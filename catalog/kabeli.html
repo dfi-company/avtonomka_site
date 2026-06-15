@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Силові та сонячні кабелі — Автономка</title>
+  <meta name="description" content="Купити силові та сонячні кабелі в Одесі. Кабелі для підключення сонячних панелей та систем автономного живлення.">
+  <meta property="og:title" content="Силові та сонячні кабелі — Автономка">
+  <meta property="og:description" content="Силові та сонячні кабелі для систем автономного живлення. Доставка по Україні.">
+  <meta property="og:image" content="../assets/images/sticker.webp">
+  <link rel="icon" href="../assets/images/logo.jpg" type="image/jpeg">
+  <link rel="canonical" href="https://avtonomka.com.ua/catalog/kabeli.html">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="../index.html" class="logo-link">
+          <img src="../assets/images/logo.jpg" alt="Автономка" class="logo-img">
+          <span class="logo-text">Автономка</span>
+        </a>
+        <nav class="main-nav" id="main-nav" aria-label="Головне меню">
+          <ul>
+            <li><a href="../index.html">Головна</a></li>
+            <li><a href="../catalog.html">Каталог</a></li>
+            <li><a href="../articles.html">Статті</a></li>
+          </ul>
+        </nav>
+        <div class="header-actions">
+          <a href="https://docs.google.com/forms/d/1GIJ4S0ifI_dvxS78DsIpBGBcdqp8S3RqWelt7jcSD84/viewform" target="_blank" rel="noopener" class="btn btn-partner btn-sm">Стати партнером</a>
+          <a href="https://t.me/avtonomka_od" target="_blank" rel="noopener" class="btn btn-tg btn-sm">✈ Написати нам</a>
+        </div>
+        <button class="burger" id="burger" aria-label="Відкрити меню" aria-expanded="false" aria-controls="main-nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-header">
+    <div class="container">
+      <nav aria-label="Breadcrumb" style="font-size:0.85rem;color:var(--color-muted);margin-bottom:8px">
+        <a href="../index.html" style="color:var(--color-muted)">Головна</a> /
+        <a href="../catalog.html" style="color:var(--color-muted)">Каталог</a> /
+        <span>Силові та сонячні кабелі</span>
+      </nav>
+      <h1>Силові та сонячні кабелі</h1>
+      <p>Обладнання для надійного автономного живлення</p>
+    </div>
+  </div>
+
+  <main>
+    <section class="section" style="padding-top:32px">
+      <div class="container">
+        <div class="catalog-layout">
+
+          <aside class="filters-panel" aria-label="Фільтри">
+            <h2>Фільтри</h2>
+            <div class="filter-group">
+              <label for="filter-search">Пошук</label>
+              <input type="search" id="filter-search" class="filter-input" placeholder="Назва товару…" autocomplete="off">
+            </div>
+            <div class="filter-group">
+              <label for="filter-category">Категорія</label>
+              <select id="filter-category" class="filter-select">
+                <option value="">Всі категорії</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label>Наявність</label>
+              <div class="filter-radio-group">
+                <label class="filter-radio"><input type="radio" name="availability" value="all" checked> Всі товари</label>
+                <label class="filter-radio"><input type="radio" name="availability" value="in_stock"> В наявності</label>
+              </div>
+            </div>
+            <div class="filter-group">
+              <label for="filter-sort">Сортування</label>
+              <select id="filter-sort" class="filter-select">
+                <option value="name_asc">За назвою (А→Я)</option>
+                <option value="name_desc">За назвою (Я→А)</option>
+                <option value="price_asc">Ціна (зростання)</option>
+                <option value="price_desc">Ціна (спадання)</option>
+              </select>
+            </div>
+            <button id="filter-reset" class="btn-reset">Скинути фільтри</button>
+          </aside>
+
+          <div class="catalog-content">
+            <div class="catalog-main-header">
+              <p id="catalog-counter" class="catalog-counter">Завантаження…</p>
+              <div class="catalog-sort">
+                <label for="sort-select-top">Сортування:</label>
+                <select id="sort-select-top" class="sort-select" aria-label="Сортування">
+                  <option value="name_asc">А→Я</option>
+                  <option value="name_desc">Я→А</option>
+                  <option value="price_asc">Ціна ↑</option>
+                  <option value="price_desc">Ціна ↓</option>
+                </select>
+              </div>
+            </div>
+            <div id="products-grid" class="products-grid"></div>
+            <div id="pagination" class="pagination"></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo">
+          <img src="../assets/images/logo.jpg" alt="Автономка" style="height:32px;width:32px;object-fit:contain;border-radius:4px">
+          <span class="footer-logo-text">Автономка</span>
+        </div>
+        <nav class="footer-links" aria-label="Нижня навігація">
+          <a href="../index.html">Головна</a>
+          <a href="../catalog.html">Каталог</a>
+          <a href="../blog.html">Новини</a>
+          <a href="../articles.html">Статті</a>
+          <a href="https://t.me/avtonomka_od" target="_blank" rel="noopener">Telegram</a>
+        </nav>
+        <div class="footer-contacts">
+          <a href="tel:+380987772020">+38 (098) 777-20-20</a>
+          <a href="https://t.me/avtonomka_od" target="_blank" rel="noopener">t.me/avtonomka_od</a>
+          <span>📍 Одеса</span>
+        </div>
+        <p class="footer-copy">&copy; 2026 Автономка. Всі права захищені.</p>
+        <div class="footer-legal">
+          <a href="../privacy.html">Політика конфіденційності</a>
+          <a href="../terms.html">Правила користування</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    const PRESET_CATEGORY = 'kabeli';
+    const PRODUCTS_URL = '../products.json';
+    const PRODUCT_BASE_URL = '../product.html';
+    const ASSETS_BASE = '../';
+
+    const sideSort = document.getElementById('filter-sort');
+    const topSort  = document.getElementById('sort-select-top');
+    topSort?.addEventListener('change', () => { sideSort.value = topSort.value; sideSort.dispatchEvent(new Event('change')); });
+    sideSort?.addEventListener('change', () => { topSort.value = sideSort.value; });
+  </script>
+  <script src="../assets/js/catalog.js"></script>
+</body>
+</html>

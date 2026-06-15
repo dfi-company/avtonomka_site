@@ -1,5 +1,14 @@
 /* catalog.js — завантаження та рендер товарів (self-contained) */
 
+/* ---- Slug ↔ category mapping (для чистих URL) ---- */
+const SLUG_TO_CATEGORY = {
+  'hybridni-invertory':   'Автономна енергетика > Гибридні інвертори',
+  'akumulyatory':         'Автономна енергетика > Акумулятори для гібридних інверторів',
+  'komplekty':            'Автономна енергетика > Комплекти автономного енергоживлення',
+  'kabeli':               'Автономна енергетика > Силові та сонячні кабелі',
+  'dzherela-zhyvlennya':  'Обладнання > Джерела безперебійного живлення',
+};
+
 const ITEMS_PER_PAGE = 24;
 
 let allProducts = [];
@@ -28,6 +37,11 @@ function formatPrice(raw) {
   return num.toLocaleString('uk-UA', { maximumFractionDigits: 0 }) + ' ' + currency;
 }
 
+/* ---- Base paths (override via window.PRODUCTS_URL / PRODUCT_BASE_URL / ASSETS_BASE) ---- */
+const _productsUrl   = (typeof PRODUCTS_URL    !== 'undefined' && PRODUCTS_URL)    || 'products.json';
+const _productBase   = (typeof PRODUCT_BASE_URL !== 'undefined' && PRODUCT_BASE_URL) || 'product.html';
+const _assetsBase    = (typeof ASSETS_BASE      !== 'undefined' && ASSETS_BASE)     || '';
+
 /* ---- DOM refs ---- */
 const grid        = document.getElementById('products-grid');
 const counter     = document.getElementById('catalog-counter');
@@ -42,13 +56,17 @@ async function init() {
   showLoading();
 
   try {
-    const resp = await fetch('products.json');
+    const resp = await fetch(_productsUrl);
     if (!resp.ok) throw new Error('HTTP ' + resp.status);
     const data = await resp.json();
     allProducts = Array.isArray(data) ? data : (data.products || []);
     populateCategories();
-    const urlCat = new URLSearchParams(window.location.search).get('cat');
-    if (urlCat && catSelect) catSelect.value = urlCat;
+    const rawCat = (typeof PRESET_CATEGORY !== 'undefined' && PRESET_CATEGORY)
+      || new URLSearchParams(window.location.search).get('cat')
+      || '';
+    if (rawCat && catSelect) {
+      catSelect.value = SLUG_TO_CATEGORY[rawCat] || rawCat;
+    }
     applyFilters();
   } catch (e) {
     showError();
@@ -115,7 +133,7 @@ function render() {
   if (page.length === 0) {
     grid.innerHTML = `
       <div class="empty-state" style="grid-column:1/-1">
-        <img src="assets/images/sticker.webp" alt="" loading="lazy">
+        <img src="${_assetsBase}assets/images/sticker.webp" alt="" loading="lazy">
         <h3>Нічого не знайдено</h3>
         <p>Спробуйте змінити параметри пошуку або скиньте фільтри.</p>
       </div>`;
@@ -136,27 +154,29 @@ function renderCard(p) {
   const priceStr = formatPrice(p.price || '');
   const title    = truncate(p.title || '', 80);
   const cat      = (p.product_type || '').split('>').pop().trim();
-  const img      = p.image_link || 'assets/images/zaglushka.png';
+  const img      = p.image_link || (_assetsBase + 'assets/images/zaglushka.png');
+  const zagl     = _assetsBase + 'assets/images/zaglushka.png';
+  const href     = `${_productBase}?id=${encodeURIComponent(p.id)}`;
 
   return `
   <div class="product-card">
-    <a href="product.html?id=${encodeURIComponent(p.id)}" class="product-card__img-wrap" aria-label="${escapeHtml(title)}">
+    <a href="${href}" class="product-card__img-wrap" aria-label="${escapeHtml(title)}">
       <img src="${escapeHtml(img)}"
            alt="${escapeHtml(p.title || '')}"
            loading="lazy"
-           onerror="this.src='assets/images/zaglushka.png'">
+           onerror="this.src='${zagl}'">
       <div class="product-card__availability">${badge}</div>
     </a>
     <div class="product-card__body">
       ${cat ? `<div class="product-card__category">${escapeHtml(cat)}</div>` : ''}
-      <a href="product.html?id=${encodeURIComponent(p.id)}" class="product-card__title">${escapeHtml(title)}</a>
+      <a href="${href}" class="product-card__title">${escapeHtml(title)}</a>
       <div class="product-card__price-row">
         <span class="product-card__price">${escapeHtml(priceStr)}</span>
         ${p.mpn ? `<span class="product-card__sku">Арт.: ${escapeHtml(p.mpn)}</span>` : ''}
       </div>
     </div>
     <div class="product-card__footer">
-      <a href="product.html?id=${encodeURIComponent(p.id)}" class="btn btn-block">
+      <a href="${href}" class="btn btn-block">
         Детальніше →
       </a>
     </div>
@@ -213,7 +233,7 @@ function showLoading() {
 function showError() {
   grid.innerHTML = `
     <div class="empty-state" style="grid-column:1/-1">
-      <img src="assets/images/sticker.webp" alt="" loading="lazy">
+      <img src="${_assetsBase}assets/images/sticker.webp" alt="" loading="lazy">
       <h3>Не вдалося завантажити товари</h3>
       <p>Перевірте підключення або спробуйте пізніше.</p>
     </div>`;
