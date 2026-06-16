@@ -15,7 +15,7 @@ let allProducts = [];
 let filtered    = [];
 let currentPage = 1;
 
-/* ---- Local helpers (не залежать від main.js) ---- */
+/* ---- Local helpers ---- */
 function truncate(str, len) {
   if (!str) return '';
   return str.length > len ? str.slice(0, len).trimEnd() + '…' : str;
@@ -34,7 +34,13 @@ function formatPrice(raw) {
   const num = parseFloat(raw);
   if (isNaN(num)) return raw;
   const currency = raw.replace(/[\d.\s]+/, '').trim() || 'UAH';
-  return num.toLocaleString('uk-UA', { maximumFractionDigits: 0 }) + ' ' + currency;
+  return num.toLocaleString('uk-UA', { maximumFractionDigits: 0 }) + ' ' + currency;
+}
+
+/* ---- t() shortcut — waits for I18n or falls back ---- */
+function t(key, vars) {
+  if (window.I18n) return window.I18n.t(key, vars);
+  return key;
 }
 
 /* ---- Base paths (override via window.PRODUCTS_URL / PRODUCT_BASE_URL / ASSETS_BASE) ---- */
@@ -50,28 +56,31 @@ const searchInput = document.getElementById('filter-search');
 const catSelect   = document.getElementById('filter-category');
 const sortSelect  = document.getElementById('filter-sort');
 
-/* ---- Init ---- */
-async function init() {
+/* ---- Init — wait for i18n then load ---- */
+function init() {
   if (!grid) return;
   showLoading();
 
-  try {
-    const resp = await fetch(_productsUrl);
-    if (!resp.ok) throw new Error('HTTP ' + resp.status);
-    const data = await resp.json();
-    allProducts = Array.isArray(data) ? data : (data.products || []);
-    populateCategories();
-    const rawCat = (typeof PRESET_CATEGORY !== 'undefined' && PRESET_CATEGORY)
-      || new URLSearchParams(window.location.search).get('cat')
-      || '';
-    if (rawCat && catSelect) {
-      catSelect.value = SLUG_TO_CATEGORY[rawCat] || rawCat;
-    }
-    applyFilters();
-  } catch (e) {
-    showError();
-    console.error('Помилка завантаження products.json:', e);
-  }
+  fetch(_productsUrl)
+    .then(function(resp) {
+      if (!resp.ok) throw new Error('HTTP ' + resp.status);
+      return resp.json();
+    })
+    .then(function(data) {
+      allProducts = Array.isArray(data) ? data : (data.products || []);
+      populateCategories();
+      const rawCat = (typeof PRESET_CATEGORY !== 'undefined' && PRESET_CATEGORY)
+        || new URLSearchParams(window.location.search).get('cat')
+        || '';
+      if (rawCat && catSelect) {
+        catSelect.value = SLUG_TO_CATEGORY[rawCat] || rawCat;
+      }
+      applyFilters();
+    })
+    .catch(function(e) {
+      showError();
+      console.error('Помилка завантаження products.json:', e);
+    });
 }
 
 /* ---- Populate category dropdown ---- */
@@ -95,7 +104,8 @@ function applyFilters() {
   const sort  = sortSelect ? sortSelect.value : 'name_asc';
 
   filtered = allProducts.filter(p => {
-    if (query && !(p.title || '').toLowerCase().includes(query)) return false;
+    const title = window.I18n ? window.I18n.productTitle(p) : (p.title || '');
+    if (query && !title.toLowerCase().includes(query)) return false;
     if (cat && p.product_type !== cat) return false;
     if (avail === 'in_stock' && p.availability !== 'in_stock') return false;
     return true;
@@ -106,8 +116,10 @@ function applyFilters() {
     const pb = parseFloat(b.price) || 0;
     if (sort === 'price_asc')  return pa - pb;
     if (sort === 'price_desc') return pb - pa;
-    if (sort === 'name_asc')   return (a.title || '').localeCompare(b.title || '', 'uk');
-    if (sort === 'name_desc')  return (b.title || '').localeCompare(a.title || '', 'uk');
+    const ta = window.I18n ? window.I18n.productTitle(a) : (a.title || '');
+    const tb = window.I18n ? window.I18n.productTitle(b) : (b.title || '');
+    if (sort === 'name_asc')   return ta.localeCompare(tb);
+    if (sort === 'name_desc')  return tb.localeCompare(ta);
     return 0;
   });
 
@@ -124,8 +136,8 @@ function render() {
 
   if (counter) {
     counter.textContent = total === 0
-      ? 'Товарів не знайдено'
-      : `Показано ${start + 1}–${end} з ${total} товарів`;
+      ? t('catalog.counter_none')
+      : t('catalog.counter', { start: start + 1, end: end, total: total });
   }
 
   grid.innerHTML = '';
@@ -134,8 +146,8 @@ function render() {
     grid.innerHTML = `
       <div class="empty-state" style="grid-column:1/-1">
         <img src="${_assetsBase}assets/images/sticker.webp" alt="" loading="lazy">
-        <h3>Нічого не знайдено</h3>
-        <p>Спробуйте змінити параметри пошуку або скиньте фільтри.</p>
+        <h3>${t('catalog.empty_title')}</h3>
+        <p>${t('catalog.empty_text')}</p>
       </div>`;
     if (pagination) pagination.innerHTML = '';
     return;
@@ -149,10 +161,11 @@ function render() {
 function renderCard(p) {
   const inStock  = p.availability === 'in_stock';
   const badge    = inStock
-    ? '<span class="badge badge-green">✓ В наявності</span>'
-    : '<span class="badge badge-grey">Немає</span>';
+    ? `<span class="badge badge-green">${t('catalog.in_stock')}</span>`
+    : `<span class="badge badge-grey">${t('catalog.out_of_stock')}</span>`;
   const priceStr = formatPrice(p.price || '');
-  const title    = truncate(p.title || '', 80);
+  const displayTitle = window.I18n ? window.I18n.productTitle(p) : (p.title || '');
+  const title    = truncate(displayTitle, 80);
   const cat      = (p.product_type || '').split('>').pop().trim();
   const img      = p.image_link || (_assetsBase + 'assets/images/zaglushka.png');
   const zagl     = _assetsBase + 'assets/images/zaglushka.png';
@@ -162,7 +175,7 @@ function renderCard(p) {
   <div class="product-card">
     <a href="${href}" class="product-card__img-wrap" aria-label="${escapeHtml(title)}">
       <img src="${escapeHtml(img)}"
-           alt="${escapeHtml(p.title || '')}"
+           alt="${escapeHtml(displayTitle)}"
            loading="lazy"
            onerror="this.src='${zagl}'">
       <div class="product-card__availability">${badge}</div>
@@ -172,12 +185,12 @@ function renderCard(p) {
       <a href="${href}" class="product-card__title">${escapeHtml(title)}</a>
       <div class="product-card__price-row">
         <span class="product-card__price">${escapeHtml(priceStr)}</span>
-        ${p.mpn ? `<span class="product-card__sku">Арт.: ${escapeHtml(p.mpn)}</span>` : ''}
+        ${p.mpn ? `<span class="product-card__sku">${t('catalog.article')} ${escapeHtml(p.mpn)}</span>` : ''}
       </div>
     </div>
     <div class="product-card__footer">
       <a href="${href}" class="btn btn-block">
-        Детальніше →
+        ${t('catalog.details')}
       </a>
     </div>
   </div>`;
@@ -226,7 +239,7 @@ function showLoading() {
   grid.innerHTML = `
     <div class="loading-state" style="grid-column:1/-1">
       <div class="spinner"></div>
-      <span>Завантаження товарів…</span>
+      <span>${t('catalog.loading_text')}</span>
     </div>`;
 }
 
@@ -234,15 +247,15 @@ function showError() {
   grid.innerHTML = `
     <div class="empty-state" style="grid-column:1/-1">
       <img src="${_assetsBase}assets/images/sticker.webp" alt="" loading="lazy">
-      <h3>Не вдалося завантажити товари</h3>
-      <p>Перевірте підключення або спробуйте пізніше.</p>
+      <h3>${t('catalog.error_title')}</h3>
+      <p>${t('catalog.error_text')}</p>
     </div>`;
 }
 
 /* ---- Event listeners ---- */
 function debounce(fn, ms) {
-  let t;
-  return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); };
+  let timer;
+  return (...args) => { clearTimeout(timer); timer = setTimeout(() => fn(...args), ms); };
 }
 
 if (searchInput) searchInput.addEventListener('input', debounce(applyFilters, 250));
@@ -262,5 +275,9 @@ document.getElementById('filter-reset')?.addEventListener('click', () => {
   applyFilters();
 });
 
-/* ---- Start ---- */
-init();
+/* ---- Start: wait for i18n, then init ---- */
+if (window.I18n) {
+  init();
+} else {
+  document.addEventListener('i18n:ready', init);
+}

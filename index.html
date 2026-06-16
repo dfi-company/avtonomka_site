@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
@@ -26,15 +26,16 @@
 
         <nav class="main-nav" id="main-nav" aria-label="Головне меню">
           <ul>
-            <li><a href="index.html">Головна</a></li>
-            <li><a href="catalog.html">Каталог</a></li>
-            <li><a href="articles.html">Статті</a></li>
+            <li><a href="index.html" data-i18n="nav.home">Головна</a></li>
+            <li><a href="catalog.html" data-i18n="nav.catalog">Каталог</a></li>
+            <li><a href="articles.html" data-i18n="nav.articles">Статті</a></li>
           </ul>
         </nav>
 
         <div class="header-actions">
-          <a href="https://docs.google.com/forms/d/1GIJ4S0ifI_dvxS78DsIpBGBcdqp8S3RqWelt7jcSD84/viewform" target="_blank" rel="noopener" class="btn btn-partner btn-sm">Стати партнером</a>
-          <a href="https://t.me/avtonomka_od" target="_blank" rel="noopener" class="btn btn-tg btn-sm">
+          <div class="lang-switcher"></div>
+          <a href="https://docs.google.com/forms/d/1GIJ4S0ifI_dvxS78DsIpBGBcdqp8S3RqWelt7jcSD84/viewform" target="_blank" rel="noopener" class="btn btn-partner btn-sm" data-i18n="nav.partner">Стати партнером</a>
+          <a href="https://t.me/avtonomka_od" target="_blank" rel="noopener" class="btn btn-tg btn-sm" data-i18n="nav.contact">
             ✈ Написати нам
           </a>
         </div>
@@ -53,11 +54,11 @@
       <div class="container">
         <div class="hero-inner">
           <div class="hero-content">
-            <h1> <span>
+            <h1 data-i18n="hero.heading" data-i18n-html="true"><span>
               Зарядні станції, акумулятори, інвертори </span> — все що потрібно для автономного живлення.</h1>
             <div class="hero-actions">
-              <a href="catalog.html" class="btn btn-primary">Переглянути каталог</a>
-              <a href="https://t.me/avtonomka_od" target="_blank" rel="noopener" class="btn btn-outline-light">✈ Написати в Telegram</a>
+              <a href="catalog.html" class="btn btn-primary" data-i18n="hero.cta_catalog">Переглянути каталог</a>
+              <a href="https://t.me/avtonomka_od" target="_blank" rel="noopener" class="btn btn-outline-light" data-i18n="hero.cta_telegram">✈ Написати в Telegram</a>
             </div>
           </div>
           <div class="hero-mascot">
@@ -74,15 +75,15 @@
 
           <!-- ліва колонка: категорії -->
           <div>
-            <h2 class="section-title">Категорії товарів</h2>
+            <h2 class="section-title" data-i18n="home.categories_title">Категорії товарів</h2>
             <div class="cat-grid">
               <a href="catalog/hybridni-invertory.html" class="cat-card">
                 <div class="cat-card__img-wrap">
                   <img src="https://dfi2.com.ua/images/142723_1.jpg" alt="Гібридні інвертори" class="cat-card__img" loading="lazy" onerror="this.src='assets/images/zaglushka.png'">
                 </div>
                 <div class="cat-card__overlay">
-                  <div class="cat-card__name">Гібридні інвертори</div>
-                  <div class="cat-card__count">9 товарів</div>
+                  <div class="cat-card__name" data-i18n="categories.hybridni-invertory">Гібридні інвертори</div>
+                  <div class="cat-card__count" id="cat-count-hybridni-invertory">9 товарів</div>
                 </div>
               </a>
               <a href="catalog/akumulyatory.html" class="cat-card">
@@ -90,8 +91,8 @@
                   <img src="https://dfi2.com.ua/images/142727_1.jpg" alt="Акумулятори для гібридних інверторів" class="cat-card__img" loading="lazy" onerror="this.src='assets/images/zaglushka.png'">
                 </div>
                 <div class="cat-card__overlay">
-                  <div class="cat-card__name">Акумулятори для гібридних інверторів</div>
-                  <div class="cat-card__count">10 товарів</div>
+                  <div class="cat-card__name" data-i18n="categories.akumulyatory">Акумулятори для гібридних інверторів</div>
+                  <div class="cat-card__count" id="cat-count-akumulyatory">10 товарів</div>
                 </div>
               </a>
               <a href="catalog/komplekty.html" class="cat-card">
@@ -99,8 +100,8 @@
                   <img src="assets/images/komp/150944.png" alt="Комплекти автономного енергоживлення" class="cat-card__img" loading="lazy" onerror="this.src='assets/images/zaglushka.png'">
                 </div>
                 <div class="cat-card__overlay">
-                  <div class="cat-card__name">Комплекти автономного енергоживлення</div>
-                  <div class="cat-card__count">28 товарів</div>
+                  <div class="cat-card__name" data-i18n="categories.komplekty">Комплекти автономного енергоживлення</div>
+                  <div class="cat-card__count" id="cat-count-komplekty">28 товарів</div>
                 </div>
               </a>
               <a href="catalog/kabeli.html" class="cat-card">
@@ -108,8 +109,8 @@
                   <img src="https://dfi2.com.ua/images/146741_1.jpg" alt="Силові та сонячні кабелі" class="cat-card__img" loading="lazy" onerror="this.src='assets/images/zaglushka.png'">
                 </div>
                 <div class="cat-card__overlay">
-                  <div class="cat-card__name">Силові та сонячні кабелі</div>
-                  <div class="cat-card__count">11 товарів</div>
+                  <div class="cat-card__name" data-i18n="categories.kabeli">Силові та сонячні кабелі</div>
+                  <div class="cat-card__count" id="cat-count-kabeli">11 товарів</div>
                 </div>
               </a>
               <a href="catalog/dzherela-zhyvlennya.html" class="cat-card">
@@ -117,27 +118,27 @@
                   <img src="https://dfi2.com.ua/images/148245_1.jpg" alt="Джерела безперебійного живлення" class="cat-card__img" loading="lazy" onerror="this.src='assets/images/zaglushka.png'">
                 </div>
                 <div class="cat-card__overlay">
-                  <div class="cat-card__name">Джерела безперебійного живлення</div>
-                  <div class="cat-card__count">4 товари</div>
+                  <div class="cat-card__name" data-i18n="categories.dzherela-zhyvlennya">Джерела безперебійного живлення</div>
+                  <div class="cat-card__count" id="cat-count-dzherela-zhyvlennya">4 товари</div>
                 </div>
               </a>
             </div>
             <div style="margin-top:24px">
-              <a href="catalog.html" class="btn btn-outline">Дивитись всі товари →</a>
+              <a href="catalog.html" class="btn btn-outline" data-i18n="home.catalog_all">Дивитись всі товари →</a>
             </div>
           </div>
 
           <!-- права колонка: Telegram-стрічка -->
           <div>
-            <h2 class="section-title">Telegram-стрічка</h2>
+            <h2 class="section-title" data-i18n="home.telegram_title">Telegram-стрічка</h2>
             <div id="home-tg-feed" class="tg-feed">
               <div class="loading-state">
                 <div class="spinner"></div>
-                <span>Завантаження…</span>
+                <span data-i18n="home.loading">Завантаження…</span>
               </div>
             </div>
             <div class="tg-feed-cta" style="margin-top:16px">
-              <a href="https://t.me/avtonomka_od" target="_blank" rel="noopener" class="btn btn-tg">✈ Відкрити канал</a>
+              <a href="https://t.me/avtonomka_od" target="_blank" rel="noopener" class="btn btn-tg" data-i18n="home.tg_open">✈ Відкрити канал</a>
             </div>
           </div>
 
@@ -148,28 +149,28 @@
     <!-- ======= ЧОМУ МИ ======= -->
     <section class="section" style="background:var(--color-white)">
       <div class="container">
-        <h2 class="section-title">Чому обирають нас</h2>
+        <h2 class="section-title" data-i18n="home.why_title">Чому обирають нас</h2>
         <div class="why-grid">
           <div class="why-card">
             <div class="why-card__icon">
               <img src="assets/images/vibir.png" alt="Великий вибір" loading="lazy">
             </div>
-            <h3>Великий вибір</h3>
-            <p>Сотні товарів для автономного живлення — від невеликих акумуляторів до повноцінних сонячних систем.</p>
+            <h3 data-i18n="home.why_choice_title">Великий вибір</h3>
+            <p data-i18n="home.why_choice_text">Сотні товарів для автономного живлення — від невеликих акумуляторів до повноцінних сонячних систем.</p>
           </div>
           <div class="why-card">
             <div class="why-card__icon">
               <img src="assets/images/garantia.png" alt="Гарантія якості" loading="lazy">
             </div>
-            <h3>Гарантія якості</h3>
-            <p>Тільки перевірені виробники та офіційна гарантія на всю продукцію. Ваша безпека — наш пріоритет.</p>
+            <h3 data-i18n="home.why_quality_title">Гарантія якості</h3>
+            <p data-i18n="home.why_quality_text">Тільки перевірені виробники та офіційна гарантія на всю продукцію. Ваша безпека — наш пріоритет.</p>
           </div>
           <div class="why-card">
             <div class="why-card__icon">
               <img src="assets/images/dostavka.png" alt="Швидка доставка" loading="lazy">
             </div>
-            <h3>Швидка доставка</h3>
-            <p>Відправка по всій Україні. Великий асортимент у наявності — відправимо одразу після замовлення.</p>
+            <h3 data-i18n="home.why_delivery_title">Швидка доставка</h3>
+            <p data-i18n="home.why_delivery_text">Відправка по всій Україні. Великий асортимент у наявності — відправимо одразу після замовлення.</p>
           </div>
         </div>
       </div>
@@ -179,15 +180,15 @@
     <!-- ======= ОСТАННІ СТАТТІ ======= -->
     <section class="section" style="background:var(--color-white)">
       <div class="container">
-        <h2 class="section-title">Останні статті</h2>
+        <h2 class="section-title" data-i18n="home.articles_title">Останні статті</h2>
         <div id="home-articles-grid" class="articles-grid">
           <div class="loading-state" style="grid-column:1/-1">
             <div class="spinner"></div>
-            <span>Завантаження статей…</span>
+            <span data-i18n="home.articles_loading">Завантаження статей…</span>
           </div>
         </div>
         <div style="text-align:center;margin-top:32px">
-          <a href="articles.html" class="btn btn-outline">Всі статті</a>
+          <a href="articles.html" class="btn btn-outline" data-i18n="home.articles_all">Всі статті</a>
         </div>
       </div>
     </section>
@@ -197,10 +198,10 @@
       <div class="container">
         <div class="contacts-inner">
           <div class="contacts-content">
-            <h2 class="section-title">Зв'язатись з нами</h2>
+            <h2 class="section-title" data-i18n="home.contacts_title">Зв'язатись з нами</h2>
             <div class="contacts-info">
-              <p>Маєте питання? Напишіть нам у Telegram — відповідаємо швидко!</p>
-              <p>📍 Одеса</p>
+              <p data-i18n="home.contacts_text">Маєте питання? Напишіть нам у Telegram — відповідаємо швидко!</p>
+              <p data-i18n="home.contacts_location">📍 Одеса</p>
               <p>
                 📞&nbsp;<a href="tel:+380987772020">+38 (098) 777-20-20</a>
               </p>
@@ -209,7 +210,7 @@
                 <a href="https://t.me/avtonomka_od" target="_blank" rel="noopener">t.me/avtonomka_od</a>
               </p>
             </div>
-            <a href="https://t.me/avtonomka_od" target="_blank" rel="noopener" class="btn btn-tg">
+            <a href="https://t.me/avtonomka_od" target="_blank" rel="noopener" class="btn btn-tg" data-i18n="home.contacts_tg">
               ✈ Написати в Telegram
             </a>
           </div>
@@ -231,94 +232,102 @@
           <span class="footer-logo-text">Автономка</span>
         </div>
         <nav class="footer-links" aria-label="Нижня навігація">
-          <a href="index.html">Головна</a>
-          <a href="catalog.html">Каталог</a>
-          <a href="blog.html">Новини</a>
-          <a href="articles.html">Статті</a>
+          <a href="index.html" data-i18n="nav.home">Головна</a>
+          <a href="catalog.html" data-i18n="nav.catalog">Каталог</a>
+          <a href="blog.html" data-i18n="nav.news">Новини</a>
+          <a href="articles.html" data-i18n="nav.articles">Статті</a>
           <a href="https://t.me/avtonomka_od" target="_blank" rel="noopener">Telegram</a>
         </nav>
         <div class="footer-contacts">
           <a href="tel:+380987772020">+38 (098) 777-20-20</a>
           <a href="https://t.me/avtonomka_od" target="_blank" rel="noopener">t.me/avtonomka_od</a>
-          <span>📍 Одеса</span>
+          <span data-i18n="footer.location">📍 Одеса</span>
         </div>
-        <p class="footer-copy">&copy; 2026 Автономка. Всі права захищені.</p>
+        <p class="footer-copy" data-i18n="footer.copy">&copy; 2026 Автономка. Всі права захищені.</p>
         <div class="footer-legal">
-          <a href="privacy.html">Політика конфіденційності</a>
-          <a href="terms.html">Правила користування</a>
+          <a href="privacy.html" data-i18n="footer.privacy">Політика конфіденційності</a>
+          <a href="terms.html" data-i18n="footer.terms">Правила користування</a>
         </div>
       </div>
     </div>
   </footer>
 
+  <script src="assets/js/i18n.js"></script>
   <script src="assets/js/main.js"></script>
   <script>
-    /* Telegram-стрічка для головної — офіційний widget (1 пост) */
-    (async function () {
+    /* Telegram-стрічка для головної */
+    document.addEventListener('i18n:ready', function () {
+      const t = window.I18n.t.bind(window.I18n);
       const feed = document.getElementById('home-tg-feed');
-      try {
-        const resp = await fetch('data/telegram_posts.json');
-        if (!resp.ok) throw new Error('HTTP ' + resp.status);
-        const posts = await resp.json();
-        const post = (Array.isArray(posts) ? posts : [])[0]; // перевірка що є хоч 1
+      (async function () {
+        try {
+          const resp = await fetch('data/telegram_posts.json');
+          if (!resp.ok) throw new Error('HTTP ' + resp.status);
+          const posts = await resp.json();
+          const post = (Array.isArray(posts) ? posts : [])[0];
 
-        if (!post) {
-          feed.innerHTML = '<p class="text-muted" style="padding:12px">Немає публікацій.</p>';
-          return;
+          if (!post) {
+            feed.innerHTML = '<p class="text-muted" style="padding:12px">' + t('home.no_posts') + '</p>';
+            return;
+          }
+
+          feed.innerHTML = '';
+          const all = (Array.isArray(posts) ? posts : []).slice(0, 15);
+          all.forEach(function(p) {
+            const wrap = document.createElement('div');
+            wrap.style.marginBottom = '8px';
+            const s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://telegram.org/js/telegram-widget.js?22';
+            s.setAttribute('data-telegram-post', 'avtonomka_od/' + p.id);
+            s.setAttribute('data-width', '100%');
+            s.setAttribute('data-userpic', 'true');
+            s.setAttribute('data-color', '1C93E3');
+            wrap.appendChild(s);
+            feed.appendChild(wrap);
+          });
+        } catch (e) {
+          feed.innerHTML = '<p class="text-muted" style="padding:12px">' + t('home.load_error') + '</p>';
         }
-
-        feed.innerHTML = '';
-        const all = (Array.isArray(posts) ? posts : []).slice(0, 15);
-        all.forEach(function(p) {
-          const wrap = document.createElement('div');
-          wrap.style.marginBottom = '8px';
-          const s = document.createElement('script');
-          s.async = true;
-          s.src = 'https://telegram.org/js/telegram-widget.js?22';
-          s.setAttribute('data-telegram-post', 'avtonomka_od/' + p.id);
-          s.setAttribute('data-width', '100%');
-          s.setAttribute('data-userpic', 'true');
-          s.setAttribute('data-color', '1C93E3');
-          wrap.appendChild(s);
-          feed.appendChild(wrap);
-        });
-      } catch (e) {
-        feed.innerHTML = '<p class="text-muted" style="padding:12px">Не вдалося завантажити.</p>';
-      }
-    })();
+      })();
+    });
   </script>
   <script src="assets/js/blog.js"></script>
   <script>
     /* Останні 3 статті для головної */
-    (async function () {
+    document.addEventListener('i18n:ready', function () {
+      const t = window.I18n.t.bind(window.I18n);
       const grid = document.getElementById('home-articles-grid');
-      try {
-        const resp = await fetch('data/articles.json');
-        if (!resp.ok) throw new Error('HTTP ' + resp.status);
-        const articles = await resp.json();
-        const latest = (Array.isArray(articles) ? articles : []).slice(0, 3);
-        if (!latest.length) {
-          grid.innerHTML = '<p class="text-muted" style="grid-column:1/-1">Статті незабаром з\'являться.</p>';
-          return;
+      (async function () {
+        try {
+          const resp = await fetch('data/articles.json');
+          if (!resp.ok) throw new Error('HTTP ' + resp.status);
+          const articles = await resp.json();
+          const latest = (Array.isArray(articles) ? articles : []).slice(0, 3);
+          if (!latest.length) {
+            grid.innerHTML = '<p class="text-muted" style="grid-column:1/-1">' + t('home.articles_soon') + '</p>';
+            return;
+          }
+          function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+          grid.innerHTML = latest.map(a => {
+            const locale = window.I18n.dateLocale;
+            const date = a.date ? new Date(a.date).toLocaleDateString(locale, {day:'numeric',month:'long',year:'numeric'}) : '';
+            const img = a.photo ? `<div class="article-card__img"><img src="${esc(a.photo)}" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>` : '<div class="article-card__img article-card__img--placeholder"></div>';
+            return `<a href="articles.html#${esc(a.id)}" class="article-card" style="text-decoration:none">
+              ${img}
+              <div class="article-card__body">
+                ${date ? `<div class="article-card__date">${esc(date)}</div>` : ''}
+                <h3 class="article-card__title">${esc(a.title || '')}</h3>
+                ${a.summary ? `<p class="article-card__summary">${esc(a.summary)}</p>` : ''}
+              </div>
+              <div class="article-card__footer"><span class="article-card__link">${esc(t('home.read_more'))}</span></div>
+            </a>`;
+          }).join('');
+        } catch (e) {
+          grid.innerHTML = '<p class="text-muted" style="grid-column:1/-1">' + t('home.articles_error') + '</p>';
         }
-        function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-        grid.innerHTML = latest.map(a => {
-          const date = a.date ? new Date(a.date).toLocaleDateString('uk-UA', {day:'numeric',month:'long',year:'numeric'}) : '';
-          const img = a.photo ? `<div class="article-card__img"><img src="${esc(a.photo)}" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>` : '<div class="article-card__img article-card__img--placeholder"></div>';
-          return `<a href="articles.html#${esc(a.id)}" class="article-card" style="text-decoration:none">
-            ${img}
-            <div class="article-card__body">
-              ${date ? `<div class="article-card__date">${esc(date)}</div>` : ''}
-              <h3 class="article-card__title">${esc(a.title || '')}</h3>
-              ${a.summary ? `<p class="article-card__summary">${esc(a.summary)}</p>` : ''}
-            </div>
-            <div class="article-card__footer"><span class="article-card__link">Читати далі →</span></div>
-          </a>`;
-        }).join('');
-      } catch (e) {
-        grid.innerHTML = '<p class="text-muted" style="grid-column:1/-1">Не вдалося завантажити статті.</p>';
-      }
-    })();
+      })();
+    });
   </script>
 </body>
 </html>

@@ -1,21 +1,16 @@
-﻿/* product.js — сторінка окремого товару (self-contained) */
+/* product.js — сторінка окремого товару (self-contained) */
 
 /* ---- Local helpers ---- */
 function cleanDescription(html) {
   if (!html) return '';
   return html
-    // Fix broken tags where < was stored as lt; without &
     .replace(/lt;\/[a-z][a-z0-9]*/gi, '')
     .replace(/lt;[a-z][^>]*>/gi, '')
-    // Paragraph breaks → double newline
     .replace(/<\/p>\s*<p[^>]*>/gi, '\n\n')
     .replace(/<p[^>]*>/gi, '')
     .replace(/<\/p>/gi, '\n\n')
-    // Line breaks
     .replace(/<br\s*\/?>/gi, '\n')
-    // Strip remaining tags
     .replace(/<[^>]+>/g, '')
-    // Decode common entities via DOM
     .replace(/&nbsp;/g, ' ')
     .replace(/&rsquo;/g, '’')
     .replace(/&lsquo;/g, '‘')
@@ -25,10 +20,15 @@ function cleanDescription(html) {
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
     .replace(/&quot;/g, '"')
-    // Clean up whitespace
     .replace(/[ \t]+/g, ' ')
     .replace(/\n{3,}/g, '\n\n')
     .trim();
+}
+
+/* Strip HTML tables (for EN description) */
+function stripTables(html) {
+  if (!html) return html;
+  return html.replace(/<table[\s\S]*?<\/table>/gi, '');
 }
 
 function formatPrice(raw) {
@@ -47,37 +47,46 @@ function escHtml(str) {
     .replace(/"/g, '&quot;');
 }
 
+function t(key) {
+  return window.I18n ? window.I18n.t(key) : key;
+}
+
 function tgOrderLink(title) {
-  return 'https://t.me/avtonomka_od?text=' + encodeURIComponent('Хочу замовити: ' + title);
+  const orderText = window.I18n ? window.I18n.t('product.order_text') : 'Хочу замовити: ';
+  return 'https://t.me/avtonomka_od?text=' + encodeURIComponent(orderText + title);
 }
 
 /* ---- Init ---- */
-async function init() {
+function init() {
   const params = new URLSearchParams(window.location.search);
   const id     = params.get('id');
   if (!id) { showNotFound(); return; }
 
-  try {
-    const resp = await fetch('products.json');
-    if (!resp.ok) throw new Error('HTTP ' + resp.status);
-    const data     = await resp.json();
-    const products = Array.isArray(data) ? data : (data.products || []);
-    const product  = products.find(p => String(p.id) === String(id));
-    if (!product) { showNotFound(); return; }
-    render(product);
-  } catch (e) {
-    showError();
-    console.error('product.js:', e);
-  }
+  fetch('products.json')
+    .then(function(resp) {
+      if (!resp.ok) throw new Error('HTTP ' + resp.status);
+      return resp.json();
+    })
+    .then(function(data) {
+      const products = Array.isArray(data) ? data : (data.products || []);
+      const product  = products.find(p => String(p.id) === String(id));
+      if (!product) { showNotFound(); return; }
+      render(product);
+    })
+    .catch(function(e) {
+      showError();
+      console.error('product.js:', e);
+    });
 }
 
 /* ---- Render product ---- */
 function render(p) {
-  document.title = (p.title || 'Товар') + ' — Автономка';
+  const displayTitle = window.I18n ? window.I18n.productTitle(p) : (p.title || '');
+  document.title = displayTitle + ' — Автономка';
 
   /* breadcrumb */
   const bcName = document.getElementById('bc-name');
-  if (bcName) bcName.textContent = p.title || '';
+  if (bcName) bcName.textContent = displayTitle;
 
   /* ---- Gallery ---- */
   const images   = [p.image_link, ...(p.additional_images || [])].filter(Boolean);
@@ -86,13 +95,14 @@ function render(p) {
 
   if (mainImg && images.length > 0) {
     mainImg.src = images[0];
-    mainImg.alt = p.title || '';
+    mainImg.alt = displayTitle;
   }
 
   if (thumbsWrap && images.length > 1) {
+    const photoAlt = t('product.photo_alt');
     thumbsWrap.innerHTML = images.map((src, i) => `
       <div class="gallery-thumb ${i === 0 ? 'active' : ''}" data-src="${escHtml(src)}">
-        <img src="${escHtml(src)}" alt="Фото ${i + 1}" loading="lazy"
+        <img src="${escHtml(src)}" alt="${photoAlt} ${i + 1}" loading="lazy"
              onerror="this.src='assets/images/zaglushka.png'">
       </div>`).join('');
 
@@ -114,13 +124,13 @@ function render(p) {
 
   /* ---- Title ---- */
   const titleEl = document.getElementById('product-title');
-  if (titleEl) titleEl.textContent = p.title || '';
+  if (titleEl) titleEl.textContent = displayTitle;
 
   /* ---- Availability ---- */
   const availEl = document.getElementById('product-availability');
   if (availEl) {
     const inStock = p.availability === 'in_stock';
-    availEl.textContent = inStock ? '✓ В наявності' : 'Немає в наявності';
+    availEl.textContent = inStock ? t('product.in_stock') : t('product.out_of_stock');
     availEl.className   = 'badge ' + (inStock ? 'badge-green' : 'badge-grey');
   }
 
@@ -137,14 +147,30 @@ function render(p) {
   /* ---- Description ---- */
   const descEl = document.getElementById('product-desc');
   if (descEl) {
-    const clean = cleanDescription(p.description || '');
-    descEl.textContent = clean || 'Опис відсутній.';
+    let rawDesc = p.description || '';
+    /* For English: use translated description if available, strip tables from fallback */
+    if (window.I18n && window.I18n.lang === 'en') {
+      const enDesc = window.I18n.productDesc(p);
+      if (enDesc && enDesc !== rawDesc) {
+        descEl.textContent = enDesc || t('product.no_desc');
+      } else {
+        const cleaned = cleanDescription(stripTables(rawDesc));
+        descEl.textContent = cleaned || t('product.no_desc');
+      }
+    } else {
+      const clean = cleanDescription(rawDesc);
+      descEl.textContent = clean || t('product.no_desc');
+    }
   }
 
-  /* ---- Specs table ---- */
+  /* ---- Specs table (hide for EN if no translated desc provided) ---- */
   const specsEl = document.getElementById('product-specs');
   if (specsEl) {
-    if (p.specs) {
+    const lang = window.I18n ? window.I18n.lang : 'uk';
+    if (p.specs && lang === 'uk') {
+      specsEl.innerHTML = p.specs;
+    } else if (p.specs && lang === 'en') {
+      /* Show specs table in EN too — it contains numbers/units, language-agnostic */
       specsEl.innerHTML = p.specs;
     } else {
       specsEl.remove();
@@ -163,7 +189,7 @@ function render(p) {
 
   /* ---- Order button ---- */
   const orderBtn = document.getElementById('btn-order');
-  if (orderBtn) orderBtn.href = tgOrderLink(p.title || '');
+  if (orderBtn) orderBtn.href = tgOrderLink(displayTitle);
 
   /* ---- Datasheet button ---- */
   const datasheetWrap = document.getElementById('product-datasheet-wrap');
@@ -193,5 +219,9 @@ function showError() {
   document.getElementById('error-state')?.classList.remove('hidden');
 }
 
-/* ---- Start ---- */
-init();
+/* ---- Start: wait for i18n ---- */
+if (window.I18n) {
+  init();
+} else {
+  document.addEventListener('i18n:ready', init);
+}
