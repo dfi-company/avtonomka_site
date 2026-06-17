@@ -1,4 +1,7 @@
 {
+  "brand": {
+    "name": "Avtonomka"
+  },
   "nav": {
     "home": "Home",
     "catalog": "Catalog",

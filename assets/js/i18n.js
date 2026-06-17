@@ -128,6 +128,7 @@
 
     applyDom(strings);
     buildSwitcher();
+    if (LANG === 'en') document.body.classList.add('lang-en');
 
     /* Expose globals */
     const productTranslations = LANG === 'en' ? await loadProductTranslations() : {};

@@ -51,6 +51,28 @@ function t(key) {
   return window.I18n ? window.I18n.t(key) : key;
 }
 
+const _SLUG_TO_CATEGORY = {
+  'hybridni-invertory':   'Автономна енергетика > Гибридні інвертори',
+  'akumulyatory':         'Автономна енергетика > Акумулятори для гібридних інверторів',
+  'komplekty':            'Автономна енергетика > Комплекти автономного енергоживлення',
+  'kabeli':               'Автономна енергетика > Силові та сонячні кабелі',
+  'dzherela-zhyvlennya':  'Обладнання > Джерела безперебійного живлення',
+};
+const _CATEGORY_TO_SLUG = {};
+Object.keys(_SLUG_TO_CATEGORY).forEach(function(slug) {
+  _CATEGORY_TO_SLUG[_SLUG_TO_CATEGORY[slug]] = slug;
+});
+
+function categoryLabel(productType) {
+  if (!productType) return '';
+  var slug = _CATEGORY_TO_SLUG[productType];
+  if (slug && window.I18n) {
+    var label = window.I18n.t('categories.' + slug);
+    if (label && label !== 'categories.' + slug) return label;
+  }
+  return productType.split('>').pop().trim();
+}
+
 function tgOrderLink(title) {
   const orderText = window.I18n ? window.I18n.t('product.order_text') : 'Хочу замовити: ';
   return 'https://t.me/avtonomka_od?text=' + encodeURIComponent(orderText + title);
@@ -142,35 +164,33 @@ function render(p) {
   const mpnEl = document.getElementById('product-mpn');
   const catEl = document.getElementById('product-cat');
   if (mpnEl) mpnEl.textContent = p.mpn || '—';
-  if (catEl) catEl.textContent = (p.product_type || '').split('>').pop().trim() || '—';
+  if (catEl) catEl.textContent = categoryLabel(p.product_type) || '—';
 
   /* ---- Description ---- */
-  const descEl = document.getElementById('product-desc');
+  const descEl    = document.getElementById('product-desc');
+  const descBlock = document.querySelector('.product-info__desc');
+  const lang      = window.I18n ? window.I18n.lang : 'uk';
+
   if (descEl) {
-    let rawDesc = p.description || '';
-    /* For English: use translated description if available, strip tables from fallback */
-    if (window.I18n && window.I18n.lang === 'en') {
-      const enDesc = window.I18n.productDesc(p);
-      if (enDesc && enDesc !== rawDesc) {
-        descEl.textContent = enDesc || t('product.no_desc');
+    if (lang === 'en') {
+      const enDesc = window.I18n ? window.I18n.productDesc(p) : '';
+      const hasEnDesc = enDesc && enDesc !== (p.description || '');
+      if (hasEnDesc) {
+        descEl.textContent = enDesc;
       } else {
-        const cleaned = cleanDescription(stripTables(rawDesc));
-        descEl.textContent = cleaned || t('product.no_desc');
+        /* No English translation — hide the whole description block */
+        if (descBlock) descBlock.style.display = 'none';
       }
     } else {
-      const clean = cleanDescription(rawDesc);
+      const clean = cleanDescription(p.description || '');
       descEl.textContent = clean || t('product.no_desc');
     }
   }
 
-  /* ---- Specs table (hide for EN if no translated desc provided) ---- */
+  /* ---- Specs table — hide in EN ---- */
   const specsEl = document.getElementById('product-specs');
   if (specsEl) {
-    const lang = window.I18n ? window.I18n.lang : 'uk';
     if (p.specs && lang === 'uk') {
-      specsEl.innerHTML = p.specs;
-    } else if (p.specs && lang === 'en') {
-      /* Show specs table in EN too — it contains numbers/units, language-agnostic */
       specsEl.innerHTML = p.specs;
     } else {
       specsEl.remove();
