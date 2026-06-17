@@ -310,16 +310,22 @@
             return;
           }
           function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+          function af(a, f) {
+            if (window.I18n.lang === 'en') { var v = a[f + '_en']; if (v) return v; }
+            return a[f] || '';
+          }
           grid.innerHTML = latest.map(a => {
             const locale = window.I18n.dateLocale;
             const date = a.date ? new Date(a.date).toLocaleDateString(locale, {day:'numeric',month:'long',year:'numeric'}) : '';
             const img = a.photo ? `<div class="article-card__img"><img src="${esc(a.photo)}" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>` : '<div class="article-card__img article-card__img--placeholder"></div>';
+            const title = af(a, 'title');
+            const summary = af(a, 'summary');
             return `<a href="articles.html#${esc(a.id)}" class="article-card" style="text-decoration:none">
               ${img}
               <div class="article-card__body">
                 ${date ? `<div class="article-card__date">${esc(date)}</div>` : ''}
-                <h3 class="article-card__title">${esc(a.title || '')}</h3>
-                ${a.summary ? `<p class="article-card__summary">${esc(a.summary)}</p>` : ''}
+                <h3 class="article-card__title">${esc(title)}</h3>
+                ${summary ? `<p class="article-card__summary">${esc(summary)}</p>` : ''}
               </div>
               <div class="article-card__footer"><span class="article-card__link">${esc(t('home.read_more'))}</span></div>
             </a>`;
