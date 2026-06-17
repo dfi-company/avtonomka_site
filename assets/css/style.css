@@ -1416,6 +1416,9 @@ main { flex: 1; }
   .products-grid { grid-template-columns: 1fr; }
 }
 
+/* ======= EN LANGUAGE OVERRIDES ======= */
+.lang-en .lang-hide-en { display: none !important; }
+
 /* ======= LANGUAGE SWITCHER ======= */
 .lang-switcher {
   display: flex;

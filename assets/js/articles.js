@@ -1,5 +1,13 @@
 /* articles.js — public articles page */
 
+function articleField(article, field) {
+  if (window.I18n && window.I18n.lang === 'en') {
+    var enVal = article[field + '_en'];
+    if (enVal) return enVal;
+  }
+  return article[field] || '';
+}
+
 function escHtml(str) {
   return String(str)
     .replace(/&/g, '&amp;')
@@ -20,16 +28,18 @@ function t(key) {
 
 function renderCard(article) {
   const dateStr = formatDate(article.date);
+  const title   = articleField(article, 'title');
+  const summary = articleField(article, 'summary');
   const imgHtml = article.photo
     ? `<div class="article-card__img"><img src="${escHtml(article.photo)}" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`
     : '<div class="article-card__img article-card__img--placeholder"></div>';
   return `
-  <article class="article-card" data-id="${escHtml(article.id)}" tabindex="0" role="button" aria-label="${escHtml(article.title)}">
+  <article class="article-card" data-id="${escHtml(article.id)}" tabindex="0" role="button" aria-label="${escHtml(title)}">
     ${imgHtml}
     <div class="article-card__body">
       ${dateStr ? `<div class="article-card__date">${escHtml(dateStr)}</div>` : ''}
-      <h2 class="article-card__title">${escHtml(article.title || '')}</h2>
-      ${article.summary ? `<p class="article-card__summary">${escHtml(article.summary)}</p>` : ''}
+      <h2 class="article-card__title">${escHtml(title)}</h2>
+      ${summary ? `<p class="article-card__summary">${escHtml(summary)}</p>` : ''}
     </div>
     <div class="article-card__footer">
       <span class="article-card__link">${t('articles.read_more')}</span>
@@ -39,10 +49,13 @@ function renderCard(article) {
 
 function renderFull(article) {
   const dateStr = formatDate(article.date);
+  const title   = articleField(article, 'title');
+  const summary = articleField(article, 'summary');
+  const body    = articleField(article, 'body');
   const imgHtml = article.photo
-    ? `<div class="article-full__img"><img src="${escHtml(article.photo)}" alt="${escHtml(article.title || '')}" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`
+    ? `<div class="article-full__img"><img src="${escHtml(article.photo)}" alt="${escHtml(title)}" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`
     : '';
-  const bodyHtml = (article.body || '')
+  const bodyHtml = body
     .split(/\n\n+/)
     .map(para => para.trim())
     .filter(Boolean)
@@ -55,8 +68,8 @@ function renderFull(article) {
     ${imgHtml}
     <div class="article-full__content">
       ${dateStr ? `<div class="article-full__date">${escHtml(dateStr)}</div>` : ''}
-      <h1 class="article-full__title">${escHtml(article.title || '')}</h1>
-      ${article.summary ? `<p class="article-full__lead">${escHtml(article.summary)}</p>` : ''}
+      <h1 class="article-full__title">${escHtml(title)}</h1>
+      ${summary ? `<p class="article-full__lead">${escHtml(summary)}</p>` : ''}
       <div class="article-full__body">${bodyHtml}</div>
     </div>
   </div>`;

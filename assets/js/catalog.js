@@ -9,6 +9,21 @@ const SLUG_TO_CATEGORY = {
   'dzherela-zhyvlennya':  'Обладнання > Джерела безперебійного живлення',
 };
 
+const CATEGORY_TO_SLUG = {};
+Object.keys(SLUG_TO_CATEGORY).forEach(function(slug) {
+  CATEGORY_TO_SLUG[SLUG_TO_CATEGORY[slug]] = slug;
+});
+
+function categoryLabel(productType) {
+  if (!productType) return '';
+  var slug = CATEGORY_TO_SLUG[productType];
+  if (slug && window.I18n) {
+    var label = window.I18n.t('categories.' + slug);
+    if (label && label !== 'categories.' + slug) return label;
+  }
+  return productType.split('>').pop().trim();
+}
+
 const ITEMS_PER_PAGE = 24;
 
 let allProducts = [];
@@ -87,10 +102,10 @@ function init() {
 function populateCategories() {
   if (!catSelect) return;
   const types = [...new Set(allProducts.map(p => p.product_type).filter(Boolean))].sort();
-  types.forEach(t => {
+  types.forEach(function(type) {
     const opt = document.createElement('option');
-    opt.value = t;
-    opt.textContent = t.split('>').pop().trim();
+    opt.value = type;
+    opt.textContent = categoryLabel(type);
     catSelect.appendChild(opt);
   });
 }
@@ -166,7 +181,7 @@ function renderCard(p) {
   const priceStr = formatPrice(p.price || '');
   const displayTitle = window.I18n ? window.I18n.productTitle(p) : (p.title || '');
   const title    = truncate(displayTitle, 80);
-  const cat      = (p.product_type || '').split('>').pop().trim();
+  const cat      = categoryLabel(p.product_type);
   const img      = p.image_link || (_assetsBase + 'assets/images/zaglushka.png');
   const zagl     = _assetsBase + 'assets/images/zaglushka.png';
   const href     = `${_productBase}?id=${encodeURIComponent(p.id)}`;
