@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
@@ -22,14 +22,15 @@
         </a>
         <nav class="main-nav" id="main-nav" aria-label="Головне меню">
           <ul>
-            <li><a href="index.html">Головна</a></li>
-            <li><a href="catalog.html">Каталог</a></li>
-            <li><a href="articles.html">Статті</a></li>
+            <li><a href="index.html" data-i18n="nav.home">Головна</a></li>
+            <li><a href="catalog.html" data-i18n="nav.catalog">Каталог</a></li>
+            <li><a href="articles.html" data-i18n="nav.articles">Статті</a></li>
           </ul>
         </nav>
         <div class="header-actions">
-          <a href="https://docs.google.com/forms/d/1GIJ4S0ifI_dvxS78DsIpBGBcdqp8S3RqWelt7jcSD84/viewform" target="_blank" rel="noopener" class="btn btn-partner btn-sm">Стати партнером</a>
-          <a href="https://t.me/avtonomka_od" target="_blank" rel="noopener" class="btn btn-tg btn-sm">
+          <div class="lang-switcher"></div>
+          <a href="https://docs.google.com/forms/d/1GIJ4S0ifI_dvxS78DsIpBGBcdqp8S3RqWelt7jcSD84/viewform" target="_blank" rel="noopener" class="btn btn-partner btn-sm" data-i18n="nav.partner">Стати партнером</a>
+          <a href="https://t.me/avtonomka_od" target="_blank" rel="noopener" class="btn btn-tg btn-sm" data-i18n="nav.contact">
             ✈ Написати нам
           </a>
         </div>
@@ -46,33 +47,33 @@
 
         <!-- Breadcrumb -->
         <nav class="breadcrumb" aria-label="Навігаційні хлібні крихти">
-          <a href="index.html">Головна</a>
+          <a href="index.html" data-i18n="product.breadcrumb_home">Головна</a>
           <span class="breadcrumb-sep">/</span>
-          <a href="catalog.html">Каталог</a>
+          <a href="catalog.html" data-i18n="product.breadcrumb_catalog">Каталог</a>
           <span class="breadcrumb-sep">/</span>
-          <span id="bc-name">Товар</span>
+          <span id="bc-name" data-i18n="product.breadcrumb_item">Товар</span>
         </nav>
 
         <!-- Loading -->
         <div id="loading-state" class="loading-state">
           <div class="spinner"></div>
-          <span>Завантаження товару…</span>
+          <span data-i18n="product.loading">Завантаження товару…</span>
         </div>
 
         <!-- Not found -->
         <div id="not-found-state" class="empty-state hidden">
           <img src="assets/images/1111111.webp" alt="" loading="lazy">
-          <h3>Товар не знайдено</h3>
-          <p>Можливо, товар більше не існує або посилання невірне.</p>
-          <a href="catalog.html" class="btn btn-primary">Повернутись до каталогу</a>
+          <h3 data-i18n="product.not_found_title">Товар не знайдено</h3>
+          <p data-i18n="product.not_found_text">Можливо, товар більше не існує або посилання невірне.</p>
+          <a href="catalog.html" class="btn btn-primary" data-i18n="product.not_found_btn">Повернутись до каталогу</a>
         </div>
 
         <!-- Error -->
         <div id="error-state" class="empty-state hidden">
           <img src="assets/images/sticker.webp" alt="" loading="lazy">
-          <h3>Помилка завантаження</h3>
-          <p>Не вдалося завантажити інформацію про товар. Спробуйте пізніше.</p>
-          <a href="catalog.html" class="btn btn-outline">До каталогу</a>
+          <h3 data-i18n="product.error_title">Помилка завантаження</h3>
+          <p data-i18n="product.error_text">Не вдалося завантажити інформацію про товар. Спробуйте пізніше.</p>
+          <a href="catalog.html" class="btn btn-outline" data-i18n="product.error_btn">До каталогу</a>
         </div>
 
         <!-- Product content -->
@@ -98,10 +99,10 @@
               </div>
 
               <div class="product-info__price-block">
-                <div class="product-price-label">Ціна</div>
+                <div class="product-price-label" data-i18n="product.price_label">Ціна</div>
                 <div class="product-price-row">
                   <div id="product-price" class="product-price"></div>
-                  <a id="btn-order" href="#" target="_blank" rel="noopener" class="btn btn-tg">
+                  <a id="btn-order" href="#" target="_blank" rel="noopener" class="btn btn-tg" data-i18n="product.order_btn">
                     ✈ Замовити в Telegram
                   </a>
                 </div>
@@ -109,20 +110,20 @@
 
               <div class="product-info__meta">
                 <div class="product-meta-row">
-                  <span class="product-meta-row__label">Артикул</span>
+                  <span class="product-meta-row__label" data-i18n="product.sku_label">Артикул</span>
                   <span class="product-meta-row__value" id="product-mpn">—</span>
                 </div>
                 <div class="product-meta-row">
-                  <span class="product-meta-row__label">Категорія</span>
+                  <span class="product-meta-row__label" data-i18n="product.category_label">Категорія</span>
                   <span class="product-meta-row__value" id="product-cat">—</span>
                 </div>
               </div>
 
               <div class="product-info__desc">
-                <div class="product-desc-title">Опис</div>
+                <div class="product-desc-title" data-i18n="product.desc_label">Опис</div>
                 <div id="product-desc" class="product-desc"></div>
                 <div id="product-datasheet-wrap" class="hidden" style="margin-top:16px">
-                  <a id="btn-datasheet" href="#" target="_blank" rel="noopener" class="btn btn-datasheet">
+                  <a id="btn-datasheet" href="#" target="_blank" rel="noopener" class="btn btn-datasheet" data-i18n="product.datasheet_btn">
                     ↓ Datasheet
                   </a>
                 </div>
@@ -131,7 +132,7 @@
               </div>
 
               <div class="product-info__actions">
-                <a href="catalog.html" class="btn btn-outline">
+                <a href="catalog.html" class="btn btn-outline" data-i18n="product.back_btn">
                   ← Назад до каталогу
                 </a>
               </div>
@@ -156,26 +157,27 @@
           <span class="footer-logo-text">Автономка</span>
         </div>
         <nav class="footer-links" aria-label="Нижня навігація">
-          <a href="index.html">Головна</a>
-          <a href="catalog.html">Каталог</a>
-          <a href="blog.html">Новини</a>
-          <a href="articles.html">Статті</a>
+          <a href="index.html" data-i18n="nav.home">Головна</a>
+          <a href="catalog.html" data-i18n="nav.catalog">Каталог</a>
+          <a href="blog.html" data-i18n="nav.news">Новини</a>
+          <a href="articles.html" data-i18n="nav.articles">Статті</a>
           <a href="https://t.me/avtonomka_od" target="_blank" rel="noopener">Telegram</a>
         </nav>
         <div class="footer-contacts">
           <a href="tel:+380987772020">+38 (098) 777-20-20</a>
           <a href="https://t.me/avtonomka_od" target="_blank" rel="noopener">t.me/avtonomka_od</a>
-          <span>📍 Одеса</span>
+          <span data-i18n="footer.location">📍 Одеса</span>
         </div>
-        <p class="footer-copy">&copy; 2026 Автономка. Всі права захищені.</p>
+        <p class="footer-copy" data-i18n="footer.copy">&copy; 2026 Автономка. Всі права захищені.</p>
         <div class="footer-legal">
-          <a href="privacy.html">Політика конфіденційності</a>
-          <a href="terms.html">Правила користування</a>
+          <a href="privacy.html" data-i18n="footer.privacy">Політика конфіденційності</a>
+          <a href="terms.html" data-i18n="footer.terms">Правила користування</a>
         </div>
       </div>
     </div>
   </footer>
 
+  <script src="assets/js/i18n.js"></script>
   <script src="assets/js/main.js"></script>
   <script src="assets/js/product.js"></script>
 </body>

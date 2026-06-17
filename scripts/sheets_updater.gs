@@ -59,15 +59,6 @@ function updateCatalog() {
     sheet.getRange(i, 1, 1, numCols).setBackground(bg);
   }
 
-  // ── Посилання на фото ──
-  const photoCol = 6; // F
-  for (let i = 2; i <= rows.length; i++) {
-    const url = rows[i - 1][photoCol - 1];
-    if (url && url.startsWith('http')) {
-      sheet.getRange(i, photoCol).setFormula(`=HYPERLINK("${url}","фото")`);
-    }
-  }
-
   const updatedAt = Utilities.formatDate(new Date(), 'Europe/Kiev', 'dd.MM.yyyy HH:mm');
   Logger.log(`Оновлено ${rows.length - 1} товарів о ${updatedAt}`);
   SpreadsheetApp.getActiveSpreadsheet().toast(`Каталог оновлено: ${rows.length - 1} товарів`, 'Готово', 5);

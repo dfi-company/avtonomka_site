@@ -10,7 +10,12 @@ function escHtml(str) {
 
 function formatDate(dateStr) {
   if (!dateStr) return '';
-  return new Date(dateStr).toLocaleDateString('uk-UA', { day: 'numeric', month: 'long', year: 'numeric' });
+  const locale = window.I18n ? window.I18n.dateLocale : 'uk-UA';
+  return new Date(dateStr).toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+function t(key) {
+  return window.I18n ? window.I18n.t(key) : key;
 }
 
 function renderCard(article) {
@@ -27,7 +32,7 @@ function renderCard(article) {
       ${article.summary ? `<p class="article-card__summary">${escHtml(article.summary)}</p>` : ''}
     </div>
     <div class="article-card__footer">
-      <span class="article-card__link">Читати далі →</span>
+      <span class="article-card__link">${t('articles.read_more')}</span>
     </div>
   </article>`;
 }
@@ -46,7 +51,7 @@ function renderFull(article) {
 
   return `
   <div class="article-full">
-    <button class="article-full__back" id="btn-back">← Назад до статей</button>
+    <button class="article-full__back" id="btn-back">${t('articles.back')}</button>
     ${imgHtml}
     <div class="article-full__content">
       ${dateStr ? `<div class="article-full__date">${escHtml(dateStr)}</div>` : ''}
@@ -105,7 +110,7 @@ async function init() {
   const grid = document.getElementById('articles-grid');
   if (!grid) return;
 
-  grid.innerHTML = `<div class="loading-state"><div class="spinner"></div><span>Завантаження статей…</span></div>`;
+  grid.innerHTML = `<div class="loading-state"><div class="spinner"></div><span>${t('articles.loading')}</span></div>`;
 
   try {
     const resp = await fetch('data/articles.json');
@@ -116,8 +121,8 @@ async function init() {
       grid.innerHTML = `
         <div class="empty-state">
           <img src="assets/images/sticker.webp" alt="" loading="lazy">
-          <h3>Статей поки що немає</h3>
-          <p>Перші матеріали з'являться зовсім скоро.</p>
+          <h3>${t('articles.empty_title')}</h3>
+          <p>${t('articles.empty_text')}</p>
         </div>`;
       return;
     }
@@ -142,11 +147,16 @@ async function init() {
     grid.innerHTML = `
       <div class="empty-state">
         <img src="assets/images/sticker.webp" alt="" loading="lazy">
-        <h3>Не вдалося завантажити статті</h3>
-        <p>Спробуйте пізніше.</p>
+        <h3>${t('articles.error_title')}</h3>
+        <p>${t('articles.error_text')}</p>
       </div>`;
     console.error(e);
   }
 }
 
-init();
+/* ---- Start: wait for i18n ---- */
+if (window.I18n) {
+  init();
+} else {
+  document.addEventListener('i18n:ready', init);
+}

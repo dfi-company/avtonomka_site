@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
@@ -20,14 +20,15 @@
         </a>
         <nav class="main-nav" id="main-nav" aria-label="Головне меню">
           <ul>
-            <li><a href="index.html">Головна</a></li>
-            <li><a href="catalog.html">Каталог</a></li>
-            <li><a href="articles.html">Статті</a></li>
+            <li><a href="index.html" data-i18n="nav.home">Головна</a></li>
+            <li><a href="catalog.html" data-i18n="nav.catalog">Каталог</a></li>
+            <li><a href="articles.html" data-i18n="nav.articles">Статті</a></li>
           </ul>
         </nav>
         <div class="header-actions">
-          <a href="https://docs.google.com/forms/d/1GIJ4S0ifI_dvxS78DsIpBGBcdqp8S3RqWelt7jcSD84/viewform" target="_blank" rel="noopener" class="btn btn-partner btn-sm">Стати партнером</a>
-          <a href="https://t.me/avtonomka_od" target="_blank" rel="noopener" class="btn btn-tg btn-sm">
+          <div class="lang-switcher"></div>
+          <a href="https://docs.google.com/forms/d/1GIJ4S0ifI_dvxS78DsIpBGBcdqp8S3RqWelt7jcSD84/viewform" target="_blank" rel="noopener" class="btn btn-partner btn-sm" data-i18n="nav.partner">Стати партнером</a>
+          <a href="https://t.me/avtonomka_od" target="_blank" rel="noopener" class="btn btn-tg btn-sm" data-i18n="nav.contact">
             ✈ Написати нам
           </a>
         </div>
@@ -47,12 +48,12 @@
       </div>
 
       <h1>404</h1>
-      <h2>Сторінку не знайдено</h2>
-      <p>Схоже, наш хом'як-електрик вкусив потрібний дріт і сторінка зникла. Не хвилюйтесь — повертайтесь на головну!</p>
+      <h2 data-i18n="404.heading">Сторінку не знайдено</h2>
+      <p data-i18n="404.text">Схоже, наш хом'як-електрик вкусив потрібний дріт і сторінка зникла. Не хвилюйтесь — повертайтесь на головну!</p>
 
       <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center">
-        <a href="index.html" class="btn btn-primary">На головну</a>
-        <a href="catalog.html" class="btn btn-outline">До каталогу</a>
+        <a href="index.html" class="btn btn-primary" data-i18n="404.home_btn">На головну</a>
+        <a href="catalog.html" class="btn btn-outline" data-i18n="404.catalog_btn">До каталогу</a>
       </div>
     </div>
   </main>
@@ -66,26 +67,27 @@
           <span class="footer-logo-text">Автономка</span>
         </div>
         <nav class="footer-links" aria-label="Нижня навігація">
-          <a href="index.html">Головна</a>
-          <a href="catalog.html">Каталог</a>
-          <a href="blog.html">Новини</a>
-          <a href="articles.html">Статті</a>
+          <a href="index.html" data-i18n="nav.home">Головна</a>
+          <a href="catalog.html" data-i18n="nav.catalog">Каталог</a>
+          <a href="blog.html" data-i18n="nav.news">Новини</a>
+          <a href="articles.html" data-i18n="nav.articles">Статті</a>
           <a href="https://t.me/avtonomka_od" target="_blank" rel="noopener">Telegram</a>
         </nav>
         <div class="footer-contacts">
           <a href="tel:+380987772020">+38 (098) 777-20-20</a>
           <a href="https://t.me/avtonomka_od" target="_blank" rel="noopener">t.me/avtonomka_od</a>
-          <span>📍 Одеса</span>
+          <span data-i18n="footer.location">📍 Одеса</span>
         </div>
-        <p class="footer-copy">&copy; 2026 Автономка. Всі права захищені.</p>
+        <p class="footer-copy" data-i18n="footer.copy">&copy; 2026 Автономка. Всі права захищені.</p>
         <div class="footer-legal">
-          <a href="privacy.html">Політика конфіденційності</a>
-          <a href="terms.html">Правила користування</a>
+          <a href="privacy.html" data-i18n="footer.privacy">Політика конфіденційності</a>
+          <a href="terms.html" data-i18n="footer.terms">Правила користування</a>
         </div>
       </div>
     </div>
   </footer>
 
+  <script src="assets/js/i18n.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>

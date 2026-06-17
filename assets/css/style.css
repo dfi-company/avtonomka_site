@@ -1415,3 +1415,46 @@ main { flex: 1; }
 @media (max-width: 480px) {
   .products-grid { grid-template-columns: 1fr; }
 }
+
+/* ======= LANGUAGE SWITCHER ======= */
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-right: 8px;
+}
+
+.lang-btn {
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: var(--color-muted);
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  padding: 4px 7px;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.lang-btn:hover {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.lang-btn.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .lang-switcher {
+    margin-right: 4px;
+  }
+  .lang-btn {
+    padding: 3px 6px;
+    font-size: 0.7rem;
+  }
+}
