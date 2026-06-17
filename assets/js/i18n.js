@@ -128,7 +128,15 @@
 
     applyDom(strings);
     buildSwitcher();
-    if (LANG === 'en') document.body.classList.add('lang-en');
+    if (LANG === 'en') {
+      document.body.classList.add('lang-en');
+      document.documentElement.classList.add('lang-en');
+      /* Explicitly set brand name in case data-i18n is cached */
+      var brandName = (strings.brand && strings.brand.name) ? strings.brand.name : 'Avtonomka';
+      document.querySelectorAll('.logo-text, .footer-logo-text').forEach(function(el) {
+        el.textContent = brandName;
+      });
+    }
 
     /* Expose globals */
     const productTranslations = LANG === 'en' ? await loadProductTranslations() : {};

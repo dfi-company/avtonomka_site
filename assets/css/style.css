@@ -1418,6 +1418,7 @@ main { flex: 1; }
 
 /* ======= EN LANGUAGE OVERRIDES ======= */
 .lang-en .lang-hide-en { display: none !important; }
+html.lang-en .lang-hide-en { display: none !important; }
 
 /* ======= LANGUAGE SWITCHER ======= */
 .lang-switcher {
