@@ -22,6 +22,7 @@
     "cta_telegram": "✈ Message on Telegram"
   },
   "home": {
+    "page_title": "Avtonomka — Off-Grid Power Store",
     "categories_title": "Product Categories",
     "telegram_title": "Telegram Feed",
     "tg_open": "✈ Open Channel",
@@ -55,6 +56,7 @@
     "dzherela-zhyvlennya": "UPS / Backup Power"
   },
   "catalog": {
+    "page_title": "Product Catalog — Avtonomka",
     "title": "Product Catalog",
     "subtitle": "Equipment for reliable off-grid power",
     "filters": "Filters",
@@ -114,6 +116,7 @@
     "order_text": "I want to order: "
   },
   "articles": {
+    "page_title": "Articles — Avtonomka",
     "title": "Articles",
     "subtitle": "Useful guides, tips and equipment reviews for off-grid power",
     "read_more": "Read more →",
@@ -125,12 +128,14 @@
     "error_text": "Please try again later."
   },
   "blog": {
+    "page_title": "News — Avtonomka",
     "title": "News",
     "subtitle": "Latest news and updates from our Telegram channel",
     "latest": "Latest posts from our channel",
     "subscribe": "✈ Subscribe to Channel"
   },
   "404": {
+    "page_title": "404 — Page Not Found | Avtonomka",
     "title": "404 — Page Not Found | Avtonomka",
     "heading": "Page Not Found",
     "text": "Looks like our hamster electrician chewed the right wire and the page disappeared. Don't worry — head back to the homepage!",
