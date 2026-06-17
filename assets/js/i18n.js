@@ -85,6 +85,20 @@
     });
   }
 
+  /* ---- Detect page name from URL ---- */
+  function detectPage() {
+    var path = window.location.pathname.replace(/\/$/, '').split('/').pop() || 'index.html';
+    if (path === '' || path === 'index.html') return 'home';
+    if (path === 'catalog.html') return 'catalog';
+    if (path === 'articles.html') return 'articles';
+    if (path === 'blog.html') return 'blog';
+    if (path === 'product.html') return 'product';
+    if (path === '404.html') return '404';
+    /* catalog sub-pages use catalog translations */
+    if (window.location.pathname.includes('/catalog/')) return 'catalog';
+    return 'home';
+  }
+
   /* ---- Update <html lang=""> and <title> ---- */
   function applyMeta(strings, page) {
     document.documentElement.lang = LANG === 'en' ? 'en' : 'uk';
@@ -127,6 +141,7 @@
     }
 
     applyDom(strings);
+    applyMeta(strings, detectPage());
     buildSwitcher();
     if (LANG === 'en') {
       document.body.classList.add('lang-en');

@@ -104,7 +104,8 @@ function init() {
 /* ---- Render product ---- */
 function render(p) {
   const displayTitle = window.I18n ? window.I18n.productTitle(p) : (p.title || '');
-  document.title = displayTitle + ' — Автономка';
+  var brandSuffix = (window.I18n && window.I18n.lang === 'en') ? 'Avtonomka' : 'Автономка';
+  document.title = displayTitle + ' — ' + brandSuffix;
 
   /* breadcrumb */
   const bcName = document.getElementById('bc-name');
