@@ -80,18 +80,13 @@
       <p>To place an order, please contact us via Telegram or phone.</p>
 
       <h2>2. Product Information</h2>
-      <p>We make every effort to keep product information (descriptions, specifications, prices, availability) accurate and up to date. However:</p>
-      <ul>
-        <li>prices may change without prior notice;</li>
-        <li>product availability at the time of ordering is confirmed during communication with a manager;</li>
-        <li>product images are for illustration purposes and may differ slightly from the actual product.</li>
-      </ul>
+      <p>We make every effort to keep product information (descriptions, specifications, prices, availability) accurate and up to date. The price and availability shown on the product page are current at the time the page is viewed. Product images are for illustration purposes and may differ slightly from the actual product.</p>
 
       <h2>3. Placing an Order</h2>
       <p>Orders are placed by contacting the store via Telegram (<a href="https://t.me/avtonomka_od" target="_blank" rel="noopener">t.me/avtonomka_od</a>) or by phone. After confirming the details (product, quantity, delivery address), the manager will provide payment and shipping information.</p>
 
       <h2>4. Payment</h2>
-      <p>Payment terms are agreed individually when placing an order. Accepted payment methods include bank card transfer, cash on delivery (subject to delivery conditions), or other methods by arrangement. The store reserves the right to refuse a sale without explanation.</p>
+      <p>Payment methods are described on the <a href="delivery-payment.html">"Payment &amp; Delivery"</a> page. The store reserves the right to refuse a sale without explanation.</p>
 
       <h2>5. Delivery</h2>
       <p>Delivery is available throughout Ukraine via courier services (Nova Poshta, Ukrposhta, or others — by arrangement). Delivery times and costs are agreed upon when placing an order. Risk of accidental loss or damage to the product passes to the buyer from the moment the product is handed over to the delivery service.</p>

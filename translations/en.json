@@ -8,13 +8,21 @@
     "articles": "Articles",
     "partner": "Become a Partner",
     "contact": "Contact Us",
-    "news": "News"
+    "news": "News",
+    "about": "About Us",
+    "delivery_payment": "Payment & Delivery",
+    "return_policy": "Return Policy",
+    "warranty": "Warranty"
   },
   "footer": {
     "copy": "© 2026 Avtonomka. All rights reserved.",
     "privacy": "Privacy Policy",
     "terms": "Terms of Use",
-    "location": "📍 Odesa, Ukraine"
+    "location": "📍 Odesa, Ukraine",
+    "delivery_payment": "Payment & Delivery",
+    "return_policy": "Return Policy",
+    "warranty": "Warranty",
+    "address": "40 Marselska St, Odesa, Odesa region, 65000, Ukraine"
   },
   "hero": {
     "heading": "<span>Power stations, batteries, inverters</span> — everything you need for off-grid power.",
@@ -89,7 +97,8 @@
     "in_stock": "✓ In Stock",
     "out_of_stock": "Out of Stock",
     "article": "SKU:",
-    "details": "Details →"
+    "details": "Details →",
+    "return_policy": "Return Policy"
   },
   "product": {
     "breadcrumb_home": "Home",

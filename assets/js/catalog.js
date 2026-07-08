@@ -207,6 +207,7 @@ function renderCard(p) {
       <a href="${href}" class="btn btn-block">
         ${t('catalog.details')}
       </a>
+      <a href="${_assetsBase}return-policy.html#return" class="product-card__return-link">${t('catalog.return_policy')}</a>
     </div>
   </div>`;
 }
