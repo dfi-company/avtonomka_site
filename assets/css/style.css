@@ -181,6 +181,53 @@ main { flex: 1; }
 }
 .header-actions { flex-shrink: 0; display: flex; gap: 8px; align-items: center; }
 
+/* ---------- Nav dropdown ("Інформація") ---------- */
+.main-nav .has-dropdown { position: relative; }
+.main-nav .dropdown-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+.main-nav .dropdown-toggle::after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  margin-top: -3px;
+  transition: transform var(--transition);
+}
+.main-nav .has-dropdown.open > .dropdown-toggle::after {
+  transform: rotate(-135deg);
+  margin-top: 3px;
+}
+.main-nav .dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 220px;
+  margin-top: 4px;
+  background: var(--color-dark);
+  border-radius: var(--radius);
+  box-shadow: 0 12px 32px rgba(0,0,0,.35);
+  padding: 6px;
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+  z-index: 200;
+}
+.main-nav .has-dropdown:hover > .dropdown-menu,
+.main-nav .has-dropdown.open > .dropdown-menu {
+  display: flex;
+}
+.main-nav .dropdown-menu a {
+  display: block;
+  white-space: nowrap;
+  padding: 9px 12px;
+}
+
 /* Burger */
 .burger {
   display: none;
@@ -1345,29 +1392,6 @@ main { flex: 1; }
   .article-full__content { padding: 24px 24px; }
 }
 
-/* Nav now has 7 items (added legal/info pages) — collapse into the burger
-   earlier than the general mobile breakpoint so it doesn't overflow on
-   tablets / small laptops. */
-@media (max-width: 1180px) {
-  .burger { display: flex; }
-  .main-nav {
-    display: none;
-    position: absolute;
-    top: 66px;
-    left: 0;
-    right: 0;
-    background: var(--color-dark);
-    padding: 12px 16px 20px;
-    box-shadow: 0 8px 24px rgba(0,0,0,.3);
-    z-index: 99;
-  }
-  .main-nav.open { display: block; }
-  .main-nav ul { flex-direction: column; gap: 2px; }
-  .main-nav a { display: block; padding: 10px 14px; }
-  .header-actions .btn { display: none; }
-  .site-header { position: relative; }
-}
-
 @media (max-width: 768px) {
   .burger { display: flex; }
   .main-nav {
@@ -1386,6 +1410,20 @@ main { flex: 1; }
   .main-nav a { display: block; padding: 10px 14px; }
   .header-actions .btn { display: none; }
   .site-header { position: relative; }
+
+  /* Dropdown becomes an accordion — no hover on touch devices */
+  .main-nav .has-dropdown:hover > .dropdown-menu { display: none; }
+  .main-nav .has-dropdown.open > .dropdown-menu { display: flex; }
+  .main-nav .dropdown-menu {
+    position: static;
+    box-shadow: none;
+    background: rgba(255,255,255,.06);
+    margin: 2px 0 4px 14px;
+  }
+  .main-nav .dropdown-toggle {
+    display: flex;
+    justify-content: space-between;
+  }
 
 
   .hero { padding: 28px 0 24px; }
