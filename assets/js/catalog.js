@@ -60,7 +60,7 @@ function t(key, vars) {
 
 /* ---- Base paths (override via window.PRODUCTS_URL / PRODUCT_BASE_URL / ASSETS_BASE) ---- */
 const _productsUrl   = (typeof PRODUCTS_URL    !== 'undefined' && PRODUCTS_URL)    || 'products.json';
-const _productBase   = (typeof PRODUCT_BASE_URL !== 'undefined' && PRODUCT_BASE_URL) || 'product.html';
+const _productBase   = (typeof PRODUCT_BASE_URL !== 'undefined' && PRODUCT_BASE_URL) || 'product/';
 const _assetsBase    = (typeof ASSETS_BASE      !== 'undefined' && ASSETS_BASE)     || '';
 
 /* ---- DOM refs ---- */
@@ -184,7 +184,7 @@ function renderCard(p) {
   const cat      = categoryLabel(p.product_type);
   const img      = p.image_link || (_assetsBase + 'assets/images/zaglushka.png');
   const zagl     = _assetsBase + 'assets/images/zaglushka.png';
-  const href     = `${_productBase}?id=${encodeURIComponent(p.id)}`;
+  const href     = `${_productBase}${encodeURIComponent(p.id)}.html`;
 
   return `
   <div class="product-card">

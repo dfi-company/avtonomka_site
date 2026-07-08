@@ -33,7 +33,7 @@ function availability(val) {
 }
 
 function productLink(id) {
-  return `${SITE_URL}/product.html?id=${encodeURIComponent(id)}`;
+  return `${SITE_URL}/product/${encodeURIComponent(id)}.html`;
 }
 
 function absoluteUrl(url) {

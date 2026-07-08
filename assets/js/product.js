@@ -78,13 +78,48 @@ function tgOrderLink(title) {
   return 'https://t.me/avtonomka_od?text=' + encodeURIComponent(orderText + title);
 }
 
+/* ---- Base path: root product.html vs. /product/<id>.html ---- */
+function getBase() {
+  return window.location.pathname.includes('/product/') ? '../' : '';
+}
+const BASE = getBase();
+
+/* ---- Product id: ?id= (legacy) or /product/<id>.html (static pages) ---- */
+function getProductId() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('id')) return params.get('id');
+  const m = window.location.pathname.match(/\/product\/([^/]+)\.html$/);
+  return m ? m[1] : null;
+}
+
+/* ---- Legacy ?id= link → canonical /product/<id>.html (avoids duplicate content) ---- */
+function redirectLegacyIfNeeded() {
+  const legacyId = new URLSearchParams(window.location.search).get('id');
+  if (!legacyId || window.location.pathname.includes('/product/')) return false;
+
+  const target = BASE + 'product/' + encodeURIComponent(legacyId) + '.html';
+  const absoluteTarget = window.location.origin + '/product/' + encodeURIComponent(legacyId) + '.html';
+
+  let link = document.querySelector('link[rel="canonical"]');
+  if (!link) {
+    link = document.createElement('link');
+    link.rel = 'canonical';
+    document.head.appendChild(link);
+  }
+  link.href = absoluteTarget;
+
+  window.location.replace(target);
+  return true;
+}
+
 /* ---- Init ---- */
 function init() {
-  const params = new URLSearchParams(window.location.search);
-  const id     = params.get('id');
+  if (redirectLegacyIfNeeded()) return;
+
+  const id = getProductId();
   if (!id) { showNotFound(); return; }
 
-  fetch('products.json')
+  fetch(BASE + 'products.json')
     .then(function(resp) {
       if (!resp.ok) throw new Error('HTTP ' + resp.status);
       return resp.json();
@@ -126,7 +161,7 @@ function render(p) {
     thumbsWrap.innerHTML = images.map((src, i) => `
       <div class="gallery-thumb ${i === 0 ? 'active' : ''}" data-src="${escHtml(src)}">
         <img src="${escHtml(src)}" alt="${photoAlt} ${i + 1}" loading="lazy"
-             onerror="this.src='assets/images/zaglushka.png'">
+             onerror="this.src='${BASE}assets/images/zaglushka.png'">
       </div>`).join('');
 
     thumbsWrap.querySelectorAll('.gallery-thumb').forEach(thumb => {

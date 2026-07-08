@@ -50,12 +50,16 @@ jobs:
       - name: Generate merchant feed
         run: node scripts/generate_merchant_feed.js
 
+      - name: Generate static product pages and prerendered catalog grids
+        run: node scripts/generate_static_pages.js
+
       - name: Commit updated data
         id: commit
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add products.json data/telegram_posts.json catalog_export.csv feed.xml
+          git add products.json data/telegram_posts.json catalog_export.csv feed.xml \
+                  product/ catalog.html catalog/*.html sitemap.xml
           if git diff --cached --quiet; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "Змін немає, пропускаємо комміт."

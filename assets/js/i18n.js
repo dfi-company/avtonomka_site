@@ -3,10 +3,11 @@
 (function () {
   'use strict';
 
-  /* ---- Detect base path (root vs /catalog/ subfolder) ---- */
+  /* ---- Detect base path (root vs /catalog/ or /product/ subfolder) ---- */
   function getBase() {
-    const depth = window.location.pathname.split('/').length - 2;
-    return depth >= 1 && window.location.pathname.includes('/catalog/') ? '../' : '';
+    const path = window.location.pathname;
+    const depth = path.split('/').length - 2;
+    return depth >= 1 && (path.includes('/catalog/') || path.includes('/product/')) ? '../' : '';
   }
 
   const BASE = getBase();
