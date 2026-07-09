@@ -147,7 +147,8 @@ function render(p) {
   if (bcName) bcName.textContent = displayTitle;
 
   /* ---- Gallery ---- */
-  const images   = [p.image_link, ...(p.additional_images || [])].filter(Boolean);
+  const resolveImg = (src) => /^https?:\/\//.test(src) ? src : BASE + src;
+  const images   = [p.image_link, ...(p.additional_images || [])].filter(Boolean).map(resolveImg);
   const mainImg  = document.getElementById('gallery-main-img');
   const thumbsWrap = document.getElementById('gallery-thumbs');
 

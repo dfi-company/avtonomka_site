@@ -296,7 +296,7 @@ function renderCard(p, base) {
   const priceStr = formatPrice(p.price || '');
   const title    = truncate(p.title || '', 80);
   const cat      = categoryLabel(p.product_type);
-  const img      = p.image_link || (base + 'assets/images/zaglushka.png');
+  const img      = p.image_link ? (/^https?:\/\//.test(p.image_link) ? p.image_link : base + p.image_link) : (base + 'assets/images/zaglushka.png');
   const zagl     = base + 'assets/images/zaglushka.png';
   const href     = `${base}product/${encodeURIComponent(p.id)}.html`;
 

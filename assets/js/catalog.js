@@ -182,7 +182,7 @@ function renderCard(p) {
   const displayTitle = window.I18n ? window.I18n.productTitle(p) : (p.title || '');
   const title    = truncate(displayTitle, 80);
   const cat      = categoryLabel(p.product_type);
-  const img      = p.image_link || (_assetsBase + 'assets/images/zaglushka.png');
+  const img      = p.image_link ? (/^https?:\/\//.test(p.image_link) ? p.image_link : _assetsBase + p.image_link) : (_assetsBase + 'assets/images/zaglushka.png');
   const zagl     = _assetsBase + 'assets/images/zaglushka.png';
   const href     = `${_productBase}${encodeURIComponent(p.id)}.html`;
 
