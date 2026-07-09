@@ -79,11 +79,11 @@ def main() -> int:
         komp_ids = {f.stem: f.name for f in komp_dir.iterdir() if "(" not in f.name}
         overridden = 0
         for p in data:
-            if "Комплект" in p.get("product_type", "") and p.get("id") in komp_ids:
+            if p.get("id") in komp_ids:
                 p["image_link"] = f"assets/images/komp/{komp_ids[p['id']]}"
                 overridden += 1
         if overridden:
-            print(f"  Замінено фото для {overridden} товарів групи Комплекти")
+            print(f"  Замінено фото для {overridden} товарів (локальні фото в assets/images/komp/)")
 
     # Комплекти без локального фото → заглушка (не використовуємо зовнішнє URL)
     fallback = 0
