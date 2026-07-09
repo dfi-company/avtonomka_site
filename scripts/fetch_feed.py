@@ -5,6 +5,7 @@ URL: https://dfi2.com.ua/price_xml/avtonomka.txt
 """
 
 import json
+import re
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -16,6 +17,7 @@ import requests
 
 FEED_URL = "https://dfi2.com.ua/price_xml/avtonomka.txt"
 OUTPUT_FILE = Path(__file__).parent.parent / "products.json"
+PRICE_ADJUSTMENTS_FILE = Path(__file__).parent / "price_adjustments.json"
 
 HEADERS = {
     "User-Agent": (
@@ -23,6 +25,50 @@ HEADERS = {
         "+http://www.google.com/bot.html)"
     )
 }
+
+
+def apply_price_adjustments(data) -> None:
+    """Зменшує ціну товарів на суми з price_adjustments.json (by_id > by_category).
+    Застосовується щоразу до свіжої ціни постачальника, тому не накопичується
+    при повторних щоденних запусках."""
+    if not PRICE_ADJUSTMENTS_FILE.exists():
+        return
+
+    try:
+        config = json.loads(PRICE_ADJUSTMENTS_FILE.read_text(encoding="utf-8"))
+    except Exception as exc:
+        print(f"ПОПЕРЕДЖЕННЯ: не вдалося прочитати {PRICE_ADJUSTMENTS_FILE.name}: {exc}", file=sys.stderr)
+        return
+
+    by_id = config.get("by_id", {})
+    by_category = config.get("by_category", {})
+    adjusted = 0
+
+    for p in data:
+        discount = by_id.get(p.get("id"))
+        if discount is None:
+            discount = by_category.get(p.get("product_type", ""))
+        if not discount:
+            continue
+
+        price_raw = p.get("price", "")
+        m = re.match(r"^\s*([\d.,]+)\s*(.*)$", price_raw)
+        if not m:
+            continue
+
+        amount_str, currency = m.groups()
+        try:
+            amount = float(amount_str.replace(",", "."))
+        except ValueError:
+            continue
+
+        new_amount = max(0, amount - discount)
+        new_amount = int(new_amount) if new_amount == int(new_amount) else new_amount
+        p["price"] = f"{new_amount} {currency}".strip()
+        adjusted += 1
+
+    if adjusted:
+        print(f"  Застосовано знижку до {adjusted} товарів (scripts/price_adjustments.json)")
 
 
 def main() -> int:
@@ -94,6 +140,8 @@ def main() -> int:
                 fallback += 1
     if fallback:
         print(f"  Заглушка для {fallback} комплектів без локального фото")
+
+    apply_price_adjustments(data)
 
     OUTPUT_FILE.write_text(
         json.dumps(data, ensure_ascii=False, indent=2),
