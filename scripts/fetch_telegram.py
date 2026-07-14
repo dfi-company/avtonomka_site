@@ -50,7 +50,7 @@ def parse_posts(html: str) -> list[dict]:
         post_id = post_id_raw.split("/")[-1] if "/" in post_id_raw else post_id_raw
 
         # URL
-        url = f"https://t.me/{CHANNEL}/{post_id}" if post_id else CHANNEL_URL
+        url = f"https://telegram.me/{CHANNEL}/{post_id}" if post_id else CHANNEL_URL
 
         # Date
         time_el = msg.select_one(".tgme_widget_message_date time")

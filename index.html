@@ -269,8 +269,9 @@
 
   <script src="assets/js/i18n.js"></script>
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/blog.js"></script>
   <script>
-    /* Telegram-стрічка для головної */
+    /* Telegram-стрічка для головної (рендер з власних даних, без вбудови з t.me) */
     document.addEventListener('i18n:ready', function () {
       const t = window.I18n.t.bind(window.I18n);
       const feed = document.getElementById('home-tg-feed');
@@ -279,35 +280,20 @@
           const resp = await fetch('data/telegram_posts.json');
           if (!resp.ok) throw new Error('HTTP ' + resp.status);
           const posts = await resp.json();
-          const post = (Array.isArray(posts) ? posts : [])[0];
+          const all = (Array.isArray(posts) ? posts : []).slice(0, 15);
 
-          if (!post) {
+          if (!all.length) {
             feed.innerHTML = '<p class="text-muted" style="padding:12px">' + t('home.no_posts') + '</p>';
             return;
           }
 
-          feed.innerHTML = '';
-          const all = (Array.isArray(posts) ? posts : []).slice(0, 15);
-          all.forEach(function(p) {
-            const wrap = document.createElement('div');
-            wrap.style.marginBottom = '8px';
-            const s = document.createElement('script');
-            s.async = true;
-            s.src = 'https://telegram.org/js/telegram-widget.js?22';
-            s.setAttribute('data-telegram-post', 'avtonomka_od/' + p.id);
-            s.setAttribute('data-width', '100%');
-            s.setAttribute('data-userpic', 'true');
-            s.setAttribute('data-color', '1C93E3');
-            wrap.appendChild(s);
-            feed.appendChild(wrap);
-          });
+          feed.innerHTML = all.map(renderPostFull).join('');
         } catch (e) {
           feed.innerHTML = '<p class="text-muted" style="padding:12px">' + t('home.load_error') + '</p>';
         }
       })();
     });
   </script>
-  <script src="assets/js/blog.js"></script>
   <script>
     /* Останні 3 статті для головної */
     document.addEventListener('i18n:ready', function () {
