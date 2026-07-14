@@ -61,7 +61,7 @@
       <h2>9. Contact</h2>
       <p>For questions regarding personal data processing, contact us:</p>
       <ul>
-        <li>Telegram: <a href="https://t.me/avtonomka_od" target="_blank" rel="noopener">t.me/avtonomka_od</a></li>
+        <li>Telegram: <a href="https://telegram.me/avtonomka_od" target="_blank" rel="noopener">telegram.me/avtonomka_od</a></li>
         <li>Phone: <a href="tel:+380987772020">+38 (098) 777-20-20</a></li>
         <li>City: Odesa, Ukraine</li>
       </ul>
@@ -83,7 +83,7 @@
       <p>We make every effort to keep product information (descriptions, specifications, prices, availability) accurate and up to date. The price and availability shown on the product page are current at the time the page is viewed. Product images are for illustration purposes and may differ slightly from the actual product.</p>
 
       <h2>3. Placing an Order</h2>
-      <p>Orders are placed by contacting the store via Telegram (<a href="https://t.me/avtonomka_od" target="_blank" rel="noopener">t.me/avtonomka_od</a>) or by phone. After confirming the details (product, quantity, delivery address), the manager will provide payment and shipping information.</p>
+      <p>Orders are placed by contacting the store via Telegram (<a href="https://telegram.me/avtonomka_od" target="_blank" rel="noopener">telegram.me/avtonomka_od</a>) or by phone. After confirming the details (product, quantity, delivery address), the manager will provide payment and shipping information.</p>
 
       <h2>4. Payment</h2>
       <p>Payment methods are described on the <a href="delivery-payment.html">"Payment &amp; Delivery"</a> page. The store reserves the right to refuse a sale without explanation.</p>
@@ -115,7 +115,7 @@
       <h2>11. Contact</h2>
       <p>For questions about orders, returns, or these Terms, contact us:</p>
       <ul>
-        <li>Telegram: <a href="https://t.me/avtonomka_od" target="_blank" rel="noopener">t.me/avtonomka_od</a></li>
+        <li>Telegram: <a href="https://telegram.me/avtonomka_od" target="_blank" rel="noopener">telegram.me/avtonomka_od</a></li>
         <li>Phone: <a href="tel:+380987772020">+38 (098) 777-20-20</a></li>
         <li>City: Odesa, Ukraine</li>
       </ul>

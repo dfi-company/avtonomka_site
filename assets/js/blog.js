@@ -35,7 +35,7 @@ function renderPostFull(post) {
     ${imgHtml}
     ${post.text ? `<div class="tg-post__text">${escHtml(post.text)}</div>` : ''}
     <div class="tg-post__footer">
-      <a href="${escHtml(post.url || 'https://t.me/avtonomka_od')}"
+      <a href="${escHtml(post.url || 'https://telegram.me/avtonomka_od')}"
          target="_blank" rel="noopener noreferrer"
          class="tg-post__link">Переглянути в Telegram →</a>
     </div>
@@ -58,7 +58,7 @@ function renderCard(post) {
     <div class="blog-card__body">
       ${dateStr ? `<div class="blog-card__date">${escHtml(dateStr)}</div>` : ''}
       <div class="blog-card__text">${escHtml(shortText)}</div>
-      <a href="${escHtml(post.url || 'https://t.me/avtonomka_od')}"
+      <a href="${escHtml(post.url || 'https://telegram.me/avtonomka_od')}"
          target="_blank" rel="noopener noreferrer"
          class="blog-card__link">Читати далі →</a>
     </div>
@@ -124,7 +124,7 @@ function showEmpty(grid) {
       <img src="assets/images/1111111.webp" alt="Хом'як" loading="lazy">
       <h3>Поки що новин немає</h3>
       <p>Слідкуйте за нашим Telegram-каналом, щоб не пропустити оновлення.</p>
-      <a href="https://t.me/avtonomka_od" target="_blank" rel="noopener" class="btn btn-tg">
+      <a href="https://telegram.me/avtonomka_od" target="_blank" rel="noopener" class="btn btn-tg">
         Підписатись на канал
       </a>
     </div>`;
@@ -136,7 +136,7 @@ function showError(grid) {
       <img src="assets/images/sticker.webp" alt="" loading="lazy">
       <h3>Не вдалося завантажити новини</h3>
       <p>Спробуйте пізніше або перегляньте наш Telegram-канал.</p>
-      <a href="https://t.me/avtonomka_od" target="_blank" rel="noopener" class="btn btn-tg">
+      <a href="https://telegram.me/avtonomka_od" target="_blank" rel="noopener" class="btn btn-tg">
         Telegram-канал
       </a>
     </div>`;

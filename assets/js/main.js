@@ -91,7 +91,7 @@ function truncate(str, len) {
 /* ---- Build Telegram order link ---- */
 function tgOrderLink(title) {
   const text = encodeURIComponent('Хочу замовити: ' + title);
-  return 'https://t.me/avtonomka_od?text=' + text;
+  return 'https://telegram.me/avtonomka_od?text=' + text;
 }
 
 /* ---- Expose helpers globally ---- */

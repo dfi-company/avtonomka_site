@@ -49,7 +49,7 @@
         </div>
         <div id="order-form-error" class="order-form-state order-form-state--error hidden">
           Не вдалося надіслати заявку. Спробуйте пізніше або напишіть нам у
-          <a href="https://t.me/avtonomka_od" target="_blank" rel="noopener">Telegram</a>.
+          <a href="https://telegram.me/avtonomka_od" target="_blank" rel="noopener">Telegram</a>.
         </div>
       </div>
     </div>`;

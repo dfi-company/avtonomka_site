@@ -116,7 +116,7 @@ function absoluteUrl(url) {
 }
 
 function tgOrderLink(title) {
-  return 'https://t.me/avtonomka_od?text=' + encodeURIComponent('Хочу замовити: ' + title);
+  return 'https://telegram.me/avtonomka_od?text=' + encodeURIComponent('Хочу замовити: ' + title);
 }
 
 function productUrl(id) {

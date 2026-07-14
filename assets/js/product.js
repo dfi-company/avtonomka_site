@@ -75,7 +75,7 @@ function categoryLabel(productType) {
 
 function tgOrderLink(title) {
   const orderText = window.I18n ? window.I18n.t('product.order_text') : 'Хочу замовити: ';
-  return 'https://t.me/avtonomka_od?text=' + encodeURIComponent(orderText + title);
+  return 'https://telegram.me/avtonomka_od?text=' + encodeURIComponent(orderText + title);
 }
 
 /* ---- Base path: root product.html vs. /product/<id>.html ---- */
