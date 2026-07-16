@@ -18,7 +18,7 @@
   'use strict';
 
   /* ⚠ ВСТАВ СЮДИ URL ВЕБ-ЗАСТОСУНКУ GOOGLE APPS SCRIPT */
-  const ORDER_FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxDMppf16EpBH6rQfwBDTBUcgdbN_al2X9Nc-oiHufGXhZn7iWzg29ES2aHgjwqCrNoKw/exec';
+  const ORDER_FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyesUPSxsGaf3gacpV8GQ5vlH8t7R3zHlD3eWSnsi6Kjrk8tUbunrxrMmxhfRTd4oueEA/exec';
 
   const MODAL_HTML = `
     <div id="order-form-overlay" class="order-form-overlay hidden">

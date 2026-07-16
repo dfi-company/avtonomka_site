@@ -35,7 +35,15 @@
     "priceCurrency": "UAH",
     "price": "1522.00",
     "availability": "https://schema.org/InStock",
-    "itemCondition": "https://schema.org/NewCondition"
+    "itemCondition": "https://schema.org/NewCondition",
+    "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "UA",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 14,
+      "returnMethod": "https://schema.org/ReturnByMail",
+      "returnFees": "https://schema.org/ReturnShippingFees"
+    }
   }
 }
   </script>
@@ -147,6 +155,9 @@
                   <button type="button" class="btn btn-outline" data-order-form-trigger>
                     📝 Замовити через форму
                   </button>
+                  <button type="button" id="btn-add-cart" class="btn btn-cart" data-add-to-cart data-id="150649" data-title="Безперебійник для роутера TTN DC1036P 12000 mAh DC Mini UPS for Wifi Router" data-price="1522.00" data-currency="UAH" data-sku="DC1036P">
+                    🛒 Додати в кошик
+                  </button>
                 </div>
               </div>
 
@@ -226,6 +237,7 @@
 
   <script src="../assets/js/i18n.js"></script>
   <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/cart.js"></script>
   <script src="../assets/js/product.js"></script>
   <script src="../assets/js/order-form.js"></script>
 </body>

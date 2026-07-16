@@ -248,6 +248,17 @@ function render(p) {
   const orderBtn = document.getElementById('btn-order');
   if (orderBtn) orderBtn.href = tgOrderLink(displayTitle);
 
+  /* ---- Add to cart button ---- */
+  const cartBtn = document.getElementById('btn-add-cart');
+  if (cartBtn) {
+    const priceNum = parseFloat(p.price);
+    cartBtn.setAttribute('data-id', p.id);
+    cartBtn.setAttribute('data-title', displayTitle);
+    cartBtn.setAttribute('data-price', isNaN(priceNum) ? '0' : priceNum.toFixed(2));
+    cartBtn.setAttribute('data-currency', String(p.price || '').replace(/[\d.\s]+/, '').trim() || 'UAH');
+    cartBtn.setAttribute('data-sku', p.mpn || '');
+  }
+
   /* ---- Datasheet button ---- */
   const datasheetWrap = document.getElementById('product-datasheet-wrap');
   const datasheetBtn  = document.getElementById('btn-datasheet');

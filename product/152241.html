@@ -30,7 +30,15 @@
     "priceCurrency": "UAH",
     "price": "152380.00",
     "availability": "https://schema.org/InStock",
-    "itemCondition": "https://schema.org/NewCondition"
+    "itemCondition": "https://schema.org/NewCondition",
+    "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "UA",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 14,
+      "returnMethod": "https://schema.org/ReturnByMail",
+      "returnFees": "https://schema.org/ReturnShippingFees"
+    }
   }
 }
   </script>
@@ -142,6 +150,9 @@
                   <button type="button" class="btn btn-outline" data-order-form-trigger>
                     📝 Замовити через форму
                   </button>
+                  <button type="button" id="btn-add-cart" class="btn btn-cart" data-add-to-cart data-id="152241" data-title="Комплект автономного енергоживлення: Deye SUN-16K-SG01LP1-EU-AM3-P WiFi 48 В 16 кВт+ Felicity FLA48200 51.2V 200Ah" data-price="152380.00" data-currency="UAH" data-sku="">
+                    🛒 Додати в кошик
+                  </button>
                 </div>
               </div>
 
@@ -221,6 +232,7 @@
 
   <script src="../assets/js/i18n.js"></script>
   <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/cart.js"></script>
   <script src="../assets/js/product.js"></script>
   <script src="../assets/js/order-form.js"></script>
 </body>

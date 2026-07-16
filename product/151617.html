@@ -34,7 +34,15 @@
     "priceCurrency": "UAH",
     "price": "79051.00",
     "availability": "https://schema.org/InStock",
-    "itemCondition": "https://schema.org/NewCondition"
+    "itemCondition": "https://schema.org/NewCondition",
+    "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "UA",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 14,
+      "returnMethod": "https://schema.org/ReturnByMail",
+      "returnFees": "https://schema.org/ReturnShippingFees"
+    }
   }
 }
   </script>
@@ -146,6 +154,9 @@
                   <button type="button" class="btn btn-outline" data-order-form-trigger>
                     📝 Замовити через форму
                   </button>
+                  <button type="button" id="btn-add-cart" class="btn btn-cart" data-add-to-cart data-id="151617" data-title="Акумуляторна батарея Felicity FLA48314-EU 51.2V 314Ah 16kWh LiFePO4, 435х880х247, 121.5 кг" data-price="79051.00" data-currency="UAH" data-sku="FLA48314-EU">
+                    🛒 Додати в кошик
+                  </button>
                 </div>
               </div>
 
@@ -225,6 +236,7 @@
 
   <script src="../assets/js/i18n.js"></script>
   <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/cart.js"></script>
   <script src="../assets/js/product.js"></script>
   <script src="../assets/js/order-form.js"></script>
 </body>

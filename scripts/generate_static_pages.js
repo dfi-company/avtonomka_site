@@ -153,6 +153,14 @@ function buildJsonLd(p) {
       price: isNaN(num) ? undefined : num.toFixed(2),
       availability: p.availability === 'in_stock' ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
       itemCondition: p.condition === 'new' ? 'https://schema.org/NewCondition' : 'https://schema.org/UsedCondition',
+      hasMerchantReturnPolicy: {
+        '@type': 'MerchantReturnPolicy',
+        applicableCountry: 'UA',
+        returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+        merchantReturnDays: 14,
+        returnMethod: 'https://schema.org/ReturnByMail',
+        returnFees: 'https://schema.org/ReturnShippingFees',
+      },
     },
   };
   // Prevent "</script>" inside data from closing the tag early.
@@ -237,6 +245,10 @@ function generateProductPage(p, template) {
     `<a id="btn-order" href="${escapeHtml(tgOrderLink(title))}" target="_blank" rel="noopener" class="btn btn-tg" data-i18n="product.order_btn">`
   );
   html = html.replace(
+    '<button type="button" id="btn-add-cart" class="btn btn-cart" data-add-to-cart data-id="" data-title="" data-price="" data-sku="">',
+    `<button type="button" id="btn-add-cart" class="btn btn-cart" data-add-to-cart data-id="${escapeHtml(p.id)}" data-title="${escapeHtml(title)}" data-price="${isNaN(parseFloat(p.price)) ? '0' : parseFloat(p.price).toFixed(2)}" data-currency="${escapeHtml(priceCurrency(p.price))}" data-sku="${escapeHtml(p.mpn || '')}">`
+  );
+  html = html.replace(
     '<span class="product-meta-row__value" id="product-mpn">—</span>',
     `<span class="product-meta-row__value" id="product-mpn">${escapeHtml(mpn)}</span>`
   );
@@ -319,6 +331,12 @@ function renderCard(p, base) {
     </div>
     <div class="product-card__footer">
       <a href="${href}" class="btn btn-block">Детальніше →</a>
+      <button type="button" class="btn btn-cart btn-block" data-add-to-cart
+              data-id="${escapeHtml(p.id)}" data-title="${escapeHtml(p.title || '')}"
+              data-price="${isNaN(parseFloat(p.price)) ? '0' : parseFloat(p.price).toFixed(2)}"
+              data-currency="${escapeHtml(priceCurrency(p.price))}" data-sku="${escapeHtml(p.mpn || '')}">
+        🛒 Додати в кошик
+      </button>
       <a href="${base}return-policy.html#return" class="product-card__return-link">Умови повернення</a>
     </div>
   </div>`;

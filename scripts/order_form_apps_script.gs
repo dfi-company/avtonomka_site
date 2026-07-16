@@ -24,34 +24,81 @@
  *    розгортання (Manage deployments → Edit (олівець) → New version → Deploy),
  *    інакше зміни не застосуються до вже виданого URL.
  *
- * Результат: кожна заявка з сайту додається новим рядком на аркуш "Заявки"
- * цієї ж таблиці: Дата/час | Ім'я | Телефон | Товар | Коментар.
+ * Результат: кожна заявка з сайту додається рядком (для кошика — по рядку
+ * на товар зі спільним "№ замовлення") на аркуш "Заявки" цієї ж таблиці:
+ * Дата/час | Ім'я | Телефон | Товар | Коментар | Кількість | № замовлення.
+ *
+ * Якщо аркуш уже існує зі старим (5-колонковим) заголовком — скрипт сам
+ * дописує відсутні колонки при першому ж запиті, без нового розгортання.
+ * Але якщо ти оновлюєш цей .gs-код у вже розгорнутому проєкті — потрібне
+ * нове розгортання (крок 9 вище), інакше зміни коду не застосуються.
  */
 
 const SHEET_NAME = 'Заявки';
+const HEADER = ['Дата/час', "Ім'я", 'Телефон', 'Товар', 'Коментар', 'Кількість', '№ замовлення'];
+
+function ensureSheet(ss) {
+  let sheet = ss.getSheetByName(SHEET_NAME);
+
+  if (!sheet) {
+    sheet = ss.insertSheet(SHEET_NAME);
+    sheet.appendRow(HEADER);
+    sheet.getRange(1, 1, 1, HEADER.length).setFontWeight('bold').setBackground('#1a73e8').setFontColor('#ffffff');
+    sheet.setFrozenRows(1);
+    return sheet;
+  }
+
+  /* Аркуш міг бути створений старою версією скрипта (5 колонок без
+     "Кількість"/"№ замовлення") — дописуємо відсутні заголовки, не
+     чіпаючи вже наявні рядки. */
+  const currentCols = sheet.getLastColumn();
+  if (currentCols < HEADER.length) {
+    sheet.getRange(1, currentCols + 1, 1, HEADER.length - currentCols)
+      .setValues([HEADER.slice(currentCols)])
+      .setFontWeight('bold').setBackground('#1a73e8').setFontColor('#ffffff');
+  }
+
+  return sheet;
+}
 
 function doPost(e) {
   try {
     const ss = SpreadsheetApp.getActiveSpreadsheet();
-    let sheet = ss.getSheetByName(SHEET_NAME);
-
-    if (!sheet) {
-      sheet = ss.insertSheet(SHEET_NAME);
-      sheet.appendRow(['Дата/час', "Ім'я", 'Телефон', 'Товар', 'Коментар']);
-      sheet.getRange(1, 1, 1, 5).setFontWeight('bold').setBackground('#1a73e8').setFontColor('#ffffff');
-      sheet.setFrozenRows(1);
-    }
+    const sheet = ensureSheet(ss);
 
     const params = (e && e.parameter) || {};
     const timestamp = Utilities.formatDate(new Date(), 'Europe/Kiev', 'dd.MM.yyyy HH:mm:ss');
+    const name    = params.name    || '';
+    const phone   = params.phone   || '';
+    const comment = params.comment || '';
 
-    sheet.appendRow([
-      timestamp,
-      params.name    || '',
-      params.phone   || '',
-      params.product || '',
-      params.comment || ''
-    ]);
+    let items = [];
+    if (params.items) {
+      try { items = JSON.parse(params.items); } catch (parseErr) { items = []; }
+    }
+
+    if (Array.isArray(items) && items.length > 0) {
+      /* Кошик: один рядок на товар, спільний orderId, щоб бачити,
+         які позиції належать одному замовленню. */
+      const orderId = Utilities.formatDate(new Date(), 'Europe/Kiev', 'yyyyMMdd-HHmmss');
+      items.forEach(function (item) {
+        const title = (item && item.title) || '';
+        const sku   = (item && item.sku) || '';
+        const qty   = (item && item.qty) || 1;
+        sheet.appendRow([
+          timestamp,
+          name,
+          phone,
+          sku ? (title + ' (Арт. ' + sku + ')') : title,
+          comment,
+          qty,
+          orderId
+        ]);
+      });
+    } else {
+      /* Стара форма — одне замовлення на 1 товар. */
+      sheet.appendRow([timestamp, name, phone, params.product || '', comment, '', '']);
+    }
 
     return ContentService
       .createTextOutput(JSON.stringify({ status: 'ok' }))

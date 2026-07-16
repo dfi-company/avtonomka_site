@@ -207,6 +207,13 @@ function renderCard(p) {
       <a href="${href}" class="btn btn-block">
         ${t('catalog.details')}
       </a>
+      <button type="button" class="btn btn-cart btn-block" data-add-to-cart
+              data-id="${escapeHtml(p.id)}" data-title="${escapeHtml(displayTitle)}"
+              data-price="${isNaN(parseFloat(p.price)) ? '0' : parseFloat(p.price).toFixed(2)}"
+              data-currency="${escapeHtml(String(p.price || '').replace(/[\d.\s]+/, '').trim() || 'UAH')}"
+              data-sku="${escapeHtml(p.mpn || '')}">
+        🛒 ${t('catalog.add_to_cart')}
+      </button>
       <a href="${_assetsBase}return-policy.html#return" class="product-card__return-link">${t('catalog.return_policy')}</a>
     </div>
   </div>`;
