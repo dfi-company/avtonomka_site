@@ -26,16 +26,20 @@
  *
  * Результат: кожна заявка з сайту додається рядком (для кошика — по рядку
  * на товар зі спільним "№ замовлення") на аркуш "Заявки" цієї ж таблиці:
- * Дата/час | Ім'я | Телефон | Товар | Коментар | Кількість | № замовлення.
+ * Дата/час | Ім'я | Телефон | Товар | Коментар | Кількість | № замовлення |
+ * Місто | Відділення/поштомат НП.
  *
- * Якщо аркуш уже існує зі старим (5-колонковим) заголовком — скрипт сам
+ * Місто й відділення НП заповнюються лише замовленнями з кошика (checkout.html) —
+ * швидка заявка через order-form.js їх не збирає, там ці колонки лишаються порожні.
+ *
+ * Якщо аркуш уже існує зі старим (5- чи 7-колонковим) заголовком — скрипт сам
  * дописує відсутні колонки при першому ж запиті, без нового розгортання.
  * Але якщо ти оновлюєш цей .gs-код у вже розгорнутому проєкті — потрібне
  * нове розгортання (крок 9 вище), інакше зміни коду не застосуються.
  */
 
 const SHEET_NAME = 'Заявки';
-const HEADER = ['Дата/час', "Ім'я", 'Телефон', 'Товар', 'Коментар', 'Кількість', '№ замовлення'];
+const HEADER = ['Дата/час', "Ім'я", 'Телефон', 'Товар', 'Коментар', 'Кількість', '№ замовлення', 'Місто', 'Відділення/поштомат НП'];
 
 function ensureSheet(ss) {
   let sheet = ss.getSheetByName(SHEET_NAME);
@@ -68,9 +72,11 @@ function doPost(e) {
 
     const params = (e && e.parameter) || {};
     const timestamp = Utilities.formatDate(new Date(), 'Europe/Kiev', 'dd.MM.yyyy HH:mm:ss');
-    const name    = params.name    || '';
-    const phone   = params.phone   || '';
-    const comment = params.comment || '';
+    const name     = params.name     || '';
+    const phone    = params.phone    || '';
+    const comment  = params.comment  || '';
+    const city     = params.city     || '';
+    const npBranch = params.npBranch || '';
 
     let items = [];
     if (params.items) {
@@ -92,12 +98,14 @@ function doPost(e) {
           sku ? (title + ' (Арт. ' + sku + ')') : title,
           comment,
           qty,
-          orderId
+          orderId,
+          city,
+          npBranch
         ]);
       });
     } else {
-      /* Стара форма — одне замовлення на 1 товар. */
-      sheet.appendRow([timestamp, name, phone, params.product || '', comment, '', '']);
+      /* Стара форма — одне замовлення на 1 товар, без даних доставки. */
+      sheet.appendRow([timestamp, name, phone, params.product || '', comment, '', '', '', '']);
     }
 
     return ContentService

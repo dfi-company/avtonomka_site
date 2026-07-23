@@ -1,14 +1,16 @@
 /**
- * cart.js — кошик покупця (localStorage) + floating-кнопка, дровер і оформлення
- * замовлення. Підключений глобально (через main.js include на всіх сторінках).
+ * cart.js — кошик покупця (localStorage) + floating-кнопка й дровер перегляду.
+ * Підключений глобально (через main.js include на всіх сторінках).
  *
  * Кнопки додавання в кошик — звичайні <button data-add-to-cart data-id=".."
  * data-title=".." data-price=".." data-sku=".."> у статичній розмітці карток
  * товару й сторінки товару (не домальовуються JS), щоб кнопка була видна
  * будь-якому боту одразу в HTML.
  *
- * Оформлення надсилає весь кошик у той самий Google Apps Script, що приймає
- * заявки з assets/js/order-form.js (scripts/order_form_apps_script.gs).
+ * Саме оформлення (контакти, місто/відділення Нової Пошти, згода з
+ * політикою конфіденційності) відбувається на окремій сторінці checkout.html
+ * (assets/js/checkout.js), яка надсилає кошик у той самий Google Apps Script,
+ * що приймає заявки з assets/js/order-form.js (scripts/order_form_apps_script.gs).
  */
 
 (function () {
@@ -16,9 +18,13 @@
 
   const STORAGE_KEY = 'avtonomka_cart';
 
-  /* Має збігатися з ORDER_FORM_ENDPOINT в assets/js/order-form.js —
-     це той самий Apps Script Web App. */
-  const ORDER_FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyesUPSxsGaf3gacpV8GQ5vlH8t7R3zHlD3eWSnsi6Kjrk8tUbunrxrMmxhfRTd4oueEA/exec';
+  /* Сторінки в /product/ та /catalog/ лежать на рівень глибше кореня сайту */
+  function getBase() {
+    const path = window.location.pathname;
+    const depth = path.split('/').length - 2;
+    return depth >= 1 && (path.includes('/catalog/') || path.includes('/product/')) ? '../' : '';
+  }
+  const BASE = getBase();
 
   function readCart() {
     try {
@@ -94,7 +100,7 @@
   }
 
   /* ============================================================
-     UI: floating button + drawer + checkout modal
+     UI: floating button + drawer (перегляд кошика)
      ============================================================ */
 
   const UI_HTML = `
@@ -112,38 +118,12 @@
 
         <div id="cart-drawer-footer" class="cart-drawer-footer hidden">
           <div class="cart-drawer-total">Разом: <strong id="cart-drawer-total">0 UAH</strong></div>
-          <button type="button" class="btn btn-primary btn-block" id="cart-drawer-checkout">Оформити замовлення</button>
-        </div>
-
-        <form id="cart-checkout-form" class="hidden">
-          <div class="form-group">
-            <label for="cart-checkout-name">Ім'я *</label>
-            <input type="text" id="cart-checkout-name" name="name" required autocomplete="name">
-          </div>
-          <div class="form-group">
-            <label for="cart-checkout-phone">Телефон *</label>
-            <input type="tel" id="cart-checkout-phone" name="phone" required autocomplete="tel" placeholder="+380 XX XXX XX XX">
-          </div>
-          <div class="form-group">
-            <label for="cart-checkout-comment">Коментар</label>
-            <textarea id="cart-checkout-comment" name="comment" rows="2" placeholder="Побажання щодо доставки тощо (необов'язково)"></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary btn-block" id="cart-checkout-submit">Надіслати замовлення</button>
-          <button type="button" class="btn btn-outline btn-block" id="cart-checkout-back">← Назад до кошика</button>
-        </form>
-
-        <div id="cart-checkout-success" class="order-form-state hidden">
-          ✓ Дякуємо! Замовлення надіслано, ми зв'яжемось з вами найближчим часом.
-        </div>
-        <div id="cart-checkout-error" class="order-form-state order-form-state--error hidden">
-          Не вдалося надіслати замовлення. Спробуйте пізніше або напишіть нам у
-          <a href="https://telegram.me/avtonomka_od" target="_blank" rel="noopener">Telegram</a>.
+          <a href="${BASE}checkout.html" class="btn btn-primary btn-block" id="cart-drawer-checkout">Оформити замовлення</a>
         </div>
       </div>
     </div>`;
 
-  let fab, fabCount, overlay, itemsWrap, emptyBlock, footerBlock, totalEl,
-      checkoutForm, checkoutSubmit, successBlock, errorBlock;
+  let fab, fabCount, overlay, itemsWrap, emptyBlock, footerBlock, totalEl;
 
   function buildUi() {
     document.body.insertAdjacentHTML('beforeend', UI_HTML);
@@ -155,10 +135,6 @@
     emptyBlock    = document.getElementById('cart-drawer-empty');
     footerBlock   = document.getElementById('cart-drawer-footer');
     totalEl       = document.getElementById('cart-drawer-total');
-    checkoutForm  = document.getElementById('cart-checkout-form');
-    checkoutSubmit = document.getElementById('cart-checkout-submit');
-    successBlock  = document.getElementById('cart-checkout-success');
-    errorBlock    = document.getElementById('cart-checkout-error');
 
     fab.addEventListener('click', openDrawer);
     overlay.addEventListener('click', function (e) {
@@ -168,10 +144,6 @@
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && !overlay.classList.contains('hidden')) closeDrawer();
     });
-
-    document.getElementById('cart-drawer-checkout').addEventListener('click', showCheckoutForm);
-    document.getElementById('cart-checkout-back').addEventListener('click', showCart);
-    checkoutForm.addEventListener('submit', onCheckoutSubmit);
 
     itemsWrap.addEventListener('click', function (e) {
       const removeBtn = e.target.closest('[data-cart-remove]');
@@ -245,24 +217,9 @@
   }
 
   function showCart() {
-    checkoutForm.classList.add('hidden');
     itemsWrap.classList.remove('hidden');
     footerBlock.classList.toggle('hidden', readCart().length === 0);
     if (readCart().length === 0) emptyBlock.classList.remove('hidden');
-    successBlock.classList.add('hidden');
-    errorBlock.classList.add('hidden');
-  }
-
-  function showCheckoutForm() {
-    if (readCart().length === 0) return;
-    itemsWrap.classList.add('hidden');
-    footerBlock.classList.add('hidden');
-    emptyBlock.classList.add('hidden');
-    checkoutForm.classList.remove('hidden');
-    checkoutForm.reset();
-    checkoutSubmit.disabled = false;
-    checkoutSubmit.textContent = 'Надіслати замовлення';
-    document.getElementById('cart-checkout-name')?.focus();
   }
 
   function openDrawer() {
@@ -277,48 +234,6 @@
     if (!overlay) return;
     overlay.classList.add('hidden');
     document.body.style.overflow = '';
-  }
-
-  function onCheckoutSubmit(e) {
-    e.preventDefault();
-
-    const items = readCart();
-    if (items.length === 0) return;
-
-    if (!ORDER_FORM_ENDPOINT) {
-      console.warn('cart.js: ORDER_FORM_ENDPOINT не задано.');
-      showCheckoutError();
-      return;
-    }
-
-    checkoutSubmit.disabled = true;
-    checkoutSubmit.textContent = 'Надсилання…';
-
-    const data = new URLSearchParams({
-      name:    checkoutForm.name.value.trim(),
-      phone:   checkoutForm.phone.value.trim(),
-      comment: checkoutForm.comment.value.trim(),
-      items:   JSON.stringify(items.map(i => ({
-        title: i.title, sku: i.sku, qty: i.qty, price: i.price, currency: i.currency
-      })))
-    });
-
-    fetch(ORDER_FORM_ENDPOINT, { method: 'POST', mode: 'no-cors', body: data })
-      .then(function () {
-        checkoutForm.classList.add('hidden');
-        successBlock.classList.remove('hidden');
-        clearCart();
-      })
-      .catch(function (err) {
-        console.error('cart.js: помилка надсилання', err);
-        showCheckoutError();
-      });
-  }
-
-  function showCheckoutError() {
-    checkoutSubmit.disabled = false;
-    checkoutSubmit.textContent = 'Надіслати замовлення';
-    errorBlock.classList.remove('hidden');
   }
 
   function wireAddButtons() {

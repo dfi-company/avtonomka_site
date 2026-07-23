@@ -20,6 +20,14 @@
   /* ⚠ ВСТАВ СЮДИ URL ВЕБ-ЗАСТОСУНКУ GOOGLE APPS SCRIPT */
   const ORDER_FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyesUPSxsGaf3gacpV8GQ5vlH8t7R3zHlD3eWSnsi6Kjrk8tUbunrxrMmxhfRTd4oueEA/exec';
 
+  /* Сторінки в /product/ та /catalog/ лежать на рівень глибше кореня сайту */
+  function getBase() {
+    const path = window.location.pathname;
+    const depth = path.split('/').length - 2;
+    return depth >= 1 && (path.includes('/catalog/') || path.includes('/product/')) ? '../' : '';
+  }
+  const BASE = getBase();
+
   const MODAL_HTML = `
     <div id="order-form-overlay" class="order-form-overlay hidden">
       <div class="order-form-modal" role="dialog" aria-modal="true" aria-labelledby="order-form-title">
@@ -40,6 +48,12 @@
           <div class="form-group">
             <label for="order-comment">Коментар</label>
             <textarea id="order-comment" name="comment" rows="3" placeholder="Кількість, побажання тощо (необов'язково)"></textarea>
+          </div>
+          <div class="form-group form-group--consent">
+            <label class="consent-label">
+              <input type="checkbox" id="order-consent" name="consent" required>
+              Я погоджуюсь з <a href="${BASE}privacy.html" target="_blank" rel="noopener">політикою конфіденційності</a> *
+            </label>
           </div>
           <button type="submit" class="btn btn-primary btn-block" id="order-form-submit">Надіслати заявку</button>
         </form>
