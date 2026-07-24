@@ -27,10 +27,11 @@
  * Результат: кожна заявка з сайту додається рядком (для кошика — по рядку
  * на товар зі спільним "№ замовлення") на аркуш "Заявки" цієї ж таблиці:
  * Дата/час | Ім'я | Телефон | Товар | Коментар | Кількість | № замовлення |
- * Місто | Відділення/поштомат НП.
+ * Місто | Відділення/поштомат НП | Спосіб оплати.
  *
- * Місто й відділення НП заповнюються лише замовленнями з кошика (checkout.html) —
- * швидка заявка через order-form.js їх не збирає, там ці колонки лишаються порожні.
+ * Місто, відділення НП і спосіб оплати заповнюються лише замовленнями з
+ * кошика (checkout.html) — швидка заявка через order-form.js їх не збирає,
+ * там ці колонки лишаються порожні.
  *
  * Якщо аркуш уже існує зі старим (5- чи 7-колонковим) заголовком — скрипт сам
  * дописує відсутні колонки при першому ж запиті, без нового розгортання.
@@ -39,7 +40,7 @@
  */
 
 const SHEET_NAME = 'Заявки';
-const HEADER = ['Дата/час', "Ім'я", 'Телефон', 'Товар', 'Коментар', 'Кількість', '№ замовлення', 'Місто', 'Відділення/поштомат НП'];
+const HEADER = ['Дата/час', "Ім'я", 'Телефон', 'Товар', 'Коментар', 'Кількість', '№ замовлення', 'Місто', 'Відділення/поштомат НП', 'Спосіб оплати'];
 
 function ensureSheet(ss) {
   let sheet = ss.getSheetByName(SHEET_NAME);
@@ -72,11 +73,12 @@ function doPost(e) {
 
     const params = (e && e.parameter) || {};
     const timestamp = Utilities.formatDate(new Date(), 'Europe/Kiev', 'dd.MM.yyyy HH:mm:ss');
-    const name     = params.name     || '';
-    const phone    = params.phone    || '';
-    const comment  = params.comment  || '';
-    const city     = params.city     || '';
-    const npBranch = params.npBranch || '';
+    const name          = params.name          || '';
+    const phone         = params.phone         || '';
+    const comment       = params.comment       || '';
+    const city          = params.city          || '';
+    const npBranch      = params.npBranch      || '';
+    const paymentMethod = params.paymentMethod || '';
 
     let items = [];
     if (params.items) {
@@ -100,12 +102,13 @@ function doPost(e) {
           qty,
           orderId,
           city,
-          npBranch
+          npBranch,
+          paymentMethod
         ]);
       });
     } else {
       /* Стара форма — одне замовлення на 1 товар, без даних доставки. */
-      sheet.appendRow([timestamp, name, phone, params.product || '', comment, '', '', '', '']);
+      sheet.appendRow([timestamp, name, phone, params.product || '', comment, '', '', '', '', '']);
     }
 
     return ContentService

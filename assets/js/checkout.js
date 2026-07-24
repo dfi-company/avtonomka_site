@@ -104,11 +104,12 @@
     errorBlock.classList.add('hidden');
 
     const data = new URLSearchParams({
-      name:     form.name.value.trim(),
-      phone:    form.phone.value.trim(),
-      city:     form.city.value.trim(),
-      npBranch: form.npBranch.value.trim(),
-      comment:  form.comment.value.trim(),
+      name:          form.name.value.trim(),
+      phone:         form.phone.value.trim(),
+      city:          form.city.value.trim(),
+      npBranch:      form.npBranch.value.trim(),
+      paymentMethod: form.paymentMethod.value,
+      comment:       form.comment.value.trim(),
       items:    JSON.stringify(items.map(i => ({
         title: i.title, sku: i.sku, qty: i.qty, price: i.price, currency: i.currency
       })))

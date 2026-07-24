@@ -98,6 +98,20 @@
             </div>
 
             <div class="form-group">
+              <label>Спосіб оплати *</label>
+              <div class="payment-radio-group">
+                <label class="payment-radio">
+                  <input type="radio" name="paymentMethod" value="Оплата на реквізити" required checked>
+                  Оплата на реквізити
+                </label>
+                <label class="payment-radio">
+                  <input type="radio" name="paymentMethod" value="Післясплата" required>
+                  Післясплата
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
               <label for="checkout-comment">Коментар</label>
               <textarea id="checkout-comment" name="comment" rows="2" placeholder="Побажання щодо доставки тощо (необов'язково)"></textarea>
             </div>
