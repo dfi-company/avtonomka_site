@@ -18,7 +18,7 @@
   'use strict';
 
   /* ⚠ ВСТАВ СЮДИ URL ВЕБ-ЗАСТОСУНКУ GOOGLE APPS SCRIPT */
-  const ORDER_FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyesUPSxsGaf3gacpV8GQ5vlH8t7R3zHlD3eWSnsi6Kjrk8tUbunrxrMmxhfRTd4oueEA/exec';
+  const ORDER_FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyP9GJeFOc0uuogROFbd0wfa_T4IkqCmg7b4bJZLVKHn8f-evTvItsmZFCKs7XMo8ykKw/exec';
 
   /* Сторінки в /product/ та /catalog/ лежать на рівень глибше кореня сайту */
   function getBase() {
