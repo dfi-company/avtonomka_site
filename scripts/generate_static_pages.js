@@ -115,10 +115,6 @@ function absoluteUrl(url) {
   return url.startsWith('http') ? url : `${SITE_URL}/${url.replace(/^\//, '')}`;
 }
 
-function tgOrderLink(title) {
-  return 'https://telegram.me/avtonomka_od?text=' + encodeURIComponent('Хочу замовити: ' + title);
-}
-
 function productUrl(id) {
   return `${SITE_URL}/product/${encodeURIComponent(id)}.html`;
 }
@@ -239,10 +235,6 @@ function generateProductPage(p, template) {
   html = html.replace(
     '<div id="product-price" class="product-price"></div>',
     `<div id="product-price" class="product-price">${escapeHtml(priceStr)}</div>`
-  );
-  html = html.replace(
-    '<a id="btn-order" href="#" target="_blank" rel="noopener" class="btn btn-tg" data-i18n="product.order_btn">',
-    `<a id="btn-order" href="${escapeHtml(tgOrderLink(title))}" target="_blank" rel="noopener" class="btn btn-tg" data-i18n="product.order_btn">`
   );
   html = html.replace(
     '<button type="button" id="btn-add-cart" class="btn btn-cart" data-add-to-cart data-id="" data-title="" data-price="" data-sku="">',

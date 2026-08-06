@@ -73,11 +73,6 @@ function categoryLabel(productType) {
   return productType.split('>').pop().trim();
 }
 
-function tgOrderLink(title) {
-  const orderText = window.I18n ? window.I18n.t('product.order_text') : 'Хочу замовити: ';
-  return 'https://telegram.me/avtonomka_od?text=' + encodeURIComponent(orderText + title);
-}
-
 /* ---- Base path: root product.html vs. /product/<id>.html ---- */
 function getBase() {
   return window.location.pathname.includes('/product/') ? '../' : '';
@@ -243,10 +238,6 @@ function render(p) {
       embedEl.remove();
     }
   }
-
-  /* ---- Order button ---- */
-  const orderBtn = document.getElementById('btn-order');
-  if (orderBtn) orderBtn.href = tgOrderLink(displayTitle);
 
   /* ---- Add to cart button ---- */
   const cartBtn = document.getElementById('btn-add-cart');
