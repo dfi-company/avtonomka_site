@@ -82,6 +82,11 @@
 
   <!-- Товари -->
   <url>
+    <loc>https://avtonomka.com.ua/product/145284.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://avtonomka.com.ua/product/143477.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -123,6 +128,36 @@
   </url>
   <url>
     <loc>https://avtonomka.com.ua/product/151854.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://avtonomka.com.ua/product/150757.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://avtonomka.com.ua/product/150758.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://avtonomka.com.ua/product/151785.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://avtonomka.com.ua/product/151787.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://avtonomka.com.ua/product/152224.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://avtonomka.com.ua/product/152225.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -182,6 +217,41 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://avtonomka.com.ua/product/151617.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://avtonomka.com.ua/product/152085.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://avtonomka.com.ua/product/152086.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://avtonomka.com.ua/product/152173.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://avtonomka.com.ua/product/152175.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://avtonomka.com.ua/product/152266.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://avtonomka.com.ua/product/152270.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://avtonomka.com.ua/product/150676.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -217,41 +287,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://avtonomka.com.ua/product/145284.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/152212.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/152214.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/152215.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/152216.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/152272.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/152273.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://avtonomka.com.ua/product/142723.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -282,37 +317,57 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://avtonomka.com.ua/product/152296.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://avtonomka.com.ua/product/152303.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://avtonomka.com.ua/product/152352.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://avtonomka.com.ua/product/152413.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://avtonomka.com.ua/product/152469.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://avtonomka.com.ua/product/152520.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://avtonomka.com.ua/product/152455.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://avtonomka.com.ua/product/150757.html</loc>
+    <loc>https://avtonomka.com.ua/product/152372.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://avtonomka.com.ua/product/150758.html</loc>
+    <loc>https://avtonomka.com.ua/product/152212.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://avtonomka.com.ua/product/151785.html</loc>
+    <loc>https://avtonomka.com.ua/product/152272.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://avtonomka.com.ua/product/151786.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/151787.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/152224.html</loc>
+    <loc>https://avtonomka.com.ua/product/152273.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -372,47 +427,7 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://avtonomka.com.ua/product/152411.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://avtonomka.com.ua/product/152471.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/151617.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/152085.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/152086.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/152173.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/152175.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/152266.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/152270.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -442,11 +457,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://avtonomka.com.ua/product/152513.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://avtonomka.com.ua/product/152552.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -458,86 +468,6 @@
   </url>
   <url>
     <loc>https://avtonomka.com.ua/product/152554.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/152296.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/152303.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/152352.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/152413.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/152469.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/152520.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/152225.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/152227.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/152228.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/152231.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/152370.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/152372.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/152373.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/152474.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/152499.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/152558.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -567,11 +497,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://avtonomka.com.ua/product/152221.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://avtonomka.com.ua/product/152374.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -588,11 +513,6 @@
   </url>
   <url>
     <loc>https://avtonomka.com.ua/product/152415.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://avtonomka.com.ua/product/152416.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
