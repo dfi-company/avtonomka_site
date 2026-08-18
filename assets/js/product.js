@@ -255,7 +255,7 @@ function render(p) {
   const datasheetBtn  = document.getElementById('btn-datasheet');
   if (datasheetWrap && datasheetBtn) {
     if (p.link) {
-      datasheetBtn.href = p.link;
+      datasheetBtn.href = resolveImg(p.link);
       datasheetWrap.classList.remove('hidden');
     } else {
       datasheetWrap.remove();
@@ -266,7 +266,7 @@ function render(p) {
   const datasheetBtn2  = document.getElementById('btn-datasheet-2');
   if (datasheetWrap2 && datasheetBtn2) {
     if (p.link2) {
-      datasheetBtn2.href = p.link2;
+      datasheetBtn2.href = resolveImg(p.link2);
       datasheetWrap2.classList.remove('hidden');
     } else {
       datasheetWrap2.remove();
