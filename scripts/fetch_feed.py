@@ -97,6 +97,7 @@ def main() -> int:
     # Preserve existing descriptions, links and embeds from current products.json
     existing_desc = {}
     existing_link = {}
+    existing_link2 = {}
     existing_embed = {}
     existing_specs = {}
     if OUTPUT_FILE.exists():
@@ -107,6 +108,8 @@ def main() -> int:
                     existing_desc[item["id"]] = item["description"]
                 if item.get("link"):
                     existing_link[item["id"]] = item["link"]
+                if item.get("link2"):
+                    existing_link2[item["id"]] = item["link2"]
                 if item.get("embed"):
                     existing_embed[item["id"]] = item["embed"]
                 if item.get("specs"):
@@ -117,6 +120,8 @@ def main() -> int:
     for p in data:
         p["description"] = existing_desc.get(p["id"], "")
         p["link"] = existing_link.get(p["id"], "")
+        if p["id"] in existing_link2:
+            p["link2"] = existing_link2[p["id"]]
         p["embed"] = existing_embed.get(p["id"], "")
         p["specs"] = existing_specs.get(p["id"], "")
 

@@ -32,7 +32,7 @@
     "mpn": "LP16-24100",
     "condition": "new",
     "description": "MUST LP16-24100 — акумуляторна батарея LiFePO4 ємністю 100 А·год і напругою 25,6 В. Призначена для автономних систем живлення та сонячних електростанцій. Вбудована BMS контролює кожен елемент, запобігає перегріву, перевантаженню та глибокому розряду. Підтримує до 4 паралельних модулів. Сумісна з інверторами Must, FelicityESS, Dyness. Вага 23 кг.",
-    "link": "https://drive.google.com/file/d/15ceXot9wdIgRS1bbGIeV-4dMa5otNxxt/view?usp=sharing",
+    "link": "assets/docs/must-lp1600.pdf",
     "embed": "",
     "specs": "<h3 style=\"margin:20px 0 10px;font-size:1rem;color:var(--color-dark)\">Технічні характеристики</h3><table class=\"specs-table\"><tbody><tr><td colspan=\"2\" class=\"specs-section\"><strong>ОСНОВНІ ПАРАМЕТРИ</strong></td></tr><tr><td>Номінальна напруга</td><td>25.6 В</td></tr><tr><td>Номінальна ємність</td><td>100 А·год</td></tr><tr><td>Номінальна енергія</td><td>2560 Вт·год</td></tr><tr><td>Кількість циклів</td><td>6000 циклів при 80% DOD, 25°C</td></tr><tr><td>Рекомендована напруга заряду</td><td>29.2 В</td></tr><tr><td>Рекомендований струм заряду</td><td>20 А</td></tr><tr><td>Кінцева напруга розряду</td><td>22 В</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>СТРУМ</strong></td></tr><tr><td>Стандартний метод — Заряд</td><td>20 А</td></tr><tr><td>Стандартний метод — Розряд</td><td>50 А</td></tr><tr><td>Макс. безперервний струм — Заряд</td><td>100 А</td></tr><tr><td>Макс. безперервний струм — Розряд</td><td>100 А</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>НАПРУГИ ВІДКЛЮЧЕННЯ BMS</strong></td></tr><tr><td>Заряд</td><td>29.2 В (3.65 В/елемент)</td></tr><tr><td>Розряд</td><td>22.0 В (2c) (2.75 В/елемент)</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>ТЕМПЕРАТУРА</strong></td></tr><tr><td>Заряд</td><td>0°C – +45°C</td></tr><tr><td>Розряд</td><td>-10°C – +55°C</td></tr><tr><td>Зберігання</td><td>-5°C – +35°C</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>ІНШЕ</strong></td></tr><tr><td>Напруга відвантаження</td><td>≥ 25.6 В</td></tr><tr><td>Паралельність модулів</td><td>До 15 одиниць</td></tr><tr><td>Зв'язок</td><td>CAN2.0 / RS232 / RS485</td></tr><tr><td>Матеріал корпусу</td><td>SPPC</td></tr><tr><td>Розміри машини (Ш×В×Г)</td><td>485.5 × 442 × 177 мм</td></tr><tr><td>Вага нетто / брутто</td><td>27 кг / 30 кг</td></tr></tbody></table>"
   },
@@ -54,7 +54,7 @@
     "mpn": "SE-F5 Pro-C",
     "condition": "new",
     "description": "DEYE SE-F5 Pro-C — сучасна акумуляторна батарея LiFePO4 ємністю 100 А·год і напругою 51,2 В (5,12 кВт·год). Забезпечує стабільну роботу гібридних і сонячних систем. Ресурс понад 6000 циклів. Порти зв'язку CAN/RS485. Вага 45 кг. Підходить для приватних будинків, офісів і комерційних об'єктів.",
-    "link": "https://drive.google.com/file/d/1wNOfnfCf2CbsuzsmehvuZpLB9VRf4mjN/view?usp=sharing",
+    "link": "assets/docs/deye-se-f5-pro-c.pdf",
     "embed": "",
     "specs": "<h3 style=\"margin:20px 0 10px;font-size:1rem;color:var(--color-dark)\">Технічні характеристики</h3><table class=\"specs-table\"><tbody><tr><td colspan=\"2\" class=\"specs-section\"><strong>ОСНОВНІ ПАРАМЕТРИ</strong></td></tr><tr><td>Тип батареї</td><td>LiFePO₄</td></tr><tr><td>Ємність</td><td>100 А·год</td></tr><tr><td>Масштабування</td><td>До 32 батарей паралельно</td></tr><tr><td>Номінальна напруга</td><td>51.2 В</td></tr><tr><td>Робоча напруга</td><td>44.8 – 57.6 В</td></tr><tr><td>Номінальна енергія</td><td>5.12 кВт·год</td></tr><tr><td>Струм заряду макс. безперервний</td><td>100 А</td></tr><tr><td>Струм заряду піковий (120 с)</td><td>150 А</td></tr><tr><td>Струм розряду макс. безперервний</td><td>100 А</td></tr><tr><td>Струм розряду піковий (120 с)</td><td>150 А</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>ІНШІ ПАРАМЕТРИ</strong></td></tr><tr><td>Рекомендована глибина розряду</td><td>90% DoD</td></tr><tr><td>Розміри (Ш×В×Г)</td><td>404 × 547 × 141 мм</td></tr><tr><td>Приблизна вага</td><td>44 кг</td></tr><tr><td>LED індикатори</td><td>LED (SOC, робота, захист) та зумер</td></tr><tr><td>Ступінь захисту корпусу</td><td>IP21</td></tr><tr><td>Робоча температура</td><td>Заряд: 0°C – +65°C / Розряд: -20°C – +65°C</td></tr><tr><td>Температура зберігання</td><td>0°C – +35°C</td></tr><tr><td>Відносна вологість</td><td>95% (без конденсації)</td></tr><tr><td>Висота</td><td>≤ 3000 м</td></tr><tr><td>Термін служби</td><td>≥ 6000 циклів</td></tr><tr><td>Монтаж</td><td>Настінний, підлоговий або модульний монтаж</td></tr><tr><td>Комунікація</td><td>CAN 2.0, RS485, додатковий модуль (WiFi + Bluetooth + додаток)</td></tr><tr><td>Гарантійний термін</td><td>10 років</td></tr><tr><td>Енергетичний ресурс</td><td>16 МВт·год</td></tr></tbody></table>"
   },
@@ -70,8 +70,8 @@
     "product_type": "Автономна енергетика > Акумулятори для гібридних інверторів",
     "mpn": "SE-F16-С",
     "condition": "new",
-    "description": "",
-    "link": "",
+    "description": "Deye SE-F16-С — потужна акумуляторна батарея LiFePO4 ємністю 314 А·год і напругою 51,2 В (16 кВт·год). Призначена для гібридних інверторів Deye та інших автономних і сонячних систем живлення приватних будинків, офісів і комерційних об'єктів. Вбудована BMS забезпечує захист від перезаряду, глибокого розряду та перегріву, ресурс понад 6000 циклів. Розміри 400×708×233 мм, вага 123 кг.",
+    "link": "assets/docs/deye-se-f16-c.pdf",
     "embed": "",
     "specs": ""
   },
@@ -86,9 +86,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор Felicity IVEM8048-II 8 кВт та акумулятор LiFePO4 Felicity FLA48314-EU 51,2 В 314 А·год (16 кВт·год).",
-    "link": "",
+    "link": "assets/docs/felicity-ivem8048-ii.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/felicity-fla48314-eu.pdf"
   },
   {
     "id": "152205",
@@ -101,9 +102,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор Felicity IVEM12048-II 12 кВт та акумулятор LiFePO4 DAH Solar DHN-LVWES05-G1 51,2 В 100 А·год.",
-    "link": "",
+    "link": "assets/docs/felicity-ivem6048-ii.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/dahsolar-dhn-lvwes05-g.pdf"
   },
   {
     "id": "152206",
@@ -116,9 +118,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор Felicity IVEM6048-II 6 кВт та акумулятор LiFePO4 DEYE SE-F5 Pro-C 51,2 В 100 А·год.",
-    "link": "",
+    "link": "assets/docs/felicity-ivem6048-ii.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/deye-se-f5-pro-c.pdf"
   },
   {
     "id": "152208",
@@ -131,9 +134,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор Felicity IVEM6048-II 6 кВт та акумулятор LiFePO4 Deye SE-F16-С 51,2 В 314 А·год.",
-    "link": "",
+    "link": "assets/docs/felicity-ivem6048-ii.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/deye-se-f16-c.pdf"
   },
   {
     "id": "152211",
@@ -146,9 +150,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор Felicity IVEM6048-II 6 кВт та акумулятор LiFePO4 Felicity FLA48230 51,2 В 230 А·год.",
-    "link": "",
+    "link": "assets/docs/felicity-ivem6048-ii.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/felicity-fla48230.pdf"
   },
   {
     "id": "142967",
@@ -167,7 +172,7 @@
     "mpn": "SUN-12K-SG02LP1-EU-AM3-P",
     "condition": "new",
     "description": "Deye SUN-12K-SG02LP1-EU-AM3-P — потужний однофазний гібридний інвертор 12 кВт для сонячних електростанцій. Підтримує роботу з акумуляторами LiFePO4 і свинцево-кислотними батареями. Забезпечує стабільну роботу як у мережевих, так і в автономних системах. Підходить для приватних будинків і комерційних об'єктів. Розміри 420×670×233 мм, вага 35,6 кг.",
-    "link": "https://drive.google.com/file/d/1bBh6MxngDF9iXk4xSAZVx2WXm3d_zekn/view?usp=sharing",
+    "link": "assets/docs/deye-sun-12k-sg02lp1-eu-am3-p.pdf",
     "embed": "",
     "specs": "<h3 style=\"margin:20px 0 10px;font-size:1rem;color:var(--color-dark)\">Технічні характеристики</h3><table class=\"specs-table\"><tbody><tr><td colspan=\"2\" class=\"specs-section\"><strong>ДАНІ ВХОДУ АКБ</strong></td></tr><tr><td>Тип акумулятора</td><td>Свинцево-кислотний або літій-іонний</td></tr><tr><td>Діапазон напруги АКБ (В)</td><td>40–60</td></tr><tr><td>Макс. струм заряджання/розряджання (А)</td><td>250</td></tr><tr><td>Стратегія заряджання Li-Ion АКБ</td><td>Самоадаптація до BMS</td></tr><tr><td>Кількість рядків АКБ</td><td>1</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>ДАНІ ВХОДУ PV-РЯДКІВ</strong></td></tr><tr><td>Макс. потужність підключення PV (Вт)</td><td>24000</td></tr><tr><td>Макс. вхідна потужність PV (Вт)</td><td>19200</td></tr><tr><td>Макс. вхідна напруга PV (В)</td><td>500</td></tr><tr><td>Напруга запуску (В)</td><td>125</td></tr><tr><td>Діапазон напруги MPPT (В)</td><td>150–425</td></tr><tr><td>Номінальна вхідна напруга PV (В)</td><td>370</td></tr><tr><td>Макс. робочий вхідний струм PV (А)</td><td>32+32+32</td></tr><tr><td>Макс. струм КЗ на вхід (А)</td><td>60+60+60</td></tr><tr><td>К-сть MPPT-трекерів</td><td>3</td></tr><tr><td>К-сть рядків на MPPT</td><td>2+2+2</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>ДАНІ ВИХОДУ AC</strong></td></tr><tr><td>Ном. активна потужність AC виходу/входу (Вт)</td><td>12000</td></tr><tr><td>Макс. активна потужність AC виходу/входу (ВА)</td><td>13200</td></tr><tr><td>Ном. струм AC виходу/входу (А)</td><td>54.6/52.2</td></tr><tr><td>Макс. струм AC виходу/входу (А)</td><td>60/57.4</td></tr><tr><td>Макс. струм AC транзит (режим навантаження) (А)</td><td>60</td></tr><tr><td>Пікова потужність (автономно) (Вт)</td><td>2-кратна номінальна потужність, 10 с</td></tr><tr><td>Діапазон коефіцієнта потужності</td><td>від 0.8 випереджання до 0.8 запізнення</td></tr><tr><td>Ном. напруга входу/виходу</td><td>229/230 В, 0.85Un–1.1Un, L+N+PE</td></tr><tr><td>Ном. частота мережі / діапазон (Гц)</td><td>50/45–55, 60/55–65</td></tr><tr><td>Гармонійне спотворення струму THDi</td><td>&lt;3% (від номінальної потужності)</td></tr><tr><td>Струм інʼєкції DC</td><td>&lt;0.5% In</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>ККД</strong></td></tr><tr><td>Макс. ККД</td><td>97.6%</td></tr><tr><td>Європейський ККД</td><td>96.5%</td></tr><tr><td>ККД MPPT</td><td>&gt;99%</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>ІНТЕРФЕЙС</strong></td></tr><tr><td>LCD/LED дисплей</td><td>LCD</td></tr><tr><td>Комунікаційний інтерфейс</td><td>WiFi, RS485, CAN</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>ЗАГАЛЬНІ ДАНІ</strong></td></tr><tr><td>Діапазон робочих температур (°C)</td><td>-40 до +60°C, -45°C зниження потужності</td></tr><tr><td>Допустима вологість довкілля</td><td>0–100%</td></tr><tr><td>Допустима висота</td><td>2000 м</td></tr><tr><td>Шум (дБ)</td><td>&lt;45</td></tr><tr><td>Ступінь захисту (IP)</td><td>IP 65</td></tr><tr><td>Топологія інвертора</td><td>Незкільований (сонячна частина), ізольований (АКБ)</td></tr><tr><td>Категорія перенапруги</td><td>OVC II (DC), OVC III (AC)</td></tr><tr><td>Розмір корпусу (Ш×В×Г), мм</td><td>420 × 670 × 233 (без розмірів і кронштейнів)</td></tr><tr><td>Маса (кг)</td><td>35.6</td></tr><tr><td>Тип охолодження</td><td>Інтелектуальне повітряне охолодження</td></tr><tr><td>Гарантія</td><td>5 років / 10 років</td></tr><tr><td>Мережеві стандарти</td><td>IEC 61727, IEC 62116, CEI 0-21, EN 50549, NRS 097, RD 140, UNE 217002, OVE-Richtlinie R25, G99, VDE-AR-N 4105</td></tr><tr><td>Стандарти безпеки / EMC</td><td>IEC/EN 61000-6-1/2/3/4, IEC/EN 62109-1, IEC/EN 62109-2</td></tr></tbody></table>"
   },
@@ -190,7 +195,7 @@
     "mpn": "SUN-6K-SG05LP1-EU-AM2-P",
     "condition": "new",
     "description": "Deye SUN-6K-SG05LP1-EU-AM2-P — сучасний однофазний гібридний інвертор 6 кВт для сонячних електростанцій. Підтримує акумулятори 48 В (LiFePO4 та свинцево-кислотні). Забезпечує ефективне керування енергією та резервне живлення. Дозволяє підвищити енергонезалежність дому або бізнесу. Розміри 330×580×232 мм, вага 24,9 кг.",
-    "link": "https://drive.google.com/file/d/1Sc2JyzgL_vFAaqf49CRBcMRJ7Laxcnly/view?usp=sharing",
+    "link": "assets/docs/deye-sun-3.6-10k.pdf",
     "embed": "",
     "specs": "<h3 style=\"margin:20px 0 10px;font-size:1rem;color:var(--color-dark)\">Технічні характеристики</h3><table class=\"specs-table\"><tbody><tr><td colspan=\"2\" class=\"specs-section\"><strong>ДАНІ ВХОДУ АКБ</strong></td></tr><tr><td>Тип акумулятора</td><td>Свинцево-кислотний або літій-іонний</td></tr><tr><td>Діапазон напруги АКБ (В)</td><td>40–60</td></tr><tr><td>Макс. струм заряджання/розряджання (А)</td><td>120</td></tr><tr><td>Стратегія заряджання Li-Ion АКБ</td><td>Самоадаптація до BMS</td></tr><tr><td>Кількість рядків АКБ</td><td>1</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>ДАНІ ВХОДУ PV-РЯДКІВ</strong></td></tr><tr><td>Макс. потужність підключення PV (Вт)</td><td>12000</td></tr><tr><td>Макс. вхідна потужність PV (Вт)</td><td>9600</td></tr><tr><td>Макс. вхідна напруга PV (В)</td><td>500</td></tr><tr><td>Напруга запуску (В)</td><td>125</td></tr><tr><td>Діапазон напруги MPPT (В)</td><td>150–425</td></tr><tr><td>Номінальна вхідна напруга PV (В)</td><td>370</td></tr><tr><td>Макс. робочий вхідний струм PV (А)</td><td>27+27</td></tr><tr><td>Макс. струм КЗ на вхід (А)</td><td>25/23.9</td></tr><tr><td>К-сть MPPT-трекерів</td><td>2</td></tr><tr><td>К-сть рядків на MPPT</td><td>1+1</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>ДАНІ ВИХОДУ/ВХОДУ AC</strong></td></tr><tr><td>Ном. активна потужність AC виходу/входу (Вт)</td><td>6000</td></tr><tr><td>Макс. повна потужність AC виходу/входу (ВА)</td><td>6600</td></tr><tr><td>Ном. струм AC виходу/входу (А)</td><td>27.3/26.1</td></tr><tr><td>Макс. струм AC виходу/входу (А)</td><td>30/28.7</td></tr><tr><td>Макс. AC транзит (режим навантаження) (А)</td><td>40</td></tr><tr><td>Пікова потужність (автономно) (Вт)</td><td>2-кратна номінальна потужність, 10 с</td></tr><tr><td>Діапазон коефіцієнта потужності</td><td>від 0.8 випереджання до 0.8 запізнення</td></tr><tr><td>Ном. напруга входу/виходу</td><td>220/230 В, 0.85Un–1.1Un, L+N+PE</td></tr><tr><td>Ном. частота мережі / діапазон (Гц)</td><td>50/45–55, 60/55–65</td></tr><tr><td>Гармонійне спотворення струму THDi</td><td>&lt;3% (від номінальної потужності)</td></tr><tr><td>Струм інʼєкції DC</td><td>&lt;0.5% In</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>ККД</strong></td></tr><tr><td>Макс. ККД</td><td>97.6%</td></tr><tr><td>Європейський ККД</td><td>96.5%</td></tr><tr><td>ККД MPPT</td><td>&gt;99%</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>ІНТЕРФЕЙС</strong></td></tr><tr><td>LCD/LED дисплей</td><td>LCD</td></tr><tr><td>Комунікаційний інтерфейс</td><td>WiFi, RS485, CAN</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>ЗАГАЛЬНІ ДАНІ</strong></td></tr><tr><td>Діапазон робочих температур (°C)</td><td>-40 до +60°C, -45°C зниження потужності</td></tr><tr><td>Допустима вологість довкілля</td><td>0–100%</td></tr><tr><td>Допустима висота</td><td>2000 м</td></tr><tr><td>Шум (дБ)</td><td>&lt;45</td></tr><tr><td>Ступінь захисту (IP)</td><td>IP 65</td></tr><tr><td>Топологія інвертора</td><td>Незкільований (сонячна частина), ізольований (АКБ)</td></tr><tr><td>Категорія перенапруги</td><td>OVC II (DC), OVC III (AC)</td></tr><tr><td>Розмір корпусу (Ш×В×Г), мм</td><td>330 × 580 × 232 (без розмірів і кронштейнів)</td></tr><tr><td>Маса (кг)</td><td>24.9</td></tr><tr><td>Тип охолодження</td><td>Інтелектуальне повітряне охолодження</td></tr><tr><td>Гарантія</td><td>5 років / 10 років</td></tr><tr><td>Мережеві стандарти</td><td>IEC 61727, IEC 62116, CEI 0-21, EN 50549, NRS 097, RD 140, UNE 217002, OVE-Richtlinie R25, G98, G99, VDE-AR-N 4105</td></tr><tr><td>Стандарти безпеки / EMC</td><td>IEC/EN 61000-6-1/2/3/4, IEC/EN 62109-1, IEC/EN 62109-2</td></tr></tbody></table>"
   },
@@ -211,7 +216,7 @@
     "mpn": "DHN-LVWES05-G1",
     "condition": "new",
     "description": "DAH Solar DHN-LVWES05-G1 — акумуляторна батарея LiFePO4 ємністю 100 А·год і напругою 51,2 В (5,12 кВт·год). Призначена для автономних, резервних і сонячних систем живлення. Ресурс понад 6000 циклів. Максимальний струм заряду/розряду до 100 А. Вага 45–50 кг.",
-    "link": "https://drive.google.com/file/d/1P0neLVF4IW58ADgDrAdodOU7TRMKaRKR/view?usp=sharing",
+    "link": "assets/docs/dahsolar-dhn-lvwes05-g.pdf",
     "embed": "",
     "specs": "<h3 style=\"margin:20px 0 10px;font-size:1rem;color:var(--color-dark)\">Технічні характеристики</h3><table class=\"specs-table\"><tbody><tr><td colspan=\"2\" class=\"specs-section\"><strong>ОСНОВНІ ПАРАМЕТРИ</strong></td></tr><tr><td>Тип батареї</td><td>LiFePO₄</td></tr><tr><td>Номінальна енергія</td><td>5.12 кВт·год</td></tr><tr><td>Номінальна ємність</td><td>100 А·год</td></tr><tr><td>Масштабування</td><td>Паралельне підключення до 16 модулів</td></tr><tr><td>Номінальна напруга</td><td>51.2 В</td></tr><tr><td>Робоча напруга</td><td>43.2 – 58.4 В</td></tr><tr><td>Рекомендований струм заряду/розряду</td><td>50 А</td></tr><tr><td>Максимальний струм заряду/розряду</td><td>100 А</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>ІНШІ ПАРАМЕТРИ</strong></td></tr><tr><td>Рекомендована глибина розряду (DoD)</td><td>≤ 90%</td></tr><tr><td>Габарити (Ш×В×Г)</td><td>480 × 500 × 155 мм</td></tr><tr><td>Вага</td><td>47 кг</td></tr><tr><td>LED-індикатори</td><td>6 LED (рівень заряду SOC: 16.6% – 100%) + 3 LED (ON/OFF, робота, сигнал тривоги)</td></tr><tr><td>Ступінь захисту</td><td>IP20</td></tr><tr><td>Робоча температура</td><td>Заряд: 0°C – +60°C / Розряд: -20°C – +60°C</td></tr><tr><td>Температура зберігання</td><td>0°C – +35°C</td></tr><tr><td>Кількість циклів</td><td>≥ 6000 (при 25°C, 0.5C/0.5C, 70% залишкової ємності)</td></tr><tr><td>Монтаж</td><td>Настінний або підлоговий</td></tr><tr><td>Система пожежогасіння</td><td>Попередньо встановлений модуль (опціонально)</td></tr><tr><td>Інтерфейси</td><td>CAN 2.0 / RS485</td></tr><tr><td>Гарантія</td><td>5 років</td></tr><tr><td>Сертифікація</td><td>IEC62619, CB, CE, UN38.3</td></tr></tbody></table>"
   },
@@ -233,7 +238,7 @@
     "mpn": "SUN-16K-SG01LP1-EU ",
     "condition": "new",
     "description": "Deye SUN-16K-SG01LP1-EU-AM3-P — потужний однофазний гібридний інвертор 16 кВт нового покоління. Підтримує низьковольтні акумулятори 48 В, має два MPPT-трекери та вбудований Wi-Fi модуль. Працює в резервному, автономному та мережевому режимах. Підходить для великих будинків, офісів і комерційних систем накопичення енергії. Розміри 464×763×282 мм, вага 52 кг.",
-    "link": "https://drive.google.com/file/d/1zUMQyWQtnrMDoCJkNOnkjQQjlcukUfqP/view?usp=sharing",
+    "link": "assets/docs/deye-sun-12-18k.pdf",
     "embed": "",
     "specs": "<h3 style=\"margin:20px 0 10px;font-size:1rem;color:var(--color-dark)\">Технічні характеристики</h3><table class=\"specs-table\"><tbody><tr><td colspan=\"2\" class=\"specs-section\"><strong>ДАНІ ВХОДУ АКБ</strong></td></tr><tr><td>Тип акумулятора</td><td>Свинцево-кислотний або літій-іонний</td></tr><tr><td>Діапазон напруги АКБ (В)</td><td>40–60</td></tr><tr><td>Макс. струм заряджання/розряджання (А)</td><td>290</td></tr><tr><td>Стратегія заряджання Li-Ion АКБ</td><td>Самоадаптація до BMS</td></tr><tr><td>Кількість рядків АКБ</td><td>1</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>ДАНІ ВХОДУ PV-РЯДКІВ</strong></td></tr><tr><td>Макс. потужність підключення PV (Вт)</td><td>32000</td></tr><tr><td>Макс. вхідна потужність PV (Вт)</td><td>25600</td></tr><tr><td>Макс. вхідна напруга PV (В)</td><td>500</td></tr><tr><td>Напруга запуску (В)</td><td>125</td></tr><tr><td>Діапазон напруги MPPT (В)</td><td>150–425</td></tr><tr><td>Номінальна вхідна напруга PV (В)</td><td>370</td></tr><tr><td>Макс. робочий вхідний струм PV (А)</td><td>54+54+54</td></tr><tr><td>Макс. струм КЗ на вхід (А)</td><td>54+54+54</td></tr><tr><td>К-сть MPPT-трекерів</td><td>3</td></tr><tr><td>К-сть рядків на MPPT</td><td>2+2+2</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>ДАНІ ВИХОДУ/ВХОДУ AC</strong></td></tr><tr><td>Ном. активна потужність AC виходу/входу (Вт)</td><td>16000</td></tr><tr><td>Макс. повна потужність AC виходу/входу (ВА)</td><td>17600</td></tr><tr><td>Ном. струм AC виходу/входу (А)</td><td>72.8/69.6</td></tr><tr><td>Макс. струм AC виходу/входу (А)</td><td>80/76.6</td></tr><tr><td>Макс. AC транзит (режим навантаження) (А)</td><td>100</td></tr><tr><td>Пікова потужність (автономно) (Вт)</td><td>2-кратна номінальна потужність, 10 с</td></tr><tr><td>Діапазон коефіцієнта потужності</td><td>від 0.8 випереджання до 0.8 запізнення</td></tr><tr><td>Ном. напруга входу/виходу</td><td>220/230 В, 0.85Un–1.1Un, L+N+PE</td></tr><tr><td>Ном. частота мережі / діапазон (Гц)</td><td>50/45–55, 60/55–65</td></tr><tr><td>Гармонійне спотворення струму THDi</td><td>&lt;3% (від номінальної потужності)</td></tr><tr><td>Струм інʼєкції DC</td><td>&lt;0.5% In</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>ККД</strong></td></tr><tr><td>Макс. ККД</td><td>97.6%</td></tr><tr><td>Європейський ККД</td><td>96.5%</td></tr><tr><td>ККД MPPT</td><td>&gt;99%</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>ІНТЕРФЕЙС</strong></td></tr><tr><td>LCD/LED дисплей</td><td>LCD</td></tr><tr><td>Комунікаційний інтерфейс</td><td>WiFi, RS485, CAN</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>ЗАГАЛЬНІ ДАНІ</strong></td></tr><tr><td>Діапазон робочих температур (°C)</td><td>-40 до +60°C, -45°C зниження потужності</td></tr><tr><td>Допустима вологість довкілля</td><td>0–100%</td></tr><tr><td>Допустима висота</td><td>3000 м</td></tr><tr><td>Шум (дБ)</td><td>&lt;55</td></tr><tr><td>Ступінь захисту (IP)</td><td>IP 65</td></tr><tr><td>Топологія інвертора</td><td>Незкільований (сонячна частина), ізольований (АКБ)</td></tr><tr><td>Категорія перенапруги</td><td>OVC II (DC), OVC III (AC)</td></tr><tr><td>Розмір корпусу (Ш×В×Г), мм</td><td>464 × 763 × 282 (без розмірів і кронштейнів)</td></tr><tr><td>Маса (кг)</td><td>54.1</td></tr><tr><td>Тип охолодження</td><td>Інтелектуальне повітряне охолодження</td></tr><tr><td>Гарантія</td><td>5 років / 10 років</td></tr><tr><td>Мережеві стандарти</td><td>IEC 61727, IEC 62116, AS 4777-2, NRS 097</td></tr><tr><td>Стандарти безпеки / EMC</td><td>IEC/EN 61000-6-1/2/3/4, IEC/EN 62109-1, IEC/EN 62109-2</td></tr></tbody></table>"
   },
@@ -354,9 +359,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор Felicity IVEM6048-II 6 кВт та акумулятор LiFePO4 Felicity FLA48314-EU 51,2 В 314 А·год.",
-    "link": "",
+    "link": "assets/docs/felicity-ivem6048-ii.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/felicity-fla48314-eu.pdf"
   },
   {
     "id": "152272",
@@ -369,9 +375,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор Felicity IVEM8048-II 8 кВт та акумулятор LiFePO4 DAH Solar DHN-LVWES05-G1 51,2 В 100 А·год.",
-    "link": "",
+    "link": "assets/docs/felicity-ivem8048-ii.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/dahsolar-dhn-lvwes05-g.pdf"
   },
   {
     "id": "152273",
@@ -384,9 +391,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор Felicity IVEM8048-II 8 кВт та акумулятор LiFePO4 Deye SE-F16-С 51,2 В 314 А·год.",
-    "link": "",
+    "link": "assets/docs/felicity-ivem8048-ii.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/deye-se-f16-c.pdf"
   },
   {
     "id": "152274",
@@ -399,9 +407,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор Felicity IVEM8048-II 8 кВт та акумулятор LiFePO4 DEYE SE-F5 Pro-C 51,2 В 100 А·год.",
-    "link": "",
+    "link": "assets/docs/felicity-ivem8048-ii.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/deye-se-f5-pro-c.pdf"
   },
   {
     "id": "152277",
@@ -414,9 +423,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор Felicity IVEM8048-II 8 кВт та акумулятор LiFePO4 Felicity FLA48230 51,2 В 230 А·год.",
-    "link": "",
+    "link": "assets/docs/felicity-ivem8048-ii.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/felicity-fla48230.pdf"
   },
   {
     "id": "152278",
@@ -429,9 +439,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор Felicity IVEM8048-II 8 кВт та акумулятор LiFePO4 Felicity FLB48314TG1-H 51,2 В 314 А·год.",
-    "link": "",
+    "link": "assets/docs/felicity-ivem8048-ii.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/felicity-flb48314tg1.pdf"
   },
   {
     "id": "142723",
@@ -449,7 +460,7 @@
     "mpn": "PV18-3224VPM",
     "condition": "new",
     "description": "Гібридний інвертор MUST PV18-3024PREM — 3000 ВА, 24 В, MPPT 80A, підтримує роботу без АКБ.",
-    "link": "https://drive.google.com/file/d/16fqE-afe3_IpXUEtDPb_CbU2Qjt_6pSw/view?usp=sharing",
+    "link": "assets/docs/must-pv1800-vpm-ii.pdf",
     "embed": "",
     "specs": "<h3 style=\"margin:20px 0 10px;font-size:1rem;color:var(--color-dark)\">Технічні характеристики</h3><table class=\"specs-table\"><tbody><tr><td colspan=\"2\" class=\"specs-section\"><strong>ВИХІД ІНВЕРТОРА</strong></td></tr><tr><td>Номінальна потужність</td><td>3200 ВА / 3200 Вт</td></tr><tr><td>Пікова потужність</td><td>6400 ВА</td></tr><tr><td>Форма сигналу</td><td>Чиста синусоїда</td></tr><tr><td>Регулювання напруги AC (режим АКБ)</td><td>230 В</td></tr><tr><td>ККД інвертора (піковий)</td><td>90–93%</td></tr><tr><td>Час перемикання</td><td>10 мс (UPS / VDE4105) / 20 мс (APL)</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>ВИХІД AC</strong></td></tr><tr><td>Напруга</td><td>230 В AC</td></tr><tr><td>Діапазон вхідної напруги</td><td>170–280 В (UPS) / 90–280 В (APL) / 184–253 В (VDE)</td></tr><tr><td>Діапазон частот</td><td>50 / 60 Гц (автовизначення)</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>АКУМУЛЯТОР</strong></td></tr><tr><td>Номінальна напруга</td><td>24 В DC</td></tr><tr><td>Напруга підтримуючого заряду</td><td>27.4 В DC</td></tr><tr><td>Захист від перезаряду</td><td>30 В DC</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>СОНЯЧНИЙ ТА МЕРЕЖЕВИЙ ЗАРЯДНИЙ ПРИСТРІЙ</strong></td></tr><tr><td>Макс. напруга ХХ PV-масиву</td><td>160 В DC</td></tr><tr><td>Діапазон напруги MPPT</td><td>30–128 В DC</td></tr><tr><td>Макс. потужність PV-масиву</td><td>1600 Вт</td></tr><tr><td>Макс. струм сонячного заряду</td><td>60 А</td></tr><tr><td>Макс. ККД</td><td>98%</td></tr><tr><td>Макс. струм заряду від AC</td><td>60 А</td></tr><tr><td>Макс. сумарний струм заряду</td><td>120 А</td></tr><tr><td>Споживання в режимі очікування</td><td>2 Вт</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>МЕХАНІЧНІ ХАРАКТЕРИСТИКИ</strong></td></tr><tr><td>Габарити пристрою (Ш×В×Г)</td><td>254.5 × 367.4 × 103 мм</td></tr><tr><td>Габарити пакування (Ш×В×Г)</td><td>436 × 331 × 189 мм</td></tr><tr><td>Вага нетто / брутто</td><td>5.5 кг / 6.5 кг</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>ІНШЕ</strong></td></tr><tr><td>Вологість</td><td>5–95% (без конденсації)</td></tr><tr><td>Робоча температура</td><td>0°C – 50°C</td></tr><tr><td>Температура зберігання</td><td>-15°C – 60°C</td></tr><tr><td>Гарантія</td><td>2 роки</td></tr><tr><td>Сертифікація</td><td>CE-EMC+LVD (EN6100-6-3, EN6100-6-1, EN IEC62109-1, EN IEC62109-2)</td></tr></tbody></table>"
   },
@@ -471,7 +482,7 @@
     "mpn": "PV18-2012ECO",
     "condition": "new",
     "description": "MUST PV18-2012 ECO — багатофункціональний гібридний інвертор потужністю 2 кВт для автономних та резервних систем живлення. Поєднує функції інвертора, MPPT сонячного зарядного пристрою та зарядного пристрою для акумуляторів. Може працювати без акумулятора. Має подвійний вихід для керування навантаженням.",
-    "link": "https://drive.google.com/file/d/1dyIzpxOMXBqJMNriMzEDjLJ8XIce1A_l/view?usp=sharing",
+    "link": "assets/docs/must-pv1800-eco.pdf",
     "embed": "",
     "specs": "<h3 style=\"margin:20px 0 10px;font-size:1rem;color:var(--color-dark)\">Технічні характеристики</h3><table class=\"specs-table\"><tbody><tr><td colspan=\"2\" class=\"specs-section\"><strong>ВИХІД ІНВЕРТОРА</strong></td></tr><tr><td>Номінальна потужність (Осн.+Доп.)</td><td>2000 ВА / 2000 Вт</td></tr><tr><td>Режим АКБ (Осн.+Доп.)</td><td>2000 ВА / 1600 Вт</td></tr><tr><td>Пікова потужність</td><td>3200 Вт</td></tr><tr><td>Форма хвилі</td><td>Чиста синусоїда</td></tr><tr><td>Стабілізація напруги (режим АКБ)</td><td>230 В ±5%</td></tr><tr><td>ККД інвертора (піковий)</td><td>90–93%</td></tr><tr><td>Час перемикання</td><td>10 мс (UPS / VDE4105) / 20 мс (APL)</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>ВХІД ЗМІННОГО СТРУМУ</strong></td></tr><tr><td>Напруга</td><td>230 В AC ±5%</td></tr><tr><td>Діапазон вхідної напруги</td><td>170–280 В (UPS) / 90–280 В (APL) / 184–253 В (VDE4105)</td></tr><tr><td>Діапазон частот</td><td>50 / 60 Гц</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>АКУМУЛЯТОР</strong></td></tr><tr><td>Номінальна напруга</td><td>12 В DC</td></tr><tr><td>Напруга підтримуючого заряду</td><td>13.7 В DC</td></tr><tr><td>Захист від перезаряду</td><td>15 В DC</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>СОНЯЧНИЙ ТА AC-ЗАРЯДНИЙ ПРИСТРІЙ</strong></td></tr><tr><td>Макс. вхідна напруга ХХ СП</td><td>400 В DC</td></tr><tr><td>Макс. вхідний струм СП</td><td>16 А</td></tr><tr><td>Макс. потужність масиву СП</td><td>2000 Вт</td></tr><tr><td>Діапазон MPPT напруги</td><td>30–320 В DC</td></tr><tr><td>Макс. струм сонячного заряду</td><td>80 А</td></tr><tr><td>Макс. струм заряду від AC</td><td>80 А</td></tr><tr><td>Макс. загальний струм заряду</td><td>80 А</td></tr><tr><td>Алгоритм заряду</td><td>3-ступеневий (свинець, AGM/GEL) / 4-ступеневий (Li)</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>МЕХАНІЧНІ ХАРАКТЕРИСТИКИ</strong></td></tr><tr><td>Габарити пристрою (Ш×В×Г)</td><td>290 × 367 × 111 мм</td></tr><tr><td>Габарити пакування (Ш×В×Г)</td><td>446 × 394 × 187 мм</td></tr><tr><td>Вага нетто / брутто</td><td>6 кг / 7.2 кг</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>ІНШЕ</strong></td></tr><tr><td>Вологість</td><td>5–95% (без конденсації)</td></tr><tr><td>Робоча температура</td><td>-10°C – 50°C</td></tr><tr><td>Температура зберігання</td><td>-15°C – 60°C</td></tr><tr><td>Інтерфейс зв'язку</td><td>USB, Wi-Fi, RS-485/CAN</td></tr><tr><td>Захист від пилу (Anti-dust Kit)</td><td>Ні</td></tr><tr><td>Гарантія</td><td>2 роки</td></tr></tbody></table>"
   },
@@ -513,7 +524,7 @@
     "mpn": "PV18-1012VPK",
     "condition": "new",
     "description": "MUST PV18-5048 PREM — гібридний інвертор потужністю 5 кВт, 48 В, MPPT 100A.",
-    "link": "https://drive.google.com/file/d/1SyLNbEKKZo4YMOEVj6ralodztlG3M0RM/view?usp=sharing",
+    "link": "assets/docs/must-pv1800-vpk.pdf",
     "embed": "",
     "specs": "<h3 style=\"margin:20px 0 10px;font-size:1rem;color:var(--color-dark)\">Технічні характеристики</h3><table class=\"specs-table\"><tbody><tr><td colspan=\"2\" class=\"specs-section\"><strong>ВИХІД ІНВЕРТОРА</strong></td></tr><tr><td>Номінальна потужність</td><td>1000 Вт</td></tr><tr><td>Пікова потужність</td><td>2000 Вт</td></tr><tr><td>Форма сигналу</td><td>Чиста синусоїда</td></tr><tr><td>Регулювання напруги AC (режим АКБ)</td><td>220–240 В ±5%</td></tr><tr><td>ККД інвертора (максимальний)</td><td>93%</td></tr><tr><td>Час перемикання</td><td>10 мс (UPS / VDE4105) / 20 мс (APL)</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>ВХІД AC</strong></td></tr><tr><td>Напруга</td><td>230 В AC</td></tr><tr><td>Діапазон вхідної напруги</td><td>170–280 В (UPS) / 90–280 В / 184–253 В (VDE4105)</td></tr><tr><td>Діапазон частот</td><td>50 / 60 Гц (автовизначення)</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>АКУМУЛЯТОР</strong></td></tr><tr><td>Номінальна напруга</td><td>12 В DC</td></tr><tr><td>Напруга плаваючого заряду</td><td>13.7 В DC</td></tr><tr><td>Захист від перезаряду</td><td>15.5 В DC</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>СОНЯЧНИЙ КОНТРОЛЕР ТА AC-ЗАРЯДНИЙ ПРИСТРІЙ</strong></td></tr><tr><td>Макс. напруга ХХ PV-масиву</td><td>55 В DC</td></tr><tr><td>Споживання в режимі очікування</td><td>2 Вт</td></tr><tr><td>Макс. струм заряду від сонячних панелей (PWM)</td><td>50 А</td></tr><tr><td>Макс. струм заряду від AC</td><td>10 А або 20 А</td></tr><tr><td>Макс. сумарний струм заряду</td><td>70 А</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>МЕХАНІЧНІ ХАРАКТЕРИСТИКИ</strong></td></tr><tr><td>Габарити пристрою (Ш×В×Г)</td><td>224 × 337 × 98 мм</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>ІНШЕ</strong></td></tr><tr><td>Вологість</td><td>5–95% (без конденсації)</td></tr><tr><td>Робоча температура</td><td>0°C – 50°C</td></tr><tr><td>Температура зберігання</td><td>-15°C – 60°C</td></tr><tr><td>Гарантія</td><td>2 роки</td></tr><tr><td>Сертифікація</td><td>CE-EMC+LVD, UKCA</td></tr></tbody></table>"
   },
@@ -533,7 +544,7 @@
     "mpn": "PV19-6048EXP",
     "condition": "new",
     "description": "MUST PV19-6048EXP — гібридний інвертор потужністю 6 кВт з номінальною напругою акумулятора 48 В та вбудованим Wi-Fi модулем для моніторингу. Підходить для автономних і резервних систем сонячного живлення. Розміри 309×505×147 мм, вага 14 кг.",
-    "link": "",
+    "link": "assets/docs/must-pv1900-exp.pdf",
     "embed": "",
     "specs": ""
   },
@@ -555,7 +566,7 @@
     "mpn": "PV18-3624PREM",
     "condition": "new",
     "description": "MUST PV18-3624PREM — гібридний інвертор потужністю 3,6 кВт з номінальною напругою акумулятора 24 В та вбудованим Wi-Fi модулем для моніторингу. Підходить для невеликих автономних систем живлення. Розміри 318×454×122,5 мм, вага 7,8 кг.",
-    "link": "",
+    "link": "assets/docs/must-pv1800-prem.pdf",
     "embed": "",
     "specs": ""
   },
@@ -570,9 +581,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор Deye SUN-6K-SG05LP1-EU-AM2 6 кВт та акумулятор LiFePO4 DEYE SE-F5 Pro-C 51,2 В 100 А·год.",
-    "link": "",
+    "link": "assets/docs/deye-sun-3.6-10k.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/deye-se-f5-pro-c.pdf"
   },
   {
     "id": "150758",
@@ -585,9 +597,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор Deye SUN-6K-SG05LP1-EU-AM2 6 кВт та акумулятор LiFePO4 DAH Solar DHN-LVWES05-G1 51,2 В 100 А·год.",
-    "link": "",
+    "link": "assets/docs/deye-sun-3.6-10k.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/dahsolar-dhn-lvwes05-g.pdf"
   },
   {
     "id": "151785",
@@ -600,9 +613,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор Deye SUN-6K-SG05LP1-EU-AM2 6 кВт та акумулятор LiFePO4 Felicity FLA48314-EU 51,2 В 314 А·год (16 кВт·год).",
-    "link": "",
+    "link": "assets/docs/deye-sun-3.6-10k.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/felicity-fla48314-eu.pdf"
   },
   {
     "id": "151787",
@@ -615,9 +629,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор Deye SUN-12K-SG02LP1-EU-AM3-P 12 кВт та акумулятор LiFePO4 Felicity FLA48314-EU 51,2 В 314 А·год (16 кВт·год).",
-    "link": "",
+    "link": "assets/docs/deye-sun-12k-sg02lp1-eu-am3-p.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/felicity-fla48314-eu.pdf"
   },
   {
     "id": "152224",
@@ -630,9 +645,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор Deye SUN-6K-SG05LP1-EU-AM2 6 кВт та акумулятор LiFePO4 Deye SE-F16-С 51,2 В 314 А·год.",
-    "link": "",
+    "link": "assets/docs/deye-sun-3.6-10k.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/deye-se-f16-c.pdf"
   },
   {
     "id": "152225",
@@ -645,9 +661,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор Deye SUN-6K-SG05LP1-EU-AM2 6 кВт та акумулятор LiFePO4 Felicity FLA48230 51,2 В 230 А·год.",
-    "link": "",
+    "link": "assets/docs/deye-sun-3.6-10k.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/felicity-fla48230.pdf"
   },
   {
     "id": "151617",
@@ -664,7 +681,7 @@
     "mpn": "FLA48314-EU",
     "condition": "new",
     "description": "Felicity FLA48314-EU — потужна акумуляторна батарея LiFePO4 ємністю 314 А·год і напругою 51,2 В (16 кВт·год). Ресурс понад 6000 циклів. Підходить для приватних будинків, сонячних електростанцій і комерційних систем резервного живлення. Розміри 435×880×247 мм, вага 121,5 кг.",
-    "link": "https://drive.google.com/file/d/1cyZV2EN8xdJuVuq6fHVjFSIMebPH4Qke/view?usp=sharing",
+    "link": "assets/docs/felicity-fla48314-eu.pdf",
     "embed": "",
     "specs": "<h3 style=\"margin:20px 0 10px;font-size:1rem;color:var(--color-dark)\">Технічні характеристики</h3><table class=\"specs-table\"><tbody><tr><td colspan=\"2\" class=\"specs-section\"><strong>ОСНОВНІ ПАРАМЕТРИ</strong></td></tr><tr><td>Тип батареї</td><td>LiFePO₄</td></tr><tr><td>Номінальна енергія</td><td>16 кВт·год</td></tr><tr><td>Номінальна напруга</td><td>51.2 В</td></tr><tr><td>Робоча напруга</td><td>44.8 – 57.6 В</td></tr><tr><td>Макс. безперервний струм заряду/розряду</td><td>160 А</td></tr><tr><td>Піковий струм заряду/розряду (15 с)</td><td>300 А</td></tr><tr><td>Макс. потужність заряду/розряду (15 с)</td><td>8000 Вт</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>ДОДАТКОВІ ПАРАМЕТРИ</strong></td></tr><tr><td>Масштабування</td><td>До 15 шт. паралельно (240 кВт·год)</td></tr><tr><td>Глибина розряду (DOD)</td><td>≥ 95%</td></tr><tr><td>Комунікація</td><td>RS485 / CAN</td></tr><tr><td>Ступінь захисту</td><td>IP21</td></tr><tr><td>Термін служби</td><td>≥ 8000 циклів (25°C ± 2°C, 0.5C/0.5C, 90% DOD, 70% EOL)</td></tr><tr><td>Температура заряджання</td><td>0°C – +55°C</td></tr><tr><td>Температура розряджання</td><td>-20°C – +55°C</td></tr><tr><td>Тип дисплея</td><td>LCD + LED</td></tr><tr><td>Монтаж</td><td>Підлоговий</td></tr><tr><td>Захист</td><td>Вбудована BMS, автомат, запобіжник</td></tr><tr><td>Гарантія</td><td>10 років</td></tr><tr><td>Сертифікація</td><td>UN38.3</td></tr><tr><td>Вага продукту / з упаковкою</td><td>121.5 кг / 143.5 кг</td></tr><tr><td>Габарити продукту (Ш×В×Г)</td><td>435 × 880 × 247 мм</td></tr><tr><td>Габарити упаковки (Ш×В×Г)</td><td>960 × 555 × 450 мм</td></tr></tbody></table>"
   },
@@ -686,7 +703,7 @@
     "mpn": "IVEM6048-II",
     "condition": "new",
     "description": "Felicity IVEM6048-II — гібридний інвертор потужністю 6 кВт з номінальною напругою акумулятора 48 В. Поєднує функції інвертора та сонячного контролера заряду, підходить для автономних і резервних систем живлення. Розміри 420×335×142 мм, вага 12,5 кг.",
-    "link": "",
+    "link": "assets/docs/felicity-ivem6048-ii.pdf",
     "embed": "",
     "specs": ""
   },
@@ -708,7 +725,7 @@
     "mpn": "IVEM4024-II",
     "condition": "new",
     "description": "Felicity IVEM4024-II — гібридний інвертор потужністю 4000 ВА/4000 Вт з номінальною вхідною напругою акумулятора 24 В. Оснащений вбудованим MPPT сонячним контролером заряду (робочий діапазон PV 60–500 В, макс. вхідна потужність 6000 Вт, максимальний струм сонячного заряду 120 А). Підтримує заряджання від мережі або генератора (макс. струм заряду 120 А, з регулюванням від 10 до 120 А з кроком 1 А). Формує чисту синусоїду на виході, працює в прохідному режимі без акумулятора та має захист виходу від короткого замикання. Сертифікація EMC, IEC 62109-1/2. Габарити 430×310×120 мм, вага 10,4 кг.",
-    "link": "https://drive.google.com/file/d/1TZ8DsdVfePE5RAl4NpQwGsuXgxy8-Xxm/view",
+    "link": "assets/docs/felicity-ivem4024-ii.pdf",
     "embed": "",
     "specs": "<h3 style=\"margin:20px 0 10px;font-size:1rem;color:var(--color-dark)\">Технічні характеристики</h3><table class=\"specs-table\"><tbody><tr><td colspan=\"2\" class=\"specs-section\"><strong>ОСНОВНІ ПАРАМЕТРИ</strong></td></tr><tr><td>Номінальна вихідна потужність (ВА)</td><td>4000 ВА</td></tr><tr><td>Номінальна вихідна потужність (Вт)</td><td>4000 Вт</td></tr><tr><td>Номінальна вхідна напруга DC</td><td>24 В</td></tr><tr><td>Номінальна вхідна напруга AC</td><td>230 В AC</td></tr><tr><td>Макс. вхідна напруга AC</td><td>280 В AC</td></tr><tr><td>Номінальна вхідна частота</td><td>50 Гц / 60 Гц (автовизначення)</td></tr><tr><td>Прохідний режим без акумулятора</td><td>Так</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>ЗАРЯДЖАННЯ ВІД МЕРЕЖІ / ГЕНЕРАТОРА</strong></td></tr><tr><td>Номінальна вхідна напруга</td><td>230 В AC</td></tr><tr><td>Діапазон вхідної напруги</td><td>90–280 В AC</td></tr><tr><td>Макс. струм заряджання</td><td>120 А</td></tr><tr><td>Регулювання струму заряджання</td><td>10–120 А (крок 1 А)</td></tr><tr><td>Захист від перезаряджання</td><td>Так</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>СОНЯЧНИЙ ВХІД (PV)</strong></td></tr><tr><td>Макс. напруга холостого ходу PV</td><td>500 В</td></tr><tr><td>PV робочий діапазон напруги</td><td>60–500 В</td></tr><tr><td>Макс. вхідна потужність PV</td><td>6000 Вт</td></tr><tr><td>Макс. струм сонячного заряджання</td><td>120 А</td></tr><tr><td>Макс. ст. заряд. (PV+Grid або GEN)</td><td>120 А</td></tr><tr><td>Макс. вхідний струм</td><td>27 А</td></tr><tr><td>Мін. стартова напруга</td><td>60 В</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>ВИХІД AC</strong></td></tr><tr><td>Форма вихідної напруги</td><td>Чиста синусоїда</td></tr><tr><td>Номінальна вихідна напруга</td><td>230 В AC ±5%</td></tr><tr><td>Номінальна вихідна частота</td><td>50±0,3 Гц / 60±0,3 Гц (регулюється)</td></tr><tr><td>Паралельна робота</td><td>Ні</td></tr><tr><td>Підтримка запуску електронавантаження</td><td>Так</td></tr><tr><td>Захист виходу від КЗ</td><td>Так</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>ІНШЕ</strong></td></tr><tr><td>Робоча температура</td><td>−10°C…+50°C</td></tr><tr><td>Температура зберігання</td><td>−15°C…+60°C</td></tr><tr><td>Вага нетто</td><td>10,4 кг</td></tr><tr><td>Розміри виробу (мм)</td><td>430×310×120 мм</td></tr><tr><td>Розміри упаковки (мм)</td><td>507×387×197 мм</td></tr><tr><td>CE-Сертифікація</td><td>EMC, IEC 62109-1/2</td></tr></tbody></table>"
   },
@@ -730,7 +747,7 @@
     "mpn": "FLA24230",
     "condition": "new",
     "description": "Felicity FLA24230-EU — акумуляторна батарея LiFePO4 ємністю 230 А·год (номінальна напруга 25,6 В, енергія 5,9 кВт·год). Робоча напруга 22,4–28,8 В, максимальний тривалий струм заряду/розряду 150 А, піковий струм (15 с) — 200 А. Оснащена вбудованою Smart BMS з автоматом і запобіжником, глибина розряду ≥95%, ресурс понад 6000 циклів. Гарантійний період 10 років. Підтримує масштабування до 15 одиниць паралельно (сумарно до 88,5 кВт·год). Комунікація RS485/CAN, LCD+LED дисплей, настінний або підлоговий монтаж, ступінь захисту IP21. Вага 52,5 кг, розміри 527×400×280 мм.",
-    "link": "https://drive.google.com/file/d/1XjMfVijtMnRxbrUXdonjqajfdwYf2ie-/view",
+    "link": "assets/docs/felicity-fla24230-eu.pdf",
     "embed": "",
     "specs": "<h3 style=\"margin:20px 0 10px;font-size:1rem;color:var(--color-dark)\">Технічні характеристики</h3><table class=\"specs-table\"><tbody><tr><td colspan=\"2\" class=\"specs-section\"><strong>ОСНОВНІ ПАРАМЕТРИ</strong></td></tr><tr><td>Тип акумулятора</td><td>LiFePO4</td></tr><tr><td>Номінальна енергія</td><td>5,9 кВт·год</td></tr><tr><td>Номінальна напруга</td><td>25,6 В</td></tr><tr><td>Робоча напруга</td><td>22,4–28,8 В</td></tr><tr><td>Макс. тривалий струм заряду/розряду</td><td>150 А</td></tr><tr><td>Піковий струм заряду/розряду (15 с)</td><td>200 А</td></tr><tr><td>Макс. потужність заряду/розряду (15 с)</td><td>3840 Вт</td></tr><tr><td>Масштабованість</td><td>Макс. 15 шт. паралельно (88,5 кВт·год)</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>ДОДАТКОВІ ПАРАМЕТРИ</strong></td></tr><tr><td>Глибина розряду (DOD)</td><td>≥95%</td></tr><tr><td>Комунікація</td><td>RS485/CAN</td></tr><tr><td>Ступінь захисту</td><td>IP21</td></tr><tr><td>Ресурс циклів</td><td>≥6000</td></tr><tr><td>Температура заряджання</td><td>0°C…+55°C</td></tr><tr><td>Температура розряджання</td><td>−20°C…+55°C</td></tr><tr><td>Тип дисплея</td><td>LCD+LED</td></tr><tr><td>Монтаж</td><td>Настінний / Підлоговий</td></tr><tr><td>Захист</td><td>Вбудована Smart BMS, автомат, запобіжник</td></tr><tr><td>Гарантійний період</td><td>10 років</td></tr><tr><td>Вага виробу</td><td>52,5 кг</td></tr><tr><td>Вага в упаковці</td><td>57 кг</td></tr><tr><td>Розміри виробу</td><td>527×400×280 мм</td></tr><tr><td>Розміри упаковки</td><td>646×522×358 мм</td></tr></tbody></table>"
   },
@@ -745,7 +762,7 @@
     "mpn": "FLA48230",
     "condition": "new",
     "description": "Felicity FLA48230 — акумуляторна батарея LiFePO4 ємністю 230 А·год (номінальна напруга 51,2 В, енергія 11,8 кВт·год). Робоча напруга 44,8–57,6 В, рекомендований струм заряду/розряду до 150 А, максимальний струм (15 с) — 200 А. Оснащена вбудованою інтелектуальною BMS з автоматичним вимикачем і запобіжником, глибина розряду ≥95%, ресурс понад 6000 циклів (за умов 25°C±2°C, 0.5C/0.5C, 90% DOD, 70% EOL). Гарантія 7 років. Підтримує масштабування до 15 одиниць паралельно (сумарно до 176,6 кВт·год). Комунікація RS485/CAN, LCD+LED дисплей, настінний або підлоговий монтаж, ступінь захисту IP21. Сертифікація UN38.3, CE-EMC, IEC 62619. Вага 92 кг, розміри 783×450×274 мм.",
-    "link": "https://drive.google.com/file/d/1uPInnazFwe4ryfzgcbLGlodtByIen86O/view",
+    "link": "assets/docs/felicity-fla48230.pdf",
     "embed": "",
     "specs": "<h3 style=\"margin:20px 0 10px;font-size:1rem;color:var(--color-dark)\">Технічні характеристики</h3><table class=\"specs-table\"><tbody><tr><td colspan=\"2\" class=\"specs-section\"><strong>ОСНОВНІ ПАРАМЕТРИ</strong></td></tr><tr><td>Тип акумулятора</td><td>LiFePO4</td></tr><tr><td>Номінальна енергія</td><td>11,8 кВт·год</td></tr><tr><td>Номінальна напруга</td><td>51,2 В</td></tr><tr><td>Робоча напруга</td><td>44,8–57,6 В</td></tr><tr><td>Рекомендований струм заряду/розряду</td><td>≤150 А</td></tr><tr><td>Рекомендована потужність заряду/розряду</td><td>≤7500 Вт</td></tr><tr><td>Максимальний струм заряду/розряду (15 с)</td><td>200 А</td></tr><tr><td>Максимальна потужність (15 с)</td><td>10000 Вт</td></tr><tr><td>Масштабованість</td><td>Макс. 15 шт. паралельно (176,6 кВт·год)</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>ДОДАТКОВІ ПАРАМЕТРИ</strong></td></tr><tr><td>Глибина розряду (DOD)</td><td>≥95%</td></tr><tr><td>Комунікація</td><td>RS485/CAN</td></tr><tr><td>Ступінь захисту</td><td>IP21</td></tr><tr><td>Термін служби (циклів)</td><td>≥6000 (25°C±2°C, 0.5C/0.5C, 90%DOD, 70%EOL)</td></tr><tr><td>Температура заряджання</td><td>0°C…+55°C</td></tr><tr><td>Температура розряджання</td><td>−20°C…+55°C</td></tr><tr><td>Тип дисплея</td><td>LCD+LED</td></tr><tr><td>Монтаж</td><td>Настінний / Підлоговий</td></tr><tr><td>Захист</td><td>Вбудована інтелектуальна BMS, автоматичний вимикач, запобіжник</td></tr><tr><td>Гарантія</td><td>7 років</td></tr><tr><td>Сертифікація</td><td>UN38.3, CE-EMC, IEC 62619</td></tr><tr><td>Вага продукту</td><td>92 кг</td></tr><tr><td>Вага упаковки</td><td>115,6 кг</td></tr><tr><td>Розмір продукту</td><td>783×450×274 мм</td></tr><tr><td>Розмір упаковки</td><td>900×570×450 мм</td></tr></tbody></table>"
   },
@@ -767,7 +784,7 @@
     "mpn": "IVEM8048-II",
     "condition": "new",
     "description": "Felicity IVEM8048-II — гібридний інвертор потужністю 8000 ВА/8000 Вт з номінальною вхідною напругою акумулятора 48 В. Оснащений вбудованим MPPT сонячним контролером заряду (робочий діапазон PV 90–450 В, макс. вхідна потужність 10000 Вт при 5000 Вт на 1 PV-вхід, максимальний струм сонячного заряду 150 А). Підтримує заряджання від мережі або генератора (макс. струм заряду 150 А, з регулюванням від 10 до 150 А з кроком 1 А). Формує чисту синусоїду на виході, підтримує паралельну роботу до 6 пристроїв та має захист виходу від короткого замикання. Сертифікація EMC, IEC 62109-1/2. Габарити 607×464×141 мм, вага 23,7 кг.",
-    "link": "https://drive.google.com/file/d/1e23QG5bg4iR22sr6qs-BkbZ7xFaA34qL/view",
+    "link": "assets/docs/felicity-ivem8048-ii.pdf",
     "embed": "",
     "specs": "<h3 style=\"margin:20px 0 10px;font-size:1rem;color:var(--color-dark)\">Технічні характеристики</h3><table class=\"specs-table\"><tbody><tr><td colspan=\"2\" class=\"specs-section\"><strong>ОСНОВНІ ПАРАМЕТРИ</strong></td></tr><tr><td>Номінальна вихідна потужність (ВА)</td><td>8000 ВА</td></tr><tr><td>Номінальна вихідна потужність (Вт)</td><td>8000 Вт</td></tr><tr><td>Номінальна вхідна напруга DC</td><td>48 В</td></tr><tr><td>Номінальна вхідна напруга AC</td><td>230 В AC</td></tr><tr><td>Макс. вхідна напруга AC</td><td>280 В AC</td></tr><tr><td>Номінальна вхідна частота</td><td>50 Гц / 60 Гц (автовизначення)</td></tr><tr><td>Прохідний режим без акумулятора</td><td>Так</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>ЗАРЯДЖАННЯ ВІД МЕРЕЖІ / ГЕНЕРАТОРА</strong></td></tr><tr><td>Номінальна вхідна напруга</td><td>230 В AC</td></tr><tr><td>Діапазон вхідної напруги</td><td>90–280 В AC</td></tr><tr><td>Макс. струм заряджання</td><td>150 А</td></tr><tr><td>Регулювання струму заряджання</td><td>10–150 А (крок 1 А)</td></tr><tr><td>Захист від перезаряджання</td><td>Так</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>СОНЯЧНИЙ ВХІД (PV)</strong></td></tr><tr><td>Макс. напруга холостого ходу PV</td><td>500 В</td></tr><tr><td>PV робочий діапазон напруги</td><td>90–450 В</td></tr><tr><td>Макс. вхідна потужність PV</td><td>10000 Вт (5000 Вт на 1 PV)</td></tr><tr><td>Макс. струм сонячного заряджання</td><td>150 А</td></tr><tr><td>Макс. ст. заряд. (PV+Grid або GEN)</td><td>150 А</td></tr><tr><td>Макс. вхідний струм</td><td>20 А × 2 (макс. 40 А)</td></tr><tr><td>Мін. стартова напруга</td><td>100 В</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>ВИХІД AC</strong></td></tr><tr><td>Форма вихідної напруги</td><td>Чиста синусоїда</td></tr><tr><td>Номінальна вихідна напруга</td><td>230 В AC ±5%</td></tr><tr><td>Номінальна вихідна частота</td><td>50±0,3 Гц / 60±0,3 Гц (регулюється)</td></tr><tr><td>Паралельна робота</td><td>Так, до 6 пристроїв</td></tr><tr><td>Підтримка запуску електронавантаження</td><td>Так</td></tr><tr><td>Захист виходу від КЗ</td><td>Так</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>ІНШЕ</strong></td></tr><tr><td>Робоча температура</td><td>−10°C…+50°C</td></tr><tr><td>Температура зберігання</td><td>−15°C…+60°C</td></tr><tr><td>Вага нетто</td><td>23,7 кг</td></tr><tr><td>Розміри виробу (мм)</td><td>607×464×141 мм</td></tr><tr><td>Розміри упаковки (мм)</td><td>712×582×259 мм</td></tr><tr><td>CE-Сертифікація</td><td>EMC, IEC 62109-1/2</td></tr></tbody></table>"
   },
@@ -782,7 +799,7 @@
     "mpn": "FLB48314TG1-H",
     "condition": "new",
     "description": "Felicity FLB48314TG1-H — акумуляторна батарея LiFePO4 ємністю 314 А·год (номінальна напруга 51,2 В, енергія 16 кВт·год). Робоча напруга 44,8–57,6 В, рекомендований струм заряду/розряду 80 А, максимальний безперервний струм — 160 А, піковий (15 с) — 200 А. Оснащена вбудованою Smart BMS з автоматом і запобіжником, глибина розряду ≥95%, ресурс понад 8000 циклів. Ступінь захисту IP65, підлогове встановлення. Гарантія 10 років. Підтримує масштабування до 32 одиниць паралельно (сумарно до 512 кВт·год). Комунікація RS485/CAN, LED дисплей. Сертифікація UN38.3. Вага 121 кг, розміри 895×450×235 мм.",
-    "link": "https://drive.google.com/file/d/1fmrZnATqLW82zLt21NOuSkgIQnef4xFM/view",
+    "link": "assets/docs/felicity-flb48314tg1.pdf",
     "embed": "",
     "specs": "<h3 style=\"margin:20px 0 10px;font-size:1rem;color:var(--color-dark)\">Технічні характеристики</h3><table class=\"specs-table\"><tbody><tr><td colspan=\"2\" class=\"specs-section\"><strong>ОСНОВНІ ПАРАМЕТРИ</strong></td></tr><tr><td>Тип батареї</td><td>LiFePO4</td></tr><tr><td>Номінальна енергія</td><td>16 кВт·год</td></tr><tr><td>Номінальна ємність</td><td>314 А·год</td></tr><tr><td>Номінальна напруга</td><td>51,2 В</td></tr><tr><td>Робоча напруга</td><td>44,8–57,6 В</td></tr><tr><td>Рекомендований струм заряду/розряду</td><td>80 А</td></tr><tr><td>Макс. безперервний струм заряду/розряду</td><td>160 А</td></tr><tr><td>Піковий струм заряду/розряду (15 с)</td><td>200 А</td></tr><tr><td>Масштабованість</td><td>Макс. 32 шт. паралельно (512 кВт·год)</td></tr><tr><td colspan=\"2\" class=\"specs-section\"><strong>ДОДАТКОВІ ПАРАМЕТРИ</strong></td></tr><tr><td>Глибина розряду (DOD)</td><td>≥95%</td></tr><tr><td>Тип дисплея</td><td>LED</td></tr><tr><td>Ступінь захисту</td><td>IP65</td></tr><tr><td>Діапазон робочих температур</td><td>Заряд: 0°C…+55°C; Розряд: −20°C…+55°C</td></tr><tr><td>Діапазон температур зберігання</td><td>0°C…+35°C</td></tr><tr><td>Вологість</td><td>5–95%</td></tr><tr><td>Висота над рівнем моря</td><td>≤2000 м</td></tr><tr><td>Комунікація</td><td>RS485/CAN</td></tr><tr><td>Ресурс циклів</td><td>≥8000</td></tr><tr><td>Встановлення</td><td>Підлогове</td></tr><tr><td>Захист</td><td>Вбудована Smart BMS, автомат, запобіжник</td></tr><tr><td>Гарантійний період</td><td>10 років</td></tr><tr><td>Сертифікація</td><td>UN38.3</td></tr><tr><td>Вага продукту</td><td>121 кг</td></tr><tr><td>Вага упаковки</td><td>143 кг</td></tr><tr><td>Розміри продукту</td><td>895×450×235 мм</td></tr><tr><td>Розміри упаковки</td><td>958×548×424 мм</td></tr></tbody></table>"
   },
@@ -797,7 +814,7 @@
     "mpn": "PV18-2012PREM",
     "condition": "new",
     "description": "MUST PV18-2012 PREM — гібридний інвертор потужністю 2 кВт з номінальною напругою акумулятора 12 В та вбудованим Wi-Fi модулем для моніторингу. Підходить для компактних автономних систем живлення. Розміри 290×367×111 мм, вага 6 кг.",
-    "link": "",
+    "link": "assets/docs/must-pv1800-prem.pdf",
     "embed": "",
     "specs": ""
   },
@@ -812,9 +829,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор Felicity IVEM12048-II 12 кВт та акумулятор LiFePO4 Deye SE-F16-С 51,2 В 314 А·год.",
-    "link": "",
+    "link": "assets/docs/felicity-ivem12048-ii.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/deye-se-f16-c.pdf"
   },
   {
     "id": "152361",
@@ -827,9 +845,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор Felicity IVEM12048-II 12 кВт та акумулятор LiFePO4 DEYE SE-F5 Pro-C 51,2 В 100 А·год.",
-    "link": "",
+    "link": "assets/docs/felicity-ivem12048-ii.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/deye-se-f5-pro-c.pdf"
   },
   {
     "id": "152363",
@@ -842,9 +861,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор Felicity IVEM12048-II 12 кВт та акумулятор LiFePO4 Felicity FLA48230 51,2 В 230 А·год.",
-    "link": "",
+    "link": "assets/docs/felicity-ivem12048-ii.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/felicity-fla48230.pdf"
   },
   {
     "id": "152364",
@@ -857,9 +877,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор Felicity IVEM12048-II 12 кВт та акумулятор LiFePO4 Felicity FLA48314-EU 51,2 В 314 А·год.",
-    "link": "",
+    "link": "assets/docs/felicity-ivem12048-ii.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/felicity-fla48314-eu.pdf"
   },
   {
     "id": "152365",
@@ -872,9 +893,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор Felicity IVEM8048-II 8 кВт та акумулятор LiFePO4 Felicity FLB48314TG1-H 51,2 В 314 А·год.",
-    "link": "",
+    "link": "assets/docs/felicity-ivem8048-ii.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/felicity-flb48314tg1.pdf"
   },
   {
     "id": "152366",
@@ -887,9 +909,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор Felicity IVEM12048-II 12 кВт та акумулятор LiFePO4 Felicity FLB48314TG1-H 51,2 В 314 А·год.",
-    "link": "",
+    "link": "assets/docs/felicity-ivem12048-ii.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/felicity-flb48314tg1.pdf"
   },
   {
     "id": "152367",
@@ -902,9 +925,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор Felicity IVEM12048-II 12 кВт та акумулятор LiFePO4 Felicity FLA48280 51,2 В 280 А·год.",
-    "link": "",
+    "link": "assets/docs/felicity-ivem12048-ii.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/felicity-fla48280-eu.pdf"
   },
   {
     "id": "151847",
@@ -1037,7 +1061,7 @@
     "mpn": "FLB48100WG1-H",
     "condition": "new",
     "description": "Felicity FLB48100WG1-H — акумуляторна батарея LiFePO4 ємністю 100 А·год і напругою 51,2 В, з функцією підігріву елементів для стабільної роботи при низьких температурах. Підходить для гібридних інверторів і сонячних систем живлення. Розміри 650×450×174 мм, вага 48,5 кг.",
-    "link": "",
+    "link": "assets/docs/felicity-flb48100wg1.pdf",
     "embed": "",
     "specs": ""
   },
@@ -1059,7 +1083,7 @@
     "mpn": "IVEM12048-II",
     "condition": "new",
     "description": "Felicity IVEM12048-II — гібридний інвертор потужністю 12 кВт з номінальною напругою акумулятора 48 В. Підходить для автономних і резервних систем енергоживлення приватних будинків та невеликих комерційних об'єктів. Розміри 634×476×141 мм, вага 26,8 кг.",
-    "link": "",
+    "link": "assets/docs/felicity-ivem12048-ii.pdf",
     "embed": "",
     "specs": ""
   },
@@ -1074,7 +1098,7 @@
     "mpn": "FLA48280",
     "condition": "new",
     "description": "Felicity FLA48280 — акумуляторна батарея LiFePO4 ємністю 280 А·год і напругою 51,2 В. Призначена для гібридних інверторів і сонячних систем автономного живлення. Розміри 480×1100×300 мм, вага 135 кг.",
-    "link": "",
+    "link": "assets/docs/felicity-fla48280-eu.pdf",
     "embed": "",
     "specs": ""
   },
@@ -1096,7 +1120,7 @@
     "mpn": "FLA24100",
     "condition": "new",
     "description": "Felicity FLA24100 — акумуляторна батарея LiFePO4 ємністю 100 А·год і напругою 25,6 В. Підходить для гібридних інверторів 24 В у автономних та резервних системах живлення. Розміри 454×380×154 мм, вага 27 кг.",
-    "link": "",
+    "link": "assets/docs/felicity-fla24100.pdf",
     "embed": "",
     "specs": ""
   },
@@ -1126,7 +1150,7 @@
     "mpn": "LPBA48100-OL",
     "condition": "new",
     "description": "",
-    "link": "",
+    "link": "assets/docs/felicity-lpba48100-ol.pdf",
     "embed": "",
     "specs": ""
   },
@@ -1141,9 +1165,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор Felicity IVEM8048-II 8 кВт та акумулятор LiFePO4 Felicity FLA48280 51,2 В 280 А·год.",
-    "link": "",
+    "link": "assets/docs/felicity-ivem8048-ii.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/felicity-fla48280-eu.pdf"
   },
   {
     "id": "152471",
@@ -1156,9 +1181,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор Felicity IVEM6048-II 6 кВт та акумулятор LiFePO4 Felicity FLB48100WG1-H 51,2 В 100 А·год, з підігрівом.",
-    "link": "",
+    "link": "assets/docs/felicity-ivem6048-ii.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/felicity-flb48100wg1.pdf"
   },
   {
     "id": "152472",
@@ -1171,9 +1197,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор Felicity IVEM8048-II 8 кВт та акумулятор LiFePO4 Felicity FLB48100WG1-H 51,2 В 100 А·год, з підігрівом.",
-    "link": "",
+    "link": "assets/docs/felicity-ivem8048-ii.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/felicity-flb48100wg1.pdf"
   },
   {
     "id": "152475",
@@ -1186,9 +1213,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор Felicity IVEM12048-II 12 кВт та акумулятор LiFePO4 Felicity FLB48100WG1-H 51,2 В 100 А·год, з підігрівом.",
-    "link": "",
+    "link": "assets/docs/felicity-ivem12048-ii.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/felicity-flb48100wg1.pdf"
   },
   {
     "id": "152491",
@@ -1203,9 +1231,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор Felicity IVEM12048-II 12 кВт та акумулятор LiFePO4 Felicity FLA48171 51,2 В 171 А·год.",
-    "link": "",
+    "link": "assets/docs/felicity-ivem12048-ii.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": ""
   },
   {
     "id": "152492",
@@ -1218,9 +1247,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор Felicity IVEM8048-II 8 кВт та акумулятор LiFePO4 Felicity FLA48171 51,2 В 171 А·год.",
-    "link": "",
+    "link": "assets/docs/felicity-ivem8048-ii.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": ""
   },
   {
     "id": "152493",
@@ -1233,9 +1263,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор Felicity IVEM6048-II 6 кВт та акумулятор LiFePO4 Felicity FLA48171 51,2 В 171 А·год.",
-    "link": "",
+    "link": "assets/docs/felicity-ivem6048-ii.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": ""
   },
   {
     "id": "152552",
@@ -1248,9 +1279,10 @@
     "mpn": "",
     "condition": "new",
     "description": "",
-    "link": "",
+    "link": "assets/docs/felicity-ivem12048-ii.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/dahsolar-dhn-lvwes05-g.pdf"
   },
   {
     "id": "152553",
@@ -1263,9 +1295,10 @@
     "mpn": "",
     "condition": "new",
     "description": "",
-    "link": "",
+    "link": "assets/docs/felicity-ivem6048-ii.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/felicity-lpba48100-ol.pdf"
   },
   {
     "id": "152554",
@@ -1278,9 +1311,10 @@
     "mpn": "",
     "condition": "new",
     "description": "",
-    "link": "",
+    "link": "assets/docs/felicity-ivem12048-ii.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/felicity-lpba48100-ol.pdf"
   },
   {
     "id": "152372",
@@ -1293,9 +1327,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор Deye SUN-16K-SG01LP1-EU-AM3-P 16 кВт та акумулятор LiFePO4 Felicity FLA48280 51,2 В 280 А·год.",
-    "link": "",
+    "link": "assets/docs/deye-sun-12-18k.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/felicity-fla48280-eu.pdf"
   },
   {
     "id": "143938",
@@ -1308,9 +1343,10 @@
     "mpn": "3kwt",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор Must PV18-3224VPM II 24 В 3,2 кВт та акумуляторна батарея LiFePO4 MUST LP1600-24100 25,6 В 100 А·год. Підходить для організації резервного або автономного живлення невеликого будинку чи офісу. Компоненти перевірені на сумісність і готові до підключення сонячних панелей.",
-    "link": "",
+    "link": "assets/docs/must-pv1800-vpm-ii.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/must-lp1600.pdf"
   },
   {
     "id": "151284",
@@ -1323,9 +1359,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор MUST PV19-6048EXP 6 кВт та акумулятор LiFePO4 DAH Solar DHN-LVWES05-G1 51,2 В 100 А·год.",
-    "link": "",
+    "link": "assets/docs/must-pv1900-exp.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/dahsolar-dhn-lvwes05-g.pdf"
   },
   {
     "id": "151790",
@@ -1338,9 +1375,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор MUST PV19-6048EXP 48 В 6 кВт та акумулятор LiFePO4 Felicity FLA48314-EU 51,2 В 314 А·год (16 кВт·год).",
-    "link": "",
+    "link": "assets/docs/must-pv1900-exp.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/felicity-fla48314-eu.pdf"
   },
   {
     "id": "152219",
@@ -1353,9 +1391,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор MUST PV19-6048EXP 6 кВт та акумулятор LiFePO4 Felicity FLA48230 51,2 В 230 А·год.",
-    "link": "",
+    "link": "assets/docs/must-pv1900-exp.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/felicity-fla48230.pdf"
   },
   {
     "id": "152220",
@@ -1368,9 +1407,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор Must PV18-3224VPM II 3,2 кВт та акумулятор LiFePO4 Felicity FLA24230 25,6 В 230 А·год.",
-    "link": "",
+    "link": "assets/docs/must-pv1800-vpm-ii.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/felicity-fla24230-eu.pdf"
   },
   {
     "id": "152374",
@@ -1383,9 +1423,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор Must PV18-2012ECO 2 кВт та акумулятор LiFePO4 MUST LP15-12100 12 В 100 А·год.",
-    "link": "",
+    "link": "assets/docs/must-pv1800-eco.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": ""
   },
   {
     "id": "152375",
@@ -1398,9 +1439,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор Must PV18-1012VPK 1 кВт та акумулятор LiFePO4 MUST LP15-12100 12 В 100 А·год.",
-    "link": "",
+    "link": "assets/docs/must-pv1800-vpk.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": ""
   },
   {
     "id": "152377",
@@ -1413,9 +1455,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор MUST PV19-6048EXP 6 кВт та акумулятор LiFePO4 Felicity FLA48280 51,2 В 230 А·год.",
-    "link": "",
+    "link": "assets/docs/must-pv1900-exp.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/felicity-fla48280-eu.pdf"
   },
   {
     "id": "152415",
@@ -1428,9 +1471,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор MUST PV18-3624PREM 3,6 кВт та акумулятор LiFePO4 Felicity FLA24230 25,6 В 230 А·год.",
-    "link": "",
+    "link": "assets/docs/must-pv1800-prem.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/felicity-fla24230-eu.pdf"
   },
   {
     "id": "152417",
@@ -1443,9 +1487,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор MUST PV18-3624PREM 3,6 кВт та акумулятор LiFePO4 MUST LP16-24100 25,6 В 100 А·год.",
-    "link": "",
+    "link": "assets/docs/must-pv1800-prem.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/must-lp1600.pdf"
   },
   {
     "id": "152418",
@@ -1458,9 +1503,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор MUST PV18-3624PREM 3,6 кВт та акумулятор LiFePO4 Felicity FLA24100 25,6 В 100 А·год.",
-    "link": "",
+    "link": "assets/docs/must-pv1800-prem.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/felicity-fla24100.pdf"
   },
   {
     "id": "152456",
@@ -1473,9 +1519,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор MUST PV18-2012 PREM 2 кВт та акумулятор LiFePO4 MUST LP15-12100 12 В 100 А·год.",
-    "link": "",
+    "link": "assets/docs/must-pv1800-prem.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": ""
   },
   {
     "id": "152473",
@@ -1488,9 +1535,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор MUST PV19-6048EXP 6 кВт та акумулятор LiFePO4 Felicity FLB48100WG1-H 51,2 В 100 А·год, з підігрівом.",
-    "link": "",
+    "link": "assets/docs/must-pv1900-exp.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/felicity-flb48100wg1.pdf"
   },
   {
     "id": "152488",
@@ -1503,9 +1551,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор MUST PV18-3624PREM 3,6 кВт та акумулятор LiFePO4 MUST LP15-24100 25,6 В 100 А·год.",
-    "link": "",
+    "link": "assets/docs/must-pv1800-prem.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": ""
   },
   {
     "id": "152495",
@@ -1518,9 +1567,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор MUST PV19-6048EXP 6 кВт та акумулятор LiFePO4 Felicity FLA48171 51,2 В 171 А·год.",
-    "link": "",
+    "link": "assets/docs/must-pv1900-exp.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": ""
   },
   {
     "id": "152505",
@@ -1533,9 +1583,10 @@
     "mpn": "",
     "condition": "new",
     "description": "Готовий комплект автономного живлення: гібридний інвертор Must PV18-3224 VPM II 3,2 кВт та акумулятор LiFePO4 MUST LP15-24100 25,6 В 100 А·год.",
-    "link": "",
+    "link": "assets/docs/must-pv1800-vpm-ii.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": ""
   },
   {
     "id": "152556",
@@ -1548,8 +1599,9 @@
     "mpn": "",
     "condition": "new",
     "description": "",
-    "link": "",
+    "link": "assets/docs/must-pv1900-exp.pdf",
     "embed": "",
-    "specs": ""
+    "specs": "",
+    "link2": "assets/docs/felicity-lpba48100-ol.pdf"
   }
 ]

@@ -122,6 +122,7 @@
     "desc_label": "Description",
     "no_desc": "No description available.",
     "datasheet_btn": "↓ Datasheet",
+    "datasheet_btn_2": "↓ Battery datasheet",
     "back_btn": "← Back to Catalog",
     "photo_alt": "Photo",
     "order_text": "I want to order: "

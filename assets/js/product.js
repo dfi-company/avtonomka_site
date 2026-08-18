@@ -250,7 +250,7 @@ function render(p) {
     cartBtn.setAttribute('data-sku', p.mpn || '');
   }
 
-  /* ---- Datasheet button ---- */
+  /* ---- Datasheet button(s) ---- */
   const datasheetWrap = document.getElementById('product-datasheet-wrap');
   const datasheetBtn  = document.getElementById('btn-datasheet');
   if (datasheetWrap && datasheetBtn) {
@@ -259,6 +259,17 @@ function render(p) {
       datasheetWrap.classList.remove('hidden');
     } else {
       datasheetWrap.remove();
+    }
+  }
+
+  const datasheetWrap2 = document.getElementById('product-datasheet-wrap-2');
+  const datasheetBtn2  = document.getElementById('btn-datasheet-2');
+  if (datasheetWrap2 && datasheetBtn2) {
+    if (p.link2) {
+      datasheetBtn2.href = p.link2;
+      datasheetWrap2.classList.remove('hidden');
+    } else {
+      datasheetWrap2.remove();
     }
   }
 
