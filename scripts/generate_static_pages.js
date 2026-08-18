@@ -204,8 +204,11 @@ function generateProductPage(p, template) {
     `<meta property="og:image" content="${escapeHtml(image)}">`
   );
   html = html.replace(
+    '<link rel="canonical" href="https://avtonomka.com.ua/product.html">',
+    `<link rel="canonical" href="${escapeHtml(canonical)}">`
+  );
+  html = html.replace(
     '</head>',
-    `  <link rel="canonical" href="${escapeHtml(canonical)}">\n` +
     `  <script type="application/ld+json">\n${jsonLd}\n  </script>\n</head>`
   );
   html = html.replace(
