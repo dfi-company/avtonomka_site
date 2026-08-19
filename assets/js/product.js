@@ -273,19 +273,25 @@ function render(p) {
     }
   }
 
-  /* ---- Show content ---- */
-  document.getElementById('loading-state')?.classList.add('hidden');
+  /* ---- Show content: only one state may exist in the DOM at a time ---- */
+  document.getElementById('loading-state')?.remove();
+  document.getElementById('not-found-state')?.remove();
+  document.getElementById('error-state')?.remove();
   document.getElementById('product-content')?.classList.remove('hidden');
 }
 
-/* ---- State helpers ---- */
+/* ---- State helpers: each removes the other three states from the DOM ---- */
 function showNotFound() {
-  document.getElementById('loading-state')?.classList.add('hidden');
+  document.getElementById('loading-state')?.remove();
+  document.getElementById('error-state')?.remove();
+  document.getElementById('product-content')?.remove();
   document.getElementById('not-found-state')?.classList.remove('hidden');
 }
 
 function showError() {
-  document.getElementById('loading-state')?.classList.add('hidden');
+  document.getElementById('loading-state')?.remove();
+  document.getElementById('not-found-state')?.remove();
+  document.getElementById('product-content')?.remove();
   document.getElementById('error-state')?.classList.remove('hidden');
 }
 

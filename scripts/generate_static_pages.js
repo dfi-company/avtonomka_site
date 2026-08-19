@@ -215,9 +215,43 @@ function generateProductPage(p, template) {
     '<span id="bc-name" data-i18n="product.breadcrumb_item">Товар</span>',
     `<span id="bc-name">${escapeHtml(title)}</span>`
   );
+  /* A static product page always represents one real, known product, so the
+     loading/not-found/error states can never fire here — strip them from the
+     markup entirely (not just hide via CSS) instead of leaving dead text
+     content for non-JS crawlers to read. */
   html = html.replace(
-    '<div id="loading-state" class="loading-state">',
-    '<div id="loading-state" class="loading-state hidden">'
+    `        <!-- Loading -->
+        <div id="loading-state" class="loading-state">
+          <div class="spinner"></div>
+          <span data-i18n="product.loading">Завантаження товару…</span>
+        </div>
+
+`,
+    ''
+  );
+  html = html.replace(
+    `        <!-- Not found -->
+        <div id="not-found-state" class="empty-state hidden">
+          <img src="assets/images/1111111.webp" alt="" loading="lazy">
+          <h3 data-i18n="product.not_found_title">Товар не знайдено</h3>
+          <p data-i18n="product.not_found_text">Можливо, товар більше не існує або посилання невірне.</p>
+          <a href="catalog.html" class="btn btn-primary" data-i18n="product.not_found_btn">Повернутись до каталогу</a>
+        </div>
+
+`,
+    ''
+  );
+  html = html.replace(
+    `        <!-- Error -->
+        <div id="error-state" class="empty-state hidden">
+          <img src="assets/images/sticker.webp" alt="" loading="lazy">
+          <h3 data-i18n="product.error_title">Помилка завантаження</h3>
+          <p data-i18n="product.error_text">Не вдалося завантажити інформацію про товар. Спробуйте пізніше.</p>
+          <a href="catalog.html" class="btn btn-outline" data-i18n="product.error_btn">До каталогу</a>
+        </div>
+
+`,
+    ''
   );
   html = html.replace(
     '<div id="product-content" class="hidden">',
