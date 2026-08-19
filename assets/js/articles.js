@@ -1,5 +1,15 @@
 /* articles.js — public articles page */
 
+/* Same slug <-> category mapping as catalog.js / product.js / generate_static_pages.js.
+   Kept as its own copy here since this page doesn't load catalog.js. */
+const SLUG_TO_CATEGORY = {
+  'hybridni-invertory':   'Автономна енергетика > Гибридні інвертори',
+  'akumulyatory':         'Автономна енергетика > Акумулятори для гібридних інверторів',
+  'komplekty':            'Автономна енергетика > Комплекти автономного енергоживлення',
+  'kabeli':               'Автономна енергетика > Силові та сонячні кабелі',
+  'dzherela-zhyvlennya':  'Обладнання > Джерела безперебійного живлення',
+};
+
 function articleField(article, field) {
   if (window.I18n && window.I18n.lang === 'en') {
     var enVal = article[field + '_en'];
@@ -14,6 +24,17 @@ function escHtml(str) {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
+}
+
+/* Minimal inline markdown support for article body paragraphs: **bold** and
+   [text](https://...) links. Operates on already-escHtml'd text, so the
+   only tags it can introduce are the whitelisted <strong>/<a> below — no
+   other HTML can reach the page through article content. Link targets are
+   restricted to http(s) URLs (no javascript:, no bare "#"). */
+function formatInline(escapedText) {
+  return escapedText
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2">$1</a>')
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
 }
 
 function formatDate(dateStr) {
@@ -47,6 +68,58 @@ function renderCard(article) {
   </article>`;
 }
 
+/* Up to 4 in-stock-first products whose product_type matches the article's
+   category slug. Returns [] if the article has no category or nothing matches
+   — the caller then renders no block at all, rather than an empty one. */
+function relatedProducts(article) {
+  if (!article.category) return [];
+  const productType = SLUG_TO_CATEGORY[article.category];
+  if (!productType) return [];
+  return allProducts
+    .filter(p => p.product_type === productType)
+    .slice(0, 4);
+}
+
+function renderRelatedProductCard(p) {
+  const priceStr = formatPrice(p.price || '');
+  const title    = p.title || '';
+  const img      = p.image_link || 'assets/images/zaglushka.png';
+  const href     = `product/${encodeURIComponent(p.id)}.html`;
+
+  return `
+  <div class="product-card">
+    <a href="${href}" class="product-card__img-wrap" aria-label="${escHtml(title)}">
+      <img src="${escHtml(img)}" alt="${escHtml(title)}" loading="lazy" onerror="this.src='assets/images/zaglushka.png'">
+    </a>
+    <div class="product-card__body">
+      <a href="${href}" class="product-card__title">${escHtml(title)}</a>
+      <div class="product-card__price-row">
+        <span class="product-card__price">${escHtml(priceStr)}</span>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderRelatedProducts(article) {
+  const products = relatedProducts(article);
+  if (products.length === 0) return '';
+  return `
+    <div class="article-full__related">
+      <h2>${t('articles.related_products_title')}</h2>
+      <div class="products-grid products-grid--compact">
+        ${products.map(renderRelatedProductCard).join('')}
+      </div>
+    </div>`;
+}
+
+function formatPrice(raw) {
+  if (!raw) return '';
+  const num = parseFloat(raw);
+  if (isNaN(num)) return raw;
+  const currency = raw.replace(/[\d.\s]+/, '').trim() || 'UAH';
+  return num.toLocaleString('uk-UA', { maximumFractionDigits: 0 }) + ' ' + currency;
+}
+
 function renderFull(article) {
   const dateStr = formatDate(article.date);
   const title   = articleField(article, 'title');
@@ -59,7 +132,17 @@ function renderFull(article) {
     .split(/\n\n+/)
     .map(para => para.trim())
     .filter(Boolean)
-    .map(para => `<p>${escHtml(para).replace(/\n/g, '<br>')}</p>`)
+    .map(para => {
+      if (para.startsWith('## ')) {
+        return `<h2>${formatInline(escHtml(para.slice(3).trim()))}</h2>`;
+      }
+      const lines = para.split('\n');
+      if (lines.length > 1 && lines.every(line => line.startsWith('- '))) {
+        const items = lines.map(line => `<li>${formatInline(escHtml(line.slice(2).trim()))}</li>`).join('');
+        return `<ul>${items}</ul>`;
+      }
+      return `<p>${formatInline(escHtml(para)).replace(/\n/g, '<br>')}</p>`;
+    })
     .join('');
 
   return `
@@ -71,11 +154,13 @@ function renderFull(article) {
       <h1 class="article-full__title">${escHtml(title)}</h1>
       ${summary ? `<p class="article-full__lead">${escHtml(summary)}</p>` : ''}
       <div class="article-full__body">${bodyHtml}</div>
+      ${renderRelatedProducts(article)}
     </div>
   </div>`;
 }
 
 let allArticles = [];
+let allProducts = [];
 
 function openArticle(id) {
   const article = allArticles.find(a => a.id === id);
@@ -129,6 +214,15 @@ async function init() {
     const resp = await fetch('data/articles.json');
     if (!resp.ok) throw new Error('HTTP ' + resp.status);
     allArticles = await resp.json();
+
+    /* Products for the "Схожі товари" block — best-effort: if this fails,
+       articles still render, just without related-product suggestions. */
+    try {
+      const prodResp = await fetch('products.json');
+      if (prodResp.ok) allProducts = await prodResp.json();
+    } catch (e) {
+      console.warn('articles.js: could not load products.json for related products', e);
+    }
 
     if (!Array.isArray(allArticles) || allArticles.length === 0) {
       grid.innerHTML = `

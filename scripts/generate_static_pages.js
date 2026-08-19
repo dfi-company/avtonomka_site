@@ -170,6 +170,32 @@ function loadProducts() {
   return Array.isArray(data) ? data : (data.products || []);
 }
 
+/* Articles tagged with a category slug (see data/articles.json's "category"
+   field), for the "Читайте також" block on product pages. A missing file or
+   an article with no/unrecognized category is simply skipped — never
+   invented here. */
+function loadArticles() {
+  const file = path.join(ROOT, 'data', 'articles.json');
+  if (!fs.existsSync(file)) return [];
+  try {
+    const data = JSON.parse(fs.readFileSync(file, 'utf8'));
+    return Array.isArray(data) ? data : [];
+  } catch (e) {
+    console.warn('generate_static_pages: could not parse data/articles.json:', e.message);
+    return [];
+  }
+}
+
+/* slug -> [article, ...], for O(1) lookup per product. */
+function groupArticlesBySlug(articles) {
+  const bySlug = {};
+  articles.forEach(a => {
+    if (!a.category) return;
+    (bySlug[a.category] = bySlug[a.category] || []).push(a);
+  });
+  return bySlug;
+}
+
 /* ============================================================
    Per-product static page: product/<id>.html
    ============================================================ */
@@ -229,7 +255,25 @@ function rewriteRelativePaths(html) {
   });
 }
 
-function generateProductPage(p, template) {
+/* "Читайте також" — 1-2 article links matching this product's category,
+   inserted right before </main> (same anchor point catalog pages use for
+   category-description). Renders nothing if there's no matching article. */
+function buildRelatedArticlesBlock(p, articlesBySlug) {
+  const slug = CATEGORY_TO_SLUG[p.product_type];
+  const matches = (slug && articlesBySlug[slug]) || [];
+  if (matches.length === 0) return '';
+
+  const items = matches.slice(0, 2).map(a =>
+    `          <li><a href="articles.html#${escapeHtml(a.id)}">${escapeHtml(a.title)}</a></li>`
+  ).join('\n');
+
+  return `\n    <section class="related-articles">\n      <div class="container">\n` +
+    `        <h2 class="related-articles__title" data-i18n="product.related_articles_title">Читайте також</h2>\n` +
+    `        <ul class="related-articles__list">\n${items}\n        </ul>\n` +
+    `      </div>\n    </section>\n  </main>`;
+}
+
+function generateProductPage(p, template, articlesBySlug) {
   const title       = p.title || '';
   const priceStr    = formatPrice(p.price || '');
   const inStock     = p.availability === 'in_stock';
@@ -350,6 +394,11 @@ function generateProductPage(p, template) {
     `<div id="product-desc" class="product-desc">${descText}</div>`
   );
 
+  const relatedArticles = buildRelatedArticlesBlock(p, articlesBySlug);
+  if (relatedArticles) {
+    html = html.replace('</main>', relatedArticles);
+  }
+
   return rewriteRelativePaths(html);
 }
 
@@ -358,11 +407,12 @@ function generateAllProductPages(products) {
   const outDir   = path.join(ROOT, 'product');
   fs.mkdirSync(outDir, { recursive: true });
 
+  const articlesBySlug = groupArticlesBySlug(loadArticles());
   const validIds = new Set(products.map(p => String(p.id)));
   const lastmod  = {}; // id -> YYYY-MM-DD, for sitemap.xml
 
   products.forEach(p => {
-    const html     = generateProductPage(p, template);
+    const html     = generateProductPage(p, template, articlesBySlug);
     const filePath = path.join(outDir, `${p.id}.html`);
     const relPath  = path.join('product', `${p.id}.html`);
     const before   = fs.existsSync(filePath) ? fs.readFileSync(filePath, 'utf8') : null;

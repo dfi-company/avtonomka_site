@@ -125,7 +125,8 @@
     "datasheet_btn_2": "↓ Battery datasheet",
     "back_btn": "← Back to Catalog",
     "photo_alt": "Photo",
-    "order_text": "I want to order: "
+    "order_text": "I want to order: ",
+    "related_articles_title": "Read also"
   },
   "articles": {
     "page_title": "Articles — Avtonomka",
@@ -136,6 +137,7 @@
     "loading": "Loading articles…",
     "empty_title": "No articles yet",
     "empty_text": "First materials coming very soon.",
+    "related_products_title": "Related products",
     "error_title": "Could not load articles",
     "error_text": "Please try again later."
   },
