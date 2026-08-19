@@ -27,7 +27,6 @@ const path = require('path');
 
 const ROOT           = path.join(__dirname, '..');
 const SITE_URL        = 'https://avtonomka.com.ua';
-const BRAND           = 'Автономка';
 const ITEMS_PER_PAGE  = 24;
 
 const SLUG_TO_CATEGORY = {
@@ -119,6 +118,30 @@ function productUrl(id) {
   return `${SITE_URL}/product/${encodeURIComponent(id)}.html`;
 }
 
+/* Manufacturer brand, detected from the title against a known-brand list —
+   never guessed/invented. A kit combining two different brands (e.g.
+   "Felicity IVEM... + DAH Solar ...") matches more than one and is left
+   without a brand, since neither alone would be accurate. */
+const KNOWN_BRANDS = [
+  [/DAH\s*Solar/i,  'DAH Solar'],
+  [/Dyness/i,        'Dyness'],
+  [/Deye/i,          'Deye'],
+  [/Felicity/i,      'Felicity'],
+  [/\bMUST\b/i,      'MUST'],
+  [/\bKBE\b/i,       'KBE'],
+  [/EcoFlow/i,       'EcoFlow'],
+  [/\bTTN\b/,        'TTN'],
+];
+
+function detectBrand(title) {
+  if (!title) return null;
+  const found = new Set();
+  for (const [re, name] of KNOWN_BRANDS) {
+    if (re.test(title)) found.add(name);
+  }
+  return found.size === 1 ? [...found][0] : null;
+}
+
 function loadProducts() {
   let raw = fs.readFileSync(path.join(ROOT, 'products.json'), 'utf8');
   if (raw.charCodeAt(0) === 0xFEFF) raw = raw.slice(1);
@@ -141,7 +164,7 @@ function buildJsonLd(p) {
     description: cleanDescription(p.description) || p.title,
     sku: p.id,
     ...(p.mpn ? { mpn: p.mpn } : {}),
-    brand: { '@type': 'Brand', name: BRAND },
+    ...(detectBrand(p.title) ? { brand: { '@type': 'Brand', name: detectBrand(p.title) } } : {}),
     offers: {
       '@type': 'Offer',
       url: productUrl(p.id),
@@ -160,6 +183,20 @@ function buildJsonLd(p) {
     },
   };
   // Prevent "</script>" inside data from closing the tag early.
+  return JSON.stringify(ld, null, 2).replace(/<\//g, '<\\/');
+}
+
+/* Mirrors the visible breadcrumb nav on product/<id>.html: Головна / Каталог / <title> */
+function buildBreadcrumbJsonLd(p) {
+  const ld = {
+    '@context': 'https://schema.org/',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Головна', item: `${SITE_URL}/` },
+      { '@type': 'ListItem', position: 2, name: 'Каталог', item: `${SITE_URL}/catalog.html` },
+      { '@type': 'ListItem', position: 3, name: p.title, item: productUrl(p.id) },
+    ],
+  };
   return JSON.stringify(ld, null, 2).replace(/<\//g, '<\\/');
 }
 
@@ -184,6 +221,7 @@ function generateProductPage(p, template) {
   const mpn         = p.mpn || '—';
   const canonical   = productUrl(p.id);
   const jsonLd      = buildJsonLd(p);
+  const breadcrumbLd = buildBreadcrumbJsonLd(p);
 
   let html = template;
 
@@ -209,7 +247,8 @@ function generateProductPage(p, template) {
   );
   html = html.replace(
     '</head>',
-    `  <script type="application/ld+json">\n${jsonLd}\n  </script>\n</head>`
+    `  <script type="application/ld+json">\n${jsonLd}\n  </script>\n` +
+    `  <script type="application/ld+json">\n${breadcrumbLd}\n  </script>\n</head>`
   );
   html = html.replace(
     '<span id="bc-name" data-i18n="product.breadcrumb_item">Товар</span>',
