@@ -22,12 +22,33 @@
  * Run: node scripts/generate_static_pages.js
  */
 
-const fs   = require('fs');
-const path = require('path');
+const fs      = require('fs');
+const path    = require('path');
+const { execFileSync } = require('child_process');
 
 const ROOT           = path.join(__dirname, '..');
 const SITE_URL        = 'https://avtonomka.com.ua';
 const ITEMS_PER_PAGE  = 24;
+const TODAY           = new Date().toISOString().slice(0, 10);
+
+/* Real last-modified date for a file: today if its content changed in this
+   very run (before that change is committed, git doesn't know about it yet),
+   otherwise the committer date of its last actual change in git history.
+   This is what keeps sitemap.xml's <lastmod> honest instead of stamping
+   every URL with "whenever the script last ran". */
+function lastmodFor(relPath, changedNow) {
+  if (changedNow) return TODAY;
+  try {
+    const out = execFileSync(
+      'git', ['log', '-1', '--format=%cs', '--', relPath],
+      { cwd: ROOT, encoding: 'utf8' }
+    ).trim();
+    if (out) return out;
+  } catch (e) {
+    // not a git checkout / git unavailable — fall through
+  }
+  return TODAY;
+}
 
 const SLUG_TO_CATEGORY = {
   'hybridni-invertory':   'Автономна енергетика > Гибридні інвертори',
@@ -338,10 +359,16 @@ function generateAllProductPages(products) {
   fs.mkdirSync(outDir, { recursive: true });
 
   const validIds = new Set(products.map(p => String(p.id)));
+  const lastmod  = {}; // id -> YYYY-MM-DD, for sitemap.xml
 
   products.forEach(p => {
-    const html = generateProductPage(p, template);
-    fs.writeFileSync(path.join(outDir, `${p.id}.html`), html, 'utf8');
+    const html     = generateProductPage(p, template);
+    const filePath = path.join(outDir, `${p.id}.html`);
+    const relPath  = path.join('product', `${p.id}.html`);
+    const before   = fs.existsSync(filePath) ? fs.readFileSync(filePath, 'utf8') : null;
+    const changed  = before !== html;
+    fs.writeFileSync(filePath, html, 'utf8');
+    lastmod[p.id] = lastmodFor(relPath, changed);
   });
 
   /* Remove pages for products that dropped out of products.json entirely
@@ -360,6 +387,8 @@ function generateAllProductPages(products) {
 
   console.log(`generate_static_pages: wrote ${products.length} files to /product/` +
     (removed ? `, removed ${removed} stale file(s) for discontinued products` : ''));
+
+  return lastmod;
 }
 
 /* ============================================================
@@ -419,38 +448,90 @@ const SSR_START = '<!-- SSR:START -->';
 const SSR_END   = '<!-- SSR:END -->';
 
 function injectGrid(filePath, cardsHtml) {
-  let html = fs.readFileSync(filePath, 'utf8');
+  const before = fs.readFileSync(filePath, 'utf8');
   const block = `${SSR_START}\n${cardsHtml}\n            ${SSR_END}`;
   const markerRe = new RegExp(SSR_START + '[\\s\\S]*?' + SSR_END);
 
-  if (markerRe.test(html)) {
-    html = html.replace(markerRe, block);
+  let html;
+  if (markerRe.test(before)) {
+    html = before.replace(markerRe, block);
   } else {
-    html = html.replace(
+    html = before.replace(
       '<div id="products-grid" class="products-grid"></div>',
       `<div id="products-grid" class="products-grid">${block}</div>`
     );
   }
 
   fs.writeFileSync(filePath, html, 'utf8');
+  return before !== html;
+}
+
+/* SEO text block under the product grid on each catalog/<slug>.html —
+   150-250 word, human-written, category-specific descriptions kept in
+   data/category_descriptions.json so they're easy to edit without
+   touching this script. Never invented here: if a slug has no entry,
+   the page simply gets no description block. */
+const CATDESC_START = '<!-- CATDESC:START -->';
+const CATDESC_END   = '<!-- CATDESC:END -->';
+
+function loadCategoryDescriptions() {
+  const file = path.join(ROOT, 'data', 'category_descriptions.json');
+  if (!fs.existsSync(file)) return {};
+  try {
+    return JSON.parse(fs.readFileSync(file, 'utf8'));
+  } catch (e) {
+    console.warn('generate_static_pages: could not parse data/category_descriptions.json:', e.message);
+    return {};
+  }
+}
+
+function injectCategoryDescription(filePath, text) {
+  const before = fs.readFileSync(filePath, 'utf8');
+  if (!text) return false;
+
+  const paragraphs = text.split(/\n{2,}/).map(p => `        <p>${escapeHtml(p.trim())}</p>`).join('\n');
+  const section = `\n    <section class="category-description">\n      <div class="container">\n` +
+    `${CATDESC_START}\n${paragraphs}\n        ${CATDESC_END}\n      </div>\n    </section>\n  </main>`;
+  const markerRe = new RegExp(
+    '\\n\\s*<section class="category-description">[\\s\\S]*?' + CATDESC_START +
+    '[\\s\\S]*?' + CATDESC_END + '[\\s\\S]*?</section>\\n\\s*</main>'
+  );
+
+  let html;
+  if (markerRe.test(before)) {
+    html = before.replace(markerRe, section);
+  } else {
+    html = before.replace(/\n\s*<\/main>/, section);
+  }
+
+  fs.writeFileSync(filePath, html, 'utf8');
+  return before !== html;
 }
 
 function generateCatalogGrids(products) {
+  const lastmod = {}; // relative path -> YYYY-MM-DD, for sitemap.xml
+  const descriptions = loadCategoryDescriptions();
+
   const rootPage = defaultFirstPage(products);
-  injectGrid(
+  const rootChanged = injectGrid(
     path.join(ROOT, 'catalog.html'),
     rootPage.map(p => renderCard(p, '')).join('\n')
   );
+  lastmod['catalog.html'] = lastmodFor('catalog.html', rootChanged);
 
   Object.keys(SLUG_TO_CATEGORY).forEach(slug => {
     const cat      = SLUG_TO_CATEGORY[slug];
     const filtered = products.filter(p => p.product_type === cat);
     const page     = defaultFirstPage(filtered);
-    const file     = path.join(ROOT, 'catalog', `${slug}.html`);
-    injectGrid(file, page.map(p => renderCard(p, '../')).join('\n'));
+    const relPath  = path.join('catalog', `${slug}.html`);
+    const file     = path.join(ROOT, relPath);
+    const gridChanged = injectGrid(file, page.map(p => renderCard(p, '../')).join('\n'));
+    const descChanged = injectCategoryDescription(file, descriptions[slug]);
+    lastmod[slug]  = lastmodFor(relPath, gridChanged || descChanged);
   });
 
   console.log('generate_static_pages: prerendered catalog.html + 5 catalog/*.html grids');
+  return lastmod;
 }
 
 /* ============================================================
@@ -458,32 +539,78 @@ function generateCatalogGrids(products) {
    /product/<id>.html URLs (previously stale/partial, old ?id= scheme).
    ============================================================ */
 
-function updateSitemap(products) {
+/* Static, hand-maintained pages — not touched by this script, so their
+   lastmod comes straight from git history (whenever a human last edited
+   the file). relPath === '' means the homepage (index.html on disk, but
+   served at the site root). */
+const STATIC_PAGES = [
+  { relPath: '',                      changefreq: 'weekly',  priority: '1.0' },
+  { relPath: 'catalog.html',          changefreq: 'daily',   priority: '0.9' },
+  { relPath: 'articles.html',         changefreq: 'weekly',  priority: '0.7' },
+  { relPath: 'blog.html',             changefreq: 'weekly',  priority: '0.7' },
+  { relPath: 'privacy.html',          changefreq: 'monthly', priority: '0.3' },
+  { relPath: 'terms.html',            changefreq: 'monthly', priority: '0.3' },
+  { relPath: 'about.html',            changefreq: 'monthly', priority: '0.5' },
+  { relPath: 'delivery-payment.html', changefreq: 'monthly', priority: '0.4' },
+  { relPath: 'return-policy.html',    changefreq: 'monthly', priority: '0.4' },
+  { relPath: 'warranty.html',         changefreq: 'monthly', priority: '0.4' },
+];
+
+function urlEntry(loc, lastmod, changefreq, priority) {
+  return `  <url>
+    <loc>${loc}</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>${changefreq}</changefreq>
+    <priority>${priority}</priority>
+  </url>`;
+}
+
+/* Rebuilds the whole file from the current products.json + catalog.html/
+   catalog/*.html state, instead of only ever refreshing the "Товари"
+   section — so static and category URLs, and each one's <lastmod>, stay
+   in sync automatically too. catalog.html itself (root grid, not a
+   /catalog/<slug> category page) is listed under STATIC_PAGES already. */
+function updateSitemap(products, catalogLastmod, productLastmod) {
   const file = path.join(ROOT, 'sitemap.xml');
-  let xml = fs.readFileSync(file, 'utf8');
 
-  const entries = products.map(p => `  <url>
-    <loc>${productUrl(p.id)}</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>`).join('\n');
+  const staticEntries = STATIC_PAGES.map(({ relPath, changefreq, priority }) => {
+    const loc = relPath ? `${SITE_URL}/${relPath}` : `${SITE_URL}/`;
+    const fsPath = relPath || 'index.html';
+    return urlEntry(loc, lastmodFor(fsPath, false), changefreq, priority);
+  }).join('\n');
 
-  const block = `<!-- Товари -->\n${entries}\n\n</urlset>`;
-  const sectionRe = /<!-- Товари -->[\s\S]*<\/urlset>/;
+  const categoryEntries = Object.keys(SLUG_TO_CATEGORY).map(slug => {
+    const loc = `${SITE_URL}/catalog/${slug}.html`;
+    return urlEntry(loc, catalogLastmod[slug] || TODAY, 'weekly', '0.8');
+  }).join('\n');
 
-  if (sectionRe.test(xml)) {
-    xml = xml.replace(sectionRe, block);
-  } else {
-    xml = xml.replace('</urlset>', `\n  <!-- Товари -->\n${entries}\n\n</urlset>`);
-  }
+  const productEntries = products.map(p =>
+    urlEntry(productUrl(p.id), productLastmod[p.id] || TODAY, 'weekly', '0.6')
+  ).join('\n');
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Статичні сторінки -->
+${staticEntries}
+
+  <!-- Категорії каталогу -->
+${categoryEntries}
+
+  <!-- Товари -->
+${productEntries}
+
+</urlset>
+`;
 
   fs.writeFileSync(file, xml, 'utf8');
-  console.log(`generate_static_pages: sitemap.xml now lists ${products.length} product URLs`);
+  console.log(`generate_static_pages: sitemap.xml rebuilt — ${STATIC_PAGES.length} static + ` +
+    `${Object.keys(SLUG_TO_CATEGORY).length} category + ${products.length} product URLs`);
 }
 
 /* ============================================================ */
 
 const products = loadProducts();
-generateAllProductPages(products);
-generateCatalogGrids(products);
-updateSitemap(products);
+const productLastmod = generateAllProductPages(products);
+const catalogLastmod = generateCatalogGrids(products);
+updateSitemap(products, catalogLastmod, productLastmod);
