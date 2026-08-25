@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Avtonomka — Каталог</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f0f7f0;
+    --bg2: #ffffff;
+    --bg3: #e8f2e8;
+    --accent: #2e7d32;
+    --text: #1a2e1a;
+    --text2: #5a7a5a;
+    --text3: #9ab89a;
+    --border: #d0e8d0;
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; overscroll-behavior:none; }
+
+  /* HEADER */
+  .header { background:#e8f4e8; padding:12px 14px; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:100; display:flex; align-items:center; gap:10px; }
+  .back-btn { width:32px; height:32px; border-radius:50%; background:var(--bg3); border:none; color:var(--text2); font-size:18px; cursor:pointer; display:none; align-items:center; justify-content:center; flex-shrink:0; transition:background .15s; }
+  .back-btn.visible { display:flex; }
+  .back-btn:active { background:#333; }
+  .logo-img { width:32px; height:32px; border-radius:8px; object-fit:cover; flex-shrink:0; }
+  .logo-fallback { width:32px; height:32px; border-radius:8px; background:linear-gradient(135deg,#4caf50,#2e7d32); display:none; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .header-title { flex:1; }
+  .logo-name { font-family:'Unbounded',sans-serif; font-size:13px; font-weight:800; }
+  .header-subtitle { font-size:10px; color:var(--text2); }
+
+  /* SEARCH — видима тільки в списку товарів */
+  .search-wrap { padding:10px 14px; background:#e8f4e8; border-bottom:1px solid var(--border); display:none; position:relative; z-index:10; }
+  .search-wrap.visible { display:block; }
+  .search-input { width:100%; background:#fff; border:1px solid var(--border); border-radius:var(--radius-sm); padding:9px 12px 9px 34px; color:var(--text); font-size:14px; font-family:'Inter',sans-serif; outline:none; transition:border-color .2s; box-shadow:0 1px 3px rgba(0,80,0,0.08); }
+  .search-input::placeholder { color:var(--text2); }
+  .search-input:focus { border-color:var(--accent); }
+  .search-icon { position:absolute; left:24px; top:50%; transform:translateY(-50%); color:var(--text2); font-size:14px; pointer-events:none; }
+  .search-rel { position:relative; }
+
+  /* DISCOUNT */
+  .discount-banner { background:linear-gradient(90deg,#c8e6c9,#dcedc8); border-bottom:1px solid #a5d6a7; padding:8px 14px; font-size:12px; color:#2e7d32; line-height:1.4; }
+  .discount-banner strong { color:#1b5e20; }
+
+  /* ══ ЕКРАН 1: КАТЕГОРІЇ ══ */
+  .screen { display:none; }
+  .screen.active { display:block; }
+
+    .cat-list { padding:8px 0; }
+  .cat-row {
+    display:flex; align-items:center; gap:16px;
+    padding:18px 16px;
+    background:var(--bg2); border-bottom:1px solid var(--border);
+    cursor:pointer; transition:background .12s;
+  }
+  .cat-row:active { background:var(--bg3); }
+  .cat-icon-wrap {
+    width:56px; height:56px; border-radius:16px;
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .cat-info { flex:1; }
+  .cat-row-name { font-family:'Unbounded',sans-serif; font-size:15px; font-weight:700; color:var(--text); margin-bottom:4px; line-height:1.2; }
+  .cat-row-count { font-size:13px; color:var(--text2); }
+  .cat-row-arrow { font-size:22px; color:var(--text3); font-weight:300; }
+
+  /* ══ ЕКРАН 2: ТОВАРИ ══ */
+  .products-screen { padding-bottom:80px; }
+
+  .cat-title-bar { padding:12px 14px 8px; display:flex; align-items:center; gap:8px; background:#e8f4e8; border-bottom:1px solid var(--border); position:relative; z-index:5; }
+  .cat-title-icon { font-size:18px; }
+  .cat-title-text { font-family:'Unbounded',sans-serif; font-size:13px; font-weight:700; flex:1; }
+  .cat-title-count { font-size:11px; color:var(--text2); }
+
+  /* BRAND HEADER */
+  .brand-header { padding:10px 14px 4px; display:flex; align-items:center; gap:8px; background:#f0f7f0; }
+  .brand-name { font-family:'Unbounded',sans-serif; font-size:10px; font-weight:700; color:#5a8a5a; letter-spacing:1px; text-transform:uppercase; }
+  .brand-line { flex:1; height:1px; background:var(--border); }
+  .brand-count { font-size:10px; color:var(--text3); }
+
+  /* PRODUCT ROW */
+  .product-row { display:flex; align-items:center; gap:12px; padding:12px 14px; background:#fff; border-bottom:1px solid var(--border); cursor:pointer; transition:background .12s; }
+  .product-row:active { background:#e8f4e8; }
+  .product-img-wrap { width:64px; height:64px; border-radius:var(--radius-sm); overflow:hidden; background:#f5f9f5; flex-shrink:0; display:flex; align-items:center; justify-content:center; border:1px solid var(--border); }
+  .product-img { width:100%; height:100%; object-fit:contain; padding:4px; }
+  .product-img-placeholder { font-size:26px; }
+  /* Skeleton поки фото не завантажилось */
+  .img-skeleton { width:100%; height:100%; background:linear-gradient(90deg,#222 25%,#2a2a2a 50%,#222 75%); background-size:200% 100%; animation:shimmer 1.2s infinite; }
+  @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+  .product-info { flex:1; min-width:0; }
+  .product-name { font-size:13px; font-weight:600; line-height:1.3; margin-bottom:5px; overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; }
+  .price-row { display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+  .price { font-family:'Unbounded',sans-serif; font-size:14px; font-weight:700; color:var(--accent); }
+  .price-unit { font-size:11px; color:var(--text2); }
+  .stock-in { font-size:10px; padding:2px 7px; border-radius:100px; background:#e8f5e9; color:#2e7d32; border:1px solid #a5d6a7; font-weight:600; }
+  .stock-order { font-size:10px; padding:2px 7px; border-radius:100px; background:#e3f2fd; color:#1565c0; border:1px solid #90caf9; font-weight:600; }
+  .product-arrow { color:var(--text3); font-size:18px; flex-shrink:0; }
+
+  /* LOADER */
+  .loader { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:60px 0; gap:14px; }
+  .loader-ring { width:32px; height:32px; border:3px solid #c8e6c9; border-top-color:#2e7d32; border-radius:50%; animation:spin .7s linear infinite; }
+  @keyframes spin { to{transform:rotate(360deg)} }
+  .loader-text { color:var(--text2); font-size:13px; }
+
+  .empty { text-align:center; padding:50px 20px; color:var(--text2); }
+  .empty-icon { font-size:36px; margin-bottom:10px; }
+  .error-banner { background:#2a1a1a; border:1px solid #5a2020; border-radius:var(--radius-sm); padding:12px 14px; font-size:13px; color:#ff8080; margin:14px; line-height:1.5; }
+
+  /* MODAL */
+  .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.82); z-index:200; align-items:flex-end; justify-content:center; }
+  .modal-overlay.open { display:flex; animation:fadeIn .2s ease; }
+  @keyframes fadeIn { from{opacity:0}to{opacity:1} }
+  .modal { background:#fff; border-radius:var(--radius) var(--radius) 0 0; width:100%; max-width:600px; max-height:88vh; overflow-y:auto; animation:slideUp .22s ease; border-top:1px solid var(--border); }
+  @keyframes slideUp { from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1} }
+  .modal-handle { width:34px; height:4px; background:var(--border); border-radius:2px; margin:10px auto 0; }
+  .modal-img-wrap { width:100%; background:#f5f9f5; display:flex; align-items:center; justify-content:center; padding:20px; min-height:160px; }
+  .modal-img { max-width:100%; max-height:200px; object-fit:contain; }
+  .modal-img-placeholder { font-size:64px; }
+  .modal-body { padding:14px 16px 28px; }
+  .modal-brand { font-size:10px; color:var(--accent); font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px; }
+  .modal-name { font-family:'Unbounded',sans-serif; font-size:15px; font-weight:700; line-height:1.3; margin-bottom:10px; }
+  .modal-price { font-family:'Unbounded',sans-serif; font-size:22px; color:var(--accent); font-weight:700; margin-bottom:14px; }
+  .modal-discount { background:#e8f5e9; border:1px solid #a5d6a7; border-radius:6px; padding:9px 11px; font-size:12px; color:#2e7d32; line-height:1.5; margin-bottom:16px; }
+  .modal-btn { display:block; width:100%; padding:14px; background:var(--accent); color:#fff; font-family:'Unbounded',sans-serif; font-size:12px; font-weight:700; border:none; border-radius:var(--radius); cursor:pointer; text-align:center; transition:opacity .15s; text-decoration:none; }
+  .modal-btn:active { opacity:.85; }
+
+  /* Page transition */
+  .screen { animation:pageFade .2s ease; }
+  @keyframes pageFade { from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:translateX(0)} }
+
+  /* ══ ЗАМОВЛЕННЯ / КОШИК ══ */
+  .qty-stepper { display:flex; align-items:center; gap:14px; margin-bottom:16px; }
+  .qty-btn { width:36px; height:36px; border-radius:10px; border:1px solid var(--border); background:#fff; color:var(--accent); font-size:18px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .12s; flex-shrink:0; }
+  .qty-btn:active { background:var(--bg3); }
+  .qty-value { font-family:'Unbounded',sans-serif; font-size:16px; font-weight:700; min-width:22px; text-align:center; }
+
+  .modal-btn-secondary { background:#fff; color:var(--accent); border:1px solid var(--accent); margin-top:8px; }
+
+  .cart-bar { position:fixed; left:14px; right:14px; bottom:14px; background:var(--accent); color:#fff; border-radius:var(--radius); padding:13px 16px; display:none; align-items:center; gap:10px; box-shadow:0 4px 16px rgba(0,80,0,.35); cursor:pointer; z-index:150; }
+  .cart-bar.visible { display:flex; animation:fadeIn .2s ease; }
+  .cart-bar-icon { font-size:18px; }
+  .cart-bar-text { font-family:'Unbounded',sans-serif; font-size:12px; font-weight:700; flex:1; }
+  .cart-bar-sum { font-family:'Unbounded',sans-serif; font-size:13px; font-weight:800; }
+
+  .cart-item { display:flex; align-items:center; gap:10px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .cart-item-info { flex:1; min-width:0; }
+  .cart-item-name { font-size:13px; font-weight:600; margin-bottom:4px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .cart-item-price { font-size:12px; color:var(--text2); }
+  .cart-item-qty { display:flex; align-items:center; gap:8px; flex-shrink:0; }
+  .cart-item-remove { width:26px; height:26px; border-radius:50%; background:#fdecea; color:#c62828; border:none; font-size:15px; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+
+  .cart-total-row { display:flex; justify-content:space-between; align-items:center; padding:14px 0; font-family:'Unbounded',sans-serif; font-size:15px; font-weight:700; }
+  .cart-empty { text-align:center; padding:40px 10px; color:var(--text2); }
+
+  .form-group { margin-bottom:14px; }
+  .form-label { font-size:12px; color:var(--text2); margin-bottom:6px; display:block; font-weight:600; }
+  .form-input, .form-textarea { width:100%; border:1px solid var(--border); border-radius:var(--radius-sm); padding:11px 12px; font-size:14px; font-family:'Inter',sans-serif; outline:none; background:#fff; transition:border-color .15s; }
+  .form-input:focus, .form-textarea:focus { border-color:var(--accent); }
+  .form-textarea { resize:vertical; min-height:60px; }
+  .form-error { color:#c62828; font-size:11px; margin-top:4px; display:none; }
+  .form-error.visible { display:block; }
+
+  .checkout-summary { background:var(--bg3); border-radius:var(--radius-sm); padding:12px; margin-bottom:16px; font-size:13px; line-height:1.6; }
+
+  .toast { position:fixed; left:50%; bottom:90px; transform:translateX(-50%) translateY(20px); background:#1a2e1a; color:#fff; padding:12px 20px; border-radius:100px; font-size:13px; z-index:300; opacity:0; pointer-events:none; transition:all .25s ease; white-space:nowrap; max-width:88vw; overflow:hidden; text-overflow:ellipsis; }
+  .toast.visible { opacity:1; transform:translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <button class="back-btn" id="backBtn" onclick="goBack()">‹</button>
+  <img class="logo-img" src="./logo.png" alt=""
+    onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+  <div class="logo-fallback">🌿</div>
+  <div class="header-title">
+    <div class="logo-name" id="headerTitle">AVTONOMKA</div>
+    <div class="header-subtitle" id="headerSub">АВТОНОМНА ЕНЕРГЕТИКА</div>
+    <a href="tel:+380987772020" id="headerPhone" style="font-size:11px;color:#2e7d32;font-weight:600;text-decoration:none;margin-top:1px;display:block">📞 0987772020</a>
+  </div>
+</div>
+
+<!-- SEARCH (для екрану товарів) -->
+<div class="search-wrap" id="searchWrap">
+  <div class="search-rel">
+    <span class="search-icon">🔍</span>
+    <input class="search-input" type="text" id="searchInput" placeholder="Пошук у категорії...">
+  </div>
+</div>
+
+<!-- DISCOUNT -->
+<div class="discount-banner">
+  💚 <strong>Інсталяторам та гуртовим покупцям</strong> — спеціальна ціна.
+</div>
+
+<!-- ЕКРАН 1: КАТЕГОРІЇ -->
+<div class="screen active" id="screenCats">
+  <div class="cat-list" id="catGrid">
+    <div class="loader"><div class="loader-ring"></div><div class="loader-text">Завантаження...</div></div>
+  </div>
+</div>
+
+<!-- ЕКРАН 2: ТОВАРИ -->
+<div class="screen" id="screenProducts">
+  <div id="productsContent"></div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<!-- CART BAR -->
+<div class="cart-bar" id="cartBar" onclick="openCartModal()">
+  <span class="cart-bar-icon">🛒</span>
+  <span class="cart-bar-text" id="cartBarText">Кошик</span>
+  <span class="cart-bar-sum" id="cartBarSum"></span>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+const CONFIG = {
+  PRODUCTS_URL: "../products.json",
+  MANAGER: "http://t.me/+380987772020",
+  ORDERS_URL: "https://script.google.com/macros/s/AKfycbyXUhTha2LJ2AToMihwUOWJHQkCH7nlUXBfDFK-yLzzxZERx3yBTg9iR9bggz3-ikB3PQ/exec",
+};
+
+/* Той самий асортимент, що на сайті (products.json), тому мапимо по
+   точному значенню product_type — see SLUG_TO_CATEGORY in assets/js/catalog.js */
+const CATEGORY_LABEL = {
+  "Автономна енергетика > Гибридні інвертори":                    "Гібридні інвертори",
+  "Автономна енергетика > Акумулятори для гібридних інверторів":  "Акумулятори для гібридних інверторів",
+  "Автономна енергетика > Комплекти автономного енергоживлення":  "Комплекти автономного енергоживлення",
+  "Автономна енергетика > Силові та сонячні кабелі":               "Силові та сонячні кабелі",
+  "Обладнання > Джерела безперебійного живлення":                  "Джерела безперебійного живлення",
+};
+
+const EMOJI = {"комплекти автономного енергоживлення":"🏠","гібридні інвертори":"⚡","акумулятори":"🔋","джерела безперебійного живлення":"🔌","силові та сонячні кабелі":"🔌","інші товари":"📦"};
+const ce = cat => { const k=(cat||"").toLowerCase(); for(const[key,v] of Object.entries(EMOJI)) if(k.includes(key)) return v; return "📦"; };
+
+if(window.Telegram?.WebApp){Telegram.WebApp.ready();Telegram.WebApp.expand();}
+
+// ── BRAND DETECTION (mirrors scripts/generate_static_pages.js:detectBrand) ──
+const KNOWN_BRANDS = [
+  [/DAH\s*Solar/i, "DAH Solar"], [/Dyness/i, "Dyness"], [/Deye/i, "Deye"],
+  [/Felicity/i, "Felicity"], [/\bMUST\b/i, "MUST"], [/\bKBE\b/i, "KBE"],
+  [/EcoFlow/i, "EcoFlow"], [/\bTTN\b/, "TTN"],
+];
+function detectBrand(title){
+  const found=new Set();
+  for(const[re,name] of KNOWN_BRANDS) if(re.test(title)) found.add(name);
+  return found.size===1 ? [...found][0] : null;
+}
+
+// ── PRICE "1234 UAH" -> {price:"1234", unit:"UAH"} ──
+function splitPrice(raw){
+  const m=String(raw||"").match(/^([\d.,\s]+)\s*(.*)$/);
+  if(!m) return {price:raw||"", unit:"UAH"};
+  return {price:m[1].replace(/\s/g,"").replace(",","."), unit:(m[2]||"").trim()||"UAH"};
+}
+
+// ── IMAGE PATH: products.json paths are site-root-relative; miniapp/ is one level deep ──
+function resolveImg(img){
+  if(!img) return "";
+  if(/^https?:\/\//i.test(img)) return img;
+  return "../"+String(img).replace(/^\//,"");
+}
+
+// ── POWER RATING (для групування "Комплекти" по потужності) ──
+function extractKw(title){
+  // (?!h) виключає "16kWh" (ємність акумулятора) — то не потужність інвертора
+  let m=title.match(/(\d+(?:[.,]\d+)?)\s*(?:кВт|kw)(?!h)/i);
+  if(m) return m[1].replace(",",".");
+  m=title.match(/(\d+)\s*Вт\b/);
+  if(m) return String(Number(m[1])/1000);
+  m=title.match(/SUN-(\d+)K-/i);
+  if(m) return m[1];
+  m=title.match(/PV\d+-(\d{2})\d{2}/i); // MUST "PVxx-XXYY": XX/10 = кВт, YY = В
+  if(m) return String(Number(m[1])/10);
+  return null;
+}
+
+// ── NORMALIZE products.json entry ──
+function norm(p){
+  const catLabel=CATEGORY_LABEL[p.product_type]||(p.product_type||"").split(">").pop().trim()||"Інші товари";
+  const {price,unit}=splitPrice(p.price);
+  let brand=detectBrand(p.title)||"—";
+  if(catLabel==="Комплекти автономного енергоживлення"){
+    const kw=extractKw(p.title);
+    if(kw!==null) brand=kw+" кВт";
+  }
+  return {
+    id:p.id,
+    category:catLabel,
+    brand,
+    name:p.title||"",
+    price, unit,
+    photo:resolveImg(p.image_link),
+    desc:p.description||"",
+    availability:p.availability||"in_stock",
+  };
+}
+
+let all=[], activeCat="", searchQ="";
+
+// ── LOAD ──
+async function loadData(){
+  try{
+    const res=await fetch(CONFIG.PRODUCTS_URL+"?t="+Date.now());
+    if(!res.ok)throw new Error("HTTP "+res.status);
+    all=(await res.json()).map(norm).filter(p=>p.name);
+    buildCats();
+  }catch(e){
+    document.getElementById("catGrid").innerHTML=`
+      <div style="grid-column:1/-1">
+        <div class="error-banner">⚠️ Помилка завантаження.<br><small style="opacity:.6">${e.message}</small></div>
+        <div style="text-align:center;padding:16px"><button onclick="loadData()" style="background:var(--accent);color:#fff;border:none;padding:10px 22px;border-radius:8px;font-weight:600;font-size:14px;cursor:pointer">🔄 Повторити</button></div>
+      </div>`;
+  }
+}
+
+// ── CATEGORIES SCREEN ──
+const CAT_ICONS = {
+  "Гібридні інвертори": { bg:"#1a2233", svg:`
+    <svg viewBox="0 0 48 48" width="32" height="32" fill="none">
+      <rect x="2" y="3" width="5" height="42" rx="2" fill="#111"/>
+      <rect x="3" y="6" width="3" height="1.5" rx="0.5" fill="#2a2a2a"/>
+      <rect x="3" y="10" width="3" height="1.5" rx="0.5" fill="#2a2a2a"/>
+      <rect x="3" y="14" width="3" height="1.5" rx="0.5" fill="#2a2a2a"/>
+      <rect x="3" y="18" width="3" height="1.5" rx="0.5" fill="#2a2a2a"/>
+      <rect x="3" y="22" width="3" height="1.5" rx="0.5" fill="#2a2a2a"/>
+      <rect x="3" y="26" width="3" height="1.5" rx="0.5" fill="#2a2a2a"/>
+      <rect x="3" y="30" width="3" height="1.5" rx="0.5" fill="#2a2a2a"/>
+      <rect x="3" y="34" width="3" height="1.5" rx="0.5" fill="#2a2a2a"/>
+      <rect x="8" y="2" width="38" height="44" rx="4" fill="#e8e8e8"/>
+      <text x="27" y="14" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="7" font-weight="900" fill="#e53935">MUST</text>
+      <rect x="11" y="17" width="4" height="4" rx="0.5" fill="#37474f"/>
+      <rect x="16" y="17" width="4" height="4" rx="0.5" fill="#37474f"/>
+      <rect x="11" y="22" width="4" height="4" rx="0.5" fill="#37474f"/>
+      <rect x="16" y="22" width="4" height="4" rx="0.5" fill="#37474f"/>
+      <path d="M8 30 Q14 26 20 27 L46 27 L46 44 L8 44 Z" fill="#1a1a1a"/>
+      <rect x="10" y="28" width="18" height="12" rx="2" fill="#0d1a0d"/>
+      <text x="19" y="36" text-anchor="middle" font-family="monospace" font-size="5" fill="#4caf50">220V</text>
+      <circle cx="33" cy="30" r="2" fill="#4caf50"/>
+      <circle cx="33" cy="35" r="2" fill="#ff9800"/>
+      <circle cx="33" cy="40" r="2" fill="#f4433655"/>
+      <circle cx="40" cy="30" r="3" fill="#2a2a2a"/>
+      <circle cx="40" cy="36" r="3" fill="#2a2a2a"/>
+      <circle cx="40" cy="42" r="3" fill="#2a2a2a"/>
+    </svg>`
+  },
+  "Акумулятори для гібридних інверторів": { bg:"#1a2a1a", svg:`
+    <svg viewBox="0 0 48 48" width="32" height="32" fill="none">
+      <rect x="4" y="6" width="40" height="38" rx="5" fill="#d0d5d8"/>
+      <rect x="4" y="6" width="40" height="8" rx="5" fill="#bcc2c5"/>
+      <rect x="13" y="1" width="7" height="10" rx="2.5" fill="#1a1a1a"/>
+      <rect x="28" y="1" width="7" height="10" rx="2.5" fill="#c62828"/>
+      <circle cx="24" cy="26" r="14" fill="#0a0a0a"/>
+      <circle cx="24" cy="26" r="11" fill="#111"/>
+      <text x="24" y="23" text-anchor="middle" font-family="Arial,sans-serif" font-size="5" fill="#4fc3f7" font-weight="bold">Deye</text>
+      <text x="24" y="31" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="7" fill="#ffffff">100%</text>
+      <circle cx="24" cy="35" r="2" fill="#ef5350"/>
+      <rect x="8" y="42" width="32" height="4" rx="2" fill="#b0b8bc"/>
+    </svg>`
+  },
+  "Джерела безперебійного живлення": { bg:"#22252c", svg:`
+    <svg viewBox="0 0 48 48" width="32" height="32" fill="none">
+      <path d="M4 18 Q5 6 24 5 Q43 6 44 18 L42 23 Q24 19 6 23 Z" fill="#6a6a6a"/>
+      <line x1="8" y1="10" x2="7" y2="21" stroke="#555" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="12" y1="9" x2="11" y2="21" stroke="#555" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="16" y1="8" x2="15" y2="21" stroke="#555" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="20" y1="8" x2="19" y2="21" stroke="#555" stroke-width="1.5" stroke-linecap="round"/>
+      <rect x="4" y="21" width="40" height="24" rx="5" fill="#2e3135"/>
+      <text x="17" y="36" text-anchor="middle" font-family="Arial Black,monospace" font-size="13" fill="#ffffff">84</text>
+      <path d="M27 26 A9 9 0 0 1 36 35" fill="none" stroke="#4fc3f7" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M27 26 A9 9 0 0 0 18 35" fill="none" stroke="#4fc3f7" stroke-width="1" stroke-linecap="round" opacity="0.3"/>
+      <rect x="4" y="43" width="40" height="4" rx="2" fill="#222"/>
+    </svg>`
+  },
+  "Силові та сонячні кабелі": { bg:"#1a1205", svg:`
+    <svg viewBox="0 0 48 48" width="32" height="32" fill="none">
+      <circle cx="16" cy="20" r="12" fill="none" stroke="#e53935" stroke-width="5"/>
+      <circle cx="16" cy="20" r="12" fill="none" stroke="#c62828" stroke-width="3" stroke-dasharray="6 3"/>
+      <circle cx="16" cy="20" r="5" fill="none" stroke="#b71c1c" stroke-width="3"/>
+      <circle cx="32" cy="28" r="11" fill="none" stroke="#222" stroke-width="5"/>
+      <circle cx="32" cy="28" r="11" fill="none" stroke="#1a1a1a" stroke-width="3" stroke-dasharray="6 3"/>
+      <circle cx="32" cy="28" r="5" fill="none" stroke="#0a0a0a" stroke-width="3"/>
+      <rect x="1" y="38" width="20" height="8" rx="3" fill="#e65100"/>
+      <text x="11" y="44" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="5" fill="#fff">KBE 6мм</text>
+    </svg>`
+  },
+  "Комплекти автономного енергоживлення": { bg:"#1a3a2a", svg:`
+    <svg viewBox="0 0 48 48" width="32" height="32" fill="none">
+      <!-- House -->
+      <path d="M24 6 L44 22 L40 22 L40 42 L28 42 L28 30 L20 30 L20 42 L8 42 L8 22 L4 22 Z" fill="none" stroke="#4caf50" stroke-width="2" stroke-linejoin="round"/>
+      <!-- Solar panel on roof -->
+      <rect x="18" y="14" width="6" height="4" rx="0.5" fill="#4caf50" opacity="0.8"/>
+      <rect x="25" y="14" width="6" height="4" rx="0.5" fill="#4caf50" opacity="0.8"/>
+      <!-- Lightning bolt -->
+      <path d="M26 24 L22 31 L25 31 L22 38 L30 29 L26 29 Z" fill="#ffb74d" stroke="#ff8f00" stroke-width="0.5"/>
+    </svg>`
+  },
+  "Інші товари": { bg:"#1a1a20", svg:`
+    <svg viewBox="0 0 48 48" width="32" height="32" fill="none">
+      <rect x="6" y="4" width="36" height="22" rx="5" fill="#d0d0d0"/>
+      <rect x="8" y="6" width="22" height="12" rx="2" fill="#050505"/>
+      <text x="19" y="15" text-anchor="middle" font-family="monospace" font-size="8" fill="#f44336" font-weight="bold">220</text>
+      <circle cx="36" cy="10" r="3" fill="#4caf50"/>
+      <rect x="30" y="7" width="8" height="5" rx="1.5" fill="#b0b0b0" stroke="#999" stroke-width="0.5"/>
+      <rect x="30" y="14" width="8" height="5" rx="1.5" fill="#b0b0b0" stroke="#999" stroke-width="0.5"/>
+      <circle cx="24" cy="36" r="11" fill="#c8c8c8"/>
+      <circle cx="24" cy="36" r="9" fill="#d0d0d0"/>
+      <circle cx="20" cy="38" r="2.5" fill="#2a2a2a"/>
+      <circle cx="28" cy="38" r="2.5" fill="#2a2a2a"/>
+      <rect x="21" y="29" width="6" height="5" rx="1.5" fill="#2a2a2a"/>
+      <rect x="14" y="33" width="4" height="3" rx="1" fill="#aaa"/>
+      <rect x="30" y="33" width="4" height="3" rx="1" fill="#aaa"/>
+    </svg>`
+  },
+};
+function getCatIcon(cat) {
+  return CAT_ICONS[cat] || CAT_ICONS['Інші товари'] || { bg:"#1a1a2a", color:"#90a4ae",
+    svg:`<svg width="26" height="26" viewBox="0 0 26 26" fill="none"><rect x="4" y="4" width="18" height="18" rx="3" stroke="#90a4ae" stroke-width="1.8"/></svg>`};
+}
+
+function buildCats(){
+  const cats=[...new Set(all.map(p=>p.category))];
+  const grid=document.getElementById("catGrid");
+  grid.innerHTML="";
+  cats.forEach(cat=>{
+    const count=all.filter(p=>p.category===cat).length;
+    const icon=getCatIcon(cat);
+    const row=document.createElement("div");
+    row.className="cat-row";
+    row.innerHTML=`
+      <div class="cat-icon-wrap" style="background:${icon.bg};display:flex;align-items:center;justify-content:center">${icon.svg}</div>
+      <div class="cat-info">
+        <div class="cat-row-name">${cat}</div>
+        <div class="cat-row-count">${count} позицій</div>
+      </div>
+      <div class="cat-row-arrow">›</div>`;
+    row.onclick=()=>openCat(cat);
+    grid.appendChild(row);
+  });
+}
+
+// ── OPEN CATEGORY ──
+function openCat(cat){
+  const ph=document.getElementById('headerPhone'); if(ph) ph.style.display='none';
+  activeCat=cat;
+  searchQ="";
+  document.getElementById("searchInput").value="";
+
+  // Switch screens
+  document.getElementById("screenCats").classList.remove("active");
+  document.getElementById("screenProducts").classList.add("active");
+  document.getElementById("backBtn").classList.add("visible");
+  document.getElementById("searchWrap").classList.add("visible");
+  document.getElementById("headerTitle").textContent=cat;
+  document.getElementById("headerSub").textContent=`${ce(cat)} ${all.filter(p=>p.category===cat).length} позицій`;
+
+  renderProducts();
+}
+
+// ── BACK ──
+function goBack(){
+  const ph=document.getElementById('headerPhone'); if(ph) ph.style.display='flex';
+  document.getElementById("screenProducts").classList.remove("active");
+  document.getElementById("screenCats").classList.add("active");
+  document.getElementById("backBtn").classList.remove("visible");
+  document.getElementById("searchWrap").classList.remove("visible");
+  document.getElementById("headerTitle").textContent="AVTONOMKA";
+  document.getElementById("headerSub").textContent="АВТОНОМНА ЕНЕРГЕТИКА";
+  activeCat=""; searchQ="";
+}
+
+document.getElementById("searchInput").addEventListener("input",e=>{searchQ=e.target.value.toLowerCase();renderProducts();});
+
+// ── RENDER PRODUCTS ──
+function renderProducts(){
+  let items=all.filter(p=>p.category===activeCat);
+  if(searchQ)items=items.filter(p=>p.name.toLowerCase().includes(searchQ)||p.brand.toLowerCase().includes(searchQ)||p.desc.toLowerCase().includes(searchQ));
+
+  const el=document.getElementById("productsContent");
+  el.innerHTML="";
+
+  if(!items.length){el.innerHTML=`<div class="empty"><div class="empty-icon">🔍</div><div>Нічого не знайдено</div></div>`;return;}
+
+  // Title bar
+  const tb=document.createElement("div"); tb.className="cat-title-bar";
+  tb.innerHTML=`<span class="cat-title-icon">${ce(activeCat)}</span><span class="cat-title-text">${activeCat}</span><span class="cat-title-count">${items.length} поз.</span>`;
+  el.appendChild(tb);
+
+  // Group by brand
+  const byBrand=groupBy(items,"brand");
+  const multi=Object.keys(byBrand).length>1;
+
+  // For "Автономне енергоживлення" sort by numeric power value
+  const brandKeys = Object.keys(byBrand);
+  if(activeCat==="Комплекти автономного енергоживлення"){
+    brandKeys.sort((a,b)=>{
+      const pa=parseFloat(a.replace(",",".").replace("кВт","").trim())||999;
+      const pb=parseFloat(b.replace(",",".").replace("кВт","").trim())||999;
+      return pa-pb;
+    });
+  }
+
+  for(const brand of brandKeys){ const bItems=byBrand[brand];
+    if(multi&&brand!=="—"){
+      const bh=document.createElement("div"); bh.className="brand-header";
+      bh.innerHTML=`<div class="brand-name">${brand}</div><div class="brand-line"></div><div class="brand-count">${bItems.length} шт</div>`;
+      el.appendChild(bh);
+    }
+    bItems.forEach(p=>{
+      const row=document.createElement("div"); row.className="product-row";
+      row.onclick=()=>openModal(p);
+      const stockHTML=getStockBadge(p);
+
+      // Skeleton + lazy image
+      const imgHTML=p.photo
+        ?`<div class="img-skeleton" id="sk_${p.id}"></div>`
+        :`<div class="product-img-placeholder">${ce(p.category)}</div>`;
+
+      row.innerHTML=`
+        <div class="product-img-wrap" id="wrap_${p.id}">${imgHTML}</div>
+        <div class="product-info">
+          <div class="product-name">${p.name}</div>
+          <div class="price-row">
+            ${p.price?`<span class="price">${fmt(p.price)}</span><span class="price-unit">${p.unit}</span>`:""}
+            ${stockHTML}
+          </div>
+        </div>
+        <div class="product-arrow">›</div>`;
+      el.appendChild(row);
+
+      // True lazy load — завантажуємо тільки коли елемент видно
+      if(p.photo){
+        const wrapId=`wrap_${p.id}`;
+        row.dataset.photo=p.photo;
+        row.dataset.wrapId=wrapId;
+        row.dataset.photoAlt=p.name;
+        row.dataset.photoCat=p.category;
+        lazyQueue.push(row);
+      }
+    });
+  }
+  // Start observing newly added rows
+  requestAnimationFrame(initLazyObserver);
+}
+
+function getStockBadge(p){
+  if(p.availability!=="in_stock") return `<span class="stock-order">📦 Під замовлення</span>`;
+  return `<span class="stock-in">✓ В наявності</span>`;
+}
+function getStockNote(p){
+  if(p.availability!=="in_stock") return `<div style="font-size:12px;color:#1565c0;margin-bottom:12px">📦 Товар під замовлення — уточніть терміни у менеджера</div>`;
+  return "";
+}
+function groupBy(arr,key){return arr.reduce((acc,i)=>{const k=i[key]||"—";if(!acc[k])acc[k]=[];acc[k].push(i);return acc;},{});}
+function fmt(p){const n=parseFloat(String(p).replace(/\s/g,"").replace(",","."));return isNaN(n)?p:n.toLocaleString("uk-UA");}
+function escHtml(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+
+// ── MODAL ──
+let currentProduct=null, modalQty=1;
+
+function openModal(p){
+  currentProduct=p; modalQty=1;
+  const stockNote=getStockNote(p);
+  document.getElementById("modalContent").innerHTML=`
+    <div class="modal-img-wrap">
+      ${p.photo?`<img class="modal-img" src="${p.photo}" alt="${p.name}" loading="lazy">`:`<div class="modal-img-placeholder">${ce(p.category)}</div>`}
+    </div>
+    <div class="modal-body">
+      <div class="modal-brand">${p.brand!=="—"?p.brand+" · ":""}${p.category}</div>
+      <div class="modal-name">${p.name}</div>
+      ${p.desc?`<p style="font-size:13px;color:var(--text2);line-height:1.5;margin-bottom:12px">${escHtml(p.desc)}</p>`:""}
+      ${p.price?`<div class="modal-price">${fmt(p.price)} <span style="font-size:14px;color:var(--text2);font-family:Inter,sans-serif;font-weight:400">${p.unit}</span></div>`:""}
+      ${stockNote}
+      <div class="modal-discount">💚 <strong>Інсталяторам та гуртовим покупцям</strong> — спеціальна ціна. Зв'яжіться з менеджером.</div>
+      <div class="qty-stepper">
+        <button class="qty-btn" onclick="changeModalQty(-1)">−</button>
+        <span class="qty-value" id="modalQtyVal">1</span>
+        <button class="qty-btn" onclick="changeModalQty(1)">+</button>
+      </div>
+      <button class="modal-btn" onclick="addToCart(currentProduct, modalQty)">🛒 Додати в кошик</button>
+      <a class="modal-btn modal-btn-secondary" href="${CONFIG.MANAGER}?text=${encodeURIComponent("Цікавить: "+p.name)}" target="_blank">Написати менеджеру</a>
+    </div>`;
+  document.getElementById("modalOverlay").classList.add("open");
+  document.body.style.overflow="hidden";
+}
+function changeModalQty(delta){
+  modalQty=Math.max(1, modalQty+delta);
+  document.getElementById("modalQtyVal").textContent=modalQty;
+}
+function closeModal(e){
+  if(e.target===document.getElementById("modalOverlay")){
+    document.getElementById("modalOverlay").classList.remove("open");
+    document.body.style.overflow="";
+  }
+}
+
+// ── CART ──
+let CART=[];
+try{ CART=JSON.parse(localStorage.getItem("avtonomka_cart")||"[]"); }catch(e){ CART=[]; }
+
+function saveCart(){
+  localStorage.setItem("avtonomka_cart", JSON.stringify(CART));
+  renderCartBar();
+}
+function addToCart(p, qty){
+  const idx=CART.findIndex(i=>i.name===p.name);
+  if(idx>-1) CART[idx].qty+=qty;
+  else CART.push({name:p.name, sku:p.id, price:p.price, unit:p.unit, brand:p.brand, category:p.category, qty:qty});
+  saveCart();
+  showToast(`Додано в кошик: ${p.name}`);
+  if(window.Telegram?.WebApp?.HapticFeedback) Telegram.WebApp.HapticFeedback.notificationOccurred("success");
+}
+function removeFromCart(idx){ CART.splice(idx,1); saveCart(); openCartModal(); }
+function changeCartQty(idx, delta){
+  CART[idx].qty=Math.max(1, CART[idx].qty+delta);
+  saveCart(); openCartModal();
+}
+function cartTotal(){
+  return CART.reduce((sum,i)=>{
+    const n=parseFloat(String(i.price).replace(/\s/g,"").replace(",","."))||0;
+    return sum+n*i.qty;
+  },0);
+}
+function cartCount(){ return CART.reduce((s,i)=>s+i.qty,0); }
+function cartUnit(){ return (CART[0] && CART[0].unit) || "UAH"; }
+
+function renderCartBar(){
+  const bar=document.getElementById("cartBar");
+  const count=cartCount();
+  if(count>0){
+    bar.classList.add("visible");
+    document.getElementById("cartBarText").textContent=`Кошик · ${count} шт`;
+    document.getElementById("cartBarSum").textContent=fmt(cartTotal())+" "+cartUnit();
+  }else{
+    bar.classList.remove("visible");
+  }
+}
+
+function showToast(msg){
+  const t=document.getElementById("toast");
+  t.textContent=msg;
+  t.classList.add("visible");
+  clearTimeout(showToast._tm);
+  showToast._tm=setTimeout(()=>t.classList.remove("visible"), 2200);
+}
+
+// ── CART MODAL ──
+function openCartModal(){
+  const wrap=document.getElementById("modalContent");
+  if(!CART.length){
+    wrap.innerHTML=`<div class="modal-body"><div class="cart-empty">🛒<br>Кошик порожній</div></div>`;
+  }else{
+    const itemsHTML=CART.map((i,idx)=>`
+      <div class="cart-item">
+        <div class="cart-item-info">
+          <div class="cart-item-name">${i.name}</div>
+          <div class="cart-item-price">${fmt(i.price)} ${i.unit} × ${i.qty}</div>
+        </div>
+        <div class="cart-item-qty">
+          <button class="qty-btn" onclick="changeCartQty(${idx},-1)">−</button>
+          <span class="qty-value">${i.qty}</span>
+          <button class="qty-btn" onclick="changeCartQty(${idx},1)">+</button>
+        </div>
+        <button class="cart-item-remove" onclick="removeFromCart(${idx})">✕</button>
+      </div>`).join("");
+    wrap.innerHTML=`
+      <div class="modal-body">
+        <div class="modal-name" style="margin-bottom:6px">Ваше замовлення</div>
+        ${itemsHTML}
+        <div class="cart-total-row"><span>Разом:</span><span>${fmt(cartTotal())} ${cartUnit()}</span></div>
+        <button class="modal-btn" onclick="openCheckoutForm()">Оформити замовлення →</button>
+      </div>`;
+  }
+  document.getElementById("modalOverlay").classList.add("open");
+  document.body.style.overflow="hidden";
+}
+
+// ── CHECKOUT FORM ──
+function openCheckoutForm(){
+  const wrap=document.getElementById("modalContent");
+  wrap.innerHTML=`
+    <div class="modal-body">
+      <div class="modal-name" style="margin-bottom:12px">Оформлення замовлення</div>
+      <div class="checkout-summary">🛒 ${cartCount()} товар(ів) на суму <strong>${fmt(cartTotal())} ${cartUnit()}</strong></div>
+      <div class="form-group">
+        <label class="form-label">Ім'я *</label>
+        <input class="form-input" id="ordName" type="text" placeholder="Ваше ім'я">
+        <div class="form-error" id="errName">Вкажіть ім'я</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Телефон *</label>
+        <input class="form-input" id="ordPhone" type="tel" placeholder="+380...">
+        <div class="form-error" id="errPhone">Вкажіть коректний номер телефону</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Місто / доставка</label>
+        <input class="form-input" id="ordCity" type="text" placeholder="Місто, відділення Нової пошти">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Коментар</label>
+        <textarea class="form-textarea" id="ordComment" placeholder="Додаткові побажання"></textarea>
+      </div>
+      <button class="modal-btn" onclick="submitOrder()">✅ Підтвердити замовлення</button>
+    </div>`;
+}
+
+function submitOrder(){
+  const name=document.getElementById("ordName").value.trim();
+  const phone=document.getElementById("ordPhone").value.trim();
+  const city=document.getElementById("ordCity").value.trim();
+  const comment=document.getElementById("ordComment").value.trim();
+
+  const phoneOk=/^[\d+()\-\s]{7,}$/.test(phone);
+  document.getElementById("errName").classList.toggle("visible", !name);
+  document.getElementById("errPhone").classList.toggle("visible", !phoneOk);
+  if(!name||!phoneOk) return;
+
+  const orderPayload={ name, phone, city, comment, items:CART, total:cartTotal(), date:new Date().toISOString() };
+
+  // Записуємо замовлення в Google Таблицю через Apps Script
+  if(CONFIG.ORDERS_URL){
+    fetch(CONFIG.ORDERS_URL, {
+      method:"POST",
+      mode:"no-cors", // Apps Script не віддає CORS-заголовки, тому відповідь не читаємо, лише надсилаємо
+      headers:{"Content-Type":"text/plain;charset=utf-8"},
+      body:JSON.stringify(orderPayload)
+    }).catch(()=>{ /* мовчки ігноруємо мережеву помилку — клієнт бачить toast незалежно */ });
+  }
+
+  // Якщо додаток запущено з бота — надсилаємо ще й напряму через Bot API
+  try{
+    if(window.Telegram?.WebApp?.sendData){
+      Telegram.WebApp.sendData(JSON.stringify({type:"order", ...orderPayload}));
+    }
+  }catch(e){}
+
+  CART=[];
+  saveCart();
+  document.getElementById("modalOverlay").classList.remove("open");
+  document.body.style.overflow="";
+  showToast("✅ Замовлення відправлено!");
+  if(window.Telegram?.WebApp?.HapticFeedback) Telegram.WebApp.HapticFeedback.notificationOccurred("success");
+}
+
+// ── TRUE LAZY LOAD ──
+const lazyQueue = [];
+let observer;
+
+function initLazyObserver(){
+  if(observer) observer.disconnect();
+  observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(!entry.isIntersecting) return;
+      const row = entry.target;
+      const photo = row.dataset.photo;
+      const wrapId = row.dataset.wrapId;
+      const alt = row.dataset.photoAlt;
+      const cat = row.dataset.photoCat;
+      if(!photo || !wrapId) return;
+      observer.unobserve(row);
+      const img = new Image();
+      img.onload=()=>{
+        const wrap=document.getElementById(wrapId);
+        if(wrap) wrap.innerHTML=`<img class="product-img" src="${photo}" alt="${alt}">`;
+      };
+      img.onerror=()=>{
+        const wrap=document.getElementById(wrapId);
+        if(wrap) wrap.innerHTML=`<div class="product-img-placeholder">${ce(cat)}</div>`;
+      };
+      img.src=photo;
+    });
+  },{rootMargin:"200px 0px", threshold:0});
+  lazyQueue.forEach(row=>{ if(row.isConnected) observer.observe(row); });
+  lazyQueue.length=0;
+}
+
+// Call after each render
+loadData();
+renderCartBar();
+</script>
+</body>
+</html>

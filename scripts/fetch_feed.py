@@ -136,6 +136,28 @@ def main() -> int:
         if overridden:
             print(f"  Замінено фото для {overridden} товарів (локальні фото в assets/images/komp/)")
 
+    # Товари (не комплекти), для яких раніше вручну мігровано фото з dfi2.com.ua
+    # у assets/images/products/<id>_<n>.<ext> (див. scripts/migrate_product_images.js) —
+    # підміняємо image_link/additional_images на локальні файли замість посилання
+    # з фіда, інакше кожен запуск фіда повертав би зовнішній dfi2.com.ua URL.
+    products_dir = Path(__file__).parent.parent / "assets" / "images" / "products"
+    if products_dir.exists():
+        by_id: dict[str, list[tuple[int, str]]] = {}
+        for f in products_dir.iterdir():
+            pid, sep, n = f.stem.rpartition("_")
+            if sep and n.isdigit():
+                by_id.setdefault(pid, []).append((int(n), f.name))
+        overridden2 = 0
+        for p in data:
+            pid = p.get("id")
+            if pid in by_id and not p.get("image_link", "").startswith("assets/"):
+                files = [name for _, name in sorted(by_id[pid])]
+                p["image_link"] = f"assets/images/products/{files[0]}"
+                p["additional_images"] = [f"assets/images/products/{name}" for name in files[1:]]
+                overridden2 += 1
+        if overridden2:
+            print(f"  Замінено фото для {overridden2} товарів (локальні фото в assets/images/products/)")
+
     # Комплекти без локального фото → заглушка (не використовуємо зовнішнє URL)
     fallback = 0
     for p in data:
