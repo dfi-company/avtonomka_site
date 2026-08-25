@@ -386,10 +386,16 @@ function getCatIconSrc(cat) {
   return CAT_ICON_FILES[cat] || "";
 }
 
+const CATEGORY_ORDER=[
+  "Комплекти автономного енергоживлення",
+  "Гібридні інвертори",
+  "Акумулятори для гібридних інверторів",
+  "Джерела безперебійного живлення",
+  "Силові та сонячні кабелі",
+];
 function buildCats(){
-  let cats=[...new Set(all.map(p=>p.category))];
-  const cableCat="Силові та сонячні кабелі";
-  if(cats.includes(cableCat)) cats=cats.filter(c=>c!==cableCat).concat(cableCat);
+  const cats=[...new Set(all.map(p=>p.category))]
+    .sort((a,b)=>CATEGORY_ORDER.indexOf(a)-CATEGORY_ORDER.indexOf(b));
   const grid=document.getElementById("catGrid");
   grid.innerHTML="";
   cats.forEach(cat=>{
