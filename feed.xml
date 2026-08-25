@@ -6,6 +6,19 @@
     <description>Магазин обладнання для автономного живлення</description>
 
     <item>
+      <g:id>145284</g:id>
+      <g:title>Комплект силових кабелів Dyness 4AWG 1000V VW1 2050мм</g:title>
+      <g:description>Комплект силових кабелів Dyness AWG4 для підключення акумуляторних батарей. Напруга 1000 В, клас горіння VW1. Довжина 2050 мм. Підходить для з&apos;єднання акумуляторів Dyness з інвертором при значній відстані між компонентами системи.</g:description>
+      <g:link>https://avtonomka.com.ua/product/145284.html</g:link>
+      <g:image_link>https://dfi2.com.ua/images/145284_1.jpg</g:image_link>
+      <g:price>1926.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Автономна енергетика &gt; Силові та сонячні кабелі</g:product_type>
+      <g:mpn>4AWG-2050</g:mpn>
+    </item>
+    <item>
       <g:id>143477</g:id>
       <g:title>Акумуляторна батарея MUST LP16-24100, 25.6V 100Ah, 442х485.5х177, 23 кг, LiFePO4</g:title>
       <g:description>MUST LP16-24100 — акумуляторна батарея LiFePO4 ємністю 100 А·год і напругою 25,6 В. Призначена для автономних систем живлення та сонячних електростанцій. Вбудована BMS контролює кожен елемент, запобігає перегріву, перевантаженню та глибокому розряду. Підтримує до 4 паралельних модулів. Сумісна з інверторами Must, FelicityESS, Dyness. Вага 23 кг.</g:description>
@@ -25,17 +38,100 @@
       <g:mpn>LP16-24100</g:mpn>
     </item>
     <item>
-      <g:id>145284</g:id>
-      <g:title>Комплект силових кабелів Dyness 4AWG 1000V VW1 2050мм</g:title>
-      <g:description>Комплект силових кабелів Dyness AWG4 для підключення акумуляторних батарей. Напруга 1000 В, клас горіння VW1. Довжина 2050 мм. Підходить для з&apos;єднання акумуляторів Dyness з інвертором при значній відстані між компонентами системи.</g:description>
-      <g:link>https://avtonomka.com.ua/product/145284.html</g:link>
-      <g:image_link>https://dfi2.com.ua/images/145284_1.jpg</g:image_link>
-      <g:price>1926.00 UAH</g:price>
+      <g:id>151847</g:id>
+      <g:title>Комплект силових кабелів 25 мм 1 м, 2 шт., мідь, мідні накінечники М8</g:title>
+      <g:description>Комплект мідних силових кабелів перетином 25 мм², довжина 1 м, 2 шт. Оснащені мідними обтискними наконечниками М8. Призначені для підключення акумуляторних батарей до інверторів і шин розподілу. Мідний провід забезпечує мінімальний опір і надійне з&apos;єднання.</g:description>
+      <g:link>https://avtonomka.com.ua/product/151847.html</g:link>
+      <g:image_link>https://dfi2.com.ua/images/151847_1.jpg</g:image_link>
+      <g:price>849.00 UAH</g:price>
       <g:availability>in stock</g:availability>
       <g:condition>new</g:condition>
       <g:brand>Автономка</g:brand>
       <g:product_type>Автономна енергетика &gt; Силові та сонячні кабелі</g:product_type>
-      <g:mpn>4AWG-2050</g:mpn>
+    </item>
+    <item>
+      <g:id>151848</g:id>
+      <g:title>Комплект силових кабелів 25 мм 50см, 2 шт., мідь, мідні накінечники М8</g:title>
+      <g:description>Комплект мідних силових кабелів перетином 25 мм², довжина 50 см, 2 шт. Мідні обтискні наконечники М8. Призначені для з&apos;єднання акумуляторів з інвертором або шиною при короткій відстані між компонентами.</g:description>
+      <g:link>https://avtonomka.com.ua/product/151848.html</g:link>
+      <g:image_link>https://dfi2.com.ua/images/151848_1.jpg</g:image_link>
+      <g:price>389.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Автономна енергетика &gt; Силові та сонячні кабелі</g:product_type>
+    </item>
+    <item>
+      <g:id>151849</g:id>
+      <g:title>Комплект силових кабелів 25 мм 1.5м, 2 шт., мідь, мідні накінечники М8</g:title>
+      <g:description>Комплект мідних силових кабелів перетином 25 мм², довжина 1,5 м, 2 шт. Мідні обтискні наконечники М8. Підходять для підключення акумуляторів до інвертора при збільшеній відстані між компонентами системи.</g:description>
+      <g:link>https://avtonomka.com.ua/product/151849.html</g:link>
+      <g:image_link>https://dfi2.com.ua/images/151849_1.jpg</g:image_link>
+      <g:price>1410.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Автономна енергетика &gt; Силові та сонячні кабелі</g:product_type>
+    </item>
+    <item>
+      <g:id>151850</g:id>
+      <g:title>Комплект силових кабелів 25 мм 75см, 2 шт., мідь, мідні накінечники М8</g:title>
+      <g:description>Комплект мідних силових кабелів перетином 25 мм², довжина 75 см, 2 шт. Мідні обтискні наконечники М8. Призначені для з&apos;єднання акумуляторних батарей з інвертором або шиною розподілу в автономних системах живлення.</g:description>
+      <g:link>https://avtonomka.com.ua/product/151850.html</g:link>
+      <g:image_link>https://dfi2.com.ua/images/151850_1.jpg</g:image_link>
+      <g:price>745.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Автономна енергетика &gt; Силові та сонячні кабелі</g:product_type>
+    </item>
+    <item>
+      <g:id>151851</g:id>
+      <g:title>Комплект силових кабелів 25 мм 1 м, 2 шт., мідь, мідні накінечники М10</g:title>
+      <g:description>Комплект мідних силових кабелів перетином 25 мм², довжина 1 м, 2 шт. Мідні обтискні наконечники М10. Призначені для підключення акумуляторів до інверторів з кріпленням М10. Мідний провід забезпечує надійне з&apos;єднання та мінімальні втрати струму.</g:description>
+      <g:link>https://avtonomka.com.ua/product/151851.html</g:link>
+      <g:image_link>https://dfi2.com.ua/images/151851_1.jpg</g:image_link>
+      <g:price>849.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Автономна енергетика &gt; Силові та сонячні кабелі</g:product_type>
+    </item>
+    <item>
+      <g:id>151852</g:id>
+      <g:title>Комплект силових кабелів 25 мм 50см, 2 шт., мідь, мідні накінечники М10</g:title>
+      <g:description>Комплект мідних силових кабелів перетином 25 мм², довжина 50 см, 2 шт. Мідні обтискні наконечники М10. Підходять для з&apos;єднання компонентів системи при короткій відстані між акумулятором та інвертором.</g:description>
+      <g:link>https://avtonomka.com.ua/product/151852.html</g:link>
+      <g:image_link>https://dfi2.com.ua/images/151852_1.jpg</g:image_link>
+      <g:price>389.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Автономна енергетика &gt; Силові та сонячні кабелі</g:product_type>
+    </item>
+    <item>
+      <g:id>151853</g:id>
+      <g:title>Комплект силових кабелів 25 мм 1.5м, 2 шт., мідь, мідні накінечники М10</g:title>
+      <g:description>Комплект мідних силових кабелів перетином 25 мм², довжина 1,5 м, 2 шт. Мідні обтискні наконечники М10. Призначені для підключення акумуляторів до інвертора при збільшеній відстані.</g:description>
+      <g:link>https://avtonomka.com.ua/product/151853.html</g:link>
+      <g:image_link>https://dfi2.com.ua/images/151853_1.jpg</g:image_link>
+      <g:price>1410.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Автономна енергетика &gt; Силові та сонячні кабелі</g:product_type>
+    </item>
+    <item>
+      <g:id>151854</g:id>
+      <g:title>Комплект силових кабелів 25 мм 75см, 2 шт., мідь, мідні накінечники М10</g:title>
+      <g:description>Комплект мідних силових кабелів перетином 25 мм², довжина 75 см, 2 шт. Мідні обтискні наконечники М10. Підходять для підключення акумуляторних батарей до інвертора в системах автономного та резервного живлення.</g:description>
+      <g:link>https://avtonomka.com.ua/product/151854.html</g:link>
+      <g:image_link>https://dfi2.com.ua/images/151854_1.jpg</g:image_link>
+      <g:price>745.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Автономна енергетика &gt; Силові та сонячні кабелі</g:product_type>
     </item>
     <item>
       <g:id>148193</g:id>
@@ -50,7 +146,7 @@
       <g:additional_image_link>https://dfi2.com.ua/images/148193_6.jpg</g:additional_image_link>
       <g:additional_image_link>https://dfi2.com.ua/images/148193_7.jpg</g:additional_image_link>
       <g:additional_image_link>https://dfi2.com.ua/images/148193_8.jpg</g:additional_image_link>
-      <g:price>42666.00 UAH</g:price>
+      <g:price>40416.00 UAH</g:price>
       <g:availability>in stock</g:availability>
       <g:condition>new</g:condition>
       <g:brand>Автономка</g:brand>
@@ -186,99 +282,6 @@
       <g:mpn>EFDELTA3MAX</g:mpn>
     </item>
     <item>
-      <g:id>150676</g:id>
-      <g:title>Акумуляторна батарея DEYE SE-F5 Pro-C 51.2V 100 Аh, 404х547х141, 45 кг, LiFePO4 5.12kWh</g:title>
-      <g:description>DEYE SE-F5 Pro-C — сучасна акумуляторна батарея LiFePO4 ємністю 100 А·год і напругою 51,2 В (5,12 кВт·год). Забезпечує стабільну роботу гібридних і сонячних систем. Ресурс понад 6000 циклів. Порти зв&apos;язку CAN/RS485. Вага 45 кг. Підходить для приватних будинків, офісів і комерційних об&apos;єктів.</g:description>
-      <g:link>https://avtonomka.com.ua/product/150676.html</g:link>
-      <g:image_link>https://dfi2.com.ua/images/150676_1.jpg</g:image_link>
-      <g:additional_image_link>https://dfi2.com.ua/images/150676_2.jpg</g:additional_image_link>
-      <g:additional_image_link>https://dfi2.com.ua/images/150676_3.jpg</g:additional_image_link>
-      <g:additional_image_link>https://dfi2.com.ua/images/150676_4.jpg</g:additional_image_link>
-      <g:additional_image_link>https://dfi2.com.ua/images/150676_5.jpg</g:additional_image_link>
-      <g:additional_image_link>https://dfi2.com.ua/images/150676_6.jpg</g:additional_image_link>
-      <g:additional_image_link>https://dfi2.com.ua/images/150676_7.jpg</g:additional_image_link>
-      <g:price>40416.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Акумулятори для гібридних інверторів</g:product_type>
-      <g:mpn>SE-F5 Pro-C</g:mpn>
-    </item>
-    <item>
-      <g:id>151057</g:id>
-      <g:title>Акумуляторна батарея Deye SE-F16-С 51.2V 314 Аh, 400х708х233, 123 кг, 16kWh LiFePO4</g:title>
-      <g:description>Deye SE-F16-С — потужна акумуляторна батарея LiFePO4 ємністю 314 А·год і напругою 51,2 В (16 кВт·год). Призначена для гібридних інверторів Deye та інших автономних і сонячних систем живлення приватних будинків, офісів і комерційних об&apos;єктів. Вбудована BMS забезпечує захист від перезаряду, глибокого розряду та перегріву, ресурс понад 6000 циклів. Розміри 400×708×233 мм, вага 123 кг.</g:description>
-      <g:link>https://avtonomka.com.ua/product/151057.html</g:link>
-      <g:image_link>https://dfi2.com.ua/images/151057_1.jpg</g:image_link>
-      <g:additional_image_link>https://dfi2.com.ua/images/151057_2.jpg</g:additional_image_link>
-      <g:price>89905.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Акумулятори для гібридних інверторів</g:product_type>
-      <g:mpn>SE-F16-С</g:mpn>
-    </item>
-    <item>
-      <g:id>152203</g:id>
-      <g:title>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLA48314-EU 51.2V 314Ah 16kWh</g:title>
-      <g:description>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLA48314-EU 51.2V 314Ah 16kWh</g:description>
-      <g:link>https://avtonomka.com.ua/product/152203.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152203.jpg</g:image_link>
-      <g:price>122373.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
-    </item>
-    <item>
-      <g:id>152205</g:id>
-      <g:title>Комплект автономного енергоживлення: Felicity IVEM6048-II 6 кВт 48 В + DAH Solar DHN-LVWES05-G1 100ah 51.2V</g:title>
-      <g:description>Готовий комплект автономного живлення: гібридний інвертор Felicity IVEM12048-II 12 кВт та акумулятор LiFePO4 DAH Solar DHN-LVWES05-G1 51,2 В 100 А·год.</g:description>
-      <g:link>https://avtonomka.com.ua/product/152205.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152205.jpg</g:image_link>
-      <g:price>62894.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
-    </item>
-    <item>
-      <g:id>152206</g:id>
-      <g:title>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ DEYE SE-F5 Pro-C 51.2V 100 Аh</g:title>
-      <g:description>Готовий комплект автономного живлення: гібридний інвертор Felicity IVEM6048-II 6 кВт та акумулятор LiFePO4 DEYE SE-F5 Pro-C 51,2 В 100 А·год.</g:description>
-      <g:link>https://avtonomka.com.ua/product/152206.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152206.jpg</g:image_link>
-      <g:price>68385.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
-    </item>
-    <item>
-      <g:id>152208</g:id>
-      <g:title>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Deye SE-F16-С 51.2V 314 Аh</g:title>
-      <g:description>Готовий комплект автономного живлення: гібридний інвертор Felicity IVEM6048-II 6 кВт та акумулятор LiFePO4 Deye SE-F16-С 51,2 В 314 А·год.</g:description>
-      <g:link>https://avtonomka.com.ua/product/152208.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152208.jpg</g:image_link>
-      <g:price>117874.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
-    </item>
-    <item>
-      <g:id>152211</g:id>
-      <g:title>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLA48230 51.2V 230Ah</g:title>
-      <g:description>Готовий комплект автономного живлення: гібридний інвертор Felicity IVEM6048-II 6 кВт та акумулятор LiFePO4 Felicity FLA48230 51,2 В 230 А·год.</g:description>
-      <g:link>https://avtonomka.com.ua/product/152211.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152211.jpg</g:image_link>
-      <g:price>97894.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
-    </item>
-    <item>
       <g:id>142723</g:id>
       <g:title>Гібридний інвертор Must PV18-3224 VPM II 3.2 кВт 24 В, 254.5х367.4х103, 5.6 кг</g:title>
       <g:description>Гібридний інвертор MUST PV18-3024PREM — 3000 ВА, 24 В, MPPT 80A, підтримує роботу без АКБ.</g:description>
@@ -387,187 +390,6 @@
       <g:mpn>PV18-3624PREM</g:mpn>
     </item>
     <item>
-      <g:id>151847</g:id>
-      <g:title>Комплект силових кабелів 25 мм 1 м, 2 шт., мідь, мідні накінечники М8</g:title>
-      <g:description>Комплект мідних силових кабелів перетином 25 мм², довжина 1 м, 2 шт. Оснащені мідними обтискними наконечниками М8. Призначені для підключення акумуляторних батарей до інверторів і шин розподілу. Мідний провід забезпечує мінімальний опір і надійне з&apos;єднання.</g:description>
-      <g:link>https://avtonomka.com.ua/product/151847.html</g:link>
-      <g:image_link>https://dfi2.com.ua/images/151847_1.jpg</g:image_link>
-      <g:price>849.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Силові та сонячні кабелі</g:product_type>
-    </item>
-    <item>
-      <g:id>151848</g:id>
-      <g:title>Комплект силових кабелів 25 мм 50см, 2 шт., мідь, мідні накінечники М8</g:title>
-      <g:description>Комплект мідних силових кабелів перетином 25 мм², довжина 50 см, 2 шт. Мідні обтискні наконечники М8. Призначені для з&apos;єднання акумуляторів з інвертором або шиною при короткій відстані між компонентами.</g:description>
-      <g:link>https://avtonomka.com.ua/product/151848.html</g:link>
-      <g:image_link>https://dfi2.com.ua/images/151848_1.jpg</g:image_link>
-      <g:price>389.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Силові та сонячні кабелі</g:product_type>
-    </item>
-    <item>
-      <g:id>151849</g:id>
-      <g:title>Комплект силових кабелів 25 мм 1.5м, 2 шт., мідь, мідні накінечники М8</g:title>
-      <g:description>Комплект мідних силових кабелів перетином 25 мм², довжина 1,5 м, 2 шт. Мідні обтискні наконечники М8. Підходять для підключення акумуляторів до інвертора при збільшеній відстані між компонентами системи.</g:description>
-      <g:link>https://avtonomka.com.ua/product/151849.html</g:link>
-      <g:image_link>https://dfi2.com.ua/images/151849_1.jpg</g:image_link>
-      <g:price>1410.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Силові та сонячні кабелі</g:product_type>
-    </item>
-    <item>
-      <g:id>151850</g:id>
-      <g:title>Комплект силових кабелів 25 мм 75см, 2 шт., мідь, мідні накінечники М8</g:title>
-      <g:description>Комплект мідних силових кабелів перетином 25 мм², довжина 75 см, 2 шт. Мідні обтискні наконечники М8. Призначені для з&apos;єднання акумуляторних батарей з інвертором або шиною розподілу в автономних системах живлення.</g:description>
-      <g:link>https://avtonomka.com.ua/product/151850.html</g:link>
-      <g:image_link>https://dfi2.com.ua/images/151850_1.jpg</g:image_link>
-      <g:price>745.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Силові та сонячні кабелі</g:product_type>
-    </item>
-    <item>
-      <g:id>151851</g:id>
-      <g:title>Комплект силових кабелів 25 мм 1 м, 2 шт., мідь, мідні накінечники М10</g:title>
-      <g:description>Комплект мідних силових кабелів перетином 25 мм², довжина 1 м, 2 шт. Мідні обтискні наконечники М10. Призначені для підключення акумуляторів до інверторів з кріпленням М10. Мідний провід забезпечує надійне з&apos;єднання та мінімальні втрати струму.</g:description>
-      <g:link>https://avtonomka.com.ua/product/151851.html</g:link>
-      <g:image_link>https://dfi2.com.ua/images/151851_1.jpg</g:image_link>
-      <g:price>849.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Силові та сонячні кабелі</g:product_type>
-    </item>
-    <item>
-      <g:id>151852</g:id>
-      <g:title>Комплект силових кабелів 25 мм 50см, 2 шт., мідь, мідні накінечники М10</g:title>
-      <g:description>Комплект мідних силових кабелів перетином 25 мм², довжина 50 см, 2 шт. Мідні обтискні наконечники М10. Підходять для з&apos;єднання компонентів системи при короткій відстані між акумулятором та інвертором.</g:description>
-      <g:link>https://avtonomka.com.ua/product/151852.html</g:link>
-      <g:image_link>https://dfi2.com.ua/images/151852_1.jpg</g:image_link>
-      <g:price>389.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Силові та сонячні кабелі</g:product_type>
-    </item>
-    <item>
-      <g:id>151853</g:id>
-      <g:title>Комплект силових кабелів 25 мм 1.5м, 2 шт., мідь, мідні накінечники М10</g:title>
-      <g:description>Комплект мідних силових кабелів перетином 25 мм², довжина 1,5 м, 2 шт. Мідні обтискні наконечники М10. Призначені для підключення акумуляторів до інвертора при збільшеній відстані.</g:description>
-      <g:link>https://avtonomka.com.ua/product/151853.html</g:link>
-      <g:image_link>https://dfi2.com.ua/images/151853_1.jpg</g:image_link>
-      <g:price>1410.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Силові та сонячні кабелі</g:product_type>
-    </item>
-    <item>
-      <g:id>151854</g:id>
-      <g:title>Комплект силових кабелів 25 мм 75см, 2 шт., мідь, мідні накінечники М10</g:title>
-      <g:description>Комплект мідних силових кабелів перетином 25 мм², довжина 75 см, 2 шт. Мідні обтискні наконечники М10. Підходять для підключення акумуляторних батарей до інвертора в системах автономного та резервного живлення.</g:description>
-      <g:link>https://avtonomka.com.ua/product/151854.html</g:link>
-      <g:image_link>https://dfi2.com.ua/images/151854_1.jpg</g:image_link>
-      <g:price>745.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Силові та сонячні кабелі</g:product_type>
-    </item>
-    <item>
-      <g:id>152455</g:id>
-      <g:title>Гібридний інвертор MUST PV18-2012 PREM 2 кВт 12 В, Wi-Fi, 290х367х111, 6 кг</g:title>
-      <g:description>MUST PV18-2012 PREM — гібридний інвертор потужністю 2 кВт з номінальною напругою акумулятора 12 В та вбудованим Wi-Fi модулем для моніторингу. Підходить для компактних автономних систем живлення. Розміри 290×367×111 мм, вага 6 кг.</g:description>
-      <g:link>https://avtonomka.com.ua/product/152455.html</g:link>
-      <g:image_link>https://dfi2.com.ua/images/152455_1.jpg</g:image_link>
-      <g:price>13198.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Гибридні інвертори</g:product_type>
-      <g:mpn>PV18-2012PREM</g:mpn>
-    </item>
-    <item>
-      <g:id>152212</g:id>
-      <g:title>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLA48314-EU 51.2V 314Ah</g:title>
-      <g:description>Готовий комплект автономного живлення: гібридний інвертор Felicity IVEM6048-II 6 кВт та акумулятор LiFePO4 Felicity FLA48314-EU 51,2 В 314 А·год.</g:description>
-      <g:link>https://avtonomka.com.ua/product/152212.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152212.jpg</g:image_link>
-      <g:price>114275.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
-    </item>
-    <item>
-      <g:id>152272</g:id>
-      <g:title>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В + DAH Solar DHN-LVWES05-G1 100ah 51.2V</g:title>
-      <g:description>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В + DAH Solar DHN-LVWES05-G1 100ah 51.2V</g:description>
-      <g:link>https://avtonomka.com.ua/product/152272.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152272.jpg</g:image_link>
-      <g:price>70992.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
-    </item>
-    <item>
-      <g:id>152273</g:id>
-      <g:title>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В + Deye SE-F16-С 51.2V 314 Аh</g:title>
-      <g:description>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В + Deye SE-F16-С 51.2V 314 Аh</g:description>
-      <g:link>https://avtonomka.com.ua/product/152273.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152273.jpg</g:image_link>
-      <g:price>125972.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
-    </item>
-    <item>
-      <g:id>152274</g:id>
-      <g:title>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В + DEYE SE-F5 Pro-C 51.2V 100 Аh</g:title>
-      <g:description>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В + DEYE SE-F5 Pro-C 51.2V 100 Аh</g:description>
-      <g:link>https://avtonomka.com.ua/product/152274.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152274.jpg</g:image_link>
-      <g:price>76483.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
-    </item>
-    <item>
-      <g:id>152277</g:id>
-      <g:title>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В + Felicity FLA48230 51.2V 230Ah</g:title>
-      <g:description>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В + Felicity FLA48230 51.2V 230Ah</g:description>
-      <g:link>https://avtonomka.com.ua/product/152277.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152277.jpg</g:image_link>
-      <g:price>105992.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
-    </item>
-    <item>
-      <g:id>152278</g:id>
-      <g:title>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48314TG1-H 51.2V 314Ah</g:title>
-      <g:description>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48314TG1-H 51.2V 314Ah</g:description>
-      <g:link>https://avtonomka.com.ua/product/152278.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152278.jpg</g:image_link>
-      <g:price>122493.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
-    </item>
-    <item>
       <g:id>150757</g:id>
       <g:title>Комплект автономного енергоживлення: Deye SUN-6K-SG05LP1-EU-AM2 1 фаза + DEYE SE-F5 Pro-C 51.2V 100 Аh</g:title>
       <g:description>Готовий комплект автономного живлення: гібридний інвертор Deye SUN-6K-SG05LP1-EU-AM2 6 кВт та акумулятор LiFePO4 DEYE SE-F5 Pro-C 51,2 В 100 А·год.</g:description>
@@ -628,12 +450,12 @@
       <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
     </item>
     <item>
-      <g:id>152225</g:id>
-      <g:title>Комплект автономного енергоживлення: Deye SUN-6K-SG05LP1-EU-AM2 + Felicity FLA48230 51.2V 230Ah</g:title>
-      <g:description>Готовий комплект автономного живлення: гібридний інвертор Deye SUN-6K-SG05LP1-EU-AM2 6 кВт та акумулятор LiFePO4 Felicity FLA48230 51,2 В 230 А·год.</g:description>
-      <g:link>https://avtonomka.com.ua/product/152225.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152225.jpg</g:image_link>
-      <g:price>112741.00 UAH</g:price>
+      <g:id>152227</g:id>
+      <g:title>Комплект автономного енергоживлення: Deye SUN-8K-SG05LP1-EU-AM2-P 8 кВт 48 В+ DEYE SE-F5 Pro-C 51.2V 100 Аh </g:title>
+      <g:description>Комплект автономного енергоживлення: Deye SUN-8K-SG05LP1-EU-AM2-P 8 кВт 48 В+ DEYE SE-F5 Pro-C 51.2V 100 Аh </g:description>
+      <g:link>https://avtonomka.com.ua/product/152227.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152227.jpg</g:image_link>
+      <g:price>99878.00 UAH</g:price>
       <g:availability>in stock</g:availability>
       <g:condition>new</g:condition>
       <g:brand>Автономка</g:brand>
@@ -758,6 +580,118 @@
       <g:mpn>IVEM12048-II</g:mpn>
     </item>
     <item>
+      <g:id>152455</g:id>
+      <g:title>Гібридний інвертор MUST PV18-2012 PREM 2 кВт 12 В, Wi-Fi, 290х367х111, 6 кг</g:title>
+      <g:description>MUST PV18-2012 PREM — гібридний інвертор потужністю 2 кВт з номінальною напругою акумулятора 12 В та вбудованим Wi-Fi модулем для моніторингу. Підходить для компактних автономних систем живлення. Розміри 290×367×111 мм, вага 6 кг.</g:description>
+      <g:link>https://avtonomka.com.ua/product/152455.html</g:link>
+      <g:image_link>https://dfi2.com.ua/images/152455_1.jpg</g:image_link>
+      <g:additional_image_link>https://dfi2.com.ua/images/152455_2.jpg</g:additional_image_link>
+      <g:additional_image_link>https://dfi2.com.ua/images/152455_3.jpg</g:additional_image_link>
+      <g:additional_image_link>https://dfi2.com.ua/images/152455_4.jpg</g:additional_image_link>
+      <g:additional_image_link>https://dfi2.com.ua/images/152455_5.jpg</g:additional_image_link>
+      <g:additional_image_link>https://dfi2.com.ua/images/152455_6.jpg</g:additional_image_link>
+      <g:additional_image_link>https://dfi2.com.ua/images/152455_7.jpg</g:additional_image_link>
+      <g:price>13198.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Автономна енергетика &gt; Гибридні інвертори</g:product_type>
+      <g:mpn>PV18-2012PREM</g:mpn>
+    </item>
+    <item>
+      <g:id>150676</g:id>
+      <g:title>Акумуляторна батарея DEYE SE-F5 Pro-C 51.2V 100 Аh, 404х547х141, 45 кг, LiFePO4 5.12kWh</g:title>
+      <g:description>DEYE SE-F5 Pro-C — сучасна акумуляторна батарея LiFePO4 ємністю 100 А·год і напругою 51,2 В (5,12 кВт·год). Забезпечує стабільну роботу гібридних і сонячних систем. Ресурс понад 6000 циклів. Порти зв&apos;язку CAN/RS485. Вага 45 кг. Підходить для приватних будинків, офісів і комерційних об&apos;єктів.</g:description>
+      <g:link>https://avtonomka.com.ua/product/150676.html</g:link>
+      <g:image_link>https://dfi2.com.ua/images/150676_1.jpg</g:image_link>
+      <g:additional_image_link>https://dfi2.com.ua/images/150676_2.jpg</g:additional_image_link>
+      <g:additional_image_link>https://dfi2.com.ua/images/150676_3.jpg</g:additional_image_link>
+      <g:additional_image_link>https://dfi2.com.ua/images/150676_4.jpg</g:additional_image_link>
+      <g:additional_image_link>https://dfi2.com.ua/images/150676_5.jpg</g:additional_image_link>
+      <g:additional_image_link>https://dfi2.com.ua/images/150676_6.jpg</g:additional_image_link>
+      <g:additional_image_link>https://dfi2.com.ua/images/150676_7.jpg</g:additional_image_link>
+      <g:price>40416.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Автономна енергетика &gt; Акумулятори для гібридних інверторів</g:product_type>
+      <g:mpn>SE-F5 Pro-C</g:mpn>
+    </item>
+    <item>
+      <g:id>151057</g:id>
+      <g:title>Акумуляторна батарея Deye SE-F16-С 51.2V 314 Аh, 400х708х233, 123 кг, 16kWh LiFePO4</g:title>
+      <g:description>Deye SE-F16-С — потужна акумуляторна батарея LiFePO4 ємністю 314 А·год і напругою 51,2 В (16 кВт·год). Призначена для гібридних інверторів Deye та інших автономних і сонячних систем живлення приватних будинків, офісів і комерційних об&apos;єктів. Вбудована BMS забезпечує захист від перезаряду, глибокого розряду та перегріву, ресурс понад 6000 циклів. Розміри 400×708×233 мм, вага 123 кг.</g:description>
+      <g:link>https://avtonomka.com.ua/product/151057.html</g:link>
+      <g:image_link>https://dfi2.com.ua/images/151057_1.jpg</g:image_link>
+      <g:additional_image_link>https://dfi2.com.ua/images/151057_2.jpg</g:additional_image_link>
+      <g:price>89905.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Автономна енергетика &gt; Акумулятори для гібридних інверторів</g:product_type>
+      <g:mpn>SE-F16-С</g:mpn>
+    </item>
+    <item>
+      <g:id>152203</g:id>
+      <g:title>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLA48314-EU 51.2V 314Ah 16kWh</g:title>
+      <g:description>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLA48314-EU 51.2V 314Ah 16kWh</g:description>
+      <g:link>https://avtonomka.com.ua/product/152203.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152203.jpg</g:image_link>
+      <g:price>122373.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
+    </item>
+    <item>
+      <g:id>152205</g:id>
+      <g:title>Комплект автономного енергоживлення: Felicity IVEM6048-II 6 кВт 48 В + DAH Solar DHN-LVWES05-G1 100ah 51.2V</g:title>
+      <g:description>Готовий комплект автономного живлення: гібридний інвертор Felicity IVEM12048-II 12 кВт та акумулятор LiFePO4 DAH Solar DHN-LVWES05-G1 51,2 В 100 А·год.</g:description>
+      <g:link>https://avtonomka.com.ua/product/152205.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152205.jpg</g:image_link>
+      <g:price>62894.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
+    </item>
+    <item>
+      <g:id>152206</g:id>
+      <g:title>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ DEYE SE-F5 Pro-C 51.2V 100 Аh</g:title>
+      <g:description>Готовий комплект автономного живлення: гібридний інвертор Felicity IVEM6048-II 6 кВт та акумулятор LiFePO4 DEYE SE-F5 Pro-C 51,2 В 100 А·год.</g:description>
+      <g:link>https://avtonomka.com.ua/product/152206.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152206.jpg</g:image_link>
+      <g:price>68385.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
+    </item>
+    <item>
+      <g:id>152208</g:id>
+      <g:title>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Deye SE-F16-С 51.2V 314 Аh</g:title>
+      <g:description>Готовий комплект автономного живлення: гібридний інвертор Felicity IVEM6048-II 6 кВт та акумулятор LiFePO4 Deye SE-F16-С 51,2 В 314 А·год.</g:description>
+      <g:link>https://avtonomka.com.ua/product/152208.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152208.jpg</g:image_link>
+      <g:price>117874.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
+    </item>
+    <item>
+      <g:id>152212</g:id>
+      <g:title>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLA48314-EU 51.2V 314Ah</g:title>
+      <g:description>Готовий комплект автономного живлення: гібридний інвертор Felicity IVEM6048-II 6 кВт та акумулятор LiFePO4 Felicity FLA48314-EU 51,2 В 314 А·год.</g:description>
+      <g:link>https://avtonomka.com.ua/product/152212.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152212.jpg</g:image_link>
+      <g:price>114275.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
+    </item>
+    <item>
       <g:id>152352</g:id>
       <g:title>Акумуляторна батарея Felicity FLA48280 51.2V 280Ah LiFePO4, 480x1100x300, 135 кг</g:title>
       <g:description>Felicity FLA48280 — акумуляторна батарея LiFePO4 ємністю 280 А·год і напругою 51,2 В. Призначена для гібридних інверторів і сонячних систем автономного живлення. Розміри 480×1100×300 мм, вага 135 кг.</g:description>
@@ -808,6 +742,11 @@
       <g:description>Акумуляторна батарея Felicity LPBA48100-OL 51.2V 100Ah LiFePO4, 665х440х175, 48.5 кг</g:description>
       <g:link>https://avtonomka.com.ua/product/152520.html</g:link>
       <g:image_link>https://avtonomka.com.ua/assets/images/komp/152520.jpg</g:image_link>
+      <g:additional_image_link>https://dfi2.com.ua/images/152520_2.jpg</g:additional_image_link>
+      <g:additional_image_link>https://dfi2.com.ua/images/152520_3.jpg</g:additional_image_link>
+      <g:additional_image_link>https://dfi2.com.ua/images/152520_4.jpg</g:additional_image_link>
+      <g:additional_image_link>https://dfi2.com.ua/images/152520_5.jpg</g:additional_image_link>
+      <g:additional_image_link>https://dfi2.com.ua/images/152520_7.jpg</g:additional_image_link>
       <g:price>39926.00 UAH</g:price>
       <g:availability>in stock</g:availability>
       <g:condition>new</g:condition>
@@ -829,108 +768,12 @@
       <g:mpn>FLB48100WG1-H</g:mpn>
     </item>
     <item>
-      <g:id>152365</g:id>
-      <g:title>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48314TG1-H 51.2V 314Ah</g:title>
-      <g:description>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48314TG1-H 51.2V 314Ah</g:description>
-      <g:link>https://avtonomka.com.ua/product/152365.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152365.jpg</g:image_link>
-      <g:price>122493.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
-    </item>
-    <item>
-      <g:id>152368</g:id>
-      <g:title>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLA48280 51.2V 280Ah</g:title>
-      <g:description>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLA48280 51.2V 280Ah</g:description>
-      <g:link>https://avtonomka.com.ua/product/152368.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152368.jpg</g:image_link>
-      <g:price>113825.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
-    </item>
-    <item>
-      <g:id>152471</g:id>
-      <g:title>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLB48100WG1-H 51.2V 100Ah, з підігрівом</g:title>
-      <g:description>Готовий комплект автономного живлення: гібридний інвертор Felicity IVEM6048-II 6 кВт та акумулятор LiFePO4 Felicity FLB48100WG1-H 51,2 В 100 А·год, з підігрівом.</g:description>
-      <g:link>https://avtonomka.com.ua/product/152471.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152471.jpg</g:image_link>
-      <g:price>66894.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
-    </item>
-    <item>
-      <g:id>152492</g:id>
-      <g:title>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLA48171 51.2V 171Ah LiFePO4</g:title>
-      <g:description>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLA48171 51.2V 171Ah LiFePO4</g:description>
-      <g:link>https://avtonomka.com.ua/product/152492.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152492.jpg</g:image_link>
-      <g:price>96993.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
-    </item>
-    <item>
-      <g:id>152493</g:id>
-      <g:title>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLA48171 51.2V 171Ah LiFePO4</g:title>
-      <g:description>Готовий комплект автономного живлення: гібридний інвертор Felicity IVEM6048-II 6 кВт та акумулятор LiFePO4 Felicity FLA48171 51,2 В 171 А·год.</g:description>
-      <g:link>https://avtonomka.com.ua/product/152493.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152493.jpg</g:image_link>
-      <g:price>88894.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
-    </item>
-    <item>
-      <g:id>152553</g:id>
-      <g:title>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity LPBA48100-OL 51.2V 100Ah</g:title>
-      <g:description>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity LPBA48100-OL 51.2V 100Ah</g:description>
-      <g:link>https://avtonomka.com.ua/product/152553.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/zaglushka.png</g:image_link>
-      <g:price>67894.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
-    </item>
-    <item>
-      <g:id>152227</g:id>
-      <g:title>Комплект автономного енергоживлення: Deye SUN-8K-SG05LP1-EU-AM2-P 8 кВт 48 В+ DEYE SE-F5 Pro-C 51.2V 100 Аh </g:title>
-      <g:description>Комплект автономного енергоживлення: Deye SUN-8K-SG05LP1-EU-AM2-P 8 кВт 48 В+ DEYE SE-F5 Pro-C 51.2V 100 Аh </g:description>
-      <g:link>https://avtonomka.com.ua/product/152227.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152227.jpg</g:image_link>
-      <g:price>99878.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
-    </item>
-    <item>
       <g:id>152228</g:id>
       <g:title>Комплект автономного енергоживлення: Deye SUN-8K-SG05LP1-EU-AM2-P 8 кВт 48 В+ DAH Solar DHN-LVWES05-G1 100ah 51.2V</g:title>
       <g:description>Комплект автономного енергоживлення: Deye SUN-8K-SG05LP1-EU-AM2-P 8 кВт 48 В+ DAH Solar DHN-LVWES05-G1 100ah 51.2V</g:description>
       <g:link>https://avtonomka.com.ua/product/152228.html</g:link>
       <g:image_link>https://avtonomka.com.ua/assets/images/komp/152228.jpg</g:image_link>
       <g:price>93487.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
-    </item>
-    <item>
-      <g:id>152231</g:id>
-      <g:title>Комплект автономного енергоживлення: Deye SUN-8K-SG05LP1-EU-AM2-P 8 кВт 48 В+ Felicity FLA48230 51.2V 230Ah</g:title>
-      <g:description>Комплект автономного енергоживлення: Deye SUN-8K-SG05LP1-EU-AM2-P 8 кВт 48 В+ Felicity FLA48230 51.2V 230Ah</g:description>
-      <g:link>https://avtonomka.com.ua/product/152231.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152231.jpg</g:image_link>
-      <g:price>128487.00 UAH</g:price>
       <g:availability>in stock</g:availability>
       <g:condition>new</g:condition>
       <g:brand>Автономка</g:brand>
@@ -997,6 +840,114 @@
       <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
     </item>
     <item>
+      <g:id>152272</g:id>
+      <g:title>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В + DAH Solar DHN-LVWES05-G1 100ah 51.2V</g:title>
+      <g:description>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В + DAH Solar DHN-LVWES05-G1 100ah 51.2V</g:description>
+      <g:link>https://avtonomka.com.ua/product/152272.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152272.jpg</g:image_link>
+      <g:price>70992.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
+    </item>
+    <item>
+      <g:id>152273</g:id>
+      <g:title>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В + Deye SE-F16-С 51.2V 314 Аh</g:title>
+      <g:description>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В + Deye SE-F16-С 51.2V 314 Аh</g:description>
+      <g:link>https://avtonomka.com.ua/product/152273.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152273.jpg</g:image_link>
+      <g:price>125972.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
+    </item>
+    <item>
+      <g:id>152274</g:id>
+      <g:title>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В + DEYE SE-F5 Pro-C 51.2V 100 Аh</g:title>
+      <g:description>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В + DEYE SE-F5 Pro-C 51.2V 100 Аh</g:description>
+      <g:link>https://avtonomka.com.ua/product/152274.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152274.jpg</g:image_link>
+      <g:price>76483.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
+    </item>
+    <item>
+      <g:id>152278</g:id>
+      <g:title>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48314TG1-H 51.2V 314Ah</g:title>
+      <g:description>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48314TG1-H 51.2V 314Ah</g:description>
+      <g:link>https://avtonomka.com.ua/product/152278.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152278.jpg</g:image_link>
+      <g:price>122493.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
+    </item>
+    <item>
+      <g:id>152365</g:id>
+      <g:title>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48314TG1-H 51.2V 314Ah</g:title>
+      <g:description>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLB48314TG1-H 51.2V 314Ah</g:description>
+      <g:link>https://avtonomka.com.ua/product/152365.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152365.jpg</g:image_link>
+      <g:price>122493.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
+    </item>
+    <item>
+      <g:id>152368</g:id>
+      <g:title>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLA48280 51.2V 280Ah</g:title>
+      <g:description>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLA48280 51.2V 280Ah</g:description>
+      <g:link>https://avtonomka.com.ua/product/152368.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152368.jpg</g:image_link>
+      <g:price>113825.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
+    </item>
+    <item>
+      <g:id>152492</g:id>
+      <g:title>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLA48171 51.2V 171Ah LiFePO4</g:title>
+      <g:description>Комплект автономного енергоживлення: Felicity IVEM8048-II 8 кВт 48 В+ Felicity FLA48171 51.2V 171Ah LiFePO4</g:description>
+      <g:link>https://avtonomka.com.ua/product/152492.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152492.jpg</g:image_link>
+      <g:price>96993.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
+    </item>
+    <item>
+      <g:id>152493</g:id>
+      <g:title>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity FLA48171 51.2V 171Ah LiFePO4</g:title>
+      <g:description>Готовий комплект автономного живлення: гібридний інвертор Felicity IVEM6048-II 6 кВт та акумулятор LiFePO4 Felicity FLA48171 51,2 В 171 А·год.</g:description>
+      <g:link>https://avtonomka.com.ua/product/152493.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152493.jpg</g:image_link>
+      <g:price>88894.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
+    </item>
+    <item>
+      <g:id>152553</g:id>
+      <g:title>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity LPBA48100-OL 51.2V 100Ah</g:title>
+      <g:description>Комплект автономного енергоживлення: Felicity IVEM6048-II 48В 6 кВт+ Felicity LPBA48100-OL 51.2V 100Ah</g:description>
+      <g:link>https://avtonomka.com.ua/product/152553.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/zaglushka.png</g:image_link>
+      <g:price>67894.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
+    </item>
+    <item>
       <g:id>143938</g:id>
       <g:title>Комплект автономного енергоживлення: Must PV18-3224VPM II 24V 3.2kW + MUST LP1600-24100, 25.6V 100Ah, LiFePO4</g:title>
       <g:description>Готовий комплект автономного живлення: гібридний інвертор Must PV18-3224VPM II 24 В 3,2 кВт та акумуляторна батарея LiFePO4 MUST LP1600-24100 25,6 В 100 А·год. Підходить для організації резервного або автономного живлення невеликого будинку чи офісу. Компоненти перевірені на сумісність і готові до підключення сонячних панелей.</g:description>
@@ -1028,18 +979,6 @@
       <g:link>https://avtonomka.com.ua/product/151790.html</g:link>
       <g:image_link>https://avtonomka.com.ua/assets/images/komp/151790.png</g:image_link>
       <g:price>107527.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
-    </item>
-    <item>
-      <g:id>152219</g:id>
-      <g:title>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLA48230 51.2V 230Ah</g:title>
-      <g:description>Готовий комплект автономного живлення: гібридний інвертор MUST PV19-6048EXP 6 кВт та акумулятор LiFePO4 Felicity FLA48230 51,2 В 230 А·год.</g:description>
-      <g:link>https://avtonomka.com.ua/product/152219.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152219.jpg</g:image_link>
-      <g:price>91146.00 UAH</g:price>
       <g:availability>in stock</g:availability>
       <g:condition>new</g:condition>
       <g:brand>Автономка</g:brand>
