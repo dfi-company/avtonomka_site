@@ -86,7 +86,7 @@
   /* PRODUCT ROW */
   .product-row { display:flex; align-items:center; gap:12px; padding:12px 14px; background:#fff; border-bottom:1px solid var(--border); cursor:pointer; transition:background .12s; }
   .product-row:active { background:#e8f4e8; }
-  .product-img-wrap { width:64px; height:64px; border-radius:var(--radius-sm); overflow:hidden; background:#f5f9f5; flex-shrink:0; display:flex; align-items:center; justify-content:center; border:1px solid var(--border); }
+  .product-img-wrap { width:76px; height:76px; border-radius:var(--radius-sm); overflow:hidden; background:#f5f9f5; flex-shrink:0; display:flex; align-items:center; justify-content:center; border:1px solid var(--border); }
   .product-img { width:100%; height:100%; object-fit:contain; padding:4px; }
   .product-img-placeholder { font-size:26px; }
   /* Skeleton поки фото не завантажилось */
@@ -292,20 +292,63 @@ function extractKw(title){
   return null;
 }
 
+// ── SHORT DISPLAY NAME (повна назва лишається в p.name — для кошика й заявки) ──
+// Родові префікси зайві, коли товар уже показаний всередині своєї категорії.
+// JS-регекс \b не бачить кириличних літер як "словесні" — межа слова після
+// "батарея"/"Акумулятор" мовчки не спрацьовує. Тому замість \b просто
+// вимагаємо реальний пробіл одразу після префікса (цього достатньо, щоб
+// "Акумулятор " не зачепив "Акумуляторна батарея ...").
+const TYPE_PREFIXES = [
+  /^Комплект силових кабелів\s+/i,
+  /^Сонячний кабель\s+/i,
+  /^Гібридний інвертор\s+/i,
+  /^Акумуляторна батарея\s+/i,
+  /^Акумулятор\s+/i,
+  /^Зарядна станція\s+/i,
+  /^Безперебійник(?:\s+для\s+\S+)?\s+/i,
+];
+function stripTypePrefix(name){
+  for(const re of TYPE_PREFIXES){
+    const stripped=name.replace(re,"");
+    if(stripped!==name) return stripped.trim();
+  }
+  return name;
+}
+// Для "Комплекти": замість повного "Комплект ...: Інвертор, В, Вт+ Батарея, В, Аh"
+// лишаємо тільки "Інвертор + Батарея" — потужність/напругу вже видно в заголовку групи.
+const KIT_UNIT_CUT_RE=/\d+(?:[.,]\d+)?\s*(?:кВт|kW|kw|Вт|фаза|V|В|Ah|Аh|ah)(?![A-Za-zА-Яа-яІіЇїЄєҐґ])/i;
+const WIFI_RE=/\bWi-?Fi\b/i;
+function kitPartShort(segment){
+  const cuts=[];
+  const m1=segment.match(KIT_UNIT_CUT_RE); if(m1) cuts.push(m1.index);
+  const m2=segment.match(WIFI_RE); if(m2) cuts.push(m2.index);
+  const s=cuts.length?segment.slice(0,Math.min(...cuts)):segment;
+  return s.trim().replace(/[,+]+$/,"").trim();
+}
+function kitShortName(name){
+  const body=name.replace(/^Комплект автономного енергоживлення:\s*/i,"");
+  const parts=body.split(/\s*\+\s*/);
+  if(parts.length!==2) return body.trim();
+  return kitPartShort(parts[0])+" + "+kitPartShort(parts[1]);
+}
+
 // ── NORMALIZE products.json entry ──
 function norm(p){
   const catLabel=CATEGORY_LABEL[p.product_type]||(p.product_type||"").split(">").pop().trim()||"Інші товари";
   const {price,unit}=splitPrice(p.price);
   let brand=detectBrand(p.title)||"—";
-  if(catLabel==="Комплекти автономного енергоживлення"){
+  const isKit=catLabel==="Комплекти автономного енергоживлення";
+  if(isKit){
     const kw=extractKw(p.title);
     if(kw!==null) brand=kw+" кВт";
   }
+  const name=p.title||"";
   return {
     id:p.id,
     category:catLabel,
     brand,
-    name:p.title||"",
+    name,
+    shortName:isKit?kitShortName(name):stripTypePrefix(name),
     price, unit,
     photo:resolveImg(p.image_link),
     desc:p.description||"",
@@ -536,7 +579,7 @@ function renderProducts(){
       row.innerHTML=`
         <div class="product-img-wrap" id="wrap_${p.id}">${imgHTML}</div>
         <div class="product-info">
-          <div class="product-name">${p.name}</div>
+          <div class="product-name">${p.shortName}</div>
           <div class="price-row">
             ${p.price?`<span class="price">${fmt(p.price)}</span><span class="price-unit">${p.unit}</span>`:""}
             ${stockHTML}
@@ -584,7 +627,7 @@ function openModal(p){
     </div>
     <div class="modal-body">
       <div class="modal-brand">${p.brand!=="—"?p.brand+" · ":""}${p.category}</div>
-      <div class="modal-name">${p.name}</div>
+      <div class="modal-name">${p.shortName}</div>
       ${p.desc?`<p style="font-size:13px;color:var(--text2);line-height:1.5;margin-bottom:12px">${escHtml(p.desc)}</p>`:""}
       ${p.price?`<div class="modal-price">${fmt(p.price)} <span style="font-size:14px;color:var(--text2);font-family:Inter,sans-serif;font-weight:400">${p.unit}</span></div>`:""}
       ${stockNote}
@@ -622,9 +665,9 @@ function saveCart(){
 function addToCart(p, qty){
   const idx=CART.findIndex(i=>i.name===p.name);
   if(idx>-1) CART[idx].qty+=qty;
-  else CART.push({name:p.name, sku:p.id, price:p.price, unit:p.unit, brand:p.brand, category:p.category, qty:qty});
+  else CART.push({name:p.name, shortName:p.shortName, sku:p.id, price:p.price, unit:p.unit, brand:p.brand, category:p.category, qty:qty});
   saveCart();
-  showToast(`Додано в кошик: ${p.name}`);
+  showToast(`Додано в кошик: ${p.shortName}`);
   if(window.Telegram?.WebApp?.HapticFeedback) Telegram.WebApp.HapticFeedback.notificationOccurred("success");
 }
 function removeFromCart(idx){ CART.splice(idx,1); saveCart(); openCartModal(); }
@@ -670,7 +713,7 @@ function openCartModal(){
     const itemsHTML=CART.map((i,idx)=>`
       <div class="cart-item">
         <div class="cart-item-info">
-          <div class="cart-item-name">${i.name}</div>
+          <div class="cart-item-name">${i.shortName||i.name}</div>
           <div class="cart-item-price">${fmt(i.price)} ${i.unit} × ${i.qty}</div>
         </div>
         <div class="cart-item-qty">
