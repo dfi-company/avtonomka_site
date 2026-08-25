@@ -387,7 +387,9 @@ function getCatIconSrc(cat) {
 }
 
 function buildCats(){
-  const cats=[...new Set(all.map(p=>p.category))];
+  let cats=[...new Set(all.map(p=>p.category))];
+  const cableCat="Силові та сонячні кабелі";
+  if(cats.includes(cableCat)) cats=cats.filter(c=>c!==cableCat).concat(cableCat);
   const grid=document.getElementById("catGrid");
   grid.innerHTML="";
   cats.forEach(cat=>{
