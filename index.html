@@ -324,7 +324,9 @@
           const resp = await fetch('data/articles.json');
           if (!resp.ok) throw new Error('HTTP ' + resp.status);
           const articles = await resp.json();
-          const latest = (Array.isArray(articles) ? articles : []).slice(0, 3);
+          const sorted = (Array.isArray(articles) ? articles.slice() : [])
+            .sort((a, b) => new Date(b.date) - new Date(a.date));
+          const latest = sorted.slice(0, 3);
           if (!latest.length) {
             grid.innerHTML = '<p class="text-muted" style="grid-column:1/-1">' + t('home.articles_soon') + '</p>';
             return;
