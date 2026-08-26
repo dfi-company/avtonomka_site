@@ -84,7 +84,7 @@ function renderRelatedProductCard(p) {
   const priceStr = formatPrice(p.price || '');
   const title    = p.title || '';
   const img      = p.image_link || 'assets/images/zaglushka.png';
-  const href     = `product/${encodeURIComponent(p.id)}.html`;
+  const href     = `product/${encodeURIComponent(p.slug || p.id)}/${encodeURIComponent(p.id)}.html`;
 
   return `
   <div class="product-card">

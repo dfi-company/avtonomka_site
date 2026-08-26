@@ -73,17 +73,20 @@ function categoryLabel(productType) {
   return productType.split('>').pop().trim();
 }
 
-/* ---- Base path: root product.html vs. /product/<id>.html ---- */
+/* ---- Base path: root product.html vs. /product/<slug>/<id>.html (2 levels deep) ---- */
 function getBase() {
-  return window.location.pathname.includes('/product/') ? '../' : '';
+  const path = window.location.pathname;
+  const depth = path.split('/').length - 2;
+  return depth >= 1 && path.includes('/product/') ? '../'.repeat(depth) : '';
 }
 const BASE = getBase();
 
-/* ---- Product id: ?id= (legacy) or /product/<id>.html (static pages) ---- */
+/* ---- Product id: ?id= (legacy), /product/<id>.html (old stub) or
+   /product/<slug>/<id>.html (static pages) — id is always the last segment ---- */
 function getProductId() {
   const params = new URLSearchParams(window.location.search);
   if (params.get('id')) return params.get('id');
-  const m = window.location.pathname.match(/\/product\/([^/]+)\.html$/);
+  const m = window.location.pathname.match(/\/product\/(?:[^/]+\/)?([^/]+)\.html$/);
   return m ? m[1] : null;
 }
 

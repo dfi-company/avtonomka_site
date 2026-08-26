@@ -15,6 +15,9 @@ if hasattr(sys.stdout, "reconfigure"):
 
 import requests
 
+sys.path.insert(0, str(Path(__file__).parent))
+from slugify import slugify
+
 FEED_URL = "https://dfi2.com.ua/price_xml/avtonomka.txt"
 OUTPUT_FILE = Path(__file__).parent.parent / "products.json"
 PRICE_ADJUSTMENTS_FILE = Path(__file__).parent / "price_adjustments.json"
@@ -94,12 +97,13 @@ def main() -> int:
         print("ПОМИЛКА: очікується JSON-масив", file=sys.stderr)
         return 1
 
-    # Preserve existing descriptions, links and embeds from current products.json
+    # Preserve existing descriptions, links, embeds and slugs from current products.json
     existing_desc = {}
     existing_link = {}
     existing_link2 = {}
     existing_embed = {}
     existing_specs = {}
+    existing_slug = {}
     if OUTPUT_FILE.exists():
         try:
             existing = json.loads(OUTPUT_FILE.read_text(encoding="utf-8"))
@@ -114,6 +118,8 @@ def main() -> int:
                     existing_embed[item["id"]] = item["embed"]
                 if item.get("specs"):
                     existing_specs[item["id"]] = item["specs"]
+                if item.get("slug"):
+                    existing_slug[item["id"]] = item["slug"]
         except Exception:
             pass
 
@@ -124,6 +130,11 @@ def main() -> int:
             p["link2"] = existing_link2[p["id"]]
         p["embed"] = existing_embed.get(p["id"], "")
         p["specs"] = existing_specs.get(p["id"], "")
+        # Slug is sticky: computed once per id and kept forever after, so a
+        # later title edit never changes (and breaks) an already-indexed
+        # /product/<slug>/<id>.html URL. Only a genuinely new id gets a
+        # fresh slug here.
+        p["slug"] = existing_slug.get(p["id"]) or slugify(p.get("title", ""))
 
     komp_dir = Path(__file__).parent.parent / "assets" / "images" / "komp"
     if komp_dir.exists():

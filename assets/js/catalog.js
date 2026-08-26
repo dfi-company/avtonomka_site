@@ -184,7 +184,7 @@ function renderCard(p) {
   const cat      = categoryLabel(p.product_type);
   const img      = p.image_link ? (/^https?:\/\//.test(p.image_link) ? p.image_link : _assetsBase + p.image_link) : (_assetsBase + 'assets/images/zaglushka.png');
   const zagl     = _assetsBase + 'assets/images/zaglushka.png';
-  const href     = `${_productBase}${encodeURIComponent(p.id)}.html`;
+  const href     = `${_productBase}${encodeURIComponent(p.slug || p.id)}/${encodeURIComponent(p.id)}.html`;
 
   return `
   <div class="product-card">

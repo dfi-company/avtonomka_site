@@ -25,6 +25,7 @@
 const fs      = require('fs');
 const path    = require('path');
 const { execFileSync } = require('child_process');
+const { slugify } = require('./slugify');
 
 const ROOT           = path.join(__dirname, '..');
 const SITE_URL        = 'https://avtonomka.com.ua';
@@ -112,7 +113,7 @@ function cleanDescription(html) {
     .replace(/&nbsp;/g, ' ')
     .replace(/&rsquo;/g, '’')
     .replace(/&lsquo;/g, '‘')
-    .replace(/&mdash;/g, '—')
+    .replace(/&mdash;/g, '-')
     .replace(/&ndash;/g, '–')
     .replace(/&amp;/g, '&')
     .replace(/&lt;/g, '<')
@@ -135,8 +136,17 @@ function absoluteUrl(url) {
   return url.startsWith('http') ? url : `${SITE_URL}/${url.replace(/^\//, '')}`;
 }
 
-function productUrl(id) {
-  return `${SITE_URL}/product/${encodeURIComponent(id)}.html`;
+function productSlug(p) {
+  return p.slug || slugify(p.title || '');
+}
+
+function productUrl(p) {
+  return `${SITE_URL}/product/${productSlug(p)}/${encodeURIComponent(p.id)}.html`;
+}
+
+/* Old flat URL — kept alive as a redirect stub, not a real page anymore. */
+function legacyProductUrl(p) {
+  return `${SITE_URL}/product/${encodeURIComponent(p.id)}.html`;
 }
 
 /* Manufacturer brand, detected from the title against a known-brand list —
@@ -214,7 +224,7 @@ function buildJsonLd(p) {
     ...(detectBrand(p.title) ? { brand: { '@type': 'Brand', name: detectBrand(p.title) } } : {}),
     offers: {
       '@type': 'Offer',
-      url: productUrl(p.id),
+      url: productUrl(p),
       priceCurrency: priceCurrency(p.price),
       price: isNaN(num) ? undefined : num.toFixed(2),
       availability: p.availability === 'in_stock' ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
@@ -241,17 +251,20 @@ function buildBreadcrumbJsonLd(p) {
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Головна', item: `${SITE_URL}/` },
       { '@type': 'ListItem', position: 2, name: 'Каталог', item: `${SITE_URL}/catalog.html` },
-      { '@type': 'ListItem', position: 3, name: p.title, item: productUrl(p.id) },
+      { '@type': 'ListItem', position: 3, name: p.title, item: productUrl(p) },
     ],
   };
   return JSON.stringify(ld, null, 2).replace(/<\//g, '<\\/');
 }
 
-/* Rewrite root-relative href/src to ../ (page now lives one level deep, in /product/) */
-function rewriteRelativePaths(html) {
+/* Rewrite root-relative href/src to climb back to the site root — pages now
+   live two levels deep, at /product/<slug>/<id>.html, so prefix is '../../'
+   (kept as a param, not hardcoded, so it stays correct if depth ever changes
+   again). */
+function rewriteRelativePaths(html, prefix = '../../') {
   return html.replace(/(href|src)="([^"]*)"/g, (match, attr, url) => {
     if (!url || /^(https?:|mailto:|tel:|#|\.\.\/|\/)/.test(url)) return match;
-    return `${attr}="../${url}"`;
+    return `${attr}="${prefix}${url}"`;
   });
 }
 
@@ -283,24 +296,24 @@ function generateProductPage(p, template, articlesBySlug) {
   const metaDesc    = truncate(cleanDescription(p.description) || title, 160);
   const descText    = escapeHtml(cleanDescription(p.description) || '');
   const catLabel    = categoryLabel(p.product_type);
-  const mpn         = p.mpn || '—';
-  const canonical   = productUrl(p.id);
+  const mpn         = p.mpn || '-';
+  const canonical   = productUrl(p);
   const jsonLd      = buildJsonLd(p);
   const breadcrumbLd = buildBreadcrumbJsonLd(p);
 
   let html = template;
 
   html = html.replace(
-    '<title>Товар — Автономка</title>',
-    `<title>${escapeHtml(title)} — Автономка</title>`
+    '<title>Товар - Автономка</title>',
+    `<title>${escapeHtml(title)} - Автономка</title>`
   );
   html = html.replace(
     '<meta name="description" content="Детальна інформація про товар в магазині Автономка.">',
     `<meta name="description" content="${escapeHtml(metaDesc)}">`
   );
   html = html.replace(
-    '<meta property="og:title" content="Автономка — товар">',
-    `<meta property="og:title" content="${escapeHtml(title)} — Автономка">`
+    '<meta property="og:title" content="Автономка - товар">',
+    `<meta property="og:title" content="${escapeHtml(title)} - Автономка">`
   );
   html = html.replace(
     '<meta property="og:image" content="assets/images/sticker.webp">',
@@ -382,12 +395,12 @@ function generateProductPage(p, template, articlesBySlug) {
     `<button type="button" id="btn-add-cart" class="btn btn-cart" data-add-to-cart data-id="${escapeHtml(p.id)}" data-title="${escapeHtml(title)}" data-price="${isNaN(parseFloat(p.price)) ? '0' : parseFloat(p.price).toFixed(2)}" data-currency="${escapeHtml(priceCurrency(p.price))}" data-sku="${escapeHtml(p.mpn || '')}">`
   );
   html = html.replace(
-    '<span class="product-meta-row__value" id="product-mpn">—</span>',
+    '<span class="product-meta-row__value" id="product-mpn">-</span>',
     `<span class="product-meta-row__value" id="product-mpn">${escapeHtml(mpn)}</span>`
   );
   html = html.replace(
-    '<span class="product-meta-row__value" id="product-cat">—</span>',
-    `<span class="product-meta-row__value" id="product-cat">${escapeHtml(catLabel || '—')}</span>`
+    '<span class="product-meta-row__value" id="product-cat">-</span>',
+    `<span class="product-meta-row__value" id="product-cat">${escapeHtml(catLabel || '-')}</span>`
   );
   html = html.replace(
     '<div id="product-desc" class="product-desc"></div>',
@@ -402,40 +415,87 @@ function generateProductPage(p, template, articlesBySlug) {
   return rewriteRelativePaths(html);
 }
 
+/* Old flat /product/<id>.html — kept as a tiny redirect page (not deleted)
+   so bookmarks/indexed links don't 404. The real 301 should come from
+   .htaccess; this is the fallback for whenever that isn't in effect
+   (unclear how this repo's deploy reaches the LiteSpeed host, or whether it
+   carries dotfiles — see .htaccess header comment). */
+function buildRedirectStub(newUrl, oldUrl) {
+  return `<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <!-- Fallback redirect only — the canonical fix is the .htaccess 301 for
+       this same path. This meta-refresh exists in case that rewrite isn't
+       actually in effect on the live host. -->
+  <meta http-equiv="refresh" content="0; url=${escapeHtml(newUrl)}">
+  <link rel="canonical" href="${escapeHtml(newUrl)}">
+  <title>Redirecting…</title>
+</head>
+<body>
+  <p>Ця сторінка переїхала: <a href="${escapeHtml(newUrl)}">${escapeHtml(newUrl)}</a></p>
+</body>
+</html>
+`;
+}
+
 function generateAllProductPages(products) {
   const template = fs.readFileSync(path.join(ROOT, 'product.html'), 'utf8');
   const outDir   = path.join(ROOT, 'product');
   fs.mkdirSync(outDir, { recursive: true });
 
   const articlesBySlug = groupArticlesBySlug(loadArticles());
-  const validIds = new Set(products.map(p => String(p.id)));
   const lastmod  = {}; // id -> YYYY-MM-DD, for sitemap.xml
 
+  const validRelPaths  = new Set(); // 'slug/id.html' — current nested pages
+  const validStubNames = new Set(); // 'id.html' — current legacy stubs
+
   products.forEach(p => {
+    const slug = productSlug(p);
+    const dir  = path.join(outDir, slug);
+    fs.mkdirSync(dir, { recursive: true });
+
     const html     = generateProductPage(p, template, articlesBySlug);
-    const filePath = path.join(outDir, `${p.id}.html`);
-    const relPath  = path.join('product', `${p.id}.html`);
+    const filePath = path.join(dir, `${p.id}.html`);
+    const relPath  = path.join('product', slug, `${p.id}.html`);
     const before   = fs.existsSync(filePath) ? fs.readFileSync(filePath, 'utf8') : null;
     const changed  = before !== html;
     fs.writeFileSync(filePath, html, 'utf8');
     lastmod[p.id] = lastmodFor(relPath, changed);
+    validRelPaths.add(path.join(slug, `${p.id}.html`));
+
+    const stubPath = path.join(outDir, `${p.id}.html`);
+    fs.writeFileSync(stubPath, buildRedirectStub(productUrl(p), legacyProductUrl(p)), 'utf8');
+    validStubNames.add(`${p.id}.html`);
   });
 
-  /* Remove pages for products that dropped out of products.json entirely
-     (discontinued) — otherwise they'd sit at their old URL forever with
-     stale price/availability, which is exactly the risk this whole
-     exercise is meant to avoid. */
+  /* Remove pages/stubs for products that dropped out of products.json
+     entirely (discontinued) — otherwise they'd sit at their old URL forever
+     with stale price/availability, which is exactly the risk this whole
+     exercise is meant to avoid. Products keep no redirect once discontinued
+     (same policy as before this change — a clean 404, not a dangling
+     redirect to nothing). */
   let removed = 0;
-  fs.readdirSync(outDir).forEach(file => {
-    if (!file.endsWith('.html')) return;
-    const id = file.slice(0, -'.html'.length);
-    if (!validIds.has(id)) {
-      fs.unlinkSync(path.join(outDir, file));
-      removed++;
+  fs.readdirSync(outDir, { withFileTypes: true }).forEach(entry => {
+    if (entry.isDirectory()) {
+      const slugDir = path.join(outDir, entry.name);
+      fs.readdirSync(slugDir).forEach(file => {
+        if (!validRelPaths.has(path.join(entry.name, file))) {
+          fs.unlinkSync(path.join(slugDir, file));
+          removed++;
+        }
+      });
+      if (fs.readdirSync(slugDir).length === 0) fs.rmdirSync(slugDir);
+    } else if (entry.isFile() && entry.name.endsWith('.html')) {
+      if (!validStubNames.has(entry.name)) {
+        fs.unlinkSync(path.join(outDir, entry.name));
+        removed++;
+      }
     }
   });
 
-  console.log(`generate_static_pages: wrote ${products.length} files to /product/` +
+  console.log(`generate_static_pages: wrote ${products.length} product pages to /product/<slug>/<id>.html ` +
+    `+ ${products.length} legacy redirect stubs` +
     (removed ? `, removed ${removed} stale file(s) for discontinued products` : ''));
 
   return lastmod;
@@ -457,7 +517,7 @@ function renderCard(p, base) {
   const cat      = categoryLabel(p.product_type);
   const img      = p.image_link ? (/^https?:\/\//.test(p.image_link) ? p.image_link : base + p.image_link) : (base + 'assets/images/zaglushka.png');
   const zagl     = base + 'assets/images/zaglushka.png';
-  const href     = `${base}product/${encodeURIComponent(p.id)}.html`;
+  const href     = `${base}product/${productSlug(p)}/${encodeURIComponent(p.id)}.html`;
 
   return `
   <div class="product-card">
@@ -635,7 +695,7 @@ function updateSitemap(products, catalogLastmod, productLastmod) {
   }).join('\n');
 
   const productEntries = products.map(p =>
-    urlEntry(productUrl(p.id), productLastmod[p.id] || TODAY, 'weekly', '0.6')
+    urlEntry(productUrl(p), productLastmod[p.id] || TODAY, 'weekly', '0.6')
   ).join('\n');
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
@@ -658,9 +718,43 @@ ${productEntries}
     `${Object.keys(SLUG_TO_CATEGORY).length} category + ${products.length} product URLs`);
 }
 
+/* ============================================================
+   .htaccess — one explicit 301 per product id, old flat URL -> new
+   /product/<slug>/<id>.html. Regenerated from scratch every run so it
+   never drifts from products.json (same approach as sitemap.xml). A slug
+   can't be derived by a single regex rule (it's a per-product lookup), so
+   this is 80 explicit RewriteRules rather than one generic pattern.
+   Requires mod_rewrite — confirmed avtonomka.com.ua responds as
+   LiteSpeed/CyberPanel, which honors .htaccess mod_rewrite syntax. This is
+   the primary redirect mechanism; the per-product stub page written by
+   generateAllProductPages() is the fallback if this file somehow isn't
+   picked up by whatever deploys this repo to that host.
+   ============================================================ */
+
+function updateHtaccess(products) {
+  const file = path.join(ROOT, '.htaccess');
+  const rules = products.map(p =>
+    `RewriteRule ^product/${p.id}\\.html$ /product/${productSlug(p)}/${p.id}.html [R=301,L]`
+  ).join('\n');
+
+  const content = `# Auto-generated by scripts/generate_static_pages.js — do not edit by hand.
+# Redirects old /product/<id>.html URLs to the new /product/<slug>/<id>.html
+# format so existing Google indexing and external links keep working.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+${rules}
+</IfModule>
+`;
+
+  fs.writeFileSync(file, content, 'utf8');
+  console.log(`generate_static_pages: .htaccess rebuilt — ${products.length} redirect rule(s)`);
+}
+
 /* ============================================================ */
 
 const products = loadProducts();
 const productLastmod = generateAllProductPages(products);
 const catalogLastmod = generateCatalogGrids(products);
 updateSitemap(products, catalogLastmod, productLastmod);
+updateHtaccess(products);

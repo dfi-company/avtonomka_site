@@ -5,6 +5,7 @@
 
 const fs   = require('fs');
 const path = require('path');
+const { slugify } = require('./slugify');
 
 const SITE_URL    = 'https://avtonomka.com.ua';
 const BRAND       = 'Автономка';
@@ -32,8 +33,9 @@ function availability(val) {
   return val === 'in_stock' ? 'in stock' : 'out of stock';
 }
 
-function productLink(id) {
-  return `${SITE_URL}/product/${encodeURIComponent(id)}.html`;
+function productLink(p) {
+  const slug = p.slug || slugify(p.title || '');
+  return `${SITE_URL}/product/${slug}/${encodeURIComponent(p.id)}.html`;
 }
 
 function absoluteUrl(url) {
@@ -55,7 +57,7 @@ const items = products.map(p => {
       <g:id>${escXml(p.id)}</g:id>
       <g:title>${escXml(p.title)}</g:title>
       <g:description>${escXml(p.description || p.title)}</g:description>
-      <g:link>${escXml(productLink(p.id))}</g:link>
+      <g:link>${escXml(productLink(p))}</g:link>
       <g:image_link>${escXml(absoluteUrl(p.image_link))}</g:image_link>
 ${additionalImages ? additionalImages + '\n' : ''}      <g:price>${price}</g:price>
       <g:availability>${availability(p.availability)}</g:availability>
