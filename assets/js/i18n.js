@@ -1,4 +1,4 @@
-/* i18n.js — lightweight translation module */
+/* i18n.js - lightweight translation module */
 
 (function () {
   'use strict';
@@ -191,7 +191,7 @@
     document.dispatchEvent(new Event('i18n:ready'));
   }
 
-  /* Run as early as possible — before DOMContentLoaded is fine since
+  /* Run as early as possible - before DOMContentLoaded is fine since
      we use querySelectorAll after await (DOM is parsed by then) */
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);

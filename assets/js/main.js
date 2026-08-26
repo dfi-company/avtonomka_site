@@ -1,4 +1,4 @@
-﻿/* main.js — загальна логіка */
+﻿/* main.js - загальна логіка */
 
 /* ---- Active nav link ---- */
 (function () {
@@ -38,7 +38,7 @@
   });
 })();
 
-/* ---- Nav dropdown ("Інформація") — hover on desktop (CSS), click/tap here ---- */
+/* ---- Nav dropdown ("Інформація") - hover on desktop (CSS), click/tap here ---- */
 function closeAllDropdowns(except) {
   document.querySelectorAll('.main-nav .has-dropdown.open').forEach(el => {
     if (el === except) return;

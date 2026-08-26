@@ -1,16 +1,16 @@
 /**
- * order-form.js — модальна форма замовлення (збір заявки, без оплати онлайн)
+ * order-form.js - модальна форма замовлення (збір заявки, без оплати онлайн)
  *
  * ІНСТРУКЦІЯ ДЛЯ ПІДКЛЮЧЕННЯ (виконати вручну, один раз):
  * 1. Створи Google Таблицю та встав у неї Apps Script код з файлу
- *    scripts/order_form_apps_script.gs (детальні кроки — у коментарях того файлу).
+ *    scripts/order_form_apps_script.gs (детальні кроки - у коментарях того файлу).
  * 2. Розгорни Apps Script як Web App і скопіюй URL виду
  *    https://script.google.com/macros/s/XXXXXXXXXXXXX/exec
  * 3. Встав цей URL у константу ORDER_FORM_ENDPOINT нижче.
  * 4. Підключи цей файл на будь-якій сторінці (вже підключено на product.html)
- *    та додай тригер — елемент з атрибутом data-order-form-trigger, напр.:
+ *    та додай тригер - елемент з атрибутом data-order-form-trigger, напр.:
  *    <button data-order-form-trigger data-product="Назва товару">Замовити</button>
- *    Якщо data-product не вказано, а на сторінці є #product-title — назва
+ *    Якщо data-product не вказано, а на сторінці є #product-title - назва
  *    товару підтягнеться звідти автоматично.
  */
 
@@ -120,7 +120,7 @@
     e.preventDefault();
 
     if (!ORDER_FORM_ENDPOINT) {
-      console.warn('order-form.js: ORDER_FORM_ENDPOINT не задано — форма не підключена до Google Sheets.');
+      console.warn('order-form.js: ORDER_FORM_ENDPOINT не задано - форма не підключена до Google Sheets.');
       showError();
       return;
     }

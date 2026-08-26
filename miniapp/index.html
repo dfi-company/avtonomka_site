@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Avtonomka — Каталог</title>
+<title>Avtonomka - Каталог</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -34,7 +34,7 @@
   .logo-name { font-family:'Unbounded',sans-serif; font-size:13px; font-weight:800; }
   .header-subtitle { font-size:10px; color:var(--text2); }
 
-  /* SEARCH — видима тільки в списку товарів */
+  /* SEARCH - видима тільки в списку товарів */
   .search-wrap { padding:10px 14px; background:#e8f4e8; border-bottom:1px solid var(--border); display:none; position:relative; z-index:10; }
   .search-wrap.visible { display:block; }
   .search-input { width:100%; background:#fff; border:1px solid var(--border); border-radius:var(--radius-sm); padding:9px 12px 9px 34px; color:var(--text); font-size:14px; font-family:'Inter',sans-serif; outline:none; transition:border-color .2s; box-shadow:0 1px 3px rgba(0,80,0,0.08); }
@@ -197,7 +197,7 @@
 
 <!-- DISCOUNT -->
 <div class="discount-banner">
-  💚 <strong>Інсталяторам та гуртовим покупцям</strong> — спеціальна ціна.
+  💚 <strong>Інсталяторам та гуртовим покупцям</strong> - спеціальна ціна.
 </div>
 
 <!-- ЕКРАН 1: КАТЕГОРІЇ -->
@@ -238,7 +238,7 @@ const CONFIG = {
 };
 
 /* Той самий асортимент, що на сайті (products.json), тому мапимо по
-   точному значенню product_type — see SLUG_TO_CATEGORY in assets/js/catalog.js */
+   точному значенню product_type - see SLUG_TO_CATEGORY in assets/js/catalog.js */
 const CATEGORY_LABEL = {
   "Автономна енергетика > Гибридні інвертори":                    "Гібридні інвертори",
   "Автономна енергетика > Акумулятори для гібридних інверторів":  "Акумулятори для гібридних інверторів",
@@ -280,7 +280,7 @@ function resolveImg(img){
 
 // ── POWER RATING (для групування "Комплекти" по потужності) ──
 function extractKw(title){
-  // (?!h) виключає "16kWh" (ємність акумулятора) — то не потужність інвертора
+  // (?!h) виключає "16kWh" (ємність акумулятора) - то не потужність інвертора
   let m=title.match(/(\d+(?:[.,]\d+)?)\s*(?:кВт|kw)(?!h)/i);
   if(m) return m[1].replace(",",".");
   m=title.match(/(\d+)\s*Вт\b/);
@@ -292,9 +292,9 @@ function extractKw(title){
   return null;
 }
 
-// ── SHORT DISPLAY NAME (повна назва лишається в p.name — для кошика й заявки) ──
+// ── SHORT DISPLAY NAME (повна назва лишається в p.name - для кошика й заявки) ──
 // Родові префікси зайві, коли товар уже показаний всередині своєї категорії.
-// JS-регекс \b не бачить кириличних літер як "словесні" — межа слова після
+// JS-регекс \b не бачить кириличних літер як "словесні" - межа слова після
 // "батарея"/"Акумулятор" мовчки не спрацьовує. Тому замість \b просто
 // вимагаємо реальний пробіл одразу після префікса (цього достатньо, щоб
 // "Акумулятор " не зачепив "Акумуляторна батарея ...").
@@ -315,7 +315,7 @@ function stripTypePrefix(name){
   return name;
 }
 // Для "Комплекти": замість повного "Комплект ...: Інвертор, В, Вт+ Батарея, В, Аh"
-// лишаємо тільки "Інвертор + Батарея" — потужність/напругу вже видно в заголовку групи.
+// лишаємо тільки "Інвертор + Батарея" - потужність/напругу вже видно в заголовку групи.
 const KIT_UNIT_CUT_RE=/\d+(?:[.,]\d+)?\s*(?:кВт|kW|kw|Вт|фаза|V|В|Ah|Аh|ah)(?![A-Za-zА-Яа-яІіЇїЄєҐґ])/i;
 const WIFI_RE=/\bWi-?Fi\b/i;
 function kitPartShort(segment){
@@ -334,12 +334,12 @@ function kitShortName(name){
 
 // ── NORMALIZE products.json entry ──
 // Комплекти в мініаппі показують окремий набір "темних" брендованих фото
-// (щоб не чіпати зелені фото на самому сайті) — див. miniapp/photos/manifest.json
+// (щоб не чіпати зелені фото на самому сайті) - див. miniapp/photos/manifest.json
 let KIT_DARK_PHOTOS={};
 function norm(p){
   const catLabel=CATEGORY_LABEL[p.product_type]||(p.product_type||"").split(">").pop().trim()||"Інші товари";
   const {price,unit}=splitPrice(p.price);
-  let brand=detectBrand(p.title)||"—";
+  let brand=detectBrand(p.title)||"-";
   const isKit=catLabel==="Комплекти автономного енергоживлення";
   if(isKit){
     const kw=extractKw(p.title);
@@ -368,7 +368,7 @@ async function loadData(){
     try{
       const mRes=await fetch("photos/manifest.json?t="+Date.now());
       if(mRes.ok) KIT_DARK_PHOTOS=await mRes.json();
-    }catch(e){ /* немає темних фото — просто покажемо звичайні */ }
+    }catch(e){ /* немає темних фото - просто покажемо звичайні */ }
 
     const res=await fetch(CONFIG.PRODUCTS_URL+"?t="+Date.now());
     if(!res.ok)throw new Error("HTTP "+res.status);
@@ -486,7 +486,7 @@ function renderProducts(){
   }
 
   for(const brand of brandKeys){ const bItems=byBrand[brand];
-    if(multi&&brand!=="—"){
+    if(multi&&brand!=="-"){
       const bh=document.createElement("div"); bh.className="brand-header";
       bh.innerHTML=`<div class="brand-name">${brand}</div><div class="brand-line"></div><div class="brand-count">${bItems.length} шт</div>`;
       el.appendChild(bh);
@@ -513,7 +513,7 @@ function renderProducts(){
         <div class="product-arrow">›</div>`;
       el.appendChild(row);
 
-      // True lazy load — завантажуємо тільки коли елемент видно
+      // True lazy load - завантажуємо тільки коли елемент видно
       if(p.photo){
         const wrapId=`wrap_${p.id}`;
         row.dataset.photo=p.photo;
@@ -533,10 +533,10 @@ function getStockBadge(p){
   return `<span class="stock-in">✓ В наявності</span>`;
 }
 function getStockNote(p){
-  if(p.availability!=="in_stock") return `<div style="font-size:12px;color:#1565c0;margin-bottom:12px">📦 Товар під замовлення — уточніть терміни у менеджера</div>`;
+  if(p.availability!=="in_stock") return `<div style="font-size:12px;color:#1565c0;margin-bottom:12px">📦 Товар під замовлення - уточніть терміни у менеджера</div>`;
   return "";
 }
-function groupBy(arr,key){return arr.reduce((acc,i)=>{const k=i[key]||"—";if(!acc[k])acc[k]=[];acc[k].push(i);return acc;},{});}
+function groupBy(arr,key){return arr.reduce((acc,i)=>{const k=i[key]||"-";if(!acc[k])acc[k]=[];acc[k].push(i);return acc;},{});}
 function fmt(p){const n=parseFloat(String(p).replace(/\s/g,"").replace(",","."));return isNaN(n)?p:n.toLocaleString("uk-UA");}
 function escHtml(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
 
@@ -551,12 +551,12 @@ function openModal(p){
       ${p.photo?`<img class="modal-img" src="${p.photo}" alt="${p.name}" loading="lazy">`:`<div class="modal-img-placeholder">${ce(p.category)}</div>`}
     </div>
     <div class="modal-body">
-      <div class="modal-brand">${p.brand!=="—"?p.brand+" · ":""}${p.category}</div>
+      <div class="modal-brand">${p.brand!=="-"?p.brand+" · ":""}${p.category}</div>
       <div class="modal-name">${p.shortName}</div>
       ${p.desc?`<p style="font-size:13px;color:var(--text2);line-height:1.5;margin-bottom:12px">${escHtml(p.desc)}</p>`:""}
       ${p.price?`<div class="modal-price">${fmt(p.price)} <span style="font-size:14px;color:var(--text2);font-family:Inter,sans-serif;font-weight:400">${p.unit}</span></div>`:""}
       ${stockNote}
-      <div class="modal-discount">💚 <strong>Інсталяторам та гуртовим покупцям</strong> — спеціальна ціна. Зв'яжіться з менеджером.</div>
+      <div class="modal-discount">💚 <strong>Інсталяторам та гуртовим покупцям</strong> - спеціальна ціна. Зв'яжіться з менеджером.</div>
       <div class="qty-stepper">
         <button class="qty-btn" onclick="changeModalQty(-1)">−</button>
         <span class="qty-value" id="modalQtyVal">1</span>
@@ -709,10 +709,10 @@ function submitOrder(){
       mode:"no-cors", // Apps Script не віддає CORS-заголовки, тому відповідь не читаємо, лише надсилаємо
       headers:{"Content-Type":"text/plain;charset=utf-8"},
       body:JSON.stringify(orderPayload)
-    }).catch(()=>{ /* мовчки ігноруємо мережеву помилку — клієнт бачить toast незалежно */ });
+    }).catch(()=>{ /* мовчки ігноруємо мережеву помилку - клієнт бачить toast незалежно */ });
   }
 
-  // Якщо додаток запущено з бота — надсилаємо ще й напряму через Bot API
+  // Якщо додаток запущено з бота - надсилаємо ще й напряму через Bot API
   try{
     if(window.Telegram?.WebApp?.sendData){
       Telegram.WebApp.sendData(JSON.stringify({type:"order", ...orderPayload}));

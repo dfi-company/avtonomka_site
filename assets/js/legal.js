@@ -1,10 +1,10 @@
-/* legal.js — EN translations for privacy.html and terms.html */
+/* legal.js - EN translations for privacy.html and terms.html */
 
 (function () {
   'use strict';
 
   var PRIVACY_EN = {
-    title: 'Privacy Policy — Avtonomka',
+    title: 'Privacy Policy - Avtonomka',
     heading: 'Privacy Policy',
     date: 'Last updated: June 2025',
     content: `
@@ -13,11 +13,11 @@
       <h2>1. Data We Collect</h2>
       <p>We may collect the following data:</p>
       <ul>
-        <li>Name — when placing an order;</li>
-        <li>Phone number — to contact you about your order and delivery;</li>
-        <li>Delivery address — to ship the product;</li>
-        <li>Email address — if provided by you;</li>
-        <li>Page view data — via cookies (technical analytics).</li>
+        <li>Name - when placing an order;</li>
+        <li>Phone number - to contact you about your order and delivery;</li>
+        <li>Delivery address - to ship the product;</li>
+        <li>Email address - if provided by you;</li>
+        <li>Page view data - via cookies (technical analytics).</li>
       </ul>
 
       <h2>2. How We Use Your Data</h2>
@@ -33,12 +33,12 @@
       <h2>3. Sharing with Third Parties</h2>
       <p>We do not sell or transfer your personal data to third parties, except:</p>
       <ul>
-        <li>delivery services (Nova Poshta, Ukrposhta, etc.) — to the extent necessary to fulfill your order;</li>
+        <li>delivery services (Nova Poshta, Ukrposhta, etc.) - to the extent necessary to fulfill your order;</li>
         <li>cases required by applicable Ukrainian law.</li>
       </ul>
 
       <h2>4. Cookies</h2>
-      <p>Our website uses cookies — small text files stored in your browser. They ensure proper website functionality and do not contain personal information. You may disable cookies in your browser settings; however, this may affect website functionality.</p>
+      <p>Our website uses cookies - small text files stored in your browser. They ensure proper website functionality and do not contain personal information. You may disable cookies in your browser settings; however, this may affect website functionality.</p>
 
       <h2>5. Data Storage and Security</h2>
       <p>We apply organizational and technical measures to protect your personal data from unauthorized access, modification, or disclosure. Data is stored only as long as necessary for the purpose of its collection.</p>
@@ -69,7 +69,7 @@
   };
 
   var TERMS_EN = {
-    title: 'Terms of Use — Avtonomka',
+    title: 'Terms of Use - Avtonomka',
     heading: 'Terms of Use',
     date: 'Last updated: June 2025',
     content: `
@@ -89,7 +89,7 @@
       <p>Payment methods are described on the <a href="delivery-payment.html">"Payment &amp; Delivery"</a> page. The store reserves the right to refuse a sale without explanation.</p>
 
       <h2>5. Delivery</h2>
-      <p>Delivery is available throughout Ukraine via courier services (Nova Poshta, Ukrposhta, or others — by arrangement). Delivery times and costs are agreed upon when placing an order. Risk of accidental loss or damage to the product passes to the buyer from the moment the product is handed over to the delivery service.</p>
+      <p>Delivery is available throughout Ukraine via courier services (Nova Poshta, Ukrposhta, or others - by arrangement). Delivery times and costs are agreed upon when placing an order. Risk of accidental loss or damage to the product passes to the buyer from the moment the product is handed over to the delivery service.</p>
 
       <h2>6. Returns and Exchanges</h2>
       <p>Returns and exchanges are handled in accordance with applicable Ukrainian law (Law of Ukraine "On Consumer Rights Protection"). To initiate a return, contact us within 14 days of receiving the product, provided the product appearance, completeness, and packaging are intact.</p>

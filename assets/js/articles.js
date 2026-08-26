@@ -1,4 +1,4 @@
-/* articles.js — public articles page */
+/* articles.js - public articles page */
 
 /* Same slug <-> category mapping as catalog.js / product.js / generate_static_pages.js.
    Kept as its own copy here since this page doesn't load catalog.js. */
@@ -28,7 +28,7 @@ function escHtml(str) {
 
 /* Minimal inline markdown support for article body paragraphs: **bold** and
    [text](https://...) links. Operates on already-escHtml'd text, so the
-   only tags it can introduce are the whitelisted <strong>/<a> below — no
+   only tags it can introduce are the whitelisted <strong>/<a> below - no
    other HTML can reach the page through article content. Link targets are
    restricted to http(s) URLs (no javascript:, no bare "#"). */
 function formatInline(escapedText) {
@@ -70,7 +70,7 @@ function renderCard(article) {
 
 /* Up to 4 in-stock-first products whose product_type matches the article's
    category slug. Returns [] if the article has no category or nothing matches
-   — the caller then renders no block at all, rather than an empty one. */
+   - the caller then renders no block at all, rather than an empty one. */
 function relatedProducts(article) {
   if (!article.category) return [];
   const productType = SLUG_TO_CATEGORY[article.category];
@@ -218,7 +218,7 @@ async function init() {
       allArticles.sort((a, b) => new Date(b.date) - new Date(a.date));
     }
 
-    /* Products for the "Схожі товари" block — best-effort: if this fails,
+    /* Products for the "Схожі товари" block - best-effort: if this fails,
        articles still render, just without related-product suggestions. */
     try {
       const prodResp = await fetch('products.json');

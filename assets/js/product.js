@@ -1,4 +1,4 @@
-/* product.js — сторінка окремого товару (self-contained) */
+/* product.js - сторінка окремого товару (self-contained) */
 
 /* ---- Local helpers ---- */
 function cleanDescription(html) {
@@ -14,7 +14,7 @@ function cleanDescription(html) {
     .replace(/&nbsp;/g, ' ')
     .replace(/&rsquo;/g, '’')
     .replace(/&lsquo;/g, '‘')
-    .replace(/&mdash;/g, '—')
+    .replace(/&mdash;/g, '-')
     .replace(/&ndash;/g, '–')
     .replace(/&amp;/g, '&')
     .replace(/&lt;/g, '<')
@@ -135,7 +135,7 @@ function init() {
 function render(p) {
   const displayTitle = window.I18n ? window.I18n.productTitle(p) : (p.title || '');
   var brandSuffix = (window.I18n && window.I18n.lang === 'en') ? 'Avtonomka' : 'Автономка';
-  document.title = displayTitle + ' — ' + brandSuffix;
+  document.title = displayTitle + ' - ' + brandSuffix;
 
   /* breadcrumb */
   const bcName = document.getElementById('bc-name');
@@ -190,13 +190,13 @@ function render(p) {
 
   /* ---- Price ---- */
   const priceEl = document.getElementById('product-price');
-  if (priceEl) priceEl.textContent = formatPrice(p.price || '') || '—';
+  if (priceEl) priceEl.textContent = formatPrice(p.price || '') || '-';
 
   /* ---- Meta ---- */
   const mpnEl = document.getElementById('product-mpn');
   const catEl = document.getElementById('product-cat');
-  if (mpnEl) mpnEl.textContent = p.mpn || '—';
-  if (catEl) catEl.textContent = categoryLabel(p.product_type) || '—';
+  if (mpnEl) mpnEl.textContent = p.mpn || '-';
+  if (catEl) catEl.textContent = categoryLabel(p.product_type) || '-';
 
   /* ---- Description ---- */
   const descEl    = document.getElementById('product-desc');
@@ -210,7 +210,7 @@ function render(p) {
       if (hasEnDesc) {
         descEl.textContent = enDesc;
       } else {
-        /* No English translation — hide the whole description block */
+        /* No English translation - hide the whole description block */
         if (descBlock) descBlock.style.display = 'none';
       }
     } else {
@@ -219,7 +219,7 @@ function render(p) {
     }
   }
 
-  /* ---- Specs table — hide in EN ---- */
+  /* ---- Specs table - hide in EN ---- */
   const specsEl = document.getElementById('product-specs');
   if (specsEl) {
     if (p.specs && lang === 'uk') {

@@ -26,27 +26,27 @@
     "address": "40 Marselska St, Odesa, Odesa region, 65000, Ukraine"
   },
   "hero": {
-    "heading": "<span>Power stations, batteries, inverters</span> — everything you need for off-grid power.",
+    "heading": "<span>Power stations, batteries, inverters</span> - everything you need for off-grid power.",
     "cta_catalog": "Browse Catalog",
     "cta_telegram": "✈ Message on Telegram"
   },
   "home": {
-    "page_title": "Avtonomka — Off-Grid Power Store",
+    "page_title": "Avtonomka - Off-Grid Power Store",
     "categories_title": "Product Categories",
     "telegram_title": "Telegram Feed",
     "tg_open": "✈ Open Channel",
     "why_title": "Why Choose Us",
     "why_choice_title": "Wide Selection",
-    "why_choice_text": "Hundreds of off-grid power products — from compact batteries to full solar systems.",
+    "why_choice_text": "Hundreds of off-grid power products - from compact batteries to full solar systems.",
     "why_quality_title": "Quality Guarantee",
     "why_quality_text": "Only trusted manufacturers and official warranty on all products. Your safety is our priority.",
     "why_delivery_title": "Fast Delivery",
-    "why_delivery_text": "Shipping across Ukraine. Large stock available — we ship right after your order.",
+    "why_delivery_text": "Shipping across Ukraine. Large stock available - we ship right after your order.",
     "articles_title": "Latest Articles",
     "articles_all": "All Articles",
     "catalog_all": "View All Products →",
     "contacts_title": "Contact Us",
-    "contacts_text": "Have a question? Write to us on Telegram — we reply fast!",
+    "contacts_text": "Have a question? Write to us on Telegram - we reply fast!",
     "contacts_location": "📍 Odesa, Ukraine",
     "contacts_tg": "✈ Message on Telegram",
     "loading": "Loading…",
@@ -65,7 +65,7 @@
     "dzherela-zhyvlennya": "UPS / Backup Power"
   },
   "catalog": {
-    "page_title": "Product Catalog — Avtonomka",
+    "page_title": "Product Catalog - Avtonomka",
     "title": "Product Catalog",
     "subtitle": "Equipment for reliable off-grid power",
     "filters": "Filters",
@@ -129,7 +129,7 @@
     "related_articles_title": "Read also"
   },
   "articles": {
-    "page_title": "Articles — Avtonomka",
+    "page_title": "Articles - Avtonomka",
     "title": "Articles",
     "subtitle": "Useful guides, tips and equipment reviews for off-grid power",
     "read_more": "Read more →",
@@ -142,17 +142,17 @@
     "error_text": "Please try again later."
   },
   "blog": {
-    "page_title": "News — Avtonomka",
+    "page_title": "News - Avtonomka",
     "title": "News",
     "subtitle": "Latest news and updates from our Telegram channel",
     "latest": "Latest posts from our channel",
     "subscribe": "✈ Subscribe to Channel"
   },
   "404": {
-    "page_title": "404 — Page Not Found | Avtonomka",
-    "title": "404 — Page Not Found | Avtonomka",
+    "page_title": "404 - Page Not Found | Avtonomka",
+    "title": "404 - Page Not Found | Avtonomka",
     "heading": "Page Not Found",
-    "text": "Looks like our hamster electrician chewed the right wire and the page disappeared. Don't worry — head back to the homepage!",
+    "text": "Looks like our hamster electrician chewed the right wire and the page disappeared. Don't worry - head back to the homepage!",
     "home_btn": "Home",
     "catalog_btn": "To Catalog"
   }

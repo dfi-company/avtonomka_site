@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Адмін — Автономка</title>
+  <title>Адмін - Автономка</title>
   <link rel="icon" href="assets/images/logo.jpg" type="image/jpeg">
   <link rel="canonical" href="https://avtonomka.com.ua/admin.html">
   <style>
@@ -390,7 +390,7 @@
           <p style="font-size:.88rem;color:#6c757d;margin-bottom:18px">
             Щоб публікація статей зберігалась на сайті, потрібно підключити GitHub репозиторій.
             Отримати токен можна на <strong><a href="https://github.com/settings/tokens/new?scopes=repo&description=Avtonomka+Admin" target="_blank" style="color:#f5a623">github.com/settings/tokens</a></strong>
-            — потрібні права <code>Contents: Read and write</code>.
+            - потрібні права <code>Contents: Read and write</code>.
           </p>
           <form id="settings-form" class="settings-form">
             <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:0">
@@ -561,7 +561,7 @@
       el.innerHTML = '<p class="admin-hint">Завантаження…</p>';
       try {
         const { articles } = await loadArticlesFromGH();
-        if (!articles.length) { el.innerHTML = '<p class="admin-hint">Статей ще немає — створіть першу!</p>'; return; }
+        if (!articles.length) { el.innerHTML = '<p class="admin-hint">Статей ще немає - створіть першу!</p>'; return; }
         el.innerHTML = articles.map(a => `
           <div class="admin-article-item">
             <div>
@@ -627,10 +627,10 @@
         if (editId) {
           const i = articles.findIndex(a => a.id === editId);
           if (i !== -1) articles[i] = { ...articles[i], title, summary, body, photo };
-          await saveArticlesToGH(articles, sha, `feat: update article — ${title}`);
+          await saveArticlesToGH(articles, sha, `feat: update article - ${title}`);
         } else {
           articles.unshift({ id: genId(title), title, summary, body, photo, date: new Date().toISOString().slice(0,10) });
-          await saveArticlesToGH(articles, sha, `feat: add article — ${title}`);
+          await saveArticlesToGH(articles, sha, `feat: add article - ${title}`);
         }
         showStatus('Збережено! Сайт оновиться за ~1 хвилину після деплою GitHub Pages.', 'success');
         resetEditor();

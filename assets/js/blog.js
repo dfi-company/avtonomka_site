@@ -1,4 +1,4 @@
-/* blog.js — завантаження та рендер постів Telegram */
+/* blog.js - завантаження та рендер постів Telegram */
 
 function escHtml(str) {
   return String(str)

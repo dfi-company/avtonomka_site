@@ -1,4 +1,4 @@
-/* catalog.js — завантаження та рендер товарів (self-contained) */
+/* catalog.js - завантаження та рендер товарів (self-contained) */
 
 /* ---- Slug ↔ category mapping (для чистих URL) ---- */
 const SLUG_TO_CATEGORY = {
@@ -52,7 +52,7 @@ function formatPrice(raw) {
   return num.toLocaleString('uk-UA', { maximumFractionDigits: 0 }) + ' ' + currency;
 }
 
-/* ---- t() shortcut — waits for I18n or falls back ---- */
+/* ---- t() shortcut - waits for I18n or falls back ---- */
 function t(key, vars) {
   if (window.I18n) return window.I18n.t(key, vars);
   return key;
@@ -71,7 +71,7 @@ const searchInput = document.getElementById('filter-search');
 const catSelect   = document.getElementById('filter-category');
 const sortSelect  = document.getElementById('filter-sort');
 
-/* ---- Init — wait for i18n then load ---- */
+/* ---- Init - wait for i18n then load ---- */
 function init() {
   if (!grid) return;
   showLoading();
