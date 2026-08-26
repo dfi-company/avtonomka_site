@@ -214,6 +214,9 @@ async function init() {
     const resp = await fetch('data/articles.json');
     if (!resp.ok) throw new Error('HTTP ' + resp.status);
     allArticles = await resp.json();
+    if (Array.isArray(allArticles)) {
+      allArticles.sort((a, b) => new Date(b.date) - new Date(a.date));
+    }
 
     /* Products for the "Схожі товари" block — best-effort: if this fails,
        articles still render, just without related-product suggestions. */
