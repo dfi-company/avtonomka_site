@@ -43,6 +43,19 @@ function absoluteUrl(url) {
   return url.startsWith('http') ? url : `${SITE_URL}/${url.replace(/^\//, '')}`;
 }
 
+/* Bilingual SEO keyword phrases (see scripts/generate_seo_keywords.py),
+   appended to the feed-only description. Deliberately NOT part of
+   p.description itself, which product.js / generate_static_pages.js /
+   catalog.js also read for the on-site description — this keeps that
+   text keyword-free while still letting the feed carry the extra terms,
+   per the user's explicit call after being shown Google's Merchant Center
+   policy against keyword stuffing (accepted the risk knowingly). */
+function feedDescription(p) {
+  const base = p.description || p.title;
+  const kw = [p.merchant_keywords_uk, p.merchant_keywords_ru].filter(Boolean).join(' ');
+  return kw ? `${base} ${kw}` : base;
+}
+
 const items = products.map(p => {
   const price = formatPrice(p.price);
   if (!price) return '';
@@ -56,7 +69,7 @@ const items = products.map(p => {
     <item>
       <g:id>${escXml(p.id)}</g:id>
       <g:title>${escXml(p.title)}</g:title>
-      <g:description>${escXml(p.description || p.title)}</g:description>
+      <g:description>${escXml(feedDescription(p))}</g:description>
       <g:link>${escXml(productLink(p))}</g:link>
       <g:image_link>${escXml(absoluteUrl(p.image_link))}</g:image_link>
 ${additionalImages ? additionalImages + '\n' : ''}      <g:price>${price}</g:price>

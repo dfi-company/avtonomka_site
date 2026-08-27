@@ -17,6 +17,7 @@ import requests
 
 sys.path.insert(0, str(Path(__file__).parent))
 from slugify import slugify
+from generate_seo_keywords import build_keywords as build_merchant_keywords
 
 FEED_URL = "https://dfi2.com.ua/price_xml/avtonomka.txt"
 OUTPUT_FILE = Path(__file__).parent.parent / "products.json"
@@ -135,6 +136,18 @@ def main() -> int:
         # /product/<slug>/<id>.html URL. Only a genuinely new id gets a
         # fresh slug here.
         p["slug"] = existing_slug.get(p["id"]) or slugify(p.get("title", ""))
+        # Merchant-feed-only bilingual keywords, appended to <g:description>
+        # by generate_merchant_feed.js — never read by product.js /
+        # generate_static_pages.js / catalog.js, so never shown on-site.
+        # Regenerated fresh every run (no carry-forward needed like slug —
+        # unlike a URL, these don't need to stay stable if the title changes).
+        kw = build_merchant_keywords(p)
+        if kw:
+            p["merchant_keywords_uk"] = ", ".join(kw["uk"])
+            p["merchant_keywords_ru"] = ", ".join(kw["ru"])
+        else:
+            p.pop("merchant_keywords_uk", None)
+            p.pop("merchant_keywords_ru", None)
 
     komp_dir = Path(__file__).parent.parent / "assets" / "images" / "komp"
     if komp_dir.exists():
