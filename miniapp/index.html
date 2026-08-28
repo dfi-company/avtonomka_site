@@ -354,7 +354,9 @@ function norm(p){
     name,
     shortName:isKit?kitShortName(name):stripTypePrefix(name),
     price, unit,
-    photo:darkExt?`photos/${p.id}.${darkExt}`:resolveImg(p.image_link),
+    // Комплекти НІКОЛИ не показують сайтове (зелене) фото як запасний варіант
+    // — краще заглушка, ніж зелений стиль у мініаппі. Це правило постійне.
+    photo:isKit?(darkExt?`photos/${p.id}.${darkExt}`:""):resolveImg(p.image_link),
     desc:p.description||"",
     availability:p.availability||"in_stock",
   };
