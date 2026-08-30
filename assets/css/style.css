@@ -405,6 +405,7 @@ main { flex: 1; }
 .cat-card__img-wrap {
   width: 100%;
   background: #f5f6f8;
+  position: relative;
 }
 .cat-card__img {
   width: 100%;
@@ -414,6 +415,32 @@ main { flex: 1; }
   transition: transform .35s ease;
 }
 .cat-card:hover .cat-card__img { transform: scale(1.04); }
+.cat-card__zoom {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(20, 22, 28, .55);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transform: scale(.85);
+  transition: opacity .2s, transform .2s, background .2s;
+  z-index: 2;
+}
+.cat-card__zoom svg { width: 17px; height: 17px; }
+.cat-card:hover .cat-card__zoom,
+.cat-card__zoom:focus-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+.cat-card__zoom:hover { background: var(--color-orange); }
 .cat-card__overlay {
   padding: 10px 12px 12px;
   background: var(--color-white);
