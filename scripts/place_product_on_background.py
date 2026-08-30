@@ -53,6 +53,15 @@ STATIC_OVERRIDES = {
     "151777": "cable_pair.jpg",
 }
 
+# Some source photos show the main unit plus loose accessories laid out
+# below it (cables, plugs). Anchoring to the whole photo's bounding box
+# then plants the accessories on the table and leaves the actual product
+# floating above them. For those ids, crop the source to just the product
+# before cutting it out. Values are (top, bottom) as a fraction of height.
+SOURCE_CROP = {
+    "150649": (0.0, 0.58),
+}
+
 # One background template per product category. Anchor is where the
 # product's bottom-center should land (fractions of background width/height);
 # width_ratio is the product's rendered width as a fraction of background width.
@@ -69,8 +78,8 @@ PROFILES = {
     ),
     "ups": dict(
         bg="image_2026-08-28_10-54-04.png",
-        anchor_x=0.50, anchor_y=0.78, width_ratio=0.30, height_ratio=0.55,
-        shadow_opacity=90,
+        anchor_x=0.50, anchor_y=0.865, width_ratio=0.42, height_ratio=0.60,
+        shadow_opacity=110,
     ),
     "cable": dict(
         bg="image_2026-08-28_10-24-59.png",
@@ -90,9 +99,12 @@ CATEGORY_TO_PROFILE = {
 }
 
 
-def cutout_product(path, thresh=15):
+def cutout_product(path_or_image, thresh=15):
     """Return an RGBA cutout tightly cropped to the non-background pixels."""
-    img = Image.open(path).convert("RGB")
+    if isinstance(path_or_image, Image.Image):
+        img = path_or_image.convert("RGB")
+    else:
+        img = Image.open(path_or_image).convert("RGB")
     w, h = img.size
     filled = img.copy()
     sentinel = (1, 254, 1)
@@ -170,12 +182,37 @@ def process_override(product, out_path):
     img.save(out_path, quality=92)
 
 
+def original_source_for(product):
+    """Locate the plain studio photo for a product, ignoring image_link --
+    once a product has been processed, image_link points at our own
+    products_studio/ output, which must never be fed back into the cutout
+    pipeline as if it were a fresh source."""
+    pid = product["id"]
+    candidates = [
+        os.path.join(ROOT, "assets", "images", "products", f"{pid}_1.jpg"),
+        os.path.join(ROOT, "assets", "images", "komp", f"{pid}.jpg"),
+        os.path.join(ROOT, "assets", "images", "komp", f"{pid}_1.jpg"),
+    ]
+    for path in candidates:
+        if os.path.isfile(path):
+            return path
+    return None
+
+
 def process_pipeline(product, profile, out_path):
-    src = os.path.join(ROOT, product["image_link"])
-    if not os.path.isfile(src):
-        print(f"skip {product['id']}: source not found {src}")
+    src = original_source_for(product)
+    if not src:
+        print(f"skip {product['id']}: original source not found")
         return False
-    cutout = cutout_product(src)
+    crop = SOURCE_CROP.get(product["id"])
+    if crop:
+        img = Image.open(src).convert("RGB")
+        w, h = img.size
+        top, bottom = crop
+        img = img.crop((0, int(h * top), w, int(h * bottom)))
+        cutout = cutout_product(img)
+    else:
+        cutout = cutout_product(src)
     bg_path = os.path.join(BG_DIR, profile["bg"])
     result = compose(bg_path, cutout, profile)
     result.save(out_path, quality=92)
