@@ -8,9 +8,16 @@ which works because every source photo in assets/images/products/ is shot on
 a plain white sweep.
 
 Usage:
-    python3 scripts/place_product_on_background.py --limit 1          # one per category, for review
+    python3 scripts/place_product_on_background.py                     # full batch, skips ids already done
+    python3 scripts/place_product_on_background.py --limit 1           # one per category, for review
     python3 scripts/place_product_on_background.py --ids 150590,152520
-    python3 scripts/place_product_on_background.py                     # full batch
+    python3 scripts/place_product_on_background.py --ids 150590 --force  # redo even if cached
+
+By default the script processes every product that has a category profile
+(or a static override, see STATIC_OVERRIDES below) and SKIPS any id whose
+output file already exists in --out-dir -- so re-running it after adding new
+products to products.json only generates photos for the new ones. Pass
+--force to regenerate everything anyway (e.g. after tweaking a profile).
 
 Output goes to assets/images/products_studio/<id>_1.jpg by default so the
 live site (which reads assets/images/products/) is untouched until the
@@ -25,7 +32,26 @@ from PIL import Image, ImageDraw, ImageFilter
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PRODUCTS_JSON = os.path.join(ROOT, "products.json")
 BG_DIR = os.path.join(ROOT, "foto_fon")
+OVERRIDES_DIR = os.path.join(ROOT, "assets", "images", "overrides")
 DEFAULT_OUT_DIR = os.path.join(ROOT, "assets", "images", "products_studio")
+
+# Product ids that should just use a ready-made photo as-is (resized/
+# re-encoded) instead of running the cutout+compose pipeline -- e.g. cable
+# pairs, which already look good in one shared reference photo. Ids of
+# products that look meaningfully different (e.g. the 500m cable reels)
+# are deliberately left out so they keep going through the normal pipeline.
+STATIC_OVERRIDES = {
+    "145284": "cable_pair.jpg",
+    "151847": "cable_pair.jpg",
+    "151848": "cable_pair.jpg",
+    "151849": "cable_pair.jpg",
+    "151850": "cable_pair.jpg",
+    "151851": "cable_pair.jpg",
+    "151852": "cable_pair.jpg",
+    "151853": "cable_pair.jpg",
+    "151854": "cable_pair.jpg",
+    "151777": "cable_pair.jpg",
+}
 
 # One background template per product category. Anchor is where the
 # product's bottom-center should land (fractions of background width/height);
@@ -41,11 +67,6 @@ PROFILES = {
         anchor_x=0.49, anchor_y=0.855, width_ratio=0.40, height_ratio=0.62,
         shadow_opacity=120,
     ),
-    "kit": dict(
-        bg="image_2026-08-28_10-10-03.png",
-        anchor_x=0.50, anchor_y=0.80, width_ratio=0.30, height_ratio=0.55,
-        shadow_opacity=100,
-    ),
     "ups": dict(
         bg="image_2026-08-28_10-54-04.png",
         anchor_x=0.50, anchor_y=0.78, width_ratio=0.30, height_ratio=0.55,
@@ -53,7 +74,7 @@ PROFILES = {
     ),
     "cable": dict(
         bg="image_2026-08-28_10-24-59.png",
-        anchor_x=0.50, anchor_y=0.80, width_ratio=0.22, height_ratio=0.50,
+        anchor_x=0.50, anchor_y=0.865, width_ratio=0.30, height_ratio=0.50,
         shadow_opacity=90,
     ),
 }
@@ -61,7 +82,9 @@ PROFILES = {
 CATEGORY_TO_PROFILE = {
     "Автономна енергетика > Акумулятори для гібридних інверторів": "battery",
     "Автономна енергетика > Гибридні інвертори": "inverter",
-    "Автономна енергетика > Комплекти автономного енергоживлення": "kit",
+    # "Комплекти" photos are pre-made marketing collages (two products + a
+    # green banner), not plain studio shots -- the cutout pipeline doesn't
+    # apply to them, so they're deliberately left unmapped (skipped).
     "Автономна енергетика > Силові та сонячні кабелі": "cable",
     "Обладнання > Джерела безперебійного живлення": "ups",
 }
@@ -139,11 +162,32 @@ def profile_for(product):
     return PROFILES.get(key)
 
 
+def process_override(product, out_path):
+    src = os.path.join(OVERRIDES_DIR, STATIC_OVERRIDES[product["id"]])
+    img = Image.open(src).convert("RGB")
+    if img.width > 1254:
+        img = img.resize((1254, int(img.height * 1254 / img.width)), Image.LANCZOS)
+    img.save(out_path, quality=92)
+
+
+def process_pipeline(product, profile, out_path):
+    src = os.path.join(ROOT, product["image_link"])
+    if not os.path.isfile(src):
+        print(f"skip {product['id']}: source not found {src}")
+        return False
+    cutout = cutout_product(src)
+    bg_path = os.path.join(BG_DIR, profile["bg"])
+    result = compose(bg_path, cutout, profile)
+    result.save(out_path, quality=92)
+    return True
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--ids", help="comma-separated product ids to process")
     ap.add_argument("--limit", type=int, help="process only N products per category (for review)")
     ap.add_argument("--out-dir", default=DEFAULT_OUT_DIR)
+    ap.add_argument("--force", action="store_true", help="regenerate even if output already exists")
     args = ap.parse_args()
 
     with open(PRODUCTS_JSON, encoding="utf-8") as f:
@@ -157,32 +201,35 @@ def main():
 
     per_category_count = {}
     done = 0
+    skipped_cached = 0
     for p in products:
+        is_override = p["id"] in STATIC_OVERRIDES
         profile = profile_for(p)
-        if profile is None:
+        if not is_override and profile is None:
             continue
-        cat_key = CATEGORY_TO_PROFILE[p["product_type"]]
+        cat_key = "cable-override" if is_override else CATEGORY_TO_PROFILE[p["product_type"]]
+
+        out_path = os.path.join(args.out_dir, f"{p['id']}_1.jpg")
+        if os.path.isfile(out_path) and not args.force:
+            skipped_cached += 1
+            continue
+
         if args.limit is not None:
             n = per_category_count.get(cat_key, 0)
             if n >= args.limit:
                 continue
             per_category_count[cat_key] = n + 1
 
-        src = os.path.join(ROOT, p["image_link"])
-        if not os.path.isfile(src):
-            print(f"skip {p['id']}: source not found {src}")
-            continue
+        if is_override:
+            process_override(p, out_path)
+        else:
+            if not process_pipeline(p, profile, out_path):
+                continue
 
-        cutout = cutout_product(src)
-        bg_path = os.path.join(BG_DIR, profile["bg"])
-        result = compose(bg_path, cutout, profile)
-
-        out_path = os.path.join(args.out_dir, f"{p['id']}_1.jpg")
-        result.save(out_path, quality=92)
         done += 1
         print(f"{p['id']} [{cat_key}] -> {out_path}")
 
-    print(f"done: {done} images")
+    print(f"done: {done} images, skipped {skipped_cached} already cached")
 
 
 if __name__ == "__main__":
