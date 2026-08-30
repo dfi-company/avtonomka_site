@@ -1129,7 +1129,7 @@ main { flex: 1; }
 .photo-lightbox__img.is-zoomed {
   max-width: none;
   max-height: none;
-  width: 280%;
+  width: 160%;
   cursor: zoom-out;
 }
 .photo-lightbox__close {

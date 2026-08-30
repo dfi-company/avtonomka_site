@@ -105,7 +105,37 @@ CATEGORY_TO_PROFILE = {
 }
 
 
-def cutout_product(path_or_image, thresh=15):
+# Some photos have a drop shadow that blends into the white background so
+# gradually there's no detectable edge for flood-fill to key off (shadow and
+# panel brightness overlap). For those, hand-drawn cleanup: a diagonal line
+# (x0, y0, x1, y1) marking the object's true bottom edge -- any pixel below
+# it (or inside the optional extra corner box) that's still bright gets
+# knocked out of the mask, regardless of flood-fill threshold. All values
+# are pixel coordinates in the ORIGINAL (uncropped) source photo.
+SHADOW_CLEANUP = {
+    "150590": dict(line=(129, 699, 779, 749), corner_box=(0, 640, 240, 900)),
+}
+
+
+def _apply_shadow_cleanup(img, mask, cleanup):
+    w, h = img.size
+    px = img.load()
+    mpx = mask.load()
+    x0, y0, x1, y1 = cleanup["line"]
+    slope = (y1 - y0) / (x1 - x0)
+    cx0, cy0, cx1, cy1 = cleanup.get("corner_box", (0, 0, 0, 0))
+    top = min(y0, y1, cy0)
+    for y in range(max(0, int(top)), h):
+        for x in range(0, w):
+            below_line = y > y0 + slope * (x - x0)
+            in_corner = cx0 <= x < cx1 and cy0 <= y < cy1
+            if below_line or in_corner:
+                r, g, b = px[x, y]
+                if (r + g + b) / 3 > 200:
+                    mpx[x, y] = 0
+
+
+def cutout_product(path_or_image, thresh=15, shadow_cleanup=None):
     """Return an RGBA cutout tightly cropped to the non-background pixels."""
     if isinstance(path_or_image, Image.Image):
         img = path_or_image.convert("RGB")
@@ -124,6 +154,10 @@ def cutout_product(path_or_image, thresh=15):
 
     mask = Image.new("L", (w, h), 255)
     mask.putdata([0 if p == sentinel else 255 for p in filled.getdata()])
+
+    if shadow_cleanup:
+        _apply_shadow_cleanup(img, mask, shadow_cleanup)
+
     mask = mask.filter(ImageFilter.MinFilter(3))
     mask = mask.filter(ImageFilter.GaussianBlur(1.5))
 
@@ -210,15 +244,16 @@ def process_pipeline(product, profile, out_path):
     if not src:
         print(f"skip {product['id']}: original source not found")
         return False
+    shadow_cleanup = SHADOW_CLEANUP.get(product["id"])
     crop = SOURCE_CROP.get(product["id"])
     if crop:
         img = Image.open(src).convert("RGB")
         w, h = img.size
         x0, y0, x1, y1 = crop
         img = img.crop((int(w * x0), int(h * y0), int(w * x1), int(h * y1)))
-        cutout = cutout_product(img)
+        cutout = cutout_product(img, shadow_cleanup=shadow_cleanup)
     else:
-        cutout = cutout_product(src)
+        cutout = cutout_product(src, shadow_cleanup=shadow_cleanup)
     bg_path = os.path.join(BG_DIR, profile["bg"])
     result = compose(bg_path, cutout, profile)
     result.save(out_path, quality=92)
