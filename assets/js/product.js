@@ -7,14 +7,39 @@ function openLightbox(src, alt) {
     overlay = document.createElement('div');
     overlay.id = 'photo-lightbox';
     overlay.className = 'photo-lightbox';
-    overlay.innerHTML = '<span class="photo-lightbox__close" aria-label="Закрити">&times;</span><img class="photo-lightbox__img">';
-    overlay.addEventListener('click', () => overlay.classList.remove('is-open'));
-    document.body.appendChild(overlay);
+    overlay.innerHTML = '<span class="photo-lightbox__close" aria-label="Закрити">&times;</span><div class="photo-lightbox__scroll"><img class="photo-lightbox__img"></div>';
+    const scroll = overlay.querySelector('.photo-lightbox__scroll');
+    const img = overlay.querySelector('.photo-lightbox__img');
+
+    const closeBox = () => { overlay.classList.remove('is-open'); img.classList.remove('is-zoomed'); };
+    overlay.addEventListener('click', closeBox);
+    overlay.querySelector('.photo-lightbox__close').addEventListener('click', (e) => { e.stopPropagation(); closeBox(); });
+    scroll.addEventListener('click', (e) => e.stopPropagation());
+
+    img.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (img.classList.contains('is-zoomed')) {
+        img.classList.remove('is-zoomed');
+        scroll.scrollLeft = 0;
+        scroll.scrollTop = 0;
+      } else {
+        const rect = img.getBoundingClientRect();
+        const relX = (e.clientX - rect.left) / rect.width;
+        const relY = (e.clientY - rect.top) / rect.height;
+        img.classList.add('is-zoomed');
+        requestAnimationFrame(() => {
+          scroll.scrollLeft = relX * img.offsetWidth - scroll.clientWidth / 2;
+          scroll.scrollTop = relY * img.offsetHeight - scroll.clientHeight / 2;
+        });
+      }
+    });
+
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') overlay.classList.remove('is-open');
+      if (e.key === 'Escape') closeBox();
     });
   }
   const img = overlay.querySelector('.photo-lightbox__img');
+  img.classList.remove('is-zoomed');
   img.src = src;
   img.alt = alt || '';
   overlay.classList.add('is-open');
