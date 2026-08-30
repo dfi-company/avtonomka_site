@@ -54,12 +54,14 @@ STATIC_OVERRIDES = {
 }
 
 # Some source photos show the main unit plus loose accessories laid out
-# below it (cables, plugs). Anchoring to the whole photo's bounding box
-# then plants the accessories on the table and leaves the actual product
-# floating above them. For those ids, crop the source to just the product
-# before cutting it out. Values are (top, bottom) as a fraction of height.
+# around/below it (cables, plugs, adapters). Anchoring to the whole photo's
+# bounding box then plants the accessories on the table and leaves the
+# actual product floating above them. For those ids, crop the source to
+# just the product before cutting it out. Values are (x0, y0, x1, y1) as
+# fractions of the source image's width/height.
 SOURCE_CROP = {
-    "150649": (0.0, 0.58),
+    "150649": (0.0, 0.0, 1.0, 0.58),
+    "148245": (0.0, 0.0, 1.0, 0.78),
 }
 
 # One background template per product category. Anchor is where the
@@ -78,7 +80,7 @@ PROFILES = {
     ),
     "ups": dict(
         bg="image_2026-08-28_10-54-04.png",
-        anchor_x=0.50, anchor_y=0.865, width_ratio=0.42, height_ratio=0.60,
+        anchor_x=0.60, anchor_y=0.87, width_ratio=0.42, height_ratio=0.60,
         shadow_opacity=110,
     ),
     "cable": dict(
@@ -95,7 +97,11 @@ CATEGORY_TO_PROFILE = {
     # green banner), not plain studio shots -- the cutout pipeline doesn't
     # apply to them, so they're deliberately left unmapped (skipped).
     "Автономна енергетика > Силові та сонячні кабелі": "cable",
-    "Обладнання > Джерела безперебійного живлення": "ups",
+    # UPS/power-station photos reverted to plain white background for now --
+    # the "ups" profile still needs per-photo accessory cropping (most of
+    # these shots bundle cables/adapters like the "150649" case) before
+    # they're ready to go live again. Re-enable once that's sorted.
+    # "Обладнання > Джерела безперебійного живлення": "ups",
 }
 
 
@@ -208,8 +214,8 @@ def process_pipeline(product, profile, out_path):
     if crop:
         img = Image.open(src).convert("RGB")
         w, h = img.size
-        top, bottom = crop
-        img = img.crop((0, int(h * top), w, int(h * bottom)))
+        x0, y0, x1, y1 = crop
+        img = img.crop((int(w * x0), int(h * y0), int(w * x1), int(h * y1)))
         cutout = cutout_product(img)
     else:
         cutout = cutout_product(src)

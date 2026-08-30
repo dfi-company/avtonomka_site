@@ -1,5 +1,25 @@
 /* product.js - сторінка окремого товару (self-contained) */
 
+/* ---- Lightbox (click-to-zoom product photo) ---- */
+function openLightbox(src, alt) {
+  let overlay = document.getElementById('photo-lightbox');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.id = 'photo-lightbox';
+    overlay.className = 'photo-lightbox';
+    overlay.innerHTML = '<span class="photo-lightbox__close" aria-label="Закрити">&times;</span><img class="photo-lightbox__img">';
+    overlay.addEventListener('click', () => overlay.classList.remove('is-open'));
+    document.body.appendChild(overlay);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') overlay.classList.remove('is-open');
+    });
+  }
+  const img = overlay.querySelector('.photo-lightbox__img');
+  img.src = src;
+  img.alt = alt || '';
+  overlay.classList.add('is-open');
+}
+
 /* ---- Local helpers ---- */
 function cleanDescription(html) {
   if (!html) return '';
@@ -146,36 +166,20 @@ function render(p) {
 
   /* ---- Gallery ---- */
   const resolveImg = (src) => /^https?:\/\//.test(src) ? src : BASE + src;
-  const images   = [p.image_link, ...(p.additional_images || [])].filter(Boolean).map(resolveImg);
+  const images   = [p.image_link].filter(Boolean).map(resolveImg);
   const mainImg  = document.getElementById('gallery-main-img');
   const thumbsWrap = document.getElementById('gallery-thumbs');
 
   if (mainImg && images.length > 0) {
     mainImg.src = images[0];
     mainImg.alt = displayTitle;
+    const galleryMain = mainImg.closest('.gallery-main');
+    if (galleryMain) {
+      galleryMain.addEventListener('click', () => openLightbox(images[0], displayTitle));
+    }
   }
 
-  if (thumbsWrap && images.length > 1) {
-    const photoAlt = t('product.photo_alt');
-    thumbsWrap.innerHTML = images.map((src, i) => `
-      <div class="gallery-thumb ${i === 0 ? 'active' : ''}" data-src="${escHtml(src)}">
-        <img src="${escHtml(src)}" alt="${photoAlt} ${i + 1}" loading="lazy"
-             onerror="this.src='${BASE}assets/images/zaglushka.png'">
-      </div>`).join('');
-
-    thumbsWrap.querySelectorAll('.gallery-thumb').forEach(thumb => {
-      thumb.addEventListener('click', () => {
-        if (!mainImg) return;
-        mainImg.style.opacity = '0';
-        setTimeout(() => {
-          mainImg.src = thumb.dataset.src;
-          mainImg.style.opacity = '1';
-        }, 180);
-        thumbsWrap.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
-        thumb.classList.add('active');
-      });
-    });
-  } else if (thumbsWrap) {
+  if (thumbsWrap) {
     thumbsWrap.style.display = 'none';
   }
 
