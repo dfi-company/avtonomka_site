@@ -105,6 +105,7 @@ function openLightbox(src, alt) {
     overlay.id = 'photo-lightbox';
     overlay.className = 'photo-lightbox';
     overlay.innerHTML = '<span class="photo-lightbox__close" aria-label="Закрити">&times;</span><div class="photo-lightbox__scroll"><img class="photo-lightbox__img"></div>';
+    document.body.appendChild(overlay);
     const scroll = overlay.querySelector('.photo-lightbox__scroll');
     const img = overlay.querySelector('.photo-lightbox__img');
 
