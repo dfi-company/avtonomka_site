@@ -86,6 +86,14 @@
   /* POWER (kW) HEADER — "Комплекти" groups by power, not brand; make the
      kW value pop instead of reading like a muted brand label */
   .brand-name--power { font-size:13px; font-weight:800; color:#fff; background:var(--accent); padding:4px 12px; border-radius:999px; letter-spacing:.3px; }
+  .power-bolt { display:inline-block; animation:bolt-jolt 1.6s ease-in-out infinite; }
+  @keyframes bolt-jolt {
+    0%, 100% { transform:translateY(0) rotate(0deg) scale(1); }
+    10% { transform:translateY(-1px) rotate(-12deg) scale(1.15); }
+    20% { transform:translateY(1px) rotate(10deg) scale(1); }
+    30% { transform:translateY(0) rotate(0deg) scale(1.1); }
+    40%, 80% { transform:translateY(0) rotate(0deg) scale(1); }
+  }
 
   /* PRODUCT ROW */
   .product-row { display:flex; align-items:center; gap:12px; padding:12px 14px; background:#fff; border-bottom:1px solid var(--border); cursor:pointer; transition:background .12s; }
@@ -495,7 +503,7 @@ function renderProducts(){
     if(multi&&brand!=="-"){
       const isPower=activeCat==="Комплекти автономного енергоживлення";
       const bh=document.createElement("div"); bh.className="brand-header";
-      const nameHTML=isPower?`<div class="brand-name brand-name--power">⚡ ${brand}</div>`:`<div class="brand-name">${brand}</div>`;
+      const nameHTML=isPower?`<div class="brand-name brand-name--power"><span class="power-bolt">⚡</span> ${brand}</div>`:`<div class="brand-name">${brand}</div>`;
       bh.innerHTML=`${nameHTML}<div class="brand-line"></div><div class="brand-count">${bItems.length} шт</div>`;
       el.appendChild(bh);
     }
