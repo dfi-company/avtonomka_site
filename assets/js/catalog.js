@@ -21,7 +21,8 @@ Object.keys(SLUG_TO_CATEGORY).forEach(function(slug) {
 const FACET_CONFIG = {
   'hybridni-invertory': { power: true, brand: true },
   'komplekty':          { power: true, brand: true, monobrand: true },
-  'akumulyatory':       { brand: true },
+  'akumulyatory':       { brand: true, capacity: true },
+  'kabeli':             { crossSection: true, lugSize: true },
 };
 const KNOWN_BRANDS = ['DAH Solar', 'Deye', 'Dyness', 'Felicity', 'Must'];
 
@@ -48,6 +49,33 @@ function extractKw(title) {
   m = title.match(/PV\d+-(\d{2})\d{2}/i); // MUST "PVxx-XXYY": XX/10 = кВт
   if (m) return String(Number(m[1]) / 10);
   return null;
+}
+
+/* Battery capacity in Ah, parsed from the title ("100Ah", "314 Аh" - note the
+   source data mixes Latin and Cyrillic А). */
+function extractAh(title) {
+  if (!title) return null;
+  const m = title.match(/(\d+(?:[.,]\d+)?)\s*[AaАа][hH]\b/);
+  return m ? m[1].replace(',', '.') : null;
+}
+
+/* Cable cross-section - "25 мм" / "6 мм" (mm²) or "4AWG" for the Dyness set.
+   AWG is checked first since that title also contains an unrelated "2050мм"
+   (length), which would otherwise falsely match the мм pattern. */
+function extractCrossSection(title) {
+  if (!title) return null;
+  let m = title.match(/(\d+)\s*AWG/i);
+  if (m) return m[1] + ' AWG';
+  m = title.match(/(\d+(?:[.,]\d+)?)\s*мм(?!\d)/i);
+  if (m) return m[1].replace(',', '.') + ' мм';
+  return null;
+}
+
+/* Lug/terminal thread size - "мідні накінечники М8" / "...М10". */
+function extractLugSize(title) {
+  if (!title) return null;
+  const m = title.match(/накінечники\s*(М\d+)/i);
+  return m ? m[1].toUpperCase() : null;
 }
 
 /* "Комплект автономного енергоживлення: <inverter> + <battery>" -> the brand
@@ -89,9 +117,12 @@ let allProducts      = [];
 let filtered         = [];
 let currentPage      = 1;
 let selectedCategory = '';
-let selectedPowers   = new Set();
-let selectedBrands   = new Set();
-let monobrandOnly    = false;
+let selectedPowers        = new Set();
+let selectedBrands        = new Set();
+let monobrandOnly         = false;
+let selectedCapacities    = new Set();
+let selectedCrossSections = new Set();
+let selectedLugSizes      = new Set();
 
 /* ---- Local helpers ---- */
 function truncate(str, len) {
@@ -164,10 +195,13 @@ function init() {
 /* Switch category: reset any facet selections (they're category-specific),
    rebuild the facet panel for the new category, then re-filter. */
 function selectCategory(type) {
-  selectedCategory = type;
-  selectedPowers   = new Set();
-  selectedBrands   = new Set();
-  monobrandOnly    = false;
+  selectedCategory      = type;
+  selectedPowers        = new Set();
+  selectedBrands        = new Set();
+  monobrandOnly         = false;
+  selectedCapacities    = new Set();
+  selectedCrossSections = new Set();
+  selectedLugSizes      = new Set();
   setActiveMenuState();
   renderFacets();
   applyFilters();
@@ -227,22 +261,31 @@ function renderFacets() {
   const inCategory = allProducts.filter(p => p.product_type === selectedCategory);
   let html = '';
 
-  if (facets.power) {
+  /* Generic "extract a value from the title, count distinct values, render
+     a checkbox per value" group - used for power/capacity/cross-section/lug
+     size. Brand (with its monobrand extra checkbox) is handled separately
+     below since it needs productBrands() instead of a plain extractor. */
+  function renderNumericFacet(titleKey, dataFacet, extractFn, selectedSet, unit, numericSort) {
     const counts = {};
     inCategory.forEach(p => {
       const title = window.I18n ? window.I18n.productTitle(p) : (p.title || '');
-      const kw = extractKw(title);
-      if (kw !== null) counts[kw] = (counts[kw] || 0) + 1;
+      const v = extractFn(title);
+      if (v !== null) counts[v] = (counts[v] || 0) + 1;
     });
-    const values = Object.keys(counts).sort((a, b) => parseFloat(a) - parseFloat(b));
-    if (values.length) {
-      html += `<div class="facet-group"><div class="facet-group__title">${escapeHtml(t('catalog.facet_power'))}</div>`;
-      values.forEach(v => {
-        html += `<label class="facet-checkbox"><input type="checkbox" data-facet="power" value="${escapeHtml(v)}" ${selectedPowers.has(v) ? 'checked' : ''}><span>${escapeHtml(v)} ${escapeHtml(t('catalog.facet_power_unit'))}</span><span class="facet-checkbox__count">${counts[v]}</span></label>`;
-      });
-      html += `</div>`;
-    }
+    const values = Object.keys(counts).sort(numericSort ? (a, b) => parseFloat(a) - parseFloat(b) : undefined);
+    if (!values.length) return;
+    html += `<div class="facet-group"><div class="facet-group__title">${escapeHtml(t(titleKey))}</div>`;
+    values.forEach(v => {
+      const label = unit ? `${escapeHtml(v)} ${escapeHtml(unit)}` : escapeHtml(v);
+      html += `<label class="facet-checkbox"><input type="checkbox" data-facet="${dataFacet}" value="${escapeHtml(v)}" ${selectedSet.has(v) ? 'checked' : ''}><span>${label}</span><span class="facet-checkbox__count">${counts[v]}</span></label>`;
+    });
+    html += `</div>`;
   }
+
+  if (facets.power)        renderNumericFacet('catalog.facet_power', 'power', extractKw, selectedPowers, t('catalog.facet_power_unit'), true);
+  if (facets.capacity)     renderNumericFacet('catalog.facet_capacity', 'capacity', extractAh, selectedCapacities, 'Ah', true);
+  if (facets.crossSection) renderNumericFacet('catalog.facet_cross_section', 'crossSection', extractCrossSection, selectedCrossSections, '', false);
+  if (facets.lugSize)      renderNumericFacet('catalog.facet_lug_size', 'lugSize', extractLugSize, selectedLugSizes, '', false);
 
   if (facets.brand) {
     const counts = {};
@@ -269,16 +312,18 @@ function renderFacets() {
   facetsPanel.innerHTML = html;
   facetsPanel.hidden = !html;
 
-  facetsPanel.querySelectorAll('input[data-facet="power"]').forEach(cb => {
-    cb.addEventListener('change', () => {
-      if (cb.checked) selectedPowers.add(cb.value); else selectedPowers.delete(cb.value);
-      applyFilters();
-    });
-  });
-  facetsPanel.querySelectorAll('input[data-facet="brand"]').forEach(cb => {
-    cb.addEventListener('change', () => {
-      if (cb.checked) selectedBrands.add(cb.value); else selectedBrands.delete(cb.value);
-      applyFilters();
+  [
+    ['power', selectedPowers],
+    ['capacity', selectedCapacities],
+    ['crossSection', selectedCrossSections],
+    ['lugSize', selectedLugSizes],
+    ['brand', selectedBrands],
+  ].forEach(([key, set]) => {
+    facetsPanel.querySelectorAll(`input[data-facet="${key}"]`).forEach(cb => {
+      cb.addEventListener('change', () => {
+        if (cb.checked) set.add(cb.value); else set.delete(cb.value);
+        applyFilters();
+      });
     });
   });
   facetsPanel.querySelectorAll('input[data-facet="monobrand"]').forEach(cb => {
@@ -307,6 +352,18 @@ function applyFilters() {
       if (facets.power && selectedPowers.size) {
         const kw = extractKw(title);
         if (kw === null || !selectedPowers.has(kw)) return false;
+      }
+      if (facets.capacity && selectedCapacities.size) {
+        const ah = extractAh(title);
+        if (ah === null || !selectedCapacities.has(ah)) return false;
+      }
+      if (facets.crossSection && selectedCrossSections.size) {
+        const cs = extractCrossSection(title);
+        if (cs === null || !selectedCrossSections.has(cs)) return false;
+      }
+      if (facets.lugSize && selectedLugSizes.size) {
+        const ls = extractLugSize(title);
+        if (ls === null || !selectedLugSizes.has(ls)) return false;
       }
       if (facets.brand && selectedBrands.size) {
         const brands = productBrands(p, slug);
