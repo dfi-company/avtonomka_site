@@ -2,7 +2,7 @@
   {
     "id": "145284",
     "title": "Комплект силових кабелів Dyness 4AWG 1000V VW1 2050мм",
-    "image_link": "assets/images/products_studio/145284_1.jpg",
+    "image_link": "assets/images/products/145284_1.jpg",
     "additional_images": [],
     "price": "1926 UAH",
     "availability": "in_stock",
@@ -20,7 +20,7 @@
   {
     "id": "143477",
     "title": "Акумуляторна батарея MUST LP16-24100, 25.6V 100Ah, 442х485.5х177, 23 кг, LiFePO4",
-    "image_link": "assets/images/products_studio/143477_1.jpg",
+    "image_link": "assets/images/products/143477_1.jpg",
     "additional_images": [
       "assets/images/products/143477_2.jpg",
       "assets/images/products/143477_3.jpg",
@@ -45,7 +45,7 @@
   {
     "id": "150590",
     "title": "Акумуляторна батарея Dyness BX51100 51.2v 100ah, 5.12kwh LiFePo4, Trade IN",
-    "image_link": "assets/images/products_studio/150590_1.jpg",
+    "image_link": "assets/images/products/150590_1.jpg",
     "additional_images": [],
     "price": "34568 UAH",
     "availability": "in_stock",
@@ -63,7 +63,7 @@
   {
     "id": "151847",
     "title": "Комплект силових кабелів 25 мм 1 м, 2 шт., мідь, мідні накінечники М8",
-    "image_link": "assets/images/products_studio/151847_1.jpg",
+    "image_link": "assets/images/products/151847_1.jpg",
     "additional_images": [],
     "price": "849 UAH",
     "availability": "in_stock",
@@ -81,7 +81,7 @@
   {
     "id": "151848",
     "title": "Комплект силових кабелів 25 мм 50см, 2 шт., мідь, мідні накінечники М8",
-    "image_link": "assets/images/products_studio/151848_1.jpg",
+    "image_link": "assets/images/products/151848_1.jpg",
     "additional_images": [],
     "price": "389 UAH",
     "availability": "in_stock",
@@ -99,7 +99,7 @@
   {
     "id": "151849",
     "title": "Комплект силових кабелів 25 мм 1.5м, 2 шт., мідь, мідні накінечники М8",
-    "image_link": "assets/images/products_studio/151849_1.jpg",
+    "image_link": "assets/images/products/151849_1.jpg",
     "additional_images": [],
     "price": "1410 UAH",
     "availability": "in_stock",
@@ -117,7 +117,7 @@
   {
     "id": "151850",
     "title": "Комплект силових кабелів 25 мм 75см, 2 шт., мідь, мідні накінечники М8",
-    "image_link": "assets/images/products_studio/151850_1.jpg",
+    "image_link": "assets/images/products/151850_1.jpg",
     "additional_images": [],
     "price": "745 UAH",
     "availability": "in_stock",
@@ -135,7 +135,7 @@
   {
     "id": "151851",
     "title": "Комплект силових кабелів 25 мм 1 м, 2 шт., мідь, мідні накінечники М10",
-    "image_link": "assets/images/products_studio/151851_1.jpg",
+    "image_link": "assets/images/products/151851_1.jpg",
     "additional_images": [],
     "price": "849 UAH",
     "availability": "in_stock",
@@ -153,7 +153,7 @@
   {
     "id": "151852",
     "title": "Комплект силових кабелів 25 мм 50см, 2 шт., мідь, мідні накінечники М10",
-    "image_link": "assets/images/products_studio/151852_1.jpg",
+    "image_link": "assets/images/products/151852_1.jpg",
     "additional_images": [],
     "price": "389 UAH",
     "availability": "in_stock",
@@ -171,7 +171,7 @@
   {
     "id": "148193",
     "title": "Гібридний інвертор Deye SUN-6K-SG05LP1-EU-AM2-P 6 кВт 48 В 1 фаза, 330х580х232, 24.9 кг",
-    "image_link": "assets/images/products_studio/148193_1.jpg",
+    "image_link": "assets/images/products/148193_1.jpg",
     "additional_images": [
       "assets/images/products/148193_2.jpg",
       "assets/images/products/148193_3.jpg",
@@ -197,7 +197,7 @@
   {
     "id": "150674",
     "title": "Акумулятор DAH Solar DHN-LVWES05-G1 100ah 51.2V, 480х500х155, 47 кг",
-    "image_link": "assets/images/products_studio/150674_1.jpg",
+    "image_link": "assets/images/products/150674_1.jpg",
     "additional_images": [
       "assets/images/products/150674_2.jpg",
       "assets/images/products/150674_3.jpg",
@@ -221,7 +221,7 @@
   {
     "id": "151288",
     "title": "Гібридний інвертор Deye SUN-16K-SG01LP1-EU-AM3-P WiFi 16 кВт 48 В, 1 фаза, 2 MPPT, LV, 464х763х282, 52 кг",
-    "image_link": "assets/images/products_studio/151288_1.jpg",
+    "image_link": "assets/images/products/151288_1.jpg",
     "additional_images": [
       "assets/images/products/151288_2.jpg",
       "assets/images/products/151288_3.jpg",
@@ -246,7 +246,7 @@
   {
     "id": "151853",
     "title": "Комплект силових кабелів 25 мм 1.5м, 2 шт., мідь, мідні накінечники М10",
-    "image_link": "assets/images/products_studio/151853_1.jpg",
+    "image_link": "assets/images/products/151853_1.jpg",
     "additional_images": [],
     "price": "1410 UAH",
     "availability": "in_stock",
@@ -264,7 +264,7 @@
   {
     "id": "151854",
     "title": "Комплект силових кабелів 25 мм 75см, 2 шт., мідь, мідні накінечники М10",
-    "image_link": "assets/images/products_studio/151854_1.jpg",
+    "image_link": "assets/images/products/151854_1.jpg",
     "additional_images": [],
     "price": "745 UAH",
     "availability": "in_stock",
@@ -394,7 +394,7 @@
   {
     "id": "150676",
     "title": "Акумуляторна батарея DEYE SE-F5 Pro-C 51.2V 100 Аh, 404х547х141, 45 кг, LiFePO4 5.12kWh",
-    "image_link": "assets/images/products_studio/150676_1.jpg",
+    "image_link": "assets/images/products/150676_1.jpg",
     "additional_images": [
       "assets/images/products/150676_2.jpg",
       "assets/images/products/150676_3.jpg",
@@ -419,7 +419,7 @@
   {
     "id": "151057",
     "title": "Акумуляторна батарея Deye SE-F16-С 51.2V 314 Аh, 400х708х233, 123 кг, 16kWh LiFePO4",
-    "image_link": "assets/images/products_studio/151057_1.jpg",
+    "image_link": "assets/images/products/151057_1.jpg",
     "additional_images": [
       "assets/images/products/151057_2.jpg"
     ],
@@ -533,7 +533,7 @@
   {
     "id": "146741",
     "title": "Сонячний кабель KBE Solar 6 мм, 500 м (бухта), чорний, Німеччина",
-    "image_link": "assets/images/products_studio/146741_1.jpg",
+    "image_link": "assets/images/products/146741_1.jpg",
     "additional_images": [],
     "price": "33723 UAH",
     "availability": "in_stock",
@@ -598,7 +598,7 @@
   {
     "id": "151777",
     "title": "Сонячний кабель KBE 6 мм 1 м, Німеччина",
-    "image_link": "assets/images/products_studio/151777_1.jpg",
+    "image_link": "assets/images/products/151777_1.jpg",
     "additional_images": [],
     "price": "67 UAH",
     "availability": "in_stock",
@@ -616,7 +616,7 @@
   {
     "id": "152253",
     "title": "Сонячний кабель KBE Solar 6 мм, 500 м (бухта), червоний, Німеччина",
-    "image_link": "assets/images/products_studio/152253_1.jpg",
+    "image_link": "assets/images/komp/152253.jpg",
     "additional_images": [],
     "price": "33723 UAH",
     "availability": "in_stock",
@@ -657,7 +657,7 @@
   {
     "id": "151617",
     "title": "Акумуляторна батарея Felicity FLA48314-EU 51.2V 314Ah 16kWh LiFePO4, 435х880х247, 121.5 кг",
-    "image_link": "assets/images/products_studio/151617_1.jpg",
+    "image_link": "assets/images/products/151617_1.jpg",
     "additional_images": [
       "assets/images/products/151617_2.jpg",
       "assets/images/products/151617_3.jpg",
@@ -679,7 +679,7 @@
   {
     "id": "152085",
     "title": "Гібридний інвертор Felicity IVEM6048-II 6 кВт 48 В, 420х335х142, 12.5 кг",
-    "image_link": "assets/images/products_studio/152085_1.jpg",
+    "image_link": "assets/images/komp/152085.jpg",
     "additional_images": [
       "https://dfi2.com.ua/images/152085_2.jpg",
       "https://dfi2.com.ua/images/152085_3.jpg",
@@ -704,7 +704,7 @@
   {
     "id": "152173",
     "title": "Акумуляторна батарея Felicity FLA24230 25.6V 230Ah LiFePO4, 547х400х280, 52.5 кг",
-    "image_link": "assets/images/products_studio/152173_1.jpg",
+    "image_link": "assets/images/komp/152173.jpg",
     "additional_images": [
       "https://dfi2.com.ua/images/152173_2.jpg",
       "https://dfi2.com.ua/images/152173_3.jpg",
@@ -729,7 +729,7 @@
   {
     "id": "152175",
     "title": "Акумуляторна батарея Felicity FLA48230 51.2V 230Ah LiFePO4, 783x450x274, 97 кг",
-    "image_link": "assets/images/products_studio/152175_1.jpg",
+    "image_link": "assets/images/komp/152175.jpg",
     "additional_images": [],
     "price": "69925 UAH",
     "availability": "in_stock",
@@ -747,7 +747,7 @@
   {
     "id": "152266",
     "title": "Гібридний інвертор Felicity IVEM8048-II 48В 8 кВт, 607х464х141, 23.7 кг",
-    "image_link": "assets/images/products_studio/152266_1.jpg",
+    "image_link": "assets/images/komp/152266.jpg",
     "additional_images": [
       "https://dfi2.com.ua/images/152266_2.jpg",
       "https://dfi2.com.ua/images/152266_3.jpg",
@@ -772,7 +772,7 @@
   {
     "id": "152270",
     "title": "Акумуляторна батарея Felicity FLB48314TG1-H 51.2V 314Ah, з підігрівом, 895х450х235, 121 кг",
-    "image_link": "assets/images/products_studio/152270_1.jpg",
+    "image_link": "assets/images/komp/152270.jpg",
     "additional_images": [],
     "price": "84916 UAH",
     "availability": "in_stock",
@@ -790,7 +790,7 @@
   {
     "id": "152352",
     "title": "Акумуляторна батарея Felicity FLA48280 51.2V 280Ah LiFePO4, 480x1100x300, 135 кг",
-    "image_link": "assets/images/products_studio/152352_1.jpg",
+    "image_link": "assets/images/products/152352_1.jpg",
     "additional_images": [],
     "price": "77758 UAH",
     "availability": "in_stock",
@@ -808,7 +808,7 @@
   {
     "id": "142723",
     "title": "Гібридний інвертор Must PV18-3224 VPM II 3.2 кВт 24 В, 254.5х367.4х103, 5.6 кг",
-    "image_link": "assets/images/products_studio/142723_1.jpg",
+    "image_link": "assets/images/products/142723_1.jpg",
     "additional_images": [
       "assets/images/products/142723_2.jpg",
       "assets/images/products/142723_3.jpg",
@@ -831,7 +831,7 @@
   {
     "id": "148317",
     "title": "Гібридний інвертор MUST PV18-2012 ECO 2 кВт 12 В, 290х367х111, 6 кг",
-    "image_link": "assets/images/products_studio/148317_1.jpg",
+    "image_link": "assets/images/products/148317_1.jpg",
     "additional_images": [
       "assets/images/products/148317_2.jpg",
       "assets/images/products/148317_3.jpg",
@@ -879,7 +879,7 @@
   {
     "id": "150825",
     "title": "Гібридний інвертор Must PV18-1012VPK 1 кВт 12 В, 297.5х468х125, 5 кг",
-    "image_link": "assets/images/products_studio/150825_1.jpg",
+    "image_link": "assets/images/products/150825_1.jpg",
     "additional_images": [
       "assets/images/products/150825_2.jpg",
       "assets/images/products/150825_3.jpg",
@@ -904,7 +904,7 @@
   {
     "id": "150935",
     "title": "Гібридний інвертор MUST PV19-6048EXP 6 кВт 48 В, Wi-Fi, 309х505х147, 14 кг",
-    "image_link": "assets/images/products_studio/150935_1.jpg",
+    "image_link": "assets/images/products/150935_1.jpg",
     "additional_images": [
       "assets/images/products/150935_2.jpg",
       "assets/images/products/150935_3.jpg",
@@ -927,7 +927,7 @@
   {
     "id": "152412",
     "title": "Гібридний інвертор MUST PV18-3624PREM 3.6 кВт 24 В, Wi-Fi, 318x454x122.5, 7.8 кг",
-    "image_link": "assets/images/products_studio/152412_1.jpg",
+    "image_link": "assets/images/products/152412_1.jpg",
     "additional_images": [
       "assets/images/products/152412_2.jpg",
       "assets/images/products/152412_3.jpg",
@@ -952,7 +952,7 @@
   {
     "id": "152413",
     "title": "Акумуляторна батарея Felicity FLA24100 25.6V 100Ah LiFePO4, 454x380x154, 27 кг",
-    "image_link": "assets/images/products_studio/152413_1.jpg",
+    "image_link": "assets/images/products/152413_1.jpg",
     "additional_images": [
       "assets/images/products/152413_2.jpg",
       "assets/images/products/152413_3.jpg",
@@ -977,7 +977,7 @@
   {
     "id": "152469",
     "title": "Акумуляторна батарея Felicity FLA48171 51.2V 171Ah LiFePO4, 735х433х188, 68 кг",
-    "image_link": "assets/images/products_studio/152469_1.jpg",
+    "image_link": "assets/images/products/152469_2.jpg",
     "additional_images": [],
     "price": "60926 UAH",
     "availability": "in_stock",
@@ -995,7 +995,7 @@
   {
     "id": "152520",
     "title": "Акумуляторна батарея Felicity LPBA48100-OL 51.2V 100Ah LiFePO4, 665х440х175, 48.5 кг",
-    "image_link": "assets/images/products_studio/152520_1.jpg",
+    "image_link": "assets/images/komp/152520.jpg",
     "additional_images": [
       "https://dfi2.com.ua/images/152520_2.jpg",
       "https://dfi2.com.ua/images/152520_3.jpg",
@@ -1127,7 +1127,7 @@
   {
     "id": "152455",
     "title": "Гібридний інвертор MUST PV18-2012 PREM 2 кВт 12 В, Wi-Fi, 290х367х111, 6 кг",
-    "image_link": "assets/images/products_studio/152455_1.jpg",
+    "image_link": "assets/images/products/152455_1.jpg",
     "additional_images": [
       "assets/images/products/152455_2.jpg",
       "assets/images/products/152455_3.jpg",
