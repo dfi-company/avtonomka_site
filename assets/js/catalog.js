@@ -14,6 +14,19 @@ Object.keys(SLUG_TO_CATEGORY).forEach(function(slug) {
   CATEGORY_TO_SLUG[SLUG_TO_CATEGORY[slug]] = slug;
 });
 
+/* ---- Brand sub-filter (only for these two categories, per product owner's request) ---- */
+const BRAND_FILTER_SLUGS = ['akumulyatory', 'hybridni-invertory'];
+const KNOWN_BRANDS = ['DAH Solar', 'Deye', 'Dyness', 'Felicity', 'Must'];
+
+function extractBrand(title) {
+  if (!title) return null;
+  for (const b of KNOWN_BRANDS) {
+    const re = new RegExp('\\b' + b.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'i');
+    if (re.test(title)) return b;
+  }
+  return null;
+}
+
 function categoryLabel(productType) {
   if (!productType) return '';
   var slug = CATEGORY_TO_SLUG[productType];
@@ -26,9 +39,11 @@ function categoryLabel(productType) {
 
 const ITEMS_PER_PAGE = 24;
 
-let allProducts = [];
-let filtered    = [];
-let currentPage = 1;
+let allProducts     = [];
+let filtered        = [];
+let currentPage     = 1;
+let selectedCategory = '';
+let selectedBrand    = '';
 
 /* ---- Local helpers ---- */
 function truncate(str, len) {
@@ -68,7 +83,7 @@ const grid        = document.getElementById('products-grid');
 const counter     = document.getElementById('catalog-counter');
 const pagination  = document.getElementById('pagination');
 const searchInput = document.getElementById('filter-search');
-const catSelect   = document.getElementById('filter-category');
+const catMenu     = document.getElementById('filter-category-menu');
 const sortSelect  = document.getElementById('filter-sort');
 
 /* ---- Init - wait for i18n then load ---- */
@@ -83,13 +98,11 @@ function init() {
     })
     .then(function(data) {
       allProducts = Array.isArray(data) ? data : (data.products || []);
-      populateCategories();
       const rawCat = (typeof PRESET_CATEGORY !== 'undefined' && PRESET_CATEGORY)
         || new URLSearchParams(window.location.search).get('cat')
         || '';
-      if (rawCat && catSelect) {
-        catSelect.value = SLUG_TO_CATEGORY[rawCat] || rawCat;
-      }
+      selectedCategory = rawCat ? (SLUG_TO_CATEGORY[rawCat] || rawCat) : '';
+      populateCategories();
       applyFilters();
     })
     .catch(function(e) {
@@ -98,22 +111,96 @@ function init() {
     });
 }
 
-/* ---- Populate category dropdown ---- */
+/* ---- Populate always-open category menu (+ brand sub-menu for battery/inverter categories) ---- */
 function populateCategories() {
-  if (!catSelect) return;
+  if (!catMenu) return;
   const types = [...new Set(allProducts.map(p => p.product_type).filter(Boolean))].sort();
+
+  const allBtn = catMenu.querySelector('.category-menu__item[data-cat=""]');
+  if (allBtn && !allBtn.querySelector('.category-menu__count')) {
+    const countSpan = document.createElement('span');
+    countSpan.className = 'category-menu__count';
+    countSpan.textContent = allProducts.length;
+    allBtn.appendChild(countSpan);
+  }
+
   types.forEach(function(type) {
-    const opt = document.createElement('option');
-    opt.value = type;
-    opt.textContent = categoryLabel(type);
-    catSelect.appendChild(opt);
+    const count = allProducts.filter(p => p.product_type === type).length;
+    const slug  = CATEGORY_TO_SLUG[type];
+
+    const li = document.createElement('li');
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'category-menu__item';
+    btn.dataset.cat = type;
+    btn.innerHTML = `<span>${escapeHtml(categoryLabel(type))}</span><span class="category-menu__count">${count}</span>`;
+    btn.addEventListener('click', () => {
+      selectedCategory = type;
+      selectedBrand = '';
+      setActiveMenuState();
+      applyFilters();
+    });
+    li.appendChild(btn);
+
+    if (slug && BRAND_FILTER_SLUGS.includes(slug)) {
+      const brands = [...new Set(
+        allProducts
+          .filter(p => p.product_type === type)
+          .map(p => extractBrand(window.I18n ? window.I18n.productTitle(p) : (p.title || '')))
+          .filter(Boolean)
+      )].sort();
+
+      if (brands.length) {
+        const sub = document.createElement('ul');
+        sub.className = 'brand-submenu';
+        brands.forEach(function(brand) {
+          const bCount = allProducts.filter(p =>
+            p.product_type === type &&
+            extractBrand(window.I18n ? window.I18n.productTitle(p) : (p.title || '')) === brand
+          ).length;
+          const bLi = document.createElement('li');
+          const bBtn = document.createElement('button');
+          bBtn.type = 'button';
+          bBtn.className = 'brand-submenu__item';
+          bBtn.dataset.cat = type;
+          bBtn.dataset.brand = brand;
+          bBtn.innerHTML = `<span>${escapeHtml(brand)}</span><span class="category-menu__count">${bCount}</span>`;
+          bBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            selectedCategory = type;
+            selectedBrand = brand;
+            setActiveMenuState();
+            applyFilters();
+          });
+          bLi.appendChild(bBtn);
+          sub.appendChild(bLi);
+        });
+        li.appendChild(sub);
+      }
+    }
+
+    catMenu.appendChild(li);
+  });
+
+  setActiveMenuState();
+}
+
+/* ---- Sync .is-active classes in the category/brand menu with current selection ---- */
+function setActiveMenuState() {
+  if (!catMenu) return;
+  catMenu.querySelectorAll('.category-menu__item').forEach(btn => {
+    btn.classList.toggle('is-active', btn.dataset.cat === selectedCategory && !selectedBrand);
+  });
+  catMenu.querySelectorAll('.brand-submenu__item').forEach(btn => {
+    btn.classList.toggle('is-active', btn.dataset.cat === selectedCategory && btn.dataset.brand === selectedBrand);
   });
 }
 
 /* ---- Filter + sort ---- */
 function applyFilters() {
   const query = (searchInput ? searchInput.value : '').trim().toLowerCase();
-  const cat   = catSelect ? catSelect.value : '';
+  const cat   = selectedCategory;
+  const brand = selectedBrand;
   const availEl = document.querySelector('input[name="availability"]:checked');
   const avail = availEl ? availEl.value : 'all';
   const sort  = sortSelect ? sortSelect.value : 'name_asc';
@@ -122,6 +209,7 @@ function applyFilters() {
     const title = window.I18n ? window.I18n.productTitle(p) : (p.title || '');
     if (query && !title.toLowerCase().includes(query)) return false;
     if (cat && p.product_type !== cat) return false;
+    if (brand && extractBrand(title) !== brand) return false;
     if (avail === 'in_stock' && p.availability !== 'in_stock') return false;
     return true;
   });
@@ -282,8 +370,14 @@ function debounce(fn, ms) {
 }
 
 if (searchInput) searchInput.addEventListener('input', debounce(applyFilters, 250));
-if (catSelect)   catSelect.addEventListener('change', applyFilters);
 if (sortSelect)  sortSelect.addEventListener('change', applyFilters);
+
+document.querySelector('.category-menu__item[data-cat=""]')?.addEventListener('click', () => {
+  selectedCategory = '';
+  selectedBrand = '';
+  setActiveMenuState();
+  applyFilters();
+});
 
 document.querySelectorAll('input[name="availability"]').forEach(r =>
   r.addEventListener('change', applyFilters)
@@ -291,7 +385,9 @@ document.querySelectorAll('input[name="availability"]').forEach(r =>
 
 document.getElementById('filter-reset')?.addEventListener('click', () => {
   if (searchInput) searchInput.value = '';
-  if (catSelect)   catSelect.value   = '';
+  selectedCategory = '';
+  selectedBrand = '';
+  setActiveMenuState();
   if (sortSelect)  sortSelect.value  = 'name_asc';
   const allRadio = document.querySelector('input[name="availability"][value="all"]');
   if (allRadio) allRadio.checked = true;

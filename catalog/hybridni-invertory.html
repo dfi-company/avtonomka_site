@@ -35,7 +35,7 @@
   ]
 }
   </script>
-  <link rel="stylesheet" href="../assets/css/style.css?v=20260831b">
+  <link rel="stylesheet" href="../assets/css/style.css?v=20260831c">
 </head>
 <body>
 
@@ -98,10 +98,12 @@
               <input type="search" id="filter-search" class="filter-input" placeholder="Назва товару..." autocomplete="off" data-i18n-placeholder="catalog.search_placeholder">
             </div>
             <div class="filter-group">
-              <label for="filter-category" data-i18n="catalog.category_label">Категорія</label>
-              <select id="filter-category" class="filter-select">
-                <option value="" data-i18n="catalog.category_all">Всі категорії</option>
-              </select>
+              <label data-i18n="catalog.category_label">Категорія</label>
+              <ul class="category-menu" id="filter-category-menu">
+                <li><button type="button" class="category-menu__item is-active" data-cat="">
+                  <span data-i18n="catalog.category_all">Всі категорії</span>
+                </button></li>
+              </ul>
             </div>
             <div class="filter-group">
               <label data-i18n="catalog.availability_label">Наявність</label>
@@ -468,9 +470,9 @@
     </div>
   </footer>
 
-  <script src="../assets/js/i18n.js?v=20260831"></script>
-  <script src="../assets/js/main.js?v=20260831"></script>
-  <script src="../assets/js/cart.js?v=20260831"></script>
+  <script src="../assets/js/i18n.js?v=20260831c"></script>
+  <script src="../assets/js/main.js?v=20260831c"></script>
+  <script src="../assets/js/cart.js?v=20260831c"></script>
   <script>
     const PRESET_CATEGORY = 'hybridni-invertory';
     const PRODUCTS_URL = '../products.json';
@@ -481,6 +483,6 @@
     topSort?.addEventListener('change', () => { sideSort.value = topSort.value; sideSort.dispatchEvent(new Event('change')); });
     sideSort?.addEventListener('change', () => { topSort.value = sideSort.value; });
   </script>
-  <script src="../assets/js/catalog.js?v=20260831"></script>
+  <script src="../assets/js/catalog.js?v=20260831c"></script>
 </body>
 </html>
