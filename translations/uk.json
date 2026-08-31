@@ -78,6 +78,7 @@
     "facet_battery_brand": "Бренд акумулятора",
     "facet_monobrand": "Монобренд (інвертор + акумулятор одного бренду)",
     "facet_capacity": "Ємність",
+    "facet_cross_section": "Переріз",
     "facet_length": "Довжина",
     "facet_lug_size": "Накінечник",
     "availability_label": "Наявність",

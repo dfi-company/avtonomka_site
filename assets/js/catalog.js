@@ -23,7 +23,7 @@ const FACET_CONFIG = {
   'hybridni-invertory':  { power: true, brand: true },
   'komplekty':           { power: true, kitBrand: true, monobrand: true },
   'akumulyatory':        { brand: true, capacity: true },
-  'kabeli':              { length: true, lugSize: true },
+  'kabeli':              { crossSection: true, length: true, lugSize: true },
   'dzherela-zhyvlennya': { brand: true },
 };
 const KNOWN_BRANDS = ['DAH Solar', 'Deye', 'Dyness', 'Felicity', 'Must', 'EcoFlow', 'TTN'];
@@ -91,6 +91,18 @@ function lengthToMm(label) {
   return n * 1000;
 }
 
+/* Cable cross-section - "25 мм" / "6 мм" (mm²) or "4AWG" for the Dyness set.
+   AWG is checked first since that title also contains an unrelated "2050мм"
+   (length), which would otherwise falsely match the мм pattern. */
+function extractCrossSection(title) {
+  if (!title) return null;
+  let m = title.match(/(\d+)\s*AWG/i);
+  if (m) return m[1] + ' AWG';
+  m = title.match(/(\d+(?:[.,]\d+)?)\s*мм(?!\d)/i);
+  if (m) return m[1].replace(',', '.') + ' мм';
+  return null;
+}
+
 /* Lug/terminal thread size - "мідні накінечники М8" / "...М10". */
 function extractLugSize(title) {
   if (!title) return null;
@@ -147,6 +159,7 @@ let selectedInverterBrands  = new Set();
 let selectedBatteryBrands   = new Set();
 let monobrandOnly           = false;
 let selectedCapacities      = new Set();
+let selectedCrossSections   = new Set();
 let selectedLengths         = new Set();
 let selectedLugSizes        = new Set();
 
@@ -228,6 +241,7 @@ function selectCategory(type) {
   selectedBatteryBrands  = new Set();
   monobrandOnly         = false;
   selectedCapacities    = new Set();
+  selectedCrossSections = new Set();
   selectedLengths       = new Set();
   selectedLugSizes      = new Set();
   setActiveMenuState();
@@ -314,10 +328,11 @@ function renderFacets() {
     html += `</div>`;
   }
 
-  if (facets.power)    renderNumericFacet('catalog.facet_power', 'power', extractKw, selectedPowers, t('catalog.facet_power_unit'), true);
-  if (facets.capacity) renderNumericFacet('catalog.facet_capacity', 'capacity', extractAh, selectedCapacities, 'Ah', true);
-  if (facets.length)   renderNumericFacet('catalog.facet_length', 'length', extractLength, selectedLengths, '', (a, b) => lengthToMm(a) - lengthToMm(b));
-  if (facets.lugSize)  renderNumericFacet('catalog.facet_lug_size', 'lugSize', extractLugSize, selectedLugSizes, '', false);
+  if (facets.power)        renderNumericFacet('catalog.facet_power', 'power', extractKw, selectedPowers, t('catalog.facet_power_unit'), true);
+  if (facets.capacity)     renderNumericFacet('catalog.facet_capacity', 'capacity', extractAh, selectedCapacities, 'Ah', true);
+  if (facets.crossSection) renderNumericFacet('catalog.facet_cross_section', 'crossSection', extractCrossSection, selectedCrossSections, '', false);
+  if (facets.length)       renderNumericFacet('catalog.facet_length', 'length', extractLength, selectedLengths, '', (a, b) => lengthToMm(a) - lengthToMm(b));
+  if (facets.lugSize)      renderNumericFacet('catalog.facet_lug_size', 'lugSize', extractLugSize, selectedLugSizes, '', false);
 
   if (facets.brand) {
     const counts = {};
@@ -356,6 +371,7 @@ function renderFacets() {
   [
     ['power', selectedPowers],
     ['capacity', selectedCapacities],
+    ['crossSection', selectedCrossSections],
     ['length', selectedLengths],
     ['lugSize', selectedLugSizes],
     ['brand', selectedBrands],
@@ -399,6 +415,10 @@ function applyFilters() {
       if (facets.capacity && selectedCapacities.size) {
         const ah = extractAh(title);
         if (ah === null || !selectedCapacities.has(ah)) return false;
+      }
+      if (facets.crossSection && selectedCrossSections.size) {
+        const cs = extractCrossSection(title);
+        if (cs === null || !selectedCrossSections.has(cs)) return false;
       }
       if (facets.length && selectedLengths.size) {
         const len = extractLength(title);

@@ -80,6 +80,7 @@
     "facet_battery_brand": "Battery brand",
     "facet_monobrand": "Mono-brand (inverter + battery, same brand)",
     "facet_capacity": "Capacity",
+    "facet_cross_section": "Cross-section",
     "facet_length": "Length",
     "facet_lug_size": "Lug size",
     "availability_label": "Availability",
