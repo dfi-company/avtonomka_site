@@ -14,8 +14,15 @@ Object.keys(SLUG_TO_CATEGORY).forEach(function(slug) {
   CATEGORY_TO_SLUG[SLUG_TO_CATEGORY[slug]] = slug;
 });
 
-/* ---- Brand sub-filter (only for these two categories, per product owner's request) ---- */
-const BRAND_FILTER_SLUGS = ['akumulyatory', 'hybridni-invertory'];
+/* ---- Facet filters (power / brand / monobrand) — which categories get which,
+   per product owner's request. "brand" on komplekty matches either half of
+   the kit (inverter or battery); "monobrand" is an extra checkbox meaning
+   both halves are the same brand. ---- */
+const FACET_CONFIG = {
+  'hybridni-invertory': { power: true, brand: true },
+  'komplekty':          { power: true, brand: true, monobrand: true },
+  'akumulyatory':       { brand: true },
+};
 const KNOWN_BRANDS = ['DAH Solar', 'Deye', 'Dyness', 'Felicity', 'Must'];
 
 function extractBrand(title) {
@@ -25,6 +32,45 @@ function extractBrand(title) {
     if (re.test(title)) return b;
   }
   return null;
+}
+
+/* Power rating in kW, parsed from the title - mirrors miniapp/index.html's
+   extractKw() so the two stay consistent. (?!h) keeps "16kWh" (battery
+   capacity) from being misread as power. */
+function extractKw(title) {
+  if (!title) return null;
+  let m = title.match(/(\d+(?:[.,]\d+)?)\s*(?:кВт|kw)(?!h)/i);
+  if (m) return m[1].replace(',', '.');
+  m = title.match(/(\d+)\s*Вт\b/);
+  if (m) return String(Number(m[1]) / 1000);
+  m = title.match(/SUN-(\d+)K-/i);
+  if (m) return m[1];
+  m = title.match(/PV\d+-(\d{2})\d{2}/i); // MUST "PVxx-XXYY": XX/10 = кВт
+  if (m) return String(Number(m[1]) / 10);
+  return null;
+}
+
+/* "Комплект автономного енергоживлення: <inverter> + <battery>" -> the brand
+   of each half. */
+function kitBrands(title) {
+  const body = (title || '').replace(/^Комплект автономного енергоживлення:\s*/i, '');
+  const parts = body.split(/\s*\+\s*/);
+  if (parts.length !== 2) return [];
+  return [extractBrand(parts[0]), extractBrand(parts[1])].filter(Boolean);
+}
+
+function isMonobrand(title) {
+  const brands = kitBrands(title);
+  return brands.length === 2 && brands[0] === brands[1];
+}
+
+/* Brand(s) a product should match against for the brand facet -
+   both halves for a kit, just the one brand for everything else. */
+function productBrands(p, slug) {
+  const title = window.I18n ? window.I18n.productTitle(p) : (p.title || '');
+  if (slug === 'komplekty') return kitBrands(title);
+  const b = extractBrand(title);
+  return b ? [b] : [];
 }
 
 function categoryLabel(productType) {
@@ -39,11 +85,13 @@ function categoryLabel(productType) {
 
 const ITEMS_PER_PAGE = 24;
 
-let allProducts     = [];
-let filtered        = [];
-let currentPage     = 1;
+let allProducts      = [];
+let filtered         = [];
+let currentPage      = 1;
 let selectedCategory = '';
-let selectedBrand    = '';
+let selectedPowers   = new Set();
+let selectedBrands   = new Set();
+let monobrandOnly    = false;
 
 /* ---- Local helpers ---- */
 function truncate(str, len) {
@@ -84,6 +132,7 @@ const counter     = document.getElementById('catalog-counter');
 const pagination  = document.getElementById('pagination');
 const searchInput = document.getElementById('filter-search');
 const catMenu     = document.getElementById('filter-category-menu');
+const facetsPanel = document.getElementById('filter-facets');
 const sortSelect  = document.getElementById('filter-sort');
 
 /* ---- Init - wait for i18n then load ---- */
@@ -103,6 +152,7 @@ function init() {
         || '';
       selectedCategory = rawCat ? (SLUG_TO_CATEGORY[rawCat] || rawCat) : '';
       populateCategories();
+      renderFacets();
       applyFilters();
     })
     .catch(function(e) {
@@ -111,7 +161,19 @@ function init() {
     });
 }
 
-/* ---- Populate always-open category menu (+ brand sub-menu for battery/inverter categories) ---- */
+/* Switch category: reset any facet selections (they're category-specific),
+   rebuild the facet panel for the new category, then re-filter. */
+function selectCategory(type) {
+  selectedCategory = type;
+  selectedPowers   = new Set();
+  selectedBrands   = new Set();
+  monobrandOnly    = false;
+  setActiveMenuState();
+  renderFacets();
+  applyFilters();
+}
+
+/* ---- Populate always-open category menu ---- */
 function populateCategories() {
   if (!catMenu) return;
   const types = [...new Set(allProducts.map(p => p.product_type).filter(Boolean))].sort();
@@ -126,7 +188,6 @@ function populateCategories() {
 
   types.forEach(function(type) {
     const count = allProducts.filter(p => p.product_type === type).length;
-    const slug  = CATEGORY_TO_SLUG[type];
 
     const li = document.createElement('li');
     const btn = document.createElement('button');
@@ -134,50 +195,8 @@ function populateCategories() {
     btn.className = 'category-menu__item';
     btn.dataset.cat = type;
     btn.innerHTML = `<span>${escapeHtml(categoryLabel(type))}</span><span class="category-menu__count">${count}</span>`;
-    btn.addEventListener('click', () => {
-      selectedCategory = type;
-      selectedBrand = '';
-      setActiveMenuState();
-      applyFilters();
-    });
+    btn.addEventListener('click', () => selectCategory(type));
     li.appendChild(btn);
-
-    if (slug && BRAND_FILTER_SLUGS.includes(slug)) {
-      const brands = [...new Set(
-        allProducts
-          .filter(p => p.product_type === type)
-          .map(p => extractBrand(window.I18n ? window.I18n.productTitle(p) : (p.title || '')))
-          .filter(Boolean)
-      )].sort();
-
-      if (brands.length) {
-        const sub = document.createElement('ul');
-        sub.className = 'brand-submenu';
-        brands.forEach(function(brand) {
-          const bCount = allProducts.filter(p =>
-            p.product_type === type &&
-            extractBrand(window.I18n ? window.I18n.productTitle(p) : (p.title || '')) === brand
-          ).length;
-          const bLi = document.createElement('li');
-          const bBtn = document.createElement('button');
-          bBtn.type = 'button';
-          bBtn.className = 'brand-submenu__item';
-          bBtn.dataset.cat = type;
-          bBtn.dataset.brand = brand;
-          bBtn.innerHTML = `<span>${escapeHtml(brand)}</span><span class="category-menu__count">${bCount}</span>`;
-          bBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            selectedCategory = type;
-            selectedBrand = brand;
-            setActiveMenuState();
-            applyFilters();
-          });
-          bLi.appendChild(bBtn);
-          sub.appendChild(bLi);
-        });
-        li.appendChild(sub);
-      }
-    }
 
     catMenu.appendChild(li);
   });
@@ -185,22 +204,97 @@ function populateCategories() {
   setActiveMenuState();
 }
 
-/* ---- Sync .is-active classes in the category/brand menu with current selection ---- */
+/* ---- Sync .is-active class in the category menu with current selection ---- */
 function setActiveMenuState() {
   if (!catMenu) return;
   catMenu.querySelectorAll('.category-menu__item').forEach(btn => {
-    btn.classList.toggle('is-active', btn.dataset.cat === selectedCategory && !selectedBrand);
+    btn.classList.toggle('is-active', btn.dataset.cat === selectedCategory);
   });
-  catMenu.querySelectorAll('.brand-submenu__item').forEach(btn => {
-    btn.classList.toggle('is-active', btn.dataset.cat === selectedCategory && btn.dataset.brand === selectedBrand);
+}
+
+/* ---- Facet panel (power / brand / monobrand checkboxes) for the active category ---- */
+function renderFacets() {
+  if (!facetsPanel) return;
+  const slug   = CATEGORY_TO_SLUG[selectedCategory];
+  const facets = slug && FACET_CONFIG[slug];
+
+  if (!facets) {
+    facetsPanel.innerHTML = '';
+    facetsPanel.hidden = true;
+    return;
+  }
+
+  const inCategory = allProducts.filter(p => p.product_type === selectedCategory);
+  let html = '';
+
+  if (facets.power) {
+    const counts = {};
+    inCategory.forEach(p => {
+      const title = window.I18n ? window.I18n.productTitle(p) : (p.title || '');
+      const kw = extractKw(title);
+      if (kw !== null) counts[kw] = (counts[kw] || 0) + 1;
+    });
+    const values = Object.keys(counts).sort((a, b) => parseFloat(a) - parseFloat(b));
+    if (values.length) {
+      html += `<div class="facet-group"><div class="facet-group__title">${escapeHtml(t('catalog.facet_power'))}</div>`;
+      values.forEach(v => {
+        html += `<label class="facet-checkbox"><input type="checkbox" data-facet="power" value="${escapeHtml(v)}" ${selectedPowers.has(v) ? 'checked' : ''}><span>${escapeHtml(v)} ${escapeHtml(t('catalog.facet_power_unit'))}</span><span class="facet-checkbox__count">${counts[v]}</span></label>`;
+      });
+      html += `</div>`;
+    }
+  }
+
+  if (facets.brand) {
+    const counts = {};
+    inCategory.forEach(p => {
+      productBrands(p, slug).forEach(b => { counts[b] = (counts[b] || 0) + 1; });
+    });
+    const values = Object.keys(counts).sort();
+    if (values.length) {
+      html += `<div class="facet-group"><div class="facet-group__title">${escapeHtml(t('catalog.facet_brand'))}</div>`;
+      values.forEach(v => {
+        html += `<label class="facet-checkbox"><input type="checkbox" data-facet="brand" value="${escapeHtml(v)}" ${selectedBrands.has(v) ? 'checked' : ''}><span>${escapeHtml(v)}</span><span class="facet-checkbox__count">${counts[v]}</span></label>`;
+      });
+      if (facets.monobrand) {
+        const monoCount = inCategory.filter(p => {
+          const title = window.I18n ? window.I18n.productTitle(p) : (p.title || '');
+          return isMonobrand(title);
+        }).length;
+        html += `<label class="facet-checkbox facet-checkbox--mono"><input type="checkbox" data-facet="monobrand" ${monobrandOnly ? 'checked' : ''}><span>${escapeHtml(t('catalog.facet_monobrand'))}</span><span class="facet-checkbox__count">${monoCount}</span></label>`;
+      }
+      html += `</div>`;
+    }
+  }
+
+  facetsPanel.innerHTML = html;
+  facetsPanel.hidden = !html;
+
+  facetsPanel.querySelectorAll('input[data-facet="power"]').forEach(cb => {
+    cb.addEventListener('change', () => {
+      if (cb.checked) selectedPowers.add(cb.value); else selectedPowers.delete(cb.value);
+      applyFilters();
+    });
+  });
+  facetsPanel.querySelectorAll('input[data-facet="brand"]').forEach(cb => {
+    cb.addEventListener('change', () => {
+      if (cb.checked) selectedBrands.add(cb.value); else selectedBrands.delete(cb.value);
+      applyFilters();
+    });
+  });
+  facetsPanel.querySelectorAll('input[data-facet="monobrand"]').forEach(cb => {
+    cb.addEventListener('change', () => {
+      monobrandOnly = cb.checked;
+      applyFilters();
+    });
   });
 }
 
 /* ---- Filter + sort ---- */
 function applyFilters() {
-  const query = (searchInput ? searchInput.value : '').trim().toLowerCase();
-  const cat   = selectedCategory;
-  const brand = selectedBrand;
+  const query  = (searchInput ? searchInput.value : '').trim().toLowerCase();
+  const cat    = selectedCategory;
+  const slug   = CATEGORY_TO_SLUG[cat];
+  const facets = slug && FACET_CONFIG[slug];
   const availEl = document.querySelector('input[name="availability"]:checked');
   const avail = availEl ? availEl.value : 'all';
   const sort  = sortSelect ? sortSelect.value : 'name_asc';
@@ -209,7 +303,17 @@ function applyFilters() {
     const title = window.I18n ? window.I18n.productTitle(p) : (p.title || '');
     if (query && !title.toLowerCase().includes(query)) return false;
     if (cat && p.product_type !== cat) return false;
-    if (brand && extractBrand(title) !== brand) return false;
+    if (facets) {
+      if (facets.power && selectedPowers.size) {
+        const kw = extractKw(title);
+        if (kw === null || !selectedPowers.has(kw)) return false;
+      }
+      if (facets.brand && selectedBrands.size) {
+        const brands = productBrands(p, slug);
+        if (!brands.some(b => selectedBrands.has(b))) return false;
+      }
+      if (facets.monobrand && monobrandOnly && !isMonobrand(title)) return false;
+    }
     if (avail === 'in_stock' && p.availability !== 'in_stock') return false;
     return true;
   });
@@ -370,12 +474,7 @@ function debounce(fn, ms) {
 if (searchInput) searchInput.addEventListener('input', debounce(applyFilters, 250));
 if (sortSelect)  sortSelect.addEventListener('change', applyFilters);
 
-document.querySelector('.category-menu__item[data-cat=""]')?.addEventListener('click', () => {
-  selectedCategory = '';
-  selectedBrand = '';
-  setActiveMenuState();
-  applyFilters();
-});
+document.querySelector('.category-menu__item[data-cat=""]')?.addEventListener('click', () => selectCategory(''));
 
 document.querySelectorAll('input[name="availability"]').forEach(r =>
   r.addEventListener('change', applyFilters)
@@ -383,13 +482,10 @@ document.querySelectorAll('input[name="availability"]').forEach(r =>
 
 document.getElementById('filter-reset')?.addEventListener('click', () => {
   if (searchInput) searchInput.value = '';
-  selectedCategory = '';
-  selectedBrand = '';
-  setActiveMenuState();
   if (sortSelect)  sortSelect.value  = 'name_asc';
   const allRadio = document.querySelector('input[name="availability"][value="all"]');
   if (allRadio) allRadio.checked = true;
-  applyFilters();
+  selectCategory('');
 });
 
 /* ---- Start: wait for i18n, then init ---- */

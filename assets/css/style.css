@@ -944,37 +944,40 @@ main { flex: 1; }
 .category-menu__count { font-size: .78rem; color: var(--color-muted); flex-shrink: 0; }
 .category-menu__item.is-active .category-menu__count { color: var(--color-orange); }
 
-.brand-submenu {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  list-style: none;
-  margin: 2px 0 6px 12px;
-  padding-left: 10px;
-  border-left: 2px solid var(--color-border);
+/* ---------- Facet filters (power / brand / monobrand — appear per active category) ---------- */
+#filter-facets { display: flex; flex-direction: column; gap: 16px; margin-top: 4px; }
+.facet-group { display: flex; flex-direction: column; gap: 2px; }
+.facet-group__title {
+  font-size: .78rem;
+  font-weight: 700;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  margin-bottom: 4px;
 }
-.brand-submenu__item {
+/* .filter-group prefix needed so this beats the more specific ".filter-group
+   label { display:block; text-transform:uppercase; ... }" rule above, which
+   would otherwise also match these (a .facet-checkbox is a <label>). */
+.filter-group .facet-checkbox {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 8px;
-  width: 100%;
-  text-align: left;
-  background: none;
-  border: none;
+  padding: 5px 4px;
+  font-size: .87rem;
+  font-weight: 400;
+  color: var(--color-text);
+  text-transform: none;
+  letter-spacing: normal;
+  cursor: pointer;
   border-radius: var(--radius);
-  padding: 6px 10px;
-  font-size: .85rem;
-  font-family: var(--font);
-  color: var(--color-muted);
-  transition: background var(--transition), color var(--transition);
+  margin-bottom: 0;
+  transition: background var(--transition);
 }
-.brand-submenu__item:hover { background: var(--color-grey); color: var(--color-text); }
-.brand-submenu__item.is-active {
-  background: rgba(245,166,35,.14);
-  color: var(--color-dark);
-  font-weight: 600;
-}
+.filter-group .facet-checkbox:hover { background: var(--color-grey); }
+.filter-group .facet-checkbox input { accent-color: var(--color-orange); width: 15px; height: 15px; cursor: pointer; flex-shrink: 0; }
+.filter-group .facet-checkbox span:first-of-type { flex: 1; }
+.filter-group .facet-checkbox__count { font-size: .78rem; color: var(--color-muted); flex-shrink: 0; }
+.filter-group .facet-checkbox--mono { border-top: 1px dashed var(--color-border); margin-top: 4px; padding-top: 8px; font-weight: 600; }
 
 .btn-reset {
   width: 100%;
