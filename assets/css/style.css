@@ -544,14 +544,6 @@ main { flex: 1; }
   gap: 8px;
 }
 
-.product-card__category {
-  font-size: .72rem;
-  font-weight: 700;
-  color: var(--color-orange);
-  text-transform: uppercase;
-  letter-spacing: .06em;
-}
-
 .product-card__title {
   font-size: .97rem;
   font-weight: 600;

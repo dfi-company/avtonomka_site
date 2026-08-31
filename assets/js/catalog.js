@@ -269,7 +269,6 @@ function renderCard(p) {
   const priceStr = formatPrice(p.price || '');
   const displayTitle = window.I18n ? window.I18n.productTitle(p) : (p.title || '');
   const title    = truncate(displayTitle, 80);
-  const cat      = categoryLabel(p.product_type);
   const img      = p.image_link ? (/^https?:\/\//.test(p.image_link) ? p.image_link : _assetsBase + p.image_link) : (_assetsBase + 'assets/images/zaglushka.png');
   const zagl     = _assetsBase + 'assets/images/zaglushka.png';
   const href     = `${_productBase}${encodeURIComponent(p.slug || p.id)}/${encodeURIComponent(p.id)}.html`;
@@ -284,7 +283,6 @@ function renderCard(p) {
       <div class="product-card__availability">${badge}</div>
     </a>
     <div class="product-card__body">
-      ${cat ? `<div class="product-card__category">${escapeHtml(cat)}</div>` : ''}
       <a href="${href}" class="product-card__title">${escapeHtml(title)}</a>
       <div class="product-card__price-row">
         <span class="product-card__price">${escapeHtml(priceStr)}</span>

@@ -47,6 +47,54 @@ function t(key) {
   return window.I18n ? window.I18n.t(key) : key;
 }
 
+/* ---- View counter (Abacus - free hosted hit counter, no backend of our own) ----
+   /get reads without incrementing (article list cards); /hit increments and
+   reads (opening the full article). Best-effort: if the service is down or
+   blocked, the views element is just removed rather than showing a broken "…". */
+const VIEWS_NAMESPACE = 'avtonomka-com-ua-articles';
+
+function pluralizeUk(n, one, few, many) {
+  const mod10 = n % 10;
+  const mod100 = n % 100;
+  if (mod10 === 1 && mod100 !== 11) return one;
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return few;
+  return many;
+}
+
+function viewsLabel(n) {
+  if (window.I18n && window.I18n.lang === 'en') return n === 1 ? 'view' : 'views';
+  return pluralizeUk(n, 'перегляд', 'перегляди', 'переглядів');
+}
+
+async function fetchViews(id, hit) {
+  const url = `https://abacus.jasoncameron.dev/${hit ? 'hit' : 'get'}/${VIEWS_NAMESPACE}/${encodeURIComponent('article-' + id)}`;
+  try {
+    const res = await fetch(url);
+    /* /get on a key nobody has ever opened yet (so no /hit was ever made
+       for it) 404s with {"error":"Key not found"} - that's just 0 views,
+       not a real failure. */
+    if (res.status === 404) return 0;
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    return typeof data.value === 'number' ? data.value : null;
+  } catch (e) {
+    console.warn('Лічильник переглядів недоступний:', e);
+    return null;
+  }
+}
+
+/* Fills every [data-views-id] under scopeEl. hit=true also increments the count
+   (only for the article actually being opened, never for list cards). */
+function populateViews(scopeEl, hit) {
+  scopeEl.querySelectorAll('[data-views-id]').forEach(el => {
+    const id = el.dataset.viewsId;
+    fetchViews(id, hit).then(count => {
+      if (count === null) { el.remove(); return; }
+      el.textContent = `👁 ${count.toLocaleString('uk-UA')} ${viewsLabel(count)}`;
+    });
+  });
+}
+
 function renderCard(article) {
   const dateStr = formatDate(article.date);
   const title   = articleField(article, 'title');
@@ -54,11 +102,14 @@ function renderCard(article) {
   const imgHtml = article.photo
     ? `<div class="article-card__img"><img src="${escHtml(article.photo)}" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`
     : '<div class="article-card__img article-card__img--placeholder"></div>';
+  const metaParts = [];
+  if (dateStr) metaParts.push(escHtml(dateStr));
+  metaParts.push(`<span class="article-card__views" data-views-id="${escHtml(article.id)}">…</span>`);
   return `
   <article class="article-card" data-id="${escHtml(article.id)}" tabindex="0" role="button" aria-label="${escHtml(title)}">
     ${imgHtml}
     <div class="article-card__body">
-      ${dateStr ? `<div class="article-card__date">${escHtml(dateStr)}</div>` : ''}
+      <div class="article-card__date">${metaParts.join(' · ')}</div>
       <h2 class="article-card__title">${escHtml(title)}</h2>
       ${summary ? `<p class="article-card__summary">${escHtml(summary)}</p>` : ''}
     </div>
@@ -128,6 +179,9 @@ function renderFull(article) {
   const imgHtml = article.photo
     ? `<div class="article-full__img"><img src="${escHtml(article.photo)}" alt="${escHtml(title)}" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`
     : '';
+  const metaParts = [];
+  if (dateStr) metaParts.push(escHtml(dateStr));
+  metaParts.push(`<span class="article-full__views" data-views-id="${escHtml(article.id)}">…</span>`);
   const bodyHtml = body
     .split(/\n\n+/)
     .map(para => para.trim())
@@ -150,7 +204,7 @@ function renderFull(article) {
     <button class="article-full__back" id="btn-back">${t('articles.back')}</button>
     ${imgHtml}
     <div class="article-full__content">
-      ${dateStr ? `<div class="article-full__date">${escHtml(dateStr)}</div>` : ''}
+      <div class="article-full__date">${metaParts.join(' · ')}</div>
       <h1 class="article-full__title">${escHtml(title)}</h1>
       ${summary ? `<p class="article-full__lead">${escHtml(summary)}</p>` : ''}
       <div class="article-full__body">${bodyHtml}</div>
@@ -170,6 +224,7 @@ function openArticle(id) {
   const listEl   = document.getElementById('articles-list');
 
   detailEl.innerHTML = renderFull(article);
+  populateViews(detailEl, true);
   document.getElementById('btn-back').addEventListener('click', closeArticle);
 
   listEl.classList.add('hidden');
@@ -238,6 +293,7 @@ async function init() {
     }
 
     grid.innerHTML = allArticles.map(renderCard).join('');
+    populateViews(grid, false);
 
     grid.addEventListener('click', e => {
       const card = e.target.closest('.article-card');

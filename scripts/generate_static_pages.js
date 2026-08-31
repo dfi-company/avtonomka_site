@@ -514,7 +514,6 @@ function renderCard(p, base) {
     : '<span class="badge badge-grey">Немає</span>';
   const priceStr = formatPrice(p.price || '');
   const title    = truncate(p.title || '', 80);
-  const cat      = categoryLabel(p.product_type);
   const img      = p.image_link ? (/^https?:\/\//.test(p.image_link) ? p.image_link : base + p.image_link) : (base + 'assets/images/zaglushka.png');
   const zagl     = base + 'assets/images/zaglushka.png';
   const href     = `${base}product/${productSlug(p)}/${encodeURIComponent(p.id)}.html`;
@@ -529,7 +528,6 @@ function renderCard(p, base) {
       <div class="product-card__availability">${badge}</div>
     </a>
     <div class="product-card__body">
-      ${cat ? `<div class="product-card__category">${escapeHtml(cat)}</div>` : ''}
       <a href="${href}" class="product-card__title">${escapeHtml(title)}</a>
       <div class="product-card__price-row">
         <span class="product-card__price">${escapeHtml(priceStr)}</span>
