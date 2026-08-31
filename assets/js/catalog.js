@@ -94,10 +94,18 @@ function lengthToMm(label) {
 /* Cable cross-section - "25 мм" / "6 мм" (mm²) or "4AWG" for the Dyness set.
    AWG is checked first since that title also contains an unrelated "2050мм"
    (length), which would otherwise falsely match the мм pattern. */
+/* 4 AWG ≈ 21.1 mm², rounded to 21 per common practice - shown in the metric
+   unit the rest of the catalog uses, rather than AWG. Extend this table if a
+   different AWG gauge is ever added; unmapped gauges fall back to "N AWG". */
+const AWG_TO_MM2 = { '4': '21' };
+
 function extractCrossSection(title) {
   if (!title) return null;
   let m = title.match(/(\d+)\s*AWG/i);
-  if (m) return m[1] + ' AWG';
+  if (m) {
+    const mm2 = AWG_TO_MM2[m[1]];
+    return mm2 ? mm2 + ' мм²' : m[1] + ' AWG';
+  }
   m = title.match(/(\d+(?:[.,]\d+)?)\s*мм(?!\d)/i);
   if (m) return m[1].replace(',', '.') + ' мм';
   return null;
@@ -360,7 +368,7 @@ function renderFacets() {
 
   if (facets.power)        renderNumericFacet('catalog.facet_power', 'power', extractKw, selectedPowers, t('catalog.facet_power_unit'), true);
   if (facets.capacity)     renderNumericFacet('catalog.facet_capacity', 'capacity', extractAh, selectedCapacities, 'Ah', true);
-  if (facets.crossSection) renderNumericFacet('catalog.facet_cross_section', 'crossSection', extractCrossSection, selectedCrossSections, '', false);
+  if (facets.crossSection) renderNumericFacet('catalog.facet_cross_section', 'crossSection', extractCrossSection, selectedCrossSections, '', true);
   if (facets.length)       renderNumericFacet('catalog.facet_length', 'length', extractLength, selectedLengths, '', (a, b) => lengthToMm(a) - lengthToMm(b));
   if (facets.lugSize)      renderNumericFacet('catalog.facet_lug_size', 'lugSize', extractLugSize, selectedLugSizes, '', false);
 
