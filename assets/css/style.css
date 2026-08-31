@@ -780,6 +780,13 @@ main { flex: 1; }
 /* ---------- Footer contacts ---------- */
 .footer-contacts {
   display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.footer-contacts__info {
+  display: flex;
   flex-direction: column;
   gap: 4px;
 }
@@ -796,7 +803,7 @@ main { flex: 1; }
   height: 120px;
   border: 0;
   border-radius: var(--radius);
-  margin-top: 4px;
+  flex-shrink: 0;
 }
 .footer-copy { font-size: .82rem; }
 .footer-legal {
@@ -1771,7 +1778,7 @@ main { flex: 1; }
   .footer-inner { gap: 20px; text-align: center; }
   .footer-top { flex-direction: column; align-items: center; gap: 12px; }
   .footer-links { justify-content: center; flex-wrap: wrap; }
-  .footer-contacts { align-items: center; }
+  .footer-contacts { align-items: center; justify-content: center; }
   .footer-bottom { flex-direction: column; gap: 12px; }
   .footer-legal { justify-content: center; }
 }
