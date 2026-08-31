@@ -74,6 +74,8 @@
     "facet_power": "Потужність",
     "facet_power_unit": "кВт",
     "facet_brand": "Бренд",
+    "facet_inverter_brand": "Бренд інвертора",
+    "facet_battery_brand": "Бренд акумулятора",
     "facet_monobrand": "Монобренд (інвертор + акумулятор одного бренду)",
     "facet_capacity": "Ємність",
     "facet_length": "Довжина",

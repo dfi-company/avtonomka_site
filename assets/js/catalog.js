@@ -14,13 +14,14 @@ Object.keys(SLUG_TO_CATEGORY).forEach(function(slug) {
   CATEGORY_TO_SLUG[SLUG_TO_CATEGORY[slug]] = slug;
 });
 
-/* ---- Facet filters (power / brand / monobrand) — which categories get which,
-   per product owner's request. "brand" on komplekty matches either half of
-   the kit (inverter or battery); "monobrand" is an extra checkbox meaning
-   both halves are the same brand. ---- */
+/* ---- Facet filters — which categories get which, per product owner's
+   request. komplekty gets separate "Інвертор" / "Акумулятор" brand lists
+   (kitBrand) instead of one combined "brand", since a kit has two brands;
+   "monobrand" is an extra checkbox meaning both halves are the same
+   brand. ---- */
 const FACET_CONFIG = {
   'hybridni-invertory':  { power: true, brand: true },
-  'komplekty':           { power: true, brand: true, monobrand: true },
+  'komplekty':           { power: true, kitBrand: true, monobrand: true },
   'akumulyatory':        { brand: true, capacity: true },
   'kabeli':              { length: true, lugSize: true },
   'dzherela-zhyvlennya': { brand: true },
@@ -98,24 +99,28 @@ function extractLugSize(title) {
 }
 
 /* "Комплект автономного енергоживлення: <inverter> + <battery>" -> the brand
-   of each half. */
-function kitBrands(title) {
+   of each half, keeping the [inverter, battery] position (null if a half's
+   brand isn't recognized) so the inverter/battery facets can be extracted
+   independently. */
+function kitBrandParts(title) {
   const body = (title || '').replace(/^Комплект автономного енергоживлення:\s*/i, '');
   const parts = body.split(/\s*\+\s*/);
-  if (parts.length !== 2) return [];
-  return [extractBrand(parts[0]), extractBrand(parts[1])].filter(Boolean);
+  if (parts.length !== 2) return [null, null];
+  return [extractBrand(parts[0]), extractBrand(parts[1])];
 }
+
+function kitInverterBrand(title) { return kitBrandParts(title)[0]; }
+function kitBatteryBrand(title)  { return kitBrandParts(title)[1]; }
 
 function isMonobrand(title) {
-  const brands = kitBrands(title);
-  return brands.length === 2 && brands[0] === brands[1];
+  const [inv, bat] = kitBrandParts(title);
+  return !!inv && !!bat && inv === bat;
 }
 
-/* Brand(s) a product should match against for the brand facet -
-   both halves for a kit, just the one brand for everything else. */
-function productBrands(p, slug) {
+/* Brand for the plain single-brand facet (everything except komplekty,
+   which has its own separate inverter/battery lists). */
+function productBrands(p) {
   const title = window.I18n ? window.I18n.productTitle(p) : (p.title || '');
-  if (slug === 'komplekty') return kitBrands(title);
   const b = extractBrand(title);
   return b ? [b] : [];
 }
@@ -136,12 +141,14 @@ let allProducts      = [];
 let filtered         = [];
 let currentPage      = 1;
 let selectedCategory = '';
-let selectedPowers        = new Set();
-let selectedBrands        = new Set();
-let monobrandOnly         = false;
-let selectedCapacities    = new Set();
-let selectedLengths       = new Set();
-let selectedLugSizes      = new Set();
+let selectedPowers          = new Set();
+let selectedBrands          = new Set();
+let selectedInverterBrands  = new Set();
+let selectedBatteryBrands   = new Set();
+let monobrandOnly           = false;
+let selectedCapacities      = new Set();
+let selectedLengths         = new Set();
+let selectedLugSizes        = new Set();
 
 /* ---- Local helpers ---- */
 function truncate(str, len) {
@@ -217,6 +224,8 @@ function selectCategory(type) {
   selectedCategory      = type;
   selectedPowers        = new Set();
   selectedBrands        = new Set();
+  selectedInverterBrands = new Set();
+  selectedBatteryBrands  = new Set();
   monobrandOnly         = false;
   selectedCapacities    = new Set();
   selectedLengths       = new Set();
@@ -313,7 +322,7 @@ function renderFacets() {
   if (facets.brand) {
     const counts = {};
     inCategory.forEach(p => {
-      productBrands(p, slug).forEach(b => { counts[b] = (counts[b] || 0) + 1; });
+      productBrands(p).forEach(b => { counts[b] = (counts[b] || 0) + 1; });
     });
     const values = Object.keys(counts).sort();
     if (values.length) {
@@ -321,15 +330,24 @@ function renderFacets() {
       values.forEach(v => {
         html += `<label class="facet-checkbox"><input type="checkbox" data-facet="brand" value="${escapeHtml(v)}" ${selectedBrands.has(v) ? 'checked' : ''}><span>${escapeHtml(v)}</span><span class="facet-checkbox__count">${counts[v]}</span></label>`;
       });
-      if (facets.monobrand) {
-        const monoCount = inCategory.filter(p => {
-          const title = window.I18n ? window.I18n.productTitle(p) : (p.title || '');
-          return isMonobrand(title);
-        }).length;
-        html += `<label class="facet-checkbox facet-checkbox--mono"><input type="checkbox" data-facet="monobrand" ${monobrandOnly ? 'checked' : ''}><span>${escapeHtml(t('catalog.facet_monobrand'))}</span><span class="facet-checkbox__count">${monoCount}</span></label>`;
-      }
       html += `</div>`;
     }
+  }
+
+  /* komplekty: two separate brand lists (the kit has an inverter AND a
+     battery, each potentially a different brand), plus a standalone
+     "Монобренд" checkbox for kits where both halves match. */
+  if (facets.kitBrand) {
+    renderNumericFacet('catalog.facet_inverter_brand', 'inverterBrand', kitInverterBrand, selectedInverterBrands, '', false);
+    renderNumericFacet('catalog.facet_battery_brand', 'batteryBrand', kitBatteryBrand, selectedBatteryBrands, '', false);
+  }
+
+  if (facets.monobrand) {
+    const monoCount = inCategory.filter(p => {
+      const title = window.I18n ? window.I18n.productTitle(p) : (p.title || '');
+      return isMonobrand(title);
+    }).length;
+    html += `<div class="facet-group"><label class="facet-checkbox facet-checkbox--mono"><input type="checkbox" data-facet="monobrand" ${monobrandOnly ? 'checked' : ''}><span>${escapeHtml(t('catalog.facet_monobrand'))}</span><span class="facet-checkbox__count">${monoCount}</span></label></div>`;
   }
 
   facetsPanel.innerHTML = html;
@@ -341,6 +359,8 @@ function renderFacets() {
     ['length', selectedLengths],
     ['lugSize', selectedLugSizes],
     ['brand', selectedBrands],
+    ['inverterBrand', selectedInverterBrands],
+    ['batteryBrand', selectedBatteryBrands],
   ].forEach(([key, set]) => {
     facetsPanel.querySelectorAll(`input[data-facet="${key}"]`).forEach(cb => {
       cb.addEventListener('change', () => {
@@ -389,8 +409,18 @@ function applyFilters() {
         if (ls === null || !selectedLugSizes.has(ls)) return false;
       }
       if (facets.brand && selectedBrands.size) {
-        const brands = productBrands(p, slug);
+        const brands = productBrands(p);
         if (!brands.some(b => selectedBrands.has(b))) return false;
+      }
+      if (facets.kitBrand) {
+        if (selectedInverterBrands.size) {
+          const inv = kitInverterBrand(title);
+          if (!inv || !selectedInverterBrands.has(inv)) return false;
+        }
+        if (selectedBatteryBrands.size) {
+          const bat = kitBatteryBrand(title);
+          if (!bat || !selectedBatteryBrands.has(bat)) return false;
+        }
       }
       if (facets.monobrand && monobrandOnly && !isMonobrand(title)) return false;
     }

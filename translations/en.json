@@ -76,6 +76,8 @@
     "facet_power": "Power",
     "facet_power_unit": "kW",
     "facet_brand": "Brand",
+    "facet_inverter_brand": "Inverter brand",
+    "facet_battery_brand": "Battery brand",
     "facet_monobrand": "Mono-brand (inverter + battery, same brand)",
     "facet_capacity": "Capacity",
     "facet_length": "Length",
