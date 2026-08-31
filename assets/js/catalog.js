@@ -19,12 +19,13 @@ Object.keys(SLUG_TO_CATEGORY).forEach(function(slug) {
    the kit (inverter or battery); "monobrand" is an extra checkbox meaning
    both halves are the same brand. ---- */
 const FACET_CONFIG = {
-  'hybridni-invertory': { power: true, brand: true },
-  'komplekty':          { power: true, brand: true, monobrand: true },
-  'akumulyatory':       { brand: true, capacity: true },
-  'kabeli':             { crossSection: true, lugSize: true },
+  'hybridni-invertory':  { power: true, brand: true },
+  'komplekty':           { power: true, brand: true, monobrand: true },
+  'akumulyatory':        { brand: true, capacity: true },
+  'kabeli':              { length: true, lugSize: true },
+  'dzherela-zhyvlennya': { brand: true },
 };
-const KNOWN_BRANDS = ['DAH Solar', 'Deye', 'Dyness', 'Felicity', 'Must'];
+const KNOWN_BRANDS = ['DAH Solar', 'Deye', 'Dyness', 'Felicity', 'Must', 'EcoFlow', 'TTN'];
 
 function extractBrand(title) {
   if (!title) return null;
@@ -59,16 +60,34 @@ function extractAh(title) {
   return m ? m[1].replace(',', '.') : null;
 }
 
-/* Cable cross-section - "25 мм" / "6 мм" (mm²) or "4AWG" for the Dyness set.
-   AWG is checked first since that title also contains an unrelated "2050мм"
-   (length), which would otherwise falsely match the мм pattern. */
-function extractCrossSection(title) {
+/* Cable length - "1 м", "50 см", "2050 мм", "500 м" (a reel). Checked in
+   м → см → мм order, each rejecting a match immediately followed by another
+   letter (so "мм" doesn't get eaten by the "м" pattern, "см" doesn't get
+   eaten by "м" either, etc.) — plain \b doesn't work here since JS regex
+   only treats ASCII as "word" characters, not Cyrillic. */
+const NOT_LETTER = '(?![а-яіїєА-ЯІЇЄa-zA-Z])';
+function extractLength(title) {
   if (!title) return null;
-  let m = title.match(/(\d+)\s*AWG/i);
-  if (m) return m[1] + ' AWG';
-  m = title.match(/(\d+(?:[.,]\d+)?)\s*мм(?!\d)/i);
+  let m = title.match(new RegExp('(\\d+(?:[.,]\\d+)?)\\s*м' + NOT_LETTER, 'i'));
+  if (m) return m[1].replace(',', '.') + ' м';
+  m = title.match(new RegExp('(\\d+(?:[.,]\\d+)?)\\s*см' + NOT_LETTER, 'i'));
+  if (m) return m[1].replace(',', '.') + ' см';
+  m = title.match(new RegExp('(\\d+(?:[.,]\\d+)?)\\s*мм' + NOT_LETTER, 'i'));
   if (m) return m[1].replace(',', '.') + ' мм';
   return null;
+}
+
+/* Convert an extractLength() value back to mm, purely so the facet checkbox
+   list can be sorted by actual physical length instead of alphabetically
+   (which would put "500 м" before "50 см"). */
+function lengthToMm(label) {
+  const m = label.match(/^(\d+(?:\.\d+)?)\s*(мм|см|м)$/i);
+  if (!m) return 0;
+  const n = parseFloat(m[1]);
+  const unit = m[2].toLowerCase();
+  if (unit === 'мм') return n;
+  if (unit === 'см') return n * 10;
+  return n * 1000;
 }
 
 /* Lug/terminal thread size - "мідні накінечники М8" / "...М10". */
@@ -121,7 +140,7 @@ let selectedPowers        = new Set();
 let selectedBrands        = new Set();
 let monobrandOnly         = false;
 let selectedCapacities    = new Set();
-let selectedCrossSections = new Set();
+let selectedLengths       = new Set();
 let selectedLugSizes      = new Set();
 
 /* ---- Local helpers ---- */
@@ -200,7 +219,7 @@ function selectCategory(type) {
   selectedBrands        = new Set();
   monobrandOnly         = false;
   selectedCapacities    = new Set();
-  selectedCrossSections = new Set();
+  selectedLengths       = new Set();
   selectedLugSizes      = new Set();
   setActiveMenuState();
   renderFacets();
@@ -262,17 +281,21 @@ function renderFacets() {
   let html = '';
 
   /* Generic "extract a value from the title, count distinct values, render
-     a checkbox per value" group - used for power/capacity/cross-section/lug
-     size. Brand (with its monobrand extra checkbox) is handled separately
-     below since it needs productBrands() instead of a plain extractor. */
-  function renderNumericFacet(titleKey, dataFacet, extractFn, selectedSet, unit, numericSort) {
+     a checkbox per value" group - used for power/capacity/length/lug size.
+     `sort` is either true (plain numeric via parseFloat), a custom
+     comparator (needed when the label mixes units, e.g. length), or falsy
+     for alphabetical. Brand (with its monobrand extra checkbox) is handled
+     separately below since it needs productBrands() instead of a plain
+     extractor. */
+  function renderNumericFacet(titleKey, dataFacet, extractFn, selectedSet, unit, sort) {
     const counts = {};
     inCategory.forEach(p => {
       const title = window.I18n ? window.I18n.productTitle(p) : (p.title || '');
       const v = extractFn(title);
       if (v !== null) counts[v] = (counts[v] || 0) + 1;
     });
-    const values = Object.keys(counts).sort(numericSort ? (a, b) => parseFloat(a) - parseFloat(b) : undefined);
+    const cmp = typeof sort === 'function' ? sort : (sort ? (a, b) => parseFloat(a) - parseFloat(b) : undefined);
+    const values = Object.keys(counts).sort(cmp);
     if (!values.length) return;
     html += `<div class="facet-group"><div class="facet-group__title">${escapeHtml(t(titleKey))}</div>`;
     values.forEach(v => {
@@ -282,10 +305,10 @@ function renderFacets() {
     html += `</div>`;
   }
 
-  if (facets.power)        renderNumericFacet('catalog.facet_power', 'power', extractKw, selectedPowers, t('catalog.facet_power_unit'), true);
-  if (facets.capacity)     renderNumericFacet('catalog.facet_capacity', 'capacity', extractAh, selectedCapacities, 'Ah', true);
-  if (facets.crossSection) renderNumericFacet('catalog.facet_cross_section', 'crossSection', extractCrossSection, selectedCrossSections, '', false);
-  if (facets.lugSize)      renderNumericFacet('catalog.facet_lug_size', 'lugSize', extractLugSize, selectedLugSizes, '', false);
+  if (facets.power)    renderNumericFacet('catalog.facet_power', 'power', extractKw, selectedPowers, t('catalog.facet_power_unit'), true);
+  if (facets.capacity) renderNumericFacet('catalog.facet_capacity', 'capacity', extractAh, selectedCapacities, 'Ah', true);
+  if (facets.length)   renderNumericFacet('catalog.facet_length', 'length', extractLength, selectedLengths, '', (a, b) => lengthToMm(a) - lengthToMm(b));
+  if (facets.lugSize)  renderNumericFacet('catalog.facet_lug_size', 'lugSize', extractLugSize, selectedLugSizes, '', false);
 
   if (facets.brand) {
     const counts = {};
@@ -315,7 +338,7 @@ function renderFacets() {
   [
     ['power', selectedPowers],
     ['capacity', selectedCapacities],
-    ['crossSection', selectedCrossSections],
+    ['length', selectedLengths],
     ['lugSize', selectedLugSizes],
     ['brand', selectedBrands],
   ].forEach(([key, set]) => {
@@ -357,9 +380,9 @@ function applyFilters() {
         const ah = extractAh(title);
         if (ah === null || !selectedCapacities.has(ah)) return false;
       }
-      if (facets.crossSection && selectedCrossSections.size) {
-        const cs = extractCrossSection(title);
-        if (cs === null || !selectedCrossSections.has(cs)) return false;
+      if (facets.length && selectedLengths.size) {
+        const len = extractLength(title);
+        if (len === null || !selectedLengths.has(len)) return false;
       }
       if (facets.lugSize && selectedLugSizes.size) {
         const ls = extractLugSize(title);
