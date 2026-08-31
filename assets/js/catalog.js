@@ -129,6 +129,36 @@ function isMonobrand(title) {
   return !!inv && !!bat && inv === bat;
 }
 
+/* Battery capacity in kWh for a kit, from the battery half of the title.
+   Prefers an explicitly stated "16kWh" when present; otherwise computes it
+   from voltage × Ah (both are always present on the battery half). */
+function extractKitBatteryKwh(title) {
+  const body = (title || '').replace(/^Комплект автономного енергоживлення:\s*/i, '');
+  const parts = body.split(/\s*\+\s*/);
+  if (parts.length !== 2) return null;
+  const battery = parts[1];
+
+  let m = battery.match(/(\d+(?:[.,]\d+)?)\s*kWh/i);
+  if (m) return parseFloat(m[1].replace(',', '.'));
+
+  const v  = battery.match(/(\d+(?:[.,]\d+)?)\s*V\b/i);
+  const ah = battery.match(/(\d+(?:[.,]\d+)?)\s*[AaАа][hH]\b/);
+  if (v && ah) {
+    return Math.round(parseFloat(v[1].replace(',', '.')) * parseFloat(ah[1].replace(',', '.')) / 10) / 100;
+  }
+  return null;
+}
+
+/* "Легкий" / "Оптимальний" / "Супер запасливий" status badge, by battery
+   capacity - per product owner's thresholds: ≤5 / ≤12 / >12 kWh. */
+function kitStatusTier(title) {
+  const kwh = extractKitBatteryKwh(title);
+  if (kwh === null) return null;
+  if (kwh <= 5) return 'light';
+  if (kwh <= 12) return 'optimal';
+  return 'super';
+}
+
 /* Brand for the plain single-brand facet (everything except komplekty,
    which has its own separate inverter/battery lists). */
 function productBrands(p) {
@@ -507,6 +537,27 @@ function renderCard(p) {
   const zagl     = _assetsBase + 'assets/images/zaglushka.png';
   const href     = `${_productBase}${encodeURIComponent(p.slug || p.id)}/${encodeURIComponent(p.id)}.html`;
 
+  /* Kit-only badges: mono-brand, "Легкий/Оптимальний/Супер запасливий"
+     capacity tier, and an installment call-to-action. */
+  const isKit = CATEGORY_TO_SLUG[p.product_type] === 'komplekty';
+  let monobrandBadgeHtml = '';
+  let tierBadgeHtml = '';
+  let installmentHtml = '';
+  if (isKit) {
+    if (isMonobrand(displayTitle)) {
+      monobrandBadgeHtml = `<div class="product-card__monobrand">${escapeHtml(t('catalog.monobrand_badge'))}</div>`;
+    }
+    const tier = kitStatusTier(displayTitle);
+    if (tier) {
+      tierBadgeHtml = `<div class="product-card__tier product-card__tier--${tier}">${escapeHtml(t('catalog.tier_' + tier))}</div>`;
+    }
+    installmentHtml = `
+      <div class="product-card__installment">
+        <span class="product-card__installment-badge">${escapeHtml(t('catalog.installment_badge'))}</span>
+        <span class="product-card__installment-note">${escapeHtml(t('catalog.installment_note'))}</span>
+      </div>`;
+  }
+
   return `
   <div class="product-card">
     <a href="${href}" class="product-card__img-wrap" aria-label="${escapeHtml(title)}">
@@ -515,13 +566,16 @@ function renderCard(p) {
            loading="lazy"
            onerror="this.src='${zagl}'">
       <div class="product-card__availability">${badge}</div>
+      ${monobrandBadgeHtml}
     </a>
     <div class="product-card__body">
+      ${tierBadgeHtml}
       <a href="${href}" class="product-card__title">${escapeHtml(title)}</a>
       <div class="product-card__price-row">
         <span class="product-card__price">${escapeHtml(priceStr)}</span>
         ${p.mpn ? `<span class="product-card__sku">${t('catalog.article')} ${escapeHtml(p.mpn)}</span>` : ''}
       </div>
+      ${installmentHtml}
     </div>
     <div class="product-card__footer">
       <a href="${href}" class="btn btn-block">

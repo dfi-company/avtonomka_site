@@ -578,6 +578,53 @@ main { flex: 1; }
   margin-left: auto;
 }
 
+/* Kit-only badges (Комплекти): mono-brand corner tag, capacity tier pill,
+   installment note. */
+.product-card__monobrand {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+  background: var(--color-dark);
+  color: var(--color-white);
+  font-size: .68rem;
+  font-weight: 700;
+  padding: 4px 9px;
+  border-radius: 20px;
+  letter-spacing: .02em;
+}
+
+.product-card__tier {
+  align-self: flex-start;
+  font-size: .72rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: .02em;
+}
+.product-card__tier--light   { background: #e3f2fd; color: #1565c0; }
+.product-card__tier--optimal { background: rgba(245,166,35,.15); color: #c07d00; }
+.product-card__tier--super   { background: #f3e5f5; color: #7b1fa2; }
+
+.product-card__installment {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.product-card__installment-badge {
+  align-self: flex-start;
+  background: rgba(46,204,64,.12);
+  color: var(--color-green);
+  font-size: .78rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+.product-card__installment-note {
+  font-size: .72rem;
+  color: var(--color-muted);
+}
+
 /* Footer / CTA */
 .product-card__footer {
   padding: 0 18px 18px;

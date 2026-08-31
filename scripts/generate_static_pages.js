@@ -173,6 +173,50 @@ function detectBrand(title) {
   return found.size === 1 ? [...found][0] : null;
 }
 
+/* Kit-only badges (Комплекти автономного енергоживлення), mirrors the same
+   logic in assets/js/catalog.js — keep both in sync. */
+const KIT_FACET_BRANDS = ['DAH Solar', 'Deye', 'Dyness', 'Felicity', 'Must', 'EcoFlow', 'TTN'];
+function extractKitHalfBrand(text) {
+  if (!text) return null;
+  for (const b of KIT_FACET_BRANDS) {
+    const re = new RegExp('\\b' + b.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'i');
+    if (re.test(text)) return b;
+  }
+  return null;
+}
+function kitBrandParts(title) {
+  const body = (title || '').replace(/^Комплект автономного енергоживлення:\s*/i, '');
+  const parts = body.split(/\s*\+\s*/);
+  if (parts.length !== 2) return [null, null];
+  return [extractKitHalfBrand(parts[0]), extractKitHalfBrand(parts[1])];
+}
+function isMonobrand(title) {
+  const [inv, bat] = kitBrandParts(title);
+  return !!inv && !!bat && inv === bat;
+}
+function extractKitBatteryKwh(title) {
+  const body = (title || '').replace(/^Комплект автономного енергоживлення:\s*/i, '');
+  const parts = body.split(/\s*\+\s*/);
+  if (parts.length !== 2) return null;
+  const battery = parts[1];
+  let m = battery.match(/(\d+(?:[.,]\d+)?)\s*kWh/i);
+  if (m) return parseFloat(m[1].replace(',', '.'));
+  const v  = battery.match(/(\d+(?:[.,]\d+)?)\s*V\b/i);
+  const ah = battery.match(/(\d+(?:[.,]\d+)?)\s*[AaАа][hH]\b/);
+  if (v && ah) {
+    return Math.round(parseFloat(v[1].replace(',', '.')) * parseFloat(ah[1].replace(',', '.')) / 10) / 100;
+  }
+  return null;
+}
+function kitStatusTier(title) {
+  const kwh = extractKitBatteryKwh(title);
+  if (kwh === null) return null;
+  if (kwh <= 5) return 'light';
+  if (kwh <= 12) return 'optimal';
+  return 'super';
+}
+const TIER_LABELS = { light: 'Легкий', optimal: 'Оптимальний', super: 'Супер запасливий' };
+
 function loadProducts() {
   let raw = fs.readFileSync(path.join(ROOT, 'products.json'), 'utf8');
   if (raw.charCodeAt(0) === 0xFEFF) raw = raw.slice(1);
@@ -518,6 +562,25 @@ function renderCard(p, base) {
   const zagl     = base + 'assets/images/zaglushka.png';
   const href     = `${base}product/${productSlug(p)}/${encodeURIComponent(p.id)}.html`;
 
+  const isKit = CATEGORY_TO_SLUG[p.product_type] === 'komplekty';
+  let monobrandBadgeHtml = '';
+  let tierBadgeHtml = '';
+  let installmentHtml = '';
+  if (isKit) {
+    if (isMonobrand(p.title)) {
+      monobrandBadgeHtml = '<div class="product-card__monobrand">Монобренд</div>';
+    }
+    const tier = kitStatusTier(p.title);
+    if (tier) {
+      tierBadgeHtml = `<div class="product-card__tier product-card__tier--${tier}">${escapeHtml(TIER_LABELS[tier])}</div>`;
+    }
+    installmentHtml = `
+      <div class="product-card__installment">
+        <span class="product-card__installment-badge">+ Розстрочка</span>
+        <span class="product-card__installment-note">Запитайте умови у менеджера!</span>
+      </div>`;
+  }
+
   return `
   <div class="product-card">
     <a href="${href}" class="product-card__img-wrap" aria-label="${escapeHtml(title)}">
@@ -526,13 +589,16 @@ function renderCard(p, base) {
            loading="lazy"
            onerror="this.src='${zagl}'">
       <div class="product-card__availability">${badge}</div>
+      ${monobrandBadgeHtml}
     </a>
     <div class="product-card__body">
+      ${tierBadgeHtml}
       <a href="${href}" class="product-card__title">${escapeHtml(title)}</a>
       <div class="product-card__price-row">
         <span class="product-card__price">${escapeHtml(priceStr)}</span>
         ${p.mpn ? `<span class="product-card__sku">Арт. ${escapeHtml(p.mpn)}</span>` : ''}
       </div>
+      ${installmentHtml}
     </div>
     <div class="product-card__footer">
       <a href="${href}" class="btn btn-block">Детальніше →</a>

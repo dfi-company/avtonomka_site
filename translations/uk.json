@@ -108,7 +108,13 @@
     "article": "Арт.",
     "details": "Детальніше →",
     "add_to_cart": "Додати в кошик",
-    "return_policy": "Умови повернення"
+    "return_policy": "Умови повернення",
+    "monobrand_badge": "Монобренд",
+    "tier_light": "Легкий",
+    "tier_optimal": "Оптимальний",
+    "tier_super": "Супер запасливий",
+    "installment_badge": "+ Розстрочка",
+    "installment_note": "Запитайте умови у менеджера!"
   },
   "product": {
     "breadcrumb_home": "Головна",

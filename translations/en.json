@@ -110,7 +110,13 @@
     "article": "SKU:",
     "details": "Details →",
     "add_to_cart": "Add to cart",
-    "return_policy": "Return Policy"
+    "return_policy": "Return Policy",
+    "monobrand_badge": "Mono-brand",
+    "tier_light": "Light",
+    "tier_optimal": "Optimal",
+    "tier_super": "High capacity",
+    "installment_badge": "+ Installments",
+    "installment_note": "Ask our manager for terms!"
   },
   "product": {
     "breadcrumb_home": "Home",
