@@ -97,6 +97,55 @@ function tgOrderLink(title) {
 /* ---- Expose helpers globally ---- */
 window.AvtonomkaUtils = { formatPrice, stripHtml, truncate, tgOrderLink };
 
+/* ---- Article view counter (Abacus - free hosted hit counter, shared across
+   articles.html and the "Останні статті" block on the homepage so both show
+   the same numbers). /get reads without incrementing; /hit increments too -
+   only call hit:true for the article actually being opened, never a preview
+   card. Best-effort: if the service is unreachable, the element is removed
+   rather than showing a broken placeholder. ---- */
+(function () {
+  const VIEWS_NAMESPACE = 'avtonomka-com-ua-articles';
+
+  function pluralizeUk(n, one, few, many) {
+    const mod10 = n % 10;
+    const mod100 = n % 100;
+    if (mod10 === 1 && mod100 !== 11) return one;
+    if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return few;
+    return many;
+  }
+
+  function viewsLabel(n) {
+    if (window.I18n && window.I18n.lang === 'en') return n === 1 ? 'view' : 'views';
+    return pluralizeUk(n, 'перегляд', 'перегляди', 'переглядів');
+  }
+
+  async function fetchViews(id, hit) {
+    const url = `https://abacus.jasoncameron.dev/${hit ? 'hit' : 'get'}/${VIEWS_NAMESPACE}/${encodeURIComponent('article-' + id)}`;
+    try {
+      const res = await fetch(url);
+      if (res.status === 404) return 0;
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      return typeof data.value === 'number' ? data.value : null;
+    } catch (e) {
+      console.warn('Лічильник переглядів недоступний:', e);
+      return null;
+    }
+  }
+
+  function populateViews(scopeEl, hit) {
+    scopeEl.querySelectorAll('[data-views-id]').forEach((el) => {
+      const id = el.dataset.viewsId;
+      fetchViews(id, hit).then((count) => {
+        if (count === null) { el.remove(); return; }
+        el.textContent = `👁 ${count.toLocaleString('uk-UA')} ${viewsLabel(count)}`;
+      });
+    });
+  }
+
+  window.AvtonomkaViews = { fetchViews, populateViews, viewsLabel };
+})();
+
 /* ---- Lightbox (click-to-zoom photo), shared by product.js and category cards ---- */
 function openLightbox(src, alt) {
   let overlay = document.getElementById('photo-lightbox');

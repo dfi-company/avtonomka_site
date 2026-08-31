@@ -299,7 +299,7 @@
   </footer>
 
   <script src="assets/js/i18n.js?v=20260831c"></script>
-  <script src="assets/js/main.js?v=20260831c"></script>
+  <script src="assets/js/main.js?v=20260831d"></script>
   <script src="assets/js/cart.js?v=20260831c"></script>
   <script src="assets/js/blog.js?v=20260831c"></script>
   <script>
@@ -354,16 +354,18 @@
             const img = a.photo ? `<div class="article-card__img"><img src="${esc(a.photo)}" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>` : '<div class="article-card__img article-card__img--placeholder"></div>';
             const title = af(a, 'title');
             const summary = af(a, 'summary');
+            const meta = (date ? esc(date) + ' · ' : '') + `<span data-views-id="${esc(a.id)}">…</span>`;
             return `<a href="articles.html#${esc(a.id)}" class="article-card" style="text-decoration:none">
               ${img}
               <div class="article-card__body">
-                ${date ? `<div class="article-card__date">${esc(date)}</div>` : ''}
+                <div class="article-card__date">${meta}</div>
                 <h3 class="article-card__title">${esc(title)}</h3>
                 ${summary ? `<p class="article-card__summary">${esc(summary)}</p>` : ''}
               </div>
               <div class="article-card__footer"><span class="article-card__link">${esc(t('home.read_more'))}</span></div>
             </a>`;
           }).join('');
+          if (window.AvtonomkaViews) window.AvtonomkaViews.populateViews(grid, false);
         } catch (e) {
           grid.innerHTML = '<p class="text-muted" style="grid-column:1/-1">' + t('home.articles_error') + '</p>';
         }
