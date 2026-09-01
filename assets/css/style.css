@@ -593,12 +593,18 @@ main { flex: 1; }
   font-weight: 800;
   color: var(--color-green);
   letter-spacing: -.01em;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .product-card__sku {
   font-size: .72rem;
   color: var(--color-muted);
   margin-left: auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 
