@@ -564,18 +564,17 @@ function renderCard(p) {
     installmentNoteHtml = `<div class="product-card__installment-note">${escapeHtml(t('catalog.installment_note'))}</div>`;
   }
 
-  /* Cable-only spec chips: cross-section, lug size, length - whichever the
-     title actually has (same extractors the "Кабелі" facets use). */
+  /* Cable-only spec pills: cross-section, lug size, length - whichever the
+     title actually has (same extractors the "Кабелі" facets use), stacked
+     over the image like the kit badges. */
   let cableSpecsHtml = '';
   if (CATEGORY_TO_SLUG[p.product_type] === 'kabeli') {
-    const chips = [];
     const cs = extractCrossSection(displayTitle);
-    if (cs) chips.push(`<span class="product-card__spec">⚡ ${escapeHtml(cs)}</span>`);
+    if (cs) cableSpecsHtml += `<span class="product-card__pill product-card__pill--spec">⚡ ${escapeHtml(cs)}</span>`;
     const ls = extractLugSize(displayTitle);
-    if (ls) chips.push(`<span class="product-card__spec">🔩 ${escapeHtml(ls)}</span>`);
+    if (ls) cableSpecsHtml += `<span class="product-card__pill product-card__pill--spec">🔩 ${escapeHtml(ls)}</span>`;
     const len = extractLength(displayTitle);
-    if (len) chips.push(`<span class="product-card__spec">📏 ${escapeHtml(len)}</span>`);
-    if (chips.length) cableSpecsHtml = `<div class="product-card__specs">${chips.join('')}</div>`;
+    if (len) cableSpecsHtml += `<span class="product-card__pill product-card__pill--spec">📏 ${escapeHtml(len)}</span>`;
   }
 
   return `
@@ -588,11 +587,11 @@ function renderCard(p) {
       <div class="product-card__badge-stack">
         ${isKit ? '' : `<span class="product-card__pill product-card__pill--${inStock ? 'in-stock' : 'out-of-stock'}">${escapeHtml(availabilityText)}</span>`}
         ${stackExtraHtml}
+        ${cableSpecsHtml}
       </div>
     </a>
     <div class="product-card__body">
       <a href="${href}" class="product-card__title">${escapeHtml(title)}</a>
-      ${cableSpecsHtml}
       <div class="product-card__price-row">
         <span class="product-card__price">${escapeHtml(priceStr)}</span>
         ${p.mpn ? `<span class="product-card__sku">${t('catalog.article')} ${escapeHtml(p.mpn)}</span>` : ''}

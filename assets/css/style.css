@@ -556,6 +556,7 @@ main { flex: 1; }
 .product-card__pill--tier-optimal { background: #c07d00; }
 .product-card__pill--tier-super   { background: #7b1fa2; }
 .product-card__pill--monobrand    { background: var(--color-dark); }
+.product-card__pill--spec         { background: rgba(26,46,74,.72); }
 
 /* Body */
 .product-card__body {
@@ -600,20 +601,6 @@ main { flex: 1; }
   margin-left: auto;
 }
 
-/* Cable-only spec chips (переріз / накінечник / довжина) on the catalog card */
-.product-card__specs { display: flex; flex-wrap: wrap; gap: 6px; }
-.product-card__spec {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  font-size: .74rem;
-  font-weight: 600;
-  color: var(--color-dark);
-  background: var(--color-grey);
-  border: 1px solid var(--color-border);
-  padding: 3px 9px;
-  border-radius: 20px;
-}
 
 .product-card__installment-note {
   font-size: .72rem;
