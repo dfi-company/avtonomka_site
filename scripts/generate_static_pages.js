@@ -553,9 +553,7 @@ function generateAllProductPages(products) {
 
 function renderCard(p, base) {
   const inStock  = p.availability === 'in_stock';
-  const badge    = inStock
-    ? '<span class="badge badge-green">✓ В наявності</span>'
-    : '<span class="badge badge-grey">Немає</span>';
+  const availabilityText = inStock ? '✓ В наявності' : 'Немає';
   const priceStr = formatPrice(p.price || '');
   const title    = truncate(p.title || '', 80);
   const img      = p.image_link ? (/^https?:\/\//.test(p.image_link) ? p.image_link : base + p.image_link) : (base + 'assets/images/zaglushka.png');
@@ -563,22 +561,20 @@ function renderCard(p, base) {
   const href     = `${base}product/${productSlug(p)}/${encodeURIComponent(p.id)}.html`;
 
   const isKit = CATEGORY_TO_SLUG[p.product_type] === 'komplekty';
-  let monobrandBadgeHtml = '';
-  let tierBadgeHtml = '';
-  let installmentHtml = '';
+  let stackExtraHtml = '';
+  let installmentNoteHtml = '';
   if (isKit) {
+    let monobrandBadgeHtml = '';
+    let tierBadgeHtml = '';
     if (isMonobrand(p.title)) {
-      monobrandBadgeHtml = '<div class="product-card__monobrand">Монобренд</div>';
+      monobrandBadgeHtml = '<span class="product-card__pill product-card__pill--monobrand">Монобренд</span>';
     }
     const tier = kitStatusTier(p.title);
     if (tier) {
-      tierBadgeHtml = `<div class="product-card__tier product-card__tier--${tier}">${escapeHtml(TIER_LABELS[tier])}</div>`;
+      tierBadgeHtml = `<span class="product-card__pill product-card__pill--tier-${tier}">${escapeHtml(TIER_LABELS[tier])}</span>`;
     }
-    installmentHtml = `
-      <div class="product-card__installment">
-        <span class="product-card__installment-badge">+ Розстрочка</span>
-        <span class="product-card__installment-note">Запитайте умови у менеджера!</span>
-      </div>`;
+    stackExtraHtml = `<span class="product-card__pill product-card__pill--installment">+ Розстрочка</span>${tierBadgeHtml}${monobrandBadgeHtml}`;
+    installmentNoteHtml = '<div class="product-card__installment-note">Запитайте умови у менеджера!</div>';
   }
 
   return `
@@ -588,17 +584,18 @@ function renderCard(p, base) {
            alt="${escapeHtml(p.title || '')}"
            loading="lazy"
            onerror="this.src='${zagl}'">
-      <div class="product-card__availability">${badge}</div>
-      ${monobrandBadgeHtml}
+      <div class="product-card__badge-stack">
+        <span class="product-card__pill product-card__pill--${inStock ? 'in-stock' : 'out-of-stock'}">${escapeHtml(availabilityText)}</span>
+        ${stackExtraHtml}
+      </div>
     </a>
     <div class="product-card__body">
-      ${tierBadgeHtml}
       <a href="${href}" class="product-card__title">${escapeHtml(title)}</a>
       <div class="product-card__price-row">
         <span class="product-card__price">${escapeHtml(priceStr)}</span>
         ${p.mpn ? `<span class="product-card__sku">Арт. ${escapeHtml(p.mpn)}</span>` : ''}
       </div>
-      ${installmentHtml}
+      ${installmentNoteHtml}
     </div>
     <div class="product-card__footer">
       <a href="${href}" class="btn btn-block">Детальніше →</a>

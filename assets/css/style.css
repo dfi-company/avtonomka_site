@@ -528,12 +528,34 @@ main { flex: 1; }
   pointer-events: none;
 }
 
-.product-card__availability {
+/* Small stacked corner badges (availability + kit-only tags) - compact
+   pills with a bit of lift/shadow, one per line, top-left over the image. */
+.product-card__badge-stack {
   position: absolute;
   top: 10px;
   left: 10px;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
 }
+.product-card__pill {
+  font-size: .68rem;
+  font-weight: 700;
+  color: var(--color-white);
+  padding: 4px 10px;
+  border-radius: 20px;
+  letter-spacing: .02em;
+  box-shadow: 0 2px 6px rgba(0,0,0,.18);
+}
+.product-card__pill--in-stock     { background: #17a126; }
+.product-card__pill--out-of-stock { background: var(--color-muted); }
+.product-card__pill--installment  { background: var(--color-orange); color: var(--color-dark); }
+.product-card__pill--tier-light   { background: #1976d2; }
+.product-card__pill--tier-optimal { background: #c07d00; }
+.product-card__pill--tier-super   { background: #7b1fa2; }
+.product-card__pill--monobrand    { background: var(--color-dark); }
 
 /* Body */
 .product-card__body {
@@ -578,48 +600,6 @@ main { flex: 1; }
   margin-left: auto;
 }
 
-/* Kit-only badges (Комплекти): mono-brand corner tag, capacity tier pill,
-   installment note. */
-.product-card__monobrand {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 1;
-  background: var(--color-dark);
-  color: var(--color-white);
-  font-size: .68rem;
-  font-weight: 700;
-  padding: 4px 9px;
-  border-radius: 20px;
-  letter-spacing: .02em;
-}
-
-.product-card__tier {
-  align-self: flex-start;
-  font-size: .72rem;
-  font-weight: 700;
-  padding: 3px 10px;
-  border-radius: 20px;
-  letter-spacing: .02em;
-}
-.product-card__tier--light   { background: #e3f2fd; color: #1565c0; }
-.product-card__tier--optimal { background: rgba(245,166,35,.15); color: #c07d00; }
-.product-card__tier--super   { background: #f3e5f5; color: #7b1fa2; }
-
-.product-card__installment {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-.product-card__installment-badge {
-  align-self: flex-start;
-  background: rgba(46,204,64,.12);
-  color: var(--color-green);
-  font-size: .78rem;
-  font-weight: 700;
-  padding: 3px 10px;
-  border-radius: 20px;
-}
 .product-card__installment-note {
   font-size: .72rem;
   color: var(--color-muted);
