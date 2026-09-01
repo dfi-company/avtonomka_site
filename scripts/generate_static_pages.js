@@ -585,7 +585,7 @@ function renderCard(p, base) {
            loading="lazy"
            onerror="this.src='${zagl}'">
       <div class="product-card__badge-stack">
-        <span class="product-card__pill product-card__pill--${inStock ? 'in-stock' : 'out-of-stock'}">${escapeHtml(availabilityText)}</span>
+        ${isKit ? '' : `<span class="product-card__pill product-card__pill--${inStock ? 'in-stock' : 'out-of-stock'}">${escapeHtml(availabilityText)}</span>`}
         ${stackExtraHtml}
       </div>
     </a>
