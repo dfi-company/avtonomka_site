@@ -570,7 +570,7 @@ function renderCard(p) {
   let cableSpecsHtml = '';
   if (CATEGORY_TO_SLUG[p.product_type] === 'kabeli') {
     const cs = extractCrossSection(displayTitle);
-    if (cs) cableSpecsHtml += `<span class="product-card__pill product-card__pill--spec">⚡ ${escapeHtml(cs)}</span>`;
+    if (cs) cableSpecsHtml += `<span class="product-card__pill product-card__pill--spec">⌀ ${escapeHtml(cs)}</span>`;
     const ls = extractLugSize(displayTitle);
     if (ls) cableSpecsHtml += `<span class="product-card__pill product-card__pill--spec">🔩 ${escapeHtml(ls)}</span>`;
     const len = extractLength(displayTitle);
