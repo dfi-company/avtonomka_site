@@ -566,8 +566,9 @@ function renderCard(p, base) {
   if (isKit) {
     let monobrandBadgeHtml = '';
     let tierBadgeHtml = '';
-    if (isMonobrand(p.title)) {
-      monobrandBadgeHtml = '<span class="product-card__pill product-card__pill--monobrand">Монобренд</span>';
+    const [invBrand, batBrand] = kitBrandParts(p.title);
+    if (invBrand && invBrand === batBrand) {
+      monobrandBadgeHtml = `<span class="product-card__pill product-card__pill--monobrand">Монобренд ${escapeHtml(invBrand)}</span>`;
     }
     const tier = kitStatusTier(p.title);
     if (tier) {

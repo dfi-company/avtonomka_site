@@ -552,8 +552,9 @@ function renderCard(p) {
   if (isKit) {
     let monobrandBadgeHtml = '';
     let tierBadgeHtml = '';
-    if (isMonobrand(displayTitle)) {
-      monobrandBadgeHtml = `<span class="product-card__pill product-card__pill--monobrand">${escapeHtml(t('catalog.monobrand_badge'))}</span>`;
+    const [invBrand, batBrand] = kitBrandParts(displayTitle);
+    if (invBrand && invBrand === batBrand) {
+      monobrandBadgeHtml = `<span class="product-card__pill product-card__pill--monobrand">${escapeHtml(t('catalog.monobrand_badge'))} ${escapeHtml(invBrand)}</span>`;
     }
     const tier = kitStatusTier(displayTitle);
     if (tier) {
