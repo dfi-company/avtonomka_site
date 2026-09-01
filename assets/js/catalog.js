@@ -564,6 +564,20 @@ function renderCard(p) {
     installmentNoteHtml = `<div class="product-card__installment-note">${escapeHtml(t('catalog.installment_note'))}</div>`;
   }
 
+  /* Cable-only spec chips: cross-section, lug size, length - whichever the
+     title actually has (same extractors the "Кабелі" facets use). */
+  let cableSpecsHtml = '';
+  if (CATEGORY_TO_SLUG[p.product_type] === 'kabeli') {
+    const chips = [];
+    const cs = extractCrossSection(displayTitle);
+    if (cs) chips.push(`<span class="product-card__spec">⚡ ${escapeHtml(cs)}</span>`);
+    const ls = extractLugSize(displayTitle);
+    if (ls) chips.push(`<span class="product-card__spec">🔩 ${escapeHtml(ls)}</span>`);
+    const len = extractLength(displayTitle);
+    if (len) chips.push(`<span class="product-card__spec">📏 ${escapeHtml(len)}</span>`);
+    if (chips.length) cableSpecsHtml = `<div class="product-card__specs">${chips.join('')}</div>`;
+  }
+
   return `
   <div class="product-card">
     <a href="${href}" class="product-card__img-wrap" aria-label="${escapeHtml(title)}">
@@ -578,6 +592,7 @@ function renderCard(p) {
     </a>
     <div class="product-card__body">
       <a href="${href}" class="product-card__title">${escapeHtml(title)}</a>
+      ${cableSpecsHtml}
       <div class="product-card__price-row">
         <span class="product-card__price">${escapeHtml(priceStr)}</span>
         ${p.mpn ? `<span class="product-card__sku">${t('catalog.article')} ${escapeHtml(p.mpn)}</span>` : ''}

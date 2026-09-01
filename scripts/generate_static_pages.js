@@ -217,6 +217,36 @@ function kitStatusTier(title) {
 }
 const TIER_LABELS = { light: 'Легкий', optimal: 'Оптимальний', super: 'Супер запасливий' };
 
+/* Cable spec extractors - mirrors assets/js/catalog.js, keep both in sync. */
+const NOT_LETTER = '(?![а-яіїєА-ЯІЇЄa-zA-Z])';
+function extractLength(title) {
+  if (!title) return null;
+  let m = title.match(new RegExp('(\\d+(?:[.,]\\d+)?)\\s*м' + NOT_LETTER, 'i'));
+  if (m) return m[1].replace(',', '.') + ' м';
+  m = title.match(new RegExp('(\\d+(?:[.,]\\d+)?)\\s*см' + NOT_LETTER, 'i'));
+  if (m) return m[1].replace(',', '.') + ' см';
+  m = title.match(new RegExp('(\\d+(?:[.,]\\d+)?)\\s*мм' + NOT_LETTER, 'i'));
+  if (m) return m[1].replace(',', '.') + ' мм';
+  return null;
+}
+const AWG_TO_MM2 = { '4': '21' };
+function extractCrossSection(title) {
+  if (!title) return null;
+  let m = title.match(/(\d+)\s*AWG/i);
+  if (m) {
+    const mm2 = AWG_TO_MM2[m[1]];
+    return mm2 ? mm2 + ' мм²' : m[1] + ' AWG';
+  }
+  m = title.match(/(\d+(?:[.,]\d+)?)\s*мм(?!\d)/i);
+  if (m) return m[1].replace(',', '.') + ' мм';
+  return null;
+}
+function extractLugSize(title) {
+  if (!title) return null;
+  const m = title.match(/накінечники\s*(М\d+)/i);
+  return m ? m[1].toUpperCase() : null;
+}
+
 function loadProducts() {
   let raw = fs.readFileSync(path.join(ROOT, 'products.json'), 'utf8');
   if (raw.charCodeAt(0) === 0xFEFF) raw = raw.slice(1);
@@ -578,6 +608,18 @@ function renderCard(p, base) {
     installmentNoteHtml = '<div class="product-card__installment-note">Запитайте умови у менеджера!</div>';
   }
 
+  let cableSpecsHtml = '';
+  if (CATEGORY_TO_SLUG[p.product_type] === 'kabeli') {
+    const chips = [];
+    const cs = extractCrossSection(p.title);
+    if (cs) chips.push(`<span class="product-card__spec">⚡ ${escapeHtml(cs)}</span>`);
+    const ls = extractLugSize(p.title);
+    if (ls) chips.push(`<span class="product-card__spec">🔩 ${escapeHtml(ls)}</span>`);
+    const len = extractLength(p.title);
+    if (len) chips.push(`<span class="product-card__spec">📏 ${escapeHtml(len)}</span>`);
+    if (chips.length) cableSpecsHtml = `<div class="product-card__specs">${chips.join('')}</div>`;
+  }
+
   return `
   <div class="product-card">
     <a href="${href}" class="product-card__img-wrap" aria-label="${escapeHtml(title)}">
@@ -592,6 +634,7 @@ function renderCard(p, base) {
     </a>
     <div class="product-card__body">
       <a href="${href}" class="product-card__title">${escapeHtml(title)}</a>
+      ${cableSpecsHtml}
       <div class="product-card__price-row">
         <span class="product-card__price">${escapeHtml(priceStr)}</span>
         ${p.mpn ? `<span class="product-card__sku">Арт. ${escapeHtml(p.mpn)}</span>` : ''}
