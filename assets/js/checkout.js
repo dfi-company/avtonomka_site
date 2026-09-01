@@ -110,6 +110,7 @@
       npBranch:      form.npBranch.value.trim(),
       paymentMethod: form.paymentMethod.value,
       comment:       form.comment.value.trim(),
+      source:        'Сайт',
       items:    JSON.stringify(items.map(i => ({
         title: i.title, sku: i.sku, qty: i.qty, price: i.price, currency: i.currency
       })))

@@ -1,6 +1,16 @@
 /**
- * Google Apps Script — прийом заявок з форми замовлення сайту Автономка
- * (без прийому оплати онлайн, лише збір заявки: ім'я, телефон, товар, коментар)
+ * Google Apps Script — прийом заявок з сайту Автономка ТА з міні-аппи в
+ * один і той самий аркуш "Заявки" (без прийому оплати онлайн, лише збір
+ * заявки: ім'я, телефон, товар, коментар).
+ *
+ * Приймає два різні формати запиту, бо сайт і міні-апп надсилають дані
+ * по-різному:
+ * - Сайт (order-form.js, checkout.js) — POST з тілом application/x-www-form-urlencoded,
+ *   Apps Script сам розкладає його в e.parameter.
+ * - Міні-апп (miniapp/index.html) — POST з сирим JSON у тілі (text/plain,
+ *   щоб уникнути CORS-preflight), парситься вручну з e.postData.contents.
+ * Обидва боки передають поле "source" ("Сайт" / "Мініапп"), яке просто
+ * пишеться в окрему колонку "Джерело".
  *
  * ІНСТРУКЦІЯ (виконати вручну, один раз):
  * 1. Створи нову Google Таблицю (sheets.google.com → Порожній файл).
@@ -18,29 +28,31 @@
  *    це нормально для власного скрипта: "Додатково" → "Перейти до проєкту (небезпечно)" → "Дозволити").
  * 7. Скопіюй URL веб-застосунку — виглядає як:
  *    https://script.google.com/macros/s/XXXXXXXXXXXXXXXXX/exec
- * 8. Встав цей URL у файл assets/js/order-form.js замість рядка:
- *    const ORDER_FORM_ENDPOINT = '';
+ * 8. Встав цей URL у файл assets/js/order-form.js та assets/js/checkout.js
+ *    (константа ORDER_FORM_ENDPOINT) і в miniapp/index.html (CONFIG.ORDERS_URL) —
+ *    усі три мають вказувати на ОДИН і той самий URL.
  * 9. Якщо пізніше зміниш код цього скрипта — потрібно створити НОВЕ
  *    розгортання (Manage deployments → Edit (олівець) → New version → Deploy),
  *    інакше зміни не застосуються до вже виданого URL.
  *
- * Результат: кожна заявка з сайту додається рядком (для кошика — по рядку
- * на товар зі спільним "№ замовлення") на аркуш "Заявки" цієї ж таблиці:
+ * Результат: кожна заявка (з сайту чи з міні-аппи) додається рядком (для
+ * кошика — по рядку на товар зі спільним "№ замовлення") на аркуш "Заявки"
+ * цієї ж таблиці:
  * Дата/час | Ім'я | Телефон | Товар | Коментар | Кількість | № замовлення |
- * Місто | Відділення/поштомат НП | Спосіб оплати.
+ * Місто | Відділення/поштомат НП | Спосіб оплати | Джерело.
  *
  * Місто, відділення НП і спосіб оплати заповнюються лише замовленнями з
- * кошика (checkout.html) — швидка заявка через order-form.js їх не збирає,
- * там ці колонки лишаються порожні.
+ * кошика (checkout.html) — швидка заявка через order-form.js та заявки з
+ * міні-аппи їх не збирають, там ці колонки лишаються порожні.
  *
- * Якщо аркуш уже існує зі старим (5- чи 7-колонковим) заголовком — скрипт сам
- * дописує відсутні колонки при першому ж запиті, без нового розгортання.
- * Але якщо ти оновлюєш цей .gs-код у вже розгорнутому проєкті — потрібне
- * нове розгортання (крок 9 вище), інакше зміни коду не застосуються.
+ * Якщо аркуш уже існує зі старим (5-, 7- чи 10-колонковим) заголовком —
+ * скрипт сам дописує відсутні колонки при першому ж запиті, без нового
+ * розгортання. Але якщо ти оновлюєш цей .gs-код у вже розгорнутому проєкті —
+ * потрібне нове розгортання (крок 9 вище), інакше зміни коду не застосуються.
  */
 
 const SHEET_NAME = 'Заявки';
-const HEADER = ['Дата/час', "Ім'я", 'Телефон', 'Товар', 'Коментар', 'Кількість', '№ замовлення', 'Місто', 'Відділення/поштомат НП', 'Спосіб оплати'];
+const HEADER = ['Дата/час', "Ім'я", 'Телефон', 'Товар', 'Коментар', 'Кількість', '№ замовлення', 'Місто', 'Відділення/поштомат НП', 'Спосіб оплати', 'Джерело'];
 
 function ensureSheet(ss) {
   let sheet = ss.getSheetByName(SHEET_NAME);
@@ -53,9 +65,9 @@ function ensureSheet(ss) {
     return sheet;
   }
 
-  /* Аркуш міг бути створений старою версією скрипта (5 колонок без
-     "Кількість"/"№ замовлення") — дописуємо відсутні заголовки, не
-     чіпаючи вже наявні рядки. */
+  /* Аркуш міг бути створений старою версією скрипта (5- чи 10-колонковим
+     заголовком, без "Кількість"/"№ замовлення"/"Джерело") — дописуємо
+     відсутні заголовки, не чіпаючи вже наявні рядки. */
   const currentCols = sheet.getLastColumn();
   if (currentCols < HEADER.length) {
     sheet.getRange(1, currentCols + 1, 1, HEADER.length - currentCols)
@@ -66,12 +78,30 @@ function ensureSheet(ss) {
   return sheet;
 }
 
+/* Тіло запиту буває двох форматів:
+   - form-urlencoded (сайт) — Apps Script сам заповнює e.parameter, підходить одразу.
+   - сирий JSON-текст (міні-апп, Content-Type: text/plain) — e.parameter порожній,
+     треба вручну JSON.parse(e.postData.contents). */
+function parseRequestData(e) {
+  const params = (e && e.parameter) || {};
+  if (Object.keys(params).length > 0) return params;
+
+  const raw = e && e.postData && e.postData.contents;
+  if (!raw) return {};
+  try {
+    const parsed = JSON.parse(raw);
+    return (parsed && typeof parsed === 'object') ? parsed : {};
+  } catch (parseErr) {
+    return {};
+  }
+}
+
 function doPost(e) {
   try {
     const ss = SpreadsheetApp.getActiveSpreadsheet();
     const sheet = ensureSheet(ss);
 
-    const params = (e && e.parameter) || {};
+    const params = parseRequestData(e);
     const timestamp = Utilities.formatDate(new Date(), 'Europe/Kiev', 'dd.MM.yyyy HH:mm:ss');
     const name          = params.name          || '';
     const phone         = params.phone         || '';
@@ -79,18 +109,22 @@ function doPost(e) {
     const city          = params.city          || '';
     const npBranch      = params.npBranch      || '';
     const paymentMethod = params.paymentMethod || '';
+    const source        = params.source        || 'Сайт';
 
-    let items = [];
-    if (params.items) {
-      try { items = JSON.parse(params.items); } catch (parseErr) { items = []; }
+    /* Сайт передає items як JSON-рядок (усередині form-urlencoded тіла),
+       міні-апп — як уже готовий масив (усередині JSON-тіла). Приймаємо обидва. */
+    let items = params.items;
+    if (typeof items === 'string') {
+      try { items = JSON.parse(items); } catch (parseErr) { items = []; }
     }
+    if (!Array.isArray(items)) items = [];
 
-    if (Array.isArray(items) && items.length > 0) {
+    if (items.length > 0) {
       /* Кошик: один рядок на товар, спільний orderId, щоб бачити,
          які позиції належать одному замовленню. */
       const orderId = Utilities.formatDate(new Date(), 'Europe/Kiev', 'yyyyMMdd-HHmmss');
       items.forEach(function (item) {
-        const title = (item && item.title) || '';
+        const title = (item && (item.title || item.name)) || '';
         const sku   = (item && item.sku) || '';
         const qty   = (item && item.qty) || 1;
         sheet.appendRow([
@@ -103,12 +137,14 @@ function doPost(e) {
           orderId,
           city,
           npBranch,
-          paymentMethod
+          paymentMethod,
+          source
         ]);
       });
     } else {
-      /* Стара форма — одне замовлення на 1 товар, без даних доставки. */
-      sheet.appendRow([timestamp, name, phone, params.product || '', comment, '', '', '', '', '']);
+      /* Швидка заявка на 1 товар (сайт: order-form.js, або заявка без кошика
+         з міні-аппи), без даних доставки. */
+      sheet.appendRow([timestamp, name, phone, params.product || '', comment, '', '', '', '', '', source]);
     }
 
     return ContentService

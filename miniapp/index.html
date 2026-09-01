@@ -246,7 +246,10 @@
 const CONFIG = {
   PRODUCTS_URL: "../products.json",
   MANAGER: "http://t.me/+380987772020",
-  ORDERS_URL: "https://script.google.com/macros/s/AKfycbyXUhTha2LJ2AToMihwUOWJHQkCH7nlUXBfDFK-yLzzxZERx3yBTg9iR9bggz3-ikB3PQ/exec",
+  /* Той самий Apps Script Web App, що приймає заявки з сайту
+     (assets/js/order-form.js, assets/js/checkout.js) - усі замовлення
+     пишуться в один аркуш "Заявки", з колонкою "Джерело" для розрізнення. */
+  ORDERS_URL: "https://script.google.com/macros/s/AKfycbyP9GJeFOc0uuogROFbd0wfa_T4IkqCmg7b4bJZLVKHn8f-evTvItsmZFCKs7XMo8ykKw/exec",
 };
 
 /* Той самий асортимент, що на сайті (products.json), тому мапимо по
@@ -716,7 +719,7 @@ function submitOrder(){
   document.getElementById("errPhone").classList.toggle("visible", !phoneOk);
   if(!name||!phoneOk) return;
 
-  const orderPayload={ name, phone, city, comment, items:CART, total:cartTotal(), date:new Date().toISOString() };
+  const orderPayload={ name, phone, city, comment, items:CART, total:cartTotal(), date:new Date().toISOString(), source:"Мініапп" };
 
   // Записуємо замовлення в Google Таблицю через Apps Script
   if(CONFIG.ORDERS_URL){

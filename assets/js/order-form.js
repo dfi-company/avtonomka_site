@@ -132,7 +132,8 @@
       name:    form.name.value.trim(),
       phone:   form.phone.value.trim(),
       product: form.product.value.trim(),
-      comment: form.comment.value.trim()
+      comment: form.comment.value.trim(),
+      source:  'Сайт'
     });
 
     /* Apps Script Web App не завжди повертає CORS-заголовки для fetch,
