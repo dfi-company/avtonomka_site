@@ -74,6 +74,114 @@ function categoryLabel(productType) {
   return productType.split('>').pop().trim();
 }
 
+/* ---- Badge helpers (mirrors assets/js/catalog.js - same badges the
+   catalog card shows for this product, kept in sync by hand). ---- */
+const KNOWN_BRANDS = ['DAH Solar', 'Deye', 'Dyness', 'Felicity', 'Must'];
+function extractBrand(title) {
+  if (!title) return null;
+  for (const b of KNOWN_BRANDS) {
+    const re = new RegExp('\\b' + b.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'i');
+    if (re.test(title)) return b;
+  }
+  return null;
+}
+function kitBrandParts(title) {
+  const body = (title || '').replace(/^Комплект автономного енергоживлення:\s*/i, '');
+  const parts = body.split(/\s*\+\s*/);
+  if (parts.length !== 2) return [null, null];
+  return [extractBrand(parts[0]), extractBrand(parts[1])];
+}
+function extractKw(title) {
+  if (!title) return null;
+  let m = title.match(/(\d+(?:[.,]\d+)?)\s*(?:кВт|kw)(?!h)/i);
+  if (m) return m[1].replace(',', '.');
+  m = title.match(/(\d+)\s*Вт\b/);
+  if (m) return String(Number(m[1]) / 1000);
+  m = title.match(/SUN-(\d+)K-/i);
+  if (m) return m[1];
+  m = title.match(/PV\d+-(\d{2})\d{2}/i);
+  if (m) return String(Number(m[1]) / 10);
+  return null;
+}
+function extractKitBatteryKwh(title) {
+  const body = (title || '').replace(/^Комплект автономного енергоживлення:\s*/i, '');
+  const parts = body.split(/\s*\+\s*/);
+  if (parts.length !== 2) return null;
+  const battery = parts[1];
+  let m = battery.match(/(\d+(?:[.,]\d+)?)\s*kWh/i);
+  if (m) return parseFloat(m[1].replace(',', '.'));
+  const v = battery.match(/(\d+(?:[.,]\d+)?)\s*V\b/i);
+  const ah = battery.match(/(\d+(?:[.,]\d+)?)\s*[AaАа][hH]\b/);
+  if (v && ah) return Math.round(parseFloat(v[1].replace(',', '.')) * parseFloat(ah[1].replace(',', '.')) / 10) / 100;
+  return null;
+}
+function kitStatusTier(title) {
+  const kwh = extractKitBatteryKwh(title);
+  if (kwh === null) return null;
+  if (kwh <= 5) return 'light';
+  if (kwh <= 12) return 'optimal';
+  return 'super';
+}
+const NOT_LETTER = '(?![а-яіїєА-ЯІЇЄa-zA-Z])';
+function extractLength(title) {
+  if (!title) return null;
+  let m = title.match(new RegExp('(\\d+(?:[.,]\\d+)?)\\s*м' + NOT_LETTER, 'i'));
+  if (m) return m[1].replace(',', '.') + ' м';
+  m = title.match(new RegExp('(\\d+(?:[.,]\\d+)?)\\s*см' + NOT_LETTER, 'i'));
+  if (m) return m[1].replace(',', '.') + ' см';
+  m = title.match(new RegExp('(\\d+(?:[.,]\\d+)?)\\s*мм' + NOT_LETTER, 'i'));
+  if (m) return m[1].replace(',', '.') + ' мм';
+  return null;
+}
+const AWG_TO_MM2 = { '4': '21' };
+function extractCrossSection(title) {
+  if (!title) return null;
+  let m = title.match(/(\d+)\s*AWG/i);
+  if (m) {
+    const mm2 = AWG_TO_MM2[m[1]];
+    return mm2 ? mm2 + ' мм²' : m[1] + ' AWG';
+  }
+  m = title.match(/(\d+(?:[.,]\d+)?)\s*мм(?!\d)/i);
+  if (m) return m[1].replace(',', '.') + ' мм';
+  return null;
+}
+function extractLugSize(title) {
+  if (!title) return null;
+  const m = title.match(/накінечники\s*(М\d+)/i);
+  return m ? m[1].toUpperCase() : null;
+}
+
+/* Builds the same .product-card__badge-stack markup the catalog card shows
+   for this product, so the gallery image gets the same badges. */
+function buildBadgeStackHtml(p, displayTitle) {
+  const inStock = p.availability === 'in_stock';
+  const slug = _CATEGORY_TO_SLUG[p.product_type];
+  let extraHtml = '';
+
+  if (slug === 'komplekty') {
+    const [invBrand, batBrand] = kitBrandParts(displayTitle);
+    let monobrandHtml = '';
+    if (invBrand && invBrand === batBrand) {
+      monobrandHtml = `<span class="product-card__pill product-card__pill--monobrand">${escHtml(t('catalog.monobrand_badge'))} ${escHtml(invBrand)}</span>`;
+    }
+    const tier = kitStatusTier(displayTitle);
+    const tierHtml = tier
+      ? `<span class="product-card__pill product-card__pill--tier-${tier}">${escHtml(t('catalog.tier_' + tier))}</span>`
+      : '';
+    extraHtml = `<span class="product-card__pill product-card__pill--installment">${escHtml(t('catalog.installment_badge'))}</span>${tierHtml}${monobrandHtml}`;
+  } else if (slug === 'kabeli') {
+    const cs = extractCrossSection(displayTitle);
+    if (cs) extraHtml += `<span class="product-card__pill product-card__pill--spec">⌀ ${escHtml(cs)}</span>`;
+    const ls = extractLugSize(displayTitle);
+    if (ls) extraHtml += `<span class="product-card__pill product-card__pill--spec">🔩 ${escHtml(ls)}</span>`;
+    const len = extractLength(displayTitle);
+    if (len) extraHtml += `<span class="product-card__pill product-card__pill--spec">📏 ${escHtml(len)}</span>`;
+  }
+
+  const availabilityHtml = slug === 'komplekty' ? '' : `<span class="product-card__pill product-card__pill--${inStock ? 'in-stock' : 'out-of-stock'}">${escHtml(inStock ? t('catalog.in_stock') : t('catalog.out_of_stock'))}</span>`;
+  return `<div class="product-card__badge-stack">${availabilityHtml}${extraHtml}</div>`;
+}
+
 /* ---- Base path: root product.html vs. /product/<slug>/<id>.html (2 levels deep) ---- */
 function getBase() {
   const path = window.location.pathname;
@@ -157,6 +265,8 @@ function render(p) {
     const galleryMain = mainImg.closest('.gallery-main');
     if (galleryMain) {
       galleryMain.addEventListener('click', () => openLightbox(images[0], displayTitle));
+      galleryMain.querySelector('.product-card__badge-stack')?.remove();
+      galleryMain.insertAdjacentHTML('beforeend', buildBadgeStackHtml(p, displayTitle));
     }
   }
 

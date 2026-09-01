@@ -1166,6 +1166,7 @@ main { flex: 1; }
 .product-gallery { position: sticky; top: 82px; }
 
 .gallery-main {
+  position: relative;
   background: var(--color-white);
   border-radius: var(--radius-lg);
   overflow: hidden;
