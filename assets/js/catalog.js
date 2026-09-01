@@ -231,7 +231,7 @@ function isTopProduct(id) {
   let hash = 0;
   const s = String(id);
   for (let i = 0; i < s.length; i++) hash = (hash * 31 + s.charCodeAt(i)) >>> 0;
-  return hash % 7 === 0;
+  return hash % 4 === 0;
 }
 
 /* ---- t() shortcut - waits for I18n or falls back ---- */
