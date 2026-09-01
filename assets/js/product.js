@@ -151,6 +151,15 @@ function extractLugSize(title) {
   return m ? m[1].toUpperCase() : null;
 }
 
+/* Mirrors isTopProduct() in catalog.js - same deterministic hash, so the
+   same items show TOP here as on the catalog card. */
+function isTopProduct(id) {
+  let hash = 0;
+  const s = String(id);
+  for (let i = 0; i < s.length; i++) hash = (hash * 31 + s.charCodeAt(i)) >>> 0;
+  return hash % 7 === 0;
+}
+
 /* Builds the same .product-card__badge-stack markup the catalog card shows
    for this product, so the gallery image gets the same badges. */
 function buildBadgeStackHtml(p, displayTitle) {
@@ -179,7 +188,8 @@ function buildBadgeStackHtml(p, displayTitle) {
   }
 
   const availabilityHtml = slug === 'komplekty' ? '' : `<span class="product-card__pill product-card__pill--${inStock ? 'in-stock' : 'out-of-stock'}">${escHtml(inStock ? t('catalog.in_stock') : t('catalog.out_of_stock'))}</span>`;
-  return `<div class="product-card__badge-stack">${availabilityHtml}${extraHtml}</div>`;
+  const topBadgeHtml = isTopProduct(p.id) ? `<span class="product-card__pill product-card__pill--top">${escHtml(t('catalog.top_badge'))}</span>` : '';
+  return `<div class="product-card__badge-stack">${topBadgeHtml}${availabilityHtml}${extraHtml}</div>`;
 }
 
 /* ---- Base path: root product.html vs. /product/<slug>/<id>.html (2 levels deep) ---- */

@@ -557,6 +557,7 @@ main { flex: 1; }
 .product-card__pill--tier-super   { background: #7b1fa2; }
 .product-card__pill--monobrand    { background: var(--color-dark); }
 .product-card__pill--spec         { background: rgba(26,46,74,.72); }
+.product-card__pill--top          { background: linear-gradient(135deg, #ff6a00, #ee0979); }
 
 /* Body */
 .product-card__body {

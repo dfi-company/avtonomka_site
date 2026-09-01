@@ -223,6 +223,17 @@ function formatPrice(raw) {
   return num.toLocaleString('uk-UA', { maximumFractionDigits: 0 }) + ' ' + currency;
 }
 
+/* "ТОП" badge on a fixed-but-random-looking ~1-in-7 subset of products -
+   deterministic hash of the id so the same items stay marked TOP across
+   catalog cards, the product page and the static pre-rendered HTML,
+   instead of reshuffling on every reload. */
+function isTopProduct(id) {
+  let hash = 0;
+  const s = String(id);
+  for (let i = 0; i < s.length; i++) hash = (hash * 31 + s.charCodeAt(i)) >>> 0;
+  return hash % 7 === 0;
+}
+
 /* ---- t() shortcut - waits for I18n or falls back ---- */
 function t(key, vars) {
   if (window.I18n) return window.I18n.t(key, vars);
@@ -546,6 +557,8 @@ function renderCard(p) {
   /* Kit-only badges: mono-brand, "Легкий/Оптимальний/Супер запасливий"
      capacity tier, and an installment tag - all stacked as small pills over
      the top-left corner of the image, availability included. */
+  const topBadgeHtml = isTopProduct(p.id) ? `<span class="product-card__pill product-card__pill--top">${escapeHtml(t('catalog.top_badge'))}</span>` : '';
+
   const isKit = CATEGORY_TO_SLUG[p.product_type] === 'komplekty';
   let stackExtraHtml = '';
   let installmentNoteHtml = '';
@@ -585,6 +598,7 @@ function renderCard(p) {
            loading="lazy"
            onerror="this.src='${zagl}'">
       <div class="product-card__badge-stack">
+        ${topBadgeHtml}
         ${isKit ? '' : `<span class="product-card__pill product-card__pill--${inStock ? 'in-stock' : 'out-of-stock'}">${escapeHtml(availabilityText)}</span>`}
         ${stackExtraHtml}
         ${cableSpecsHtml}

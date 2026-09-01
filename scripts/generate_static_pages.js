@@ -247,6 +247,16 @@ function extractLugSize(title) {
   return m ? m[1].toUpperCase() : null;
 }
 
+/* Mirrors isTopProduct() in assets/js/catalog.js and assets/js/product.js -
+   same deterministic hash, so the static pre-rendered cards agree with the
+   client-side render instead of flickering on hydration. */
+function isTopProduct(id) {
+  let hash = 0;
+  const s = String(id);
+  for (let i = 0; i < s.length; i++) hash = (hash * 31 + s.charCodeAt(i)) >>> 0;
+  return hash % 7 === 0;
+}
+
 function loadProducts() {
   let raw = fs.readFileSync(path.join(ROOT, 'products.json'), 'utf8');
   if (raw.charCodeAt(0) === 0xFEFF) raw = raw.slice(1);
@@ -590,6 +600,8 @@ function renderCard(p, base) {
   const zagl     = base + 'assets/images/zaglushka.png';
   const href     = `${base}product/${productSlug(p)}/${encodeURIComponent(p.id)}.html`;
 
+  const topBadgeHtml = isTopProduct(p.id) ? `<span class="product-card__pill product-card__pill--top">🔥 ТОП</span>` : '';
+
   const isKit = CATEGORY_TO_SLUG[p.product_type] === 'komplekty';
   let stackExtraHtml = '';
   let installmentNoteHtml = '';
@@ -626,6 +638,7 @@ function renderCard(p, base) {
            loading="lazy"
            onerror="this.src='${zagl}'">
       <div class="product-card__badge-stack">
+        ${topBadgeHtml}
         ${isKit ? '' : `<span class="product-card__pill product-card__pill--${inStock ? 'in-stock' : 'out-of-stock'}">${escapeHtml(availabilityText)}</span>`}
         ${stackExtraHtml}
         ${cableSpecsHtml}
