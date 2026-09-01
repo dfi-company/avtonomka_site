@@ -12,7 +12,7 @@
 
   /* Має збігатися з ORDER_FORM_ENDPOINT в assets/js/order-form.js та cart.js -
      це той самий Apps Script Web App. */
-  const ORDER_FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyP9GJeFOc0uuogROFbd0wfa_T4IkqCmg7b4bJZLVKHn8f-evTvItsmZFCKs7XMo8ykKw/exec';
+  const ORDER_FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbz7JbuQpZmBlUck24Bjp7SGKZL-JqE_clqLuYb9y15QG4-FSk45ZkpPHf5faZWISHcE/exec';
 
   function escapeHtml(str) {
     return String(str == null ? '' : str)
