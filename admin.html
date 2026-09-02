@@ -337,6 +337,38 @@
       <!-- Status bar -->
       <div id="status-bar" class="status-bar hidden"></div>
 
+      <!-- Supabase auth - one login unlocks both articles and comments moderation -->
+      <div class="admin-card">
+        <div class="admin-card__head">
+          <span class="admin-card__title">Вхід для керування контентом</span>
+          <button id="btn-supabase-logout" class="admin-btn admin-btn--sm admin-btn--ghost hidden" style="background:#e0e6ed;color:#1a2e4a">Вийти з Supabase</button>
+        </div>
+        <div class="admin-card__body">
+          <p id="supabase-login-hint" style="font-size:.88rem;color:#6c757d;margin-bottom:18px">
+            Статті й коментарі клієнтів зберігаються в Supabase. Увійди користувачем, якого створено в
+            Supabase Dashboard → Authentication → Users → Add user (це не той самий пароль, що для входу в
+            цю панель).
+          </p>
+
+          <form id="supabase-login-form" class="settings-form">
+            <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+              <div class="form-group">
+                <label for="supabase-email">Email</label>
+                <input type="email" id="supabase-email" class="form-input" autocomplete="username">
+              </div>
+              <div class="form-group">
+                <label for="supabase-password">Пароль</label>
+                <input type="password" id="supabase-password" class="form-input" autocomplete="current-password">
+              </div>
+            </div>
+            <button type="submit" class="admin-btn admin-btn--primary">Увійти</button>
+            <p id="supabase-login-msg" class="form-msg"></p>
+          </form>
+
+          <p id="supabase-signed-in-as" class="hidden" style="font-size:.88rem;color:#17a126"></p>
+        </div>
+      </div>
+
       <!-- Articles list -->
       <div class="admin-card">
         <div class="admin-card__head">
@@ -356,6 +388,17 @@
         <div class="admin-card__body">
           <form id="article-form" class="editor-form">
             <div class="form-group">
+              <label for="editor-category">Категорія (для "Схожі товари")</label>
+              <select id="editor-category" class="form-input">
+                <option value="">—</option>
+                <option value="hybridni-invertory">Гібридні інвертори</option>
+                <option value="akumulyatory">Акумулятори</option>
+                <option value="komplekty">Комплекти</option>
+                <option value="kabeli">Кабелі</option>
+                <option value="dzherela-zhyvlennya">Джерела живлення</option>
+              </select>
+            </div>
+            <div class="form-group">
               <label for="editor-title">Заголовок *</label>
               <input type="text" id="editor-title" class="form-input" placeholder="Назва статті" required>
             </div>
@@ -366,7 +409,7 @@
             <div class="form-group">
               <label for="editor-body">Текст статті *</label>
               <textarea id="editor-body" class="form-input" placeholder="Напишіть текст статті. Розділяйте абзаци порожнім рядком." required></textarea>
-              <p class="editor-tip">Порожній рядок між блоками тексту = новий абзац.</p>
+              <p class="editor-tip">Порожній рядок між блоками тексту = новий абзац. ## Заголовок - підзаголовок, - текст - пункт списку.</p>
             </div>
             <div class="form-group">
               <label for="editor-photo">Фото (URL, необов'язково)</label>
@@ -381,51 +424,18 @@
         </div>
       </div>
 
-      <!-- Settings -->
+      <!-- Local admin password -->
       <div class="admin-card">
         <div class="admin-card__head">
-          <span class="admin-card__title">Налаштування GitHub</span>
+          <span class="admin-card__title">Безпека</span>
         </div>
         <div class="admin-card__body">
-          <p style="font-size:.88rem;color:#6c757d;margin-bottom:18px">
-            Щоб публікація статей зберігалась на сайті, потрібно підключити GitHub репозиторій.
-            Отримати токен можна на <strong><a href="https://github.com/settings/tokens/new?scopes=repo&description=Avtonomka+Admin" target="_blank" style="color:#f5a623">github.com/settings/tokens</a></strong>
-            - потрібні права <code>Contents: Read and write</code>.
-          </p>
-          <form id="settings-form" class="settings-form">
-            <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:0">
-              <div class="form-group">
-                <label for="settings-owner">GitHub Username</label>
-                <input type="text" id="settings-owner" class="form-input" placeholder="ваш-нік">
-              </div>
-              <div class="form-group">
-                <label for="settings-repo">Назва репозиторію</label>
-                <input type="text" id="settings-repo" class="form-input" placeholder="avtonomka-site">
-              </div>
+          <div class="danger-zone">
+            <div>
+              <strong>Змінити пароль</strong>
+              <p>Пароль входу в саму цю панель (не Supabase). Скинути поточний і встановити новий.</p>
             </div>
-            <div class="form-group" style="margin-top:16px">
-              <label for="settings-branch">Гілка (branch)</label>
-              <input type="text" id="settings-branch" class="form-input" placeholder="master" value="master" style="max-width:200px">
-            </div>
-            <div class="form-group">
-              <label for="settings-token">GitHub Personal Access Token</label>
-              <div class="settings-token-wrap">
-                <input type="password" id="settings-token" class="form-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" autocomplete="off">
-                <button type="button" class="btn-toggle-pw" id="btn-show-token" title="Показати/приховати">👁</button>
-              </div>
-              <p class="editor-tip">Токен зберігається лише у вашому браузері. Нікому його не передавайте.</p>
-            </div>
-            <button type="submit" class="admin-btn admin-btn--primary">Зберегти налаштування</button>
-          </form>
-
-          <div style="margin-top:28px">
-            <div class="danger-zone">
-              <div>
-                <strong>Змінити пароль</strong>
-                <p>Скинути поточний пароль і встановити новий.</p>
-              </div>
-              <button id="btn-change-password" class="admin-btn admin-btn--danger">Змінити пароль</button>
-            </div>
+            <button id="btn-change-password" class="admin-btn admin-btn--danger">Змінити пароль</button>
           </div>
         </div>
       </div>
@@ -434,32 +444,11 @@
       <div class="admin-card">
         <div class="admin-card__head">
           <span class="admin-card__title">Коментарі клієнтів</span>
-          <button id="btn-comments-logout" class="admin-btn admin-btn--sm admin-btn--ghost hidden" style="background:#e0e6ed;color:#1a2e4a">Вийти з Supabase</button>
         </div>
         <div class="admin-card__body">
-          <p style="font-size:.88rem;color:#6c757d;margin-bottom:18px">
-            Окремий вхід через Supabase (не той самий пароль, що вище) - потрібен, щоб бачити й схвалювати
-            коментарі, які ще не опубліковані на сайті. Користувача створи в Supabase Dashboard →
-            Authentication → Users → Add user.
-          </p>
-
-          <form id="comments-login-form" class="settings-form">
-            <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-              <div class="form-group">
-                <label for="comments-email">Email</label>
-                <input type="email" id="comments-email" class="form-input" autocomplete="username">
-              </div>
-              <div class="form-group">
-                <label for="comments-password">Пароль</label>
-                <input type="password" id="comments-password" class="form-input" autocomplete="current-password">
-              </div>
-            </div>
-            <button type="submit" class="admin-btn admin-btn--primary">Увійти</button>
-            <p id="comments-login-msg" class="form-msg"></p>
-          </form>
-
-          <div id="comments-panel" class="hidden" style="margin-top:8px">
-            <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap">
+          <div id="comments-panel">
+            <p id="comments-hint" class="admin-hint">Увійдіть вище через Supabase, щоб бачити коментарі, що чекають модерації.</p>
+            <div id="comments-controls" class="hidden" style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap">
               <button id="btn-comments-refresh" class="admin-btn admin-btn--sm admin-btn--ghost" style="background:#e0e6ed;color:#1a2e4a">Оновити список</button>
             </div>
             <div id="comments-list"></div>
@@ -480,10 +469,7 @@
     function escHtml(str) {
       return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     }
-    const getSettings  = () => JSON.parse(localStorage.getItem('admin_settings') || '{}');
-    const saveSettings = s  => localStorage.setItem('admin_settings', JSON.stringify(s));
     const getPwdHash   = () => localStorage.getItem('admin_pwd_hash') || '';
-    const getToken     = () => localStorage.getItem('admin_gh_token') || '';
     const isAuthed     = () => sessionStorage.getItem('admin_ok') === '1';
 
     /* ---- Screen switcher ---- */
@@ -528,47 +514,6 @@
       loadMain();
     });
 
-    /* ---- GitHub API ---- */
-    async function ghGet(path) {
-      const s = getSettings();
-      const r = await fetch(`https://api.github.com/repos/${s.owner}/${s.repo}/contents/${path}`, {
-        headers: { 'Authorization': `Bearer ${getToken()}`, 'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' }
-      });
-      const d = await r.json();
-      if (!r.ok) throw new Error(d.message || 'HTTP ' + r.status);
-      return d;
-    }
-
-    async function ghPut(path, content, sha, message) {
-      const s = getSettings();
-      const body = { message, content: btoa(unescape(encodeURIComponent(content))), branch: s.branch || 'master' };
-      if (sha) body.sha = sha;
-      const r = await fetch(`https://api.github.com/repos/${s.owner}/${s.repo}/contents/${path}`, {
-        method: 'PUT',
-        headers: { 'Authorization': `Bearer ${getToken()}`, 'Accept': 'application/vnd.github+json', 'Content-Type': 'application/json', 'X-GitHub-Api-Version': '2022-11-28' },
-        body: JSON.stringify(body)
-      });
-      const d = await r.json();
-      if (!r.ok) throw new Error(d.message || 'HTTP ' + r.status);
-      return d;
-    }
-
-    async function loadArticlesFromGH() {
-      try {
-        const data = await ghGet('data/articles.json');
-        const text = decodeURIComponent(escape(atob(data.content.replace(/\n/g,''))));
-        return { articles: JSON.parse(text), sha: data.sha };
-      } catch (e) {
-        if (/Not Found|404/.test(e.message)) return { articles: [], sha: null };
-        throw e;
-      }
-    }
-
-    async function saveArticlesToGH(articles, sha, msg) {
-      const json = JSON.stringify(articles, null, 2);
-      return ghPut('data/articles.json', json, sha, msg);
-    }
-
     /* ---- ID generator ---- */
     function genId(title) {
       const map = {а:'a',б:'b',в:'v',г:'g',д:'d',е:'e',ё:'yo',є:'ye',ж:'zh',з:'z',и:'i',і:'i',ї:'yi',й:'y',к:'k',л:'l',м:'m',н:'n',о:'o',п:'p',р:'r',с:'s',т:'t',у:'u',ф:'f',х:'kh',ц:'ts',ч:'ch',ш:'sh',щ:'shch',ъ:'',ы:'y',ь:'',э:'e',ю:'yu',я:'ya',ґ:'g'};
@@ -582,17 +527,12 @@
     let editId = null;
 
     async function loadMain() {
-      const s = getSettings();
-      document.getElementById('settings-owner').value  = s.owner  || '';
-      document.getElementById('settings-repo').value   = s.repo   || '';
-      document.getElementById('settings-branch').value = s.branch || 'master';
-      document.getElementById('settings-token').value  = getToken();
-      await refreshList();
-      await checkCommentsSession();
+      await checkSupabaseSession();
     }
 
-    /* ---- Comments moderation (Supabase) ----
-       ⚠ Ці значення мають збігатися з assets/js/comments.js. */
+    /* ---- Supabase auth (shared by articles + comments moderation) ----
+       ⚠ Ці значення мають збігатися з assets/js/comments.js, assets/js/articles.js,
+       index.html і scripts/generate_static_pages.js. */
     const SUPABASE_URL = 'https://uvndubhmqzqqsrnrxgaj.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2bmR1YmhtcXpxcXNybnJ4Z2FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgzNDY4MDIsImV4cCI6MjEwMzkyMjgwMn0.AavrYyhDXBQkjKOMdQ9wAQX6B901dOfUpmtUDwO5Cv8';
     let sbClient = null;
@@ -603,37 +543,50 @@
       return sbClient;
     }
 
-    async function checkCommentsSession() {
+    async function checkSupabaseSession() {
       const sb = getSb();
       if (!sb) return;
       const { data } = await sb.auth.getSession();
-      showCommentsPanel(!!data.session);
-      if (data.session) await loadPendingComments();
+      await showSignedInState(data.session);
     }
 
-    function showCommentsPanel(signedIn) {
-      document.getElementById('comments-login-form').classList.toggle('hidden', signedIn);
-      document.getElementById('comments-panel').classList.toggle('hidden', !signedIn);
-      document.getElementById('btn-comments-logout').classList.toggle('hidden', !signedIn);
+    async function showSignedInState(session) {
+      const signedIn = !!session;
+      document.getElementById('supabase-login-form').classList.toggle('hidden', signedIn);
+      document.getElementById('supabase-login-hint').classList.toggle('hidden', signedIn);
+      document.getElementById('btn-supabase-logout').classList.toggle('hidden', !signedIn);
+      const signedInAs = document.getElementById('supabase-signed-in-as');
+      signedInAs.classList.toggle('hidden', !signedIn);
+      if (signedIn) signedInAs.textContent = 'Увійшли як ' + session.user.email;
+
+      document.getElementById('comments-hint').classList.toggle('hidden', signedIn);
+      document.getElementById('comments-controls').classList.toggle('hidden', !signedIn);
+
+      if (signedIn) {
+        await refreshList();
+        await loadPendingComments();
+      } else {
+        document.getElementById('article-list').innerHTML = '<p class="admin-hint">Увійдіть вище через Supabase, щоб бачити й редагувати статті.</p>';
+        document.getElementById('comments-list').innerHTML = '';
+      }
     }
 
-    document.getElementById('comments-login-form').addEventListener('submit', async e => {
+    document.getElementById('supabase-login-form').addEventListener('submit', async e => {
       e.preventDefault();
       const sb = getSb();
-      if (!sb) { showMsg('comments-login-msg', 'Спочатку встав SUPABASE_URL / SUPABASE_ANON_KEY у код admin.html', 'error'); return; }
-      const email    = document.getElementById('comments-email').value.trim();
-      const password = document.getElementById('comments-password').value;
-      const { error } = await sb.auth.signInWithPassword({ email, password });
-      if (error) { showMsg('comments-login-msg', error.message, 'error'); return; }
-      document.getElementById('comments-password').value = '';
-      showCommentsPanel(true);
-      await loadPendingComments();
+      if (!sb) { showMsg('supabase-login-msg', 'Спочатку встав SUPABASE_URL / SUPABASE_ANON_KEY у код admin.html', 'error'); return; }
+      const email    = document.getElementById('supabase-email').value.trim();
+      const password = document.getElementById('supabase-password').value;
+      const { data, error } = await sb.auth.signInWithPassword({ email, password });
+      if (error) { showMsg('supabase-login-msg', error.message, 'error'); return; }
+      document.getElementById('supabase-password').value = '';
+      await showSignedInState(data.session);
     });
 
-    document.getElementById('btn-comments-logout').addEventListener('click', async () => {
+    document.getElementById('btn-supabase-logout').addEventListener('click', async () => {
       const sb = getSb();
       if (sb) await sb.auth.signOut();
-      showCommentsPanel(false);
+      await showSignedInState(null);
     });
 
     document.getElementById('btn-comments-refresh').addEventListener('click', loadPendingComments);
@@ -683,13 +636,12 @@
 
     async function refreshList() {
       const el = document.getElementById('article-list');
-      if (!getToken() || !getSettings().owner || !getSettings().repo) {
-        el.innerHTML = '<p class="admin-hint">Заповніть налаштування GitHub нижче, щоб бачити список статей.</p>';
-        return;
-      }
+      const sb = getSb();
+      if (!sb) { el.innerHTML = '<p class="admin-hint">Спочатку встав SUPABASE_URL / SUPABASE_ANON_KEY у код admin.html.</p>'; return; }
       el.innerHTML = '<p class="admin-hint">Завантаження…</p>';
       try {
-        const { articles } = await loadArticlesFromGH();
+        const { data: articles, error } = await sb.from('articles').select('*').order('date', { ascending: false });
+        if (error) throw error;
         if (!articles.length) { el.innerHTML = '<p class="admin-hint">Статей ще немає - створіть першу!</p>'; return; }
         el.innerHTML = articles.map(a => `
           <div class="admin-article-item">
@@ -710,20 +662,22 @@
     function resetEditor() {
       editId = null;
       ['editor-title','editor-summary','editor-body','editor-photo'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('editor-category').value = '';
       document.getElementById('editor-heading').textContent = 'Нова стаття';
       document.getElementById('editor-submit').textContent  = 'Опублікувати';
     }
 
     async function startEdit(id) {
       try {
-        const { articles } = await loadArticlesFromGH();
-        const a = articles.find(x => x.id === id);
-        if (!a) return;
+        const sb = getSb();
+        const { data: a, error } = await sb.from('articles').select('*').eq('id', id).single();
+        if (error || !a) return;
         editId = id;
-        document.getElementById('editor-title').value   = a.title   || '';
-        document.getElementById('editor-summary').value = a.summary || '';
-        document.getElementById('editor-body').value    = a.body    || '';
-        document.getElementById('editor-photo').value   = a.photo   || '';
+        document.getElementById('editor-title').value    = a.title    || '';
+        document.getElementById('editor-summary').value  = a.summary  || '';
+        document.getElementById('editor-body').value     = a.body     || '';
+        document.getElementById('editor-photo').value    = a.photo    || '';
+        document.getElementById('editor-category').value = a.category || '';
         document.getElementById('editor-heading').textContent = 'Редагувати статтю';
         document.getElementById('editor-submit').textContent  = 'Зберегти зміни';
         document.getElementById('editor-section').scrollIntoView({ behavior: 'smooth' });
@@ -734,34 +688,42 @@
       if (!confirm('Видалити цю статтю? Цю дію не можна скасувати.')) return;
       showStatus('Видалення…');
       try {
-        const { articles, sha } = await loadArticlesFromGH();
-        const updated = articles.filter(a => a.id !== id);
-        await saveArticlesToGH(updated, sha, 'chore: remove article');
-        showStatus('Статтю видалено. Сайт оновиться за ~1 хвилину.', 'success');
+        const sb = getSb();
+        const { error } = await sb.from('articles').delete().eq('id', id);
+        if (error) throw error;
+        showStatus('Статтю видалено.', 'success');
         await refreshList();
       } catch(e) { showStatus('Помилка: ' + e.message, 'error'); }
     }
 
     document.getElementById('article-form').addEventListener('submit', async e => {
       e.preventDefault();
-      const title   = document.getElementById('editor-title').value.trim();
-      const summary = document.getElementById('editor-summary').value.trim();
-      const body    = document.getElementById('editor-body').value.trim();
-      const photo   = document.getElementById('editor-photo').value.trim();
+      const title    = document.getElementById('editor-title').value.trim();
+      const summary  = document.getElementById('editor-summary').value.trim();
+      const body     = document.getElementById('editor-body').value.trim();
+      const photo    = document.getElementById('editor-photo').value.trim();
+      const category = document.getElementById('editor-category').value;
       if (!title || !body) { showStatus('Заповніть заголовок та текст статті', 'error'); return; }
 
-      showStatus('Збереження на GitHub…');
+      const sb = getSb();
+      if (!sb) { showStatus('Спочатку встав SUPABASE_URL / SUPABASE_ANON_KEY у код admin.html', 'error'); return; }
+
+      showStatus('Збереження…');
       try {
-        const { articles, sha } = await loadArticlesFromGH();
         if (editId) {
-          const i = articles.findIndex(a => a.id === editId);
-          if (i !== -1) articles[i] = { ...articles[i], title, summary, body, photo };
-          await saveArticlesToGH(articles, sha, `feat: update article - ${title}`);
+          const { error } = await sb.from('articles')
+            .update({ title, summary, body, photo, category: category || null })
+            .eq('id', editId);
+          if (error) throw error;
         } else {
-          articles.unshift({ id: genId(title), title, summary, body, photo, date: new Date().toISOString().slice(0,10) });
-          await saveArticlesToGH(articles, sha, `feat: add article - ${title}`);
+          const { error } = await sb.from('articles').insert({
+            id: genId(title), title, summary, body, photo,
+            category: category || null,
+            date: new Date().toISOString().slice(0, 10),
+          });
+          if (error) throw error;
         }
-        showStatus('Збережено! Сайт оновиться за ~1 хвилину після деплою GitHub Pages.', 'success');
+        showStatus('Збережено! З\'явиться на сайті одразу.', 'success');
         resetEditor();
         await refreshList();
       } catch(e) { showStatus('Помилка збереження: ' + e.message, 'error'); }
@@ -773,25 +735,6 @@
       resetEditor();
       document.getElementById('editor-section').scrollIntoView({ behavior: 'smooth' });
       document.getElementById('editor-title').focus();
-    });
-
-    /* ---- Settings ---- */
-    document.getElementById('settings-form').addEventListener('submit', e => {
-      e.preventDefault();
-      saveSettings({
-        owner:  document.getElementById('settings-owner').value.trim(),
-        repo:   document.getElementById('settings-repo').value.trim(),
-        branch: document.getElementById('settings-branch').value.trim() || 'master',
-      });
-      const tok = document.getElementById('settings-token').value.trim();
-      if (tok) localStorage.setItem('admin_gh_token', tok);
-      showStatus('Налаштування збережено!', 'success');
-      refreshList();
-    });
-
-    document.getElementById('btn-show-token').addEventListener('click', () => {
-      const inp = document.getElementById('settings-token');
-      inp.type = inp.type === 'password' ? 'text' : 'password';
     });
 
     /* ---- Auth actions ---- */

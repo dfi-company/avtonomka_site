@@ -273,18 +273,26 @@ function loadProducts() {
   return Array.isArray(data) ? data : (data.products || []);
 }
 
-/* Articles tagged with a category slug (see data/articles.json's "category"
-   field), for the "Читайте також" block on product pages. A missing file or
-   an article with no/unrecognized category is simply skipped — never
-   invented here. */
-function loadArticles() {
-  const file = path.join(ROOT, 'data', 'articles.json');
-  if (!fs.existsSync(file)) return [];
+/* Статті живуть у Supabase (public.articles), не в data/articles.json -
+   читання публічне (RLS: anon can read articles). ⚠ Ці значення мають
+   збігатися з assets/js/articles.js, index.html і admin.html. */
+const SUPABASE_URL = 'https://uvndubhmqzqqsrnrxgaj.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2bmR1YmhtcXpxcXNybnJ4Z2FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgzNDY4MDIsImV4cCI6MjEwMzkyMjgwMn0.AavrYyhDXBQkjKOMdQ9wAQX6B901dOfUpmtUDwO5Cv8';
+
+/* Статті, для "Читайте також" на сторінках товару й для SSR-блоків
+   articles.html/blog.html/index.html (розділ generateTelegramAndArticles).
+   Мережева помилка не зупиняє build - просто немає статей у цьому запуску,
+   як і раніше було з відсутнім/непарсним data/articles.json. */
+async function loadArticles() {
   try {
-    const data = JSON.parse(fs.readFileSync(file, 'utf8'));
+    const resp = await fetch(`${SUPABASE_URL}/rest/v1/articles?select=*`, {
+      headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` },
+    });
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    const data = await resp.json();
     return Array.isArray(data) ? data : [];
   } catch (e) {
-    console.warn('generate_static_pages: could not parse data/articles.json:', e.message);
+    console.warn('generate_static_pages: could not load articles from Supabase:', e.message);
     return [];
   }
 }
@@ -532,12 +540,12 @@ function buildRedirectStub(newUrl, oldUrl) {
 `;
 }
 
-function generateAllProductPages(products) {
+async function generateAllProductPages(products) {
   const template = fs.readFileSync(path.join(ROOT, 'product.html'), 'utf8');
   const outDir   = path.join(ROOT, 'product');
   fs.mkdirSync(outDir, { recursive: true });
 
-  const articlesBySlug = groupArticlesBySlug(loadArticles());
+  const articlesBySlug = groupArticlesBySlug(await loadArticles());
   const lastmod  = {}; // id -> YYYY-MM-DD, for sitemap.xml
 
   const validRelPaths  = new Set(); // 'slug/id.html' — current nested pages
@@ -995,9 +1003,9 @@ function injectMarked(filePath, tag, firstRunFrom, openTag, closeTag, html) {
   return before !== after;
 }
 
-function generateTelegramAndArticles() {
+async function generateTelegramAndArticles() {
   const posts = loadJson(path.join('data', 'telegram_posts.json'));
-  const articles = [...loadJson(path.join('data', 'articles.json'))]
+  const articles = (await loadArticles())
     .sort((a, b) => new Date(b.date) - new Date(a.date));
 
   injectMarked(
@@ -1049,9 +1057,11 @@ function generateTelegramAndArticles() {
 
 /* ============================================================ */
 
-const products = loadProducts();
-const productLastmod = generateAllProductPages(products);
-const catalogLastmod = generateCatalogGrids(products);
-updateSitemap(products, catalogLastmod, productLastmod);
-updateHtaccess(products);
-generateTelegramAndArticles();
+(async () => {
+  const products = loadProducts();
+  const productLastmod = await generateAllProductPages(products);
+  const catalogLastmod = generateCatalogGrids(products);
+  updateSitemap(products, catalogLastmod, productLastmod);
+  updateHtaccess(products);
+  await generateTelegramAndArticles();
+})();

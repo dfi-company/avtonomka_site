@@ -607,7 +607,14 @@
       const grid = document.getElementById('home-articles-grid');
       (async function () {
         try {
-          const resp = await fetch('data/articles.json');
+          /* Статті читаються з Supabase (public.articles), не з data/articles.json -
+             ⚠ значення мають збігатися з assets/js/articles.js і admin.html. */
+          const resp = await fetch('https://uvndubhmqzqqsrnrxgaj.supabase.co/rest/v1/articles?select=*', {
+            headers: {
+              apikey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2bmR1YmhtcXpxcXNybnJ4Z2FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgzNDY4MDIsImV4cCI6MjEwMzkyMjgwMn0.AavrYyhDXBQkjKOMdQ9wAQX6B901dOfUpmtUDwO5Cv8',
+              Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2bmR1YmhtcXpxcXNybnJ4Z2FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgzNDY4MDIsImV4cCI6MjEwMzkyMjgwMn0.AavrYyhDXBQkjKOMdQ9wAQX6B901dOfUpmtUDwO5Cv8',
+            },
+          });
           if (!resp.ok) throw new Error('HTTP ' + resp.status);
           const articles = await resp.json();
           const sorted = (Array.isArray(articles) ? articles.slice() : [])

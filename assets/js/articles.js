@@ -1,5 +1,23 @@
 /* articles.js - public articles page */
 
+/* Статті живуть у Supabase (таблиця public.articles), не в
+   data/articles.json - читання публічне (RLS: anon can read articles),
+   тому досить простого fetch з anon-ключем, без клієнтської бібліотеки.
+   ⚠ Ці значення мають збігатися з admin.html і index.html. */
+const ARTICLES_SUPABASE_URL = 'https://uvndubhmqzqqsrnrxgaj.supabase.co';
+const ARTICLES_SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2bmR1YmhtcXpxcXNybnJ4Z2FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgzNDY4MDIsImV4cCI6MjEwMzkyMjgwMn0.AavrYyhDXBQkjKOMdQ9wAQX6B901dOfUpmtUDwO5Cv8';
+
+async function fetchArticles() {
+  const resp = await fetch(`${ARTICLES_SUPABASE_URL}/rest/v1/articles?select=*`, {
+    headers: {
+      apikey: ARTICLES_SUPABASE_ANON_KEY,
+      Authorization: `Bearer ${ARTICLES_SUPABASE_ANON_KEY}`,
+    },
+  });
+  if (!resp.ok) throw new Error('HTTP ' + resp.status);
+  return resp.json();
+}
+
 /* Same slug <-> category mapping as catalog.js / product.js / generate_static_pages.js.
    Kept as its own copy here since this page doesn't load catalog.js. */
 const SLUG_TO_CATEGORY = {
@@ -266,9 +284,7 @@ async function init() {
   grid.innerHTML = `<div class="loading-state"><div class="spinner"></div><span>${t('articles.loading')}</span></div>`;
 
   try {
-    const resp = await fetch('data/articles.json');
-    if (!resp.ok) throw new Error('HTTP ' + resp.status);
-    allArticles = await resp.json();
+    allArticles = await fetchArticles();
     if (Array.isArray(allArticles)) {
       allArticles.sort((a, b) => new Date(b.date) - new Date(a.date));
     }
