@@ -21,8 +21,8 @@
 (function () {
   'use strict';
 
-  const SUPABASE_URL = 'https://YOUR-PROJECT.supabase.co';
-  const SUPABASE_ANON_KEY = 'YOUR-ANON-KEY';
+  const SUPABASE_URL = 'https://uvndubhmqzqqsrnrxgaj.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2bmR1YmhtcXpxcXNybnJ4Z2FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgzNDY4MDIsImV4cCI6MjEwMzkyMjgwMn0.AavrYyhDXBQkjKOMdQ9wAQX6B901dOfUpmtUDwO5Cv8';
 
   function t(key) {
     return window.I18n ? window.I18n.t(key) : key;
