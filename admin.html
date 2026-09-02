@@ -430,9 +430,47 @@
         </div>
       </div>
 
+      <!-- Comments moderation (Supabase) -->
+      <div class="admin-card">
+        <div class="admin-card__head">
+          <span class="admin-card__title">Коментарі клієнтів</span>
+          <button id="btn-comments-logout" class="admin-btn admin-btn--sm admin-btn--ghost hidden" style="background:#e0e6ed;color:#1a2e4a">Вийти з Supabase</button>
+        </div>
+        <div class="admin-card__body">
+          <p style="font-size:.88rem;color:#6c757d;margin-bottom:18px">
+            Окремий вхід через Supabase (не той самий пароль, що вище) - потрібен, щоб бачити й схвалювати
+            коментарі, які ще не опубліковані на сайті. Користувача створи в Supabase Dashboard →
+            Authentication → Users → Add user.
+          </p>
+
+          <form id="comments-login-form" class="settings-form">
+            <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+              <div class="form-group">
+                <label for="comments-email">Email</label>
+                <input type="email" id="comments-email" class="form-input" autocomplete="username">
+              </div>
+              <div class="form-group">
+                <label for="comments-password">Пароль</label>
+                <input type="password" id="comments-password" class="form-input" autocomplete="current-password">
+              </div>
+            </div>
+            <button type="submit" class="admin-btn admin-btn--primary">Увійти</button>
+            <p id="comments-login-msg" class="form-msg"></p>
+          </form>
+
+          <div id="comments-panel" class="hidden" style="margin-top:8px">
+            <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap">
+              <button id="btn-comments-refresh" class="admin-btn admin-btn--sm admin-btn--ghost" style="background:#e0e6ed;color:#1a2e4a">Оновити список</button>
+            </div>
+            <div id="comments-list"></div>
+          </div>
+        </div>
+      </div>
+
     </div><!-- /admin-body -->
   </div><!-- /screen-main -->
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script>
     /* ---- Utilities ---- */
     async function sha256(msg) {
@@ -550,6 +588,97 @@
       document.getElementById('settings-branch').value = s.branch || 'master';
       document.getElementById('settings-token').value  = getToken();
       await refreshList();
+      await checkCommentsSession();
+    }
+
+    /* ---- Comments moderation (Supabase) ----
+       ⚠ Ці значення мають збігатися з assets/js/comments.js. */
+    const SUPABASE_URL = 'https://YOUR-PROJECT.supabase.co';
+    const SUPABASE_ANON_KEY = 'YOUR-ANON-KEY';
+    let sbClient = null;
+    function getSb() {
+      if (sbClient) return sbClient;
+      if (!window.supabase || SUPABASE_URL.includes('YOUR-PROJECT')) return null;
+      sbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      return sbClient;
+    }
+
+    async function checkCommentsSession() {
+      const sb = getSb();
+      if (!sb) return;
+      const { data } = await sb.auth.getSession();
+      showCommentsPanel(!!data.session);
+      if (data.session) await loadPendingComments();
+    }
+
+    function showCommentsPanel(signedIn) {
+      document.getElementById('comments-login-form').classList.toggle('hidden', signedIn);
+      document.getElementById('comments-panel').classList.toggle('hidden', !signedIn);
+      document.getElementById('btn-comments-logout').classList.toggle('hidden', !signedIn);
+    }
+
+    document.getElementById('comments-login-form').addEventListener('submit', async e => {
+      e.preventDefault();
+      const sb = getSb();
+      if (!sb) { showMsg('comments-login-msg', 'Спочатку встав SUPABASE_URL / SUPABASE_ANON_KEY у код admin.html', 'error'); return; }
+      const email    = document.getElementById('comments-email').value.trim();
+      const password = document.getElementById('comments-password').value;
+      const { error } = await sb.auth.signInWithPassword({ email, password });
+      if (error) { showMsg('comments-login-msg', error.message, 'error'); return; }
+      document.getElementById('comments-password').value = '';
+      showCommentsPanel(true);
+      await loadPendingComments();
+    });
+
+    document.getElementById('btn-comments-logout').addEventListener('click', async () => {
+      const sb = getSb();
+      if (sb) await sb.auth.signOut();
+      showCommentsPanel(false);
+    });
+
+    document.getElementById('btn-comments-refresh').addEventListener('click', loadPendingComments);
+
+    async function loadPendingComments() {
+      const el = document.getElementById('comments-list');
+      const sb = getSb();
+      if (!sb) return;
+      el.innerHTML = '<p class="admin-hint">Завантаження…</p>';
+      const { data, error } = await sb
+        .from('comments')
+        .select('id, product_id, author_name, text, created_at')
+        .eq('approved', false)
+        .order('created_at', { ascending: false });
+      if (error) { el.innerHTML = `<p class="admin-hint error">Помилка: ${escHtml(error.message)}</p>`; return; }
+      if (!data.length) { el.innerHTML = '<p class="admin-hint">Немає коментарів, що чекають модерації.</p>'; return; }
+      el.innerHTML = data.map(c => `
+        <div class="admin-article-item" style="align-items:flex-start">
+          <div>
+            <strong>${escHtml(c.author_name)}</strong>
+            <span class="admin-article-date">товар #${escHtml(c.product_id)} · ${escHtml(new Date(c.created_at).toLocaleString('uk-UA'))}</span>
+            <p style="font-size:.9rem;margin-top:6px;white-space:pre-line">${escHtml(c.text)}</p>
+          </div>
+          <div class="admin-article-actions">
+            <button class="admin-btn admin-btn--sm admin-btn--primary" onclick="approveComment(${c.id})">Схвалити</button>
+            <button class="admin-btn admin-btn--sm admin-btn--danger" onclick="deleteComment(${c.id})">Видалити</button>
+          </div>
+        </div>`).join('');
+    }
+
+    async function approveComment(id) {
+      const sb = getSb();
+      const { error } = await sb.from('comments').update({ approved: true }).eq('id', id);
+      if (error) { showStatus('Помилка: ' + error.message, 'error'); return; }
+      showStatus('Коментар опубліковано.', 'success');
+      await loadPendingComments();
+    }
+
+    async function deleteComment(id) {
+      if (!confirm('Видалити цей коментар? Цю дію не можна скасувати.')) return;
+      const sb = getSb();
+      const { error } = await sb.from('comments').delete().eq('id', id);
+      if (error) { showStatus('Помилка: ' + error.message, 'error'); return; }
+      showStatus('Коментар видалено.', 'success');
+      await loadPendingComments();
     }
 
     async function refreshList() {

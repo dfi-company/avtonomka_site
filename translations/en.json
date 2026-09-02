@@ -145,6 +145,16 @@
     "order_text": "I want to order: ",
     "related_articles_title": "Read also"
   },
+  "comments": {
+    "title": "Customer Comments",
+    "name_label": "Your Name *",
+    "text_label": "Comment *",
+    "submit": "Send Comment",
+    "sending": "Sending…",
+    "sent": "Thank you! Your comment will appear after moderator review.",
+    "error": "Failed to send the comment. Please try again later.",
+    "empty": "No comments yet. Be the first!"
+  },
   "articles": {
     "page_title": "Articles - Avtonomka",
     "title": "Articles",
