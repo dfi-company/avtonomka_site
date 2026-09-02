@@ -29,18 +29,29 @@ create table if not exists public.virtual_products (
   image         text,               -- відносний шлях assets/images/virtual/<id>.jpg (наш домен, фото перезалиті)
   price         numeric,            -- з прайсу постачальника (UAH)
   slug          text        not null,   -- для URL /product/<slug>/<id>.html, той самий slugify() підхід, що й у реальних товарів
+  active        boolean     not null default true,  -- вимикається з адмінки (поштучно чи всією категорією) - публічний сайт бачить лише active=true
   created_at    timestamptz not null default now()
 );
 
 alter table public.virtual_products add column if not exists price numeric;
 alter table public.virtual_products add column if not exists slug text;
+alter table public.virtual_products add column if not exists active boolean not null default true;
 
 alter table public.virtual_products enable row level security;
 
+-- Публічний сайт бачить лише увімкнені товари.
 drop policy if exists "anon can read virtual_products" on public.virtual_products;
 create policy "anon can read virtual_products"
   on public.virtual_products for select
   to anon
+  using (active = true);
+
+-- Адмінка (увійшла через Supabase) бачить і вимкнені теж, щоб їх можна
+-- було знову увімкнути.
+drop policy if exists "authenticated can read virtual_products" on public.virtual_products;
+create policy "authenticated can read virtual_products"
+  on public.virtual_products for select
+  to authenticated
   using (true);
 
 drop policy if exists "authenticated can insert virtual_products" on public.virtual_products;

@@ -456,6 +456,38 @@
         </div>
       </div>
 
+      <!-- Virtual products (SEO) - enable/disable by category or one by one -->
+      <div class="admin-card">
+        <div class="admin-card__head">
+          <span class="admin-card__title">Віртуальні товари (SEO)</span>
+        </div>
+        <div class="admin-card__body">
+          <p id="virtual-hint" class="admin-hint">Увійдіть вище через Supabase, щоб керувати віртуальними товарами.</p>
+          <div id="virtual-controls" class="hidden">
+            <p style="font-size:.85rem;color:#6c757d;margin-bottom:16px">
+              Вимкнений товар одразу зникає з публічного сайту (пошук/картки), а знову з'являється після наступного
+              перегенерування сторінок (щоденний автозапуск або ручний запуск). Це не видаляє товар з бази.
+            </p>
+            <div class="form-group">
+              <label for="virtual-category">Категорія</label>
+              <select id="virtual-category" class="form-input">
+                <option value="hybridni-invertory">Гібридні інвертори</option>
+                <option value="akumulyatory">Акумулятори</option>
+                <option value="komplekty">Комплекти</option>
+                <option value="kabeli">Кабелі</option>
+                <option value="dzherela-zhyvlennya">Джерела живлення</option>
+              </select>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;margin:14px 0;flex-wrap:wrap">
+              <span id="virtual-count" style="font-size:.86rem;color:#6c757d"></span>
+              <button id="btn-virtual-enable-all" class="admin-btn admin-btn--sm admin-btn--primary">Увімкнути всю категорію</button>
+              <button id="btn-virtual-disable-all" class="admin-btn admin-btn--sm admin-btn--danger">Вимкнути всю категорію</button>
+            </div>
+            <div id="virtual-list" style="max-height:440px;overflow-y:auto"></div>
+          </div>
+        </div>
+      </div>
+
     </div><!-- /admin-body -->
   </div><!-- /screen-main -->
 
@@ -561,13 +593,17 @@
 
       document.getElementById('comments-hint').classList.toggle('hidden', signedIn);
       document.getElementById('comments-controls').classList.toggle('hidden', !signedIn);
+      document.getElementById('virtual-hint').classList.toggle('hidden', signedIn);
+      document.getElementById('virtual-controls').classList.toggle('hidden', !signedIn);
 
       if (signedIn) {
         await refreshList();
         await loadPendingComments();
+        await loadVirtualProducts();
       } else {
         document.getElementById('article-list').innerHTML = '<p class="admin-hint">Увійдіть вище через Supabase, щоб бачити й редагувати статті.</p>';
         document.getElementById('comments-list').innerHTML = '';
+        document.getElementById('virtual-list').innerHTML = '';
       }
     }
 
@@ -633,6 +669,68 @@
       showStatus('Коментар видалено.', 'success');
       await loadPendingComments();
     }
+
+    /* ---- Virtual products (SEO) - enable/disable by category or one by one ---- */
+    async function loadVirtualProducts() {
+      const el = document.getElementById('virtual-list');
+      const countEl = document.getElementById('virtual-count');
+      const sb = getSb();
+      if (!sb) return;
+      const category = document.getElementById('virtual-category').value;
+      el.innerHTML = '<p class="admin-hint">Завантаження…</p>';
+      const { data, error } = await sb
+        .from('virtual_products')
+        .select('id, title, price, active')
+        .eq('category', category)
+        .order('title');
+      if (error) { el.innerHTML = `<p class="admin-hint error">Помилка: ${escHtml(error.message)}</p>`; return; }
+      const activeCount = data.filter(p => p.active).length;
+      countEl.textContent = `Активних: ${activeCount} із ${data.length}`;
+      if (!data.length) { el.innerHTML = '<p class="admin-hint">У цій категорії немає віртуальних товарів.</p>'; return; }
+      el.innerHTML = data.map(p => `
+        <div class="admin-article-item">
+          <div>
+            <strong>${escHtml(p.title)}</strong>
+            <span class="admin-article-date">${p.price != null ? Math.round(p.price).toLocaleString('uk-UA') + ' UAH' : '-'}</span>
+          </div>
+          <div class="admin-article-actions">
+            <button class="admin-btn admin-btn--sm ${p.active ? '' : 'admin-btn--danger'}"
+                    style="${p.active ? 'background:rgba(46,204,64,.12);color:#17a126' : ''}"
+                    onclick="toggleVirtualActive('${escHtml(p.id)}', ${!p.active})">
+              ${p.active ? '✓ Активний' : 'Вимкнено'}
+            </button>
+          </div>
+        </div>`).join('');
+    }
+
+    async function toggleVirtualActive(id, nextActive) {
+      const sb = getSb();
+      const { error } = await sb.from('virtual_products').update({ active: nextActive }).eq('id', id);
+      if (error) { showStatus('Помилка: ' + error.message, 'error'); return; }
+      await loadVirtualProducts();
+    }
+
+    document.getElementById('virtual-category').addEventListener('change', loadVirtualProducts);
+
+    document.getElementById('btn-virtual-enable-all').addEventListener('click', async () => {
+      const category = document.getElementById('virtual-category').value;
+      if (!confirm('Увімкнути всі віртуальні товари цієї категорії?')) return;
+      const sb = getSb();
+      const { error } = await sb.from('virtual_products').update({ active: true }).eq('category', category);
+      if (error) { showStatus('Помилка: ' + error.message, 'error'); return; }
+      showStatus('Категорію увімкнено.', 'success');
+      await loadVirtualProducts();
+    });
+
+    document.getElementById('btn-virtual-disable-all').addEventListener('click', async () => {
+      const category = document.getElementById('virtual-category').value;
+      if (!confirm('Вимкнути всі віртуальні товари цієї категорії?')) return;
+      const sb = getSb();
+      const { error } = await sb.from('virtual_products').update({ active: false }).eq('category', category);
+      if (error) { showStatus('Помилка: ' + error.message, 'error'); return; }
+      showStatus('Категорію вимкнено.', 'success');
+      await loadVirtualProducts();
+    });
 
     async function refreshList() {
       const el = document.getElementById('article-list');
