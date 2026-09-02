@@ -200,6 +200,36 @@ function getBase() {
 }
 const BASE = getBase();
 
+/* ---- Віртуальні товари (public.virtual_products, розділ 9.4
+   ARCHITECTURE.md) - потрібні тут так само, як на каталозі: без цього
+   виклику продукт з id="V..." не знайдеться в products.json і
+   showNotFound() затре пре-рендерений HTML сторінки. ⚠ Ці значення мають
+   збігатися з assets/js/catalog.js / articles.js / admin.html /
+   scripts/generate_static_pages.js. ---- */
+const VIRTUAL_SUPABASE_URL = 'https://uvndubhmqzqqsrnrxgaj.supabase.co';
+const VIRTUAL_SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2bmR1YmhtcXpxcXNybnJ4Z2FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgzNDY4MDIsImV4cCI6MjEwMzkyMjgwMn0.AavrYyhDXBQkjKOMdQ9wAQX6B901dOfUpmtUDwO5Cv8';
+
+function fetchVirtualProducts() {
+  return fetch(`${VIRTUAL_SUPABASE_URL}/rest/v1/virtual_products?select=*`, {
+    headers: { apikey: VIRTUAL_SUPABASE_ANON_KEY, Authorization: `Bearer ${VIRTUAL_SUPABASE_ANON_KEY}` },
+  })
+    .then(resp => resp.ok ? resp.json() : [])
+    .then(rows => (Array.isArray(rows) ? rows : []).map(r => ({
+      id: r.id,
+      title: r.title,
+      image_link: r.image,
+      additional_images: [],
+      price: r.price != null ? `${r.price} UAH` : '',
+      availability: 'in_stock',
+      product_type: r.product_type,
+      mpn: r.source_model,
+      condition: 'new',
+      description: r.description,
+      slug: r.slug,
+    })))
+    .catch(e => { console.warn('product.js: could not load virtual_products:', e); return []; });
+}
+
 /* ---- Product id: ?id= (legacy), /product/<id>.html (old stub) or
    /product/<slug>/<id>.html (static pages) — id is always the last segment ---- */
 function getProductId() {
@@ -236,13 +266,17 @@ function init() {
   const id = getProductId();
   if (!id) { showNotFound(); return; }
 
-  fetch(BASE + 'products.json')
-    .then(function(resp) {
+  Promise.all([
+    fetch(BASE + 'products.json').then(function(resp) {
       if (!resp.ok) throw new Error('HTTP ' + resp.status);
       return resp.json();
-    })
-    .then(function(data) {
-      const products = Array.isArray(data) ? data : (data.products || []);
+    }),
+    fetchVirtualProducts(),
+  ])
+    .then(function(results) {
+      const data = results[0];
+      const virtual = results[1];
+      const products = (Array.isArray(data) ? data : (data.products || [])).concat(virtual);
       const product  = products.find(p => String(p.id) === String(id));
       if (!product) { showNotFound(); return; }
       render(product);

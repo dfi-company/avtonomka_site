@@ -245,6 +245,35 @@ const _productsUrl   = (typeof PRODUCTS_URL    !== 'undefined' && PRODUCTS_URL) 
 const _productBase   = (typeof PRODUCT_BASE_URL !== 'undefined' && PRODUCT_BASE_URL) || 'product/';
 const _assetsBase    = (typeof ASSETS_BASE      !== 'undefined' && ASSETS_BASE)     || '';
 
+/* ---- Віртуальні товари (public.virtual_products, розділ 9.4
+   ARCHITECTURE.md) - SEO-заглушки, замішуються прямо в основний каталог
+   разом з реальними товарами. ⚠ Ці значення мають збігатися з
+   assets/js/articles.js / admin.html / scripts/generate_static_pages.js.
+   Мережева помилка не блокує показ реального каталогу. ---- */
+const VIRTUAL_SUPABASE_URL = 'https://uvndubhmqzqqsrnrxgaj.supabase.co';
+const VIRTUAL_SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2bmR1YmhtcXpxcXNybnJ4Z2FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgzNDY4MDIsImV4cCI6MjEwMzkyMjgwMn0.AavrYyhDXBQkjKOMdQ9wAQX6B901dOfUpmtUDwO5Cv8';
+
+function fetchVirtualProducts() {
+  return fetch(`${VIRTUAL_SUPABASE_URL}/rest/v1/virtual_products?select=*`, {
+    headers: { apikey: VIRTUAL_SUPABASE_ANON_KEY, Authorization: `Bearer ${VIRTUAL_SUPABASE_ANON_KEY}` },
+  })
+    .then(resp => resp.ok ? resp.json() : [])
+    .then(rows => (Array.isArray(rows) ? rows : []).map(r => ({
+      id: r.id,
+      title: r.title,
+      image_link: r.image,
+      additional_images: [],
+      price: r.price != null ? `${r.price} UAH` : '',
+      availability: 'in_stock',
+      product_type: r.product_type,
+      mpn: r.source_model,
+      condition: 'new',
+      description: r.description,
+      slug: r.slug,
+    })))
+    .catch(e => { console.warn('catalog.js: could not load virtual_products:', e); return []; });
+}
+
 /* ---- DOM refs ---- */
 const grid        = document.getElementById('products-grid');
 const counter     = document.getElementById('catalog-counter');
@@ -259,13 +288,17 @@ function init() {
   if (!grid) return;
   showLoading();
 
-  fetch(_productsUrl)
-    .then(function(resp) {
+  Promise.all([
+    fetch(_productsUrl).then(function(resp) {
       if (!resp.ok) throw new Error('HTTP ' + resp.status);
       return resp.json();
-    })
-    .then(function(data) {
-      allProducts = Array.isArray(data) ? data : (data.products || []);
+    }),
+    fetchVirtualProducts(),
+  ])
+    .then(function(results) {
+      const data = results[0];
+      const virtual = results[1];
+      allProducts = (Array.isArray(data) ? data : (data.products || [])).concat(virtual);
       const rawCat = (typeof PRESET_CATEGORY !== 'undefined' && PRESET_CATEGORY)
         || new URLSearchParams(window.location.search).get('cat')
         || '';

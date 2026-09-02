@@ -297,6 +297,39 @@ async function loadArticles() {
   }
 }
 
+/* Віртуальні товари (public.virtual_products) - SEO-заглушки для моделей
+   постачальника, яких нема в products.json (розділ 9.4 ARCHITECTURE.md).
+   Мапляться в той самий "product"-формат, що й products.json, і йдуть в
+   generateAllProductPages/generateCatalogGrids/sitemap/.htaccess разом з
+   реальними товарами - НЕ в products.json, тому НЕ потрапляють у
+   catalog_export.csv чи feed.xml (Google Merchant), які читають лише
+   products.json напряму. Мережева помилка не зупиняє build. */
+async function loadVirtualProducts() {
+  try {
+    const resp = await fetch(`${SUPABASE_URL}/rest/v1/virtual_products?select=*`, {
+      headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` },
+    });
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    const rows = await resp.json();
+    return (Array.isArray(rows) ? rows : []).map(r => ({
+      id: r.id,
+      title: r.title,
+      image_link: r.image,
+      additional_images: [],
+      price: r.price != null ? `${r.price} UAH` : '',
+      availability: 'in_stock',
+      product_type: r.product_type,
+      mpn: r.source_model,
+      condition: 'new',
+      description: r.description,
+      slug: r.slug,
+    }));
+  } catch (e) {
+    console.warn('generate_static_pages: could not load virtual_products from Supabase:', e.message);
+    return [];
+  }
+}
+
 /* slug -> [article, ...], for O(1) lookup per product. */
 function groupArticlesBySlug(articles) {
   const bySlug = {};
@@ -1059,9 +1092,11 @@ async function generateTelegramAndArticles() {
 
 (async () => {
   const products = loadProducts();
-  const productLastmod = await generateAllProductPages(products);
-  const catalogLastmod = generateCatalogGrids(products);
-  updateSitemap(products, catalogLastmod, productLastmod);
-  updateHtaccess(products);
+  const virtualProducts = await loadVirtualProducts();
+  const allProducts = [...products, ...virtualProducts];
+  const productLastmod = await generateAllProductPages(allProducts);
+  const catalogLastmod = generateCatalogGrids(allProducts);
+  updateSitemap(allProducts, catalogLastmod, productLastmod);
+  updateHtaccess(allProducts);
   await generateTelegramAndArticles();
 })();
