@@ -94,9 +94,13 @@
     if (path === 'articles.html') return 'articles';
     if (path === 'blog.html') return 'blog';
     if (path === 'product.html') return 'product';
+    if (path === 'checkout.html') return 'checkout';
     if (path === '404.html') return '404';
-    /* catalog sub-pages use catalog translations */
+    /* catalog sub-pages use catalog translations; static /product/<slug>/<id>.html
+       pages get the generic "product" title briefly - product.js immediately
+       overwrites it with the real product name once its data loads. */
     if (window.location.pathname.includes('/catalog/')) return 'catalog';
+    if (window.location.pathname.includes('/product/')) return 'product';
     return 'home';
   }
 

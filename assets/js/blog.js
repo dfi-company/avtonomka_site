@@ -13,6 +13,10 @@ function truncate(str, len) {
   return str.length > len ? str.slice(0, len).trimEnd() + '…' : str;
 }
 
+function t(key) {
+  return window.I18n ? window.I18n.t(key) : key;
+}
+
 /* ---- Blog page: full Telegram-style post ---- */
 function renderPostFull(post) {
   const dateStr = post.date
@@ -37,7 +41,7 @@ function renderPostFull(post) {
     <div class="tg-post__footer">
       <a href="${escHtml(post.url || 'https://telegram.me/avtonomka_od')}"
          target="_blank" rel="noopener noreferrer"
-         class="tg-post__link">Переглянути в Telegram →</a>
+         class="tg-post__link">${escHtml(t('blog.view_link'))}</a>
     </div>
   </article>`;
 }
@@ -60,7 +64,7 @@ function renderCard(post) {
       <div class="blog-card__text">${escHtml(shortText)}</div>
       <a href="${escHtml(post.url || 'https://telegram.me/avtonomka_od')}"
          target="_blank" rel="noopener noreferrer"
-         class="blog-card__link">Читати далі →</a>
+         class="blog-card__link">${escHtml(t('home.read_more'))}</a>
     </div>
   </div>`;
 }
@@ -122,10 +126,10 @@ function showEmpty(grid) {
   grid.innerHTML = `
     <div class="empty-state">
       <img src="assets/images/1111111.webp" alt="Хом'як" loading="lazy">
-      <h3>Поки що новин немає</h3>
-      <p>Слідкуйте за нашим Telegram-каналом, щоб не пропустити оновлення.</p>
+      <h3>${escHtml(t('blog.empty_title'))}</h3>
+      <p>${escHtml(t('blog.empty_text'))}</p>
       <a href="https://telegram.me/avtonomka_od" target="_blank" rel="noopener" class="btn btn-tg">
-        Підписатись на канал
+        ${escHtml(t('blog.subscribe'))}
       </a>
     </div>`;
 }
@@ -134,14 +138,22 @@ function showError(grid) {
   grid.innerHTML = `
     <div class="empty-state">
       <img src="assets/images/sticker.webp" alt="" loading="lazy">
-      <h3>Не вдалося завантажити новини</h3>
-      <p>Спробуйте пізніше або перегляньте наш Telegram-канал.</p>
+      <h3>${escHtml(t('blog.error_title'))}</h3>
+      <p>${escHtml(t('blog.error_text'))}</p>
       <a href="https://telegram.me/avtonomka_od" target="_blank" rel="noopener" class="btn btn-tg">
-        Telegram-канал
+        ${escHtml(t('blog.error_button'))}
       </a>
     </div>`;
 }
 
-/* ---- Start ---- */
-init();
-initHomePreview();
+/* ---- Start (wait for i18n so renderPostFull/showEmpty/showError get
+   real translations instead of raw keys) ---- */
+function start() {
+  init();
+  initHomePreview();
+}
+if (window.I18n) {
+  start();
+} else {
+  document.addEventListener('i18n:ready', start);
+}

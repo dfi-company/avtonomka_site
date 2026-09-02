@@ -14,6 +14,10 @@
      це той самий Apps Script Web App. */
   const ORDER_FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbz7JbuQpZmBlUck24Bjp7SGKZL-JqE_clqLuYb9y15QG4-FSk45ZkpPHf5faZWISHcE/exec';
 
+  function t(key, vars) {
+    return window.I18n ? window.I18n.t(key, vars) : key;
+  }
+
   function escapeHtml(str) {
     return String(str == null ? '' : str)
       .replace(/&/g, '&amp;')
@@ -44,16 +48,16 @@
       <div class="cart-item">
         <div class="cart-item__info">
           <div class="cart-item__title">${escapeHtml(item.title)}</div>
-          ${item.sku ? `<div class="cart-item__sku">Арт. ${escapeHtml(item.sku)}</div>` : ''}
+          ${item.sku ? `<div class="cart-item__sku">${escapeHtml(t('checkout.sku_prefix'))} ${escapeHtml(item.sku)}</div>` : ''}
           <div class="cart-item__price">${formatPrice(item.price, item.currency)}</div>
         </div>
         <div class="cart-item__controls">
           <div class="cart-item__qty">
-            <button type="button" data-cart-step="-1" data-cart-id="${escapeHtml(item.id)}" aria-label="Зменшити">−</button>
-            <input type="number" min="1" value="${item.qty}" data-cart-qty-input="${escapeHtml(item.id)}" aria-label="Кількість">
-            <button type="button" data-cart-step="1" data-cart-id="${escapeHtml(item.id)}" aria-label="Збільшити">+</button>
+            <button type="button" data-cart-step="-1" data-cart-id="${escapeHtml(item.id)}" aria-label="${escapeHtml(t('checkout.decrease_aria'))}">−</button>
+            <input type="number" min="1" value="${item.qty}" data-cart-qty-input="${escapeHtml(item.id)}" aria-label="${escapeHtml(t('checkout.qty_aria'))}">
+            <button type="button" data-cart-step="1" data-cart-id="${escapeHtml(item.id)}" aria-label="${escapeHtml(t('checkout.increase_aria'))}">+</button>
           </div>
-          <button type="button" class="cart-item__remove" data-cart-remove="${escapeHtml(item.id)}" aria-label="Видалити">Видалити</button>
+          <button type="button" class="cart-item__remove" data-cart-remove="${escapeHtml(item.id)}" aria-label="${escapeHtml(t('checkout.remove'))}">${escapeHtml(t('checkout.remove'))}</button>
         </div>
       </div>`).join('');
 
@@ -89,7 +93,7 @@
 
   function showError() {
     submitBtn.disabled = false;
-    submitBtn.textContent = 'Підтвердити замовлення';
+    submitBtn.textContent = t('checkout.submit');
     errorBlock.classList.remove('hidden');
   }
 
@@ -100,7 +104,7 @@
     if (items.length === 0) return;
 
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Надсилання…';
+    submitBtn.textContent = t('checkout.submitting');
     errorBlock.classList.add('hidden');
 
     const data = new URLSearchParams({
@@ -145,9 +149,17 @@
     form.addEventListener('submit', onSubmit);
   }
 
+  function start() {
+    if (window.I18n) {
+      init();
+    } else {
+      document.addEventListener('i18n:ready', init);
+    }
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', start);
   } else {
-    init();
+    start();
   }
 })();

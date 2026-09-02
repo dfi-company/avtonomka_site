@@ -28,50 +28,55 @@
   }
   const BASE = getBase();
 
-  const MODAL_HTML = `
+  function t(key, vars) {
+    return window.I18n ? window.I18n.t(key, vars) : key;
+  }
+
+  /* Built lazily inside buildModal() (only called on the first "Замовити"
+     click, well after i18n has loaded) rather than as a top-level const, so
+     t() has real translations by the time this runs instead of the module
+     evaluating it eagerly before window.I18n exists. */
+  function buildModalHtml() {
+    return `
     <div id="order-form-overlay" class="order-form-overlay hidden">
       <div class="order-form-modal" role="dialog" aria-modal="true" aria-labelledby="order-form-title">
-        <button type="button" class="order-form-close" aria-label="Закрити">&times;</button>
-        <h3 id="order-form-title">Оформити заявку</h3>
+        <button type="button" class="order-form-close" aria-label="${t('order_form.close_aria')}">&times;</button>
+        <h3 id="order-form-title">${t('order_form.title')}</h3>
         <p class="order-form-product" id="order-form-product-label"></p>
 
         <form id="order-form">
           <div class="form-group">
-            <label for="order-name">Ім'я *</label>
+            <label for="order-name">${t('order_form.name_label')}</label>
             <input type="text" id="order-name" name="name" required autocomplete="name">
           </div>
           <div class="form-group">
-            <label for="order-phone">Телефон *</label>
+            <label for="order-phone">${t('order_form.phone_label')}</label>
             <input type="tel" id="order-phone" name="phone" required autocomplete="tel" placeholder="+380 XX XXX XX XX">
           </div>
           <input type="hidden" id="order-product" name="product">
           <div class="form-group">
-            <label for="order-comment">Коментар</label>
-            <textarea id="order-comment" name="comment" rows="3" placeholder="Кількість, побажання тощо (необов'язково)"></textarea>
+            <label for="order-comment">${t('order_form.comment_label')}</label>
+            <textarea id="order-comment" name="comment" rows="3" placeholder="${t('order_form.comment_placeholder')}"></textarea>
           </div>
           <div class="form-group form-group--consent">
             <label class="consent-label">
               <input type="checkbox" id="order-consent" name="consent" required>
-              Я погоджуюсь з <a href="${BASE}privacy.html" target="_blank" rel="noopener">політикою конфіденційності</a> *
+              <span>${t('order_form.consent_html', { base: BASE })}</span>
             </label>
           </div>
-          <button type="submit" class="btn btn-primary btn-block" id="order-form-submit">Надіслати заявку</button>
+          <button type="submit" class="btn btn-primary btn-block" id="order-form-submit">${t('order_form.submit')}</button>
         </form>
 
-        <div id="order-form-success" class="order-form-state hidden">
-          ✓ Дякуємо! Заявку надіслано, ми зв'яжемось з вами найближчим часом.
-        </div>
-        <div id="order-form-error" class="order-form-state order-form-state--error hidden">
-          Не вдалося надіслати заявку. Спробуйте пізніше або напишіть нам у
-          <a href="https://telegram.me/avtonomka_od" target="_blank" rel="noopener">Telegram</a>.
-        </div>
+        <div id="order-form-success" class="order-form-state hidden">${t('order_form.success_html')}</div>
+        <div id="order-form-error" class="order-form-state order-form-state--error hidden">${t('order_form.error_html')}</div>
       </div>
     </div>`;
+  }
 
   let overlay, form, productLabel, productInput, submitBtn, successBlock, errorBlock;
 
   function buildModal() {
-    document.body.insertAdjacentHTML('beforeend', MODAL_HTML);
+    document.body.insertAdjacentHTML('beforeend', buildModalHtml());
     overlay      = document.getElementById('order-form-overlay');
     form         = document.getElementById('order-form');
     productLabel = document.getElementById('order-form-product-label');
@@ -98,11 +103,11 @@
     successBlock.classList.add('hidden');
     errorBlock.classList.add('hidden');
     submitBtn.disabled = false;
-    submitBtn.textContent = 'Надіслати заявку';
+    submitBtn.textContent = t('order_form.submit');
 
     const title = productTitle || '';
     productInput.value = title;
-    productLabel.textContent = title ? 'Товар: ' + title : '';
+    productLabel.textContent = title ? t('order_form.product_label', { title }) : '';
     productLabel.classList.toggle('hidden', !title);
 
     overlay.classList.remove('hidden');
@@ -126,7 +131,7 @@
     }
 
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Надсилання…';
+    submitBtn.textContent = t('order_form.submitting');
 
     const data = new URLSearchParams({
       name:    form.name.value.trim(),
@@ -160,7 +165,7 @@
 
   function showError() {
     submitBtn.disabled = false;
-    submitBtn.textContent = 'Надіслати заявку';
+    submitBtn.textContent = t('order_form.submit');
     errorBlock.classList.remove('hidden');
   }
 
