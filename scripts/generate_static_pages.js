@@ -14,6 +14,15 @@
  *      catalog.js shows on first load) of product cards into catalog.html
  *      and each catalog/<slug>.html, wrapped in <!-- SSR:START/END -->
  *      markers so re-runs are idempotent.
+ *   3. Same idea for the Telegram-feed and articles LIST views (not the
+ *      full article body, which only ever opens via JS hash-routing and
+ *      isn't a separately crawlable URL anyway): blog.html's #blog-grid,
+ *      articles.html's #articles-grid, and the two homepage previews
+ *      (#home-tg-feed, #home-articles-grid) get their card markup baked
+ *      into the HTML too, wrapped in their own SSR:TG/SSR:ARTICLES markers.
+ *      assets/js/blog.js and assets/js/articles.js still run on top and
+ *      simply overwrite this with the same markup (plus live view counts) -
+ *      it's a crawler-visible fallback, not a caching layer to invalidate.
  *
  * product.html itself (the old ?id=X template) is left completely untouched
  * and keeps working exactly as before — nothing links to it going forward,
@@ -867,6 +876,177 @@ ${rules}
   console.log(`generate_static_pages: .htaccess rebuilt — ${products.length} redirect rule(s)`);
 }
 
+/* ============================================================
+   Telegram feed + articles list — mirrors assets/js/blog.js's
+   renderPostFull() and assets/js/articles.js's renderCard() exactly, so
+   the baked HTML matches what the client JS re-renders on top of it.
+   ============================================================ */
+
+function loadJson(relPath) {
+  const file = path.join(ROOT, relPath);
+  if (!fs.existsSync(file)) return [];
+  try {
+    const data = JSON.parse(fs.readFileSync(file, 'utf8'));
+    return Array.isArray(data) ? data : [];
+  } catch (e) {
+    console.warn(`generate_static_pages: could not parse ${relPath}:`, e.message);
+    return [];
+  }
+}
+
+function formatDateUk(dateStr) {
+  if (!dateStr) return '';
+  return new Date(dateStr).toLocaleDateString('uk-UA', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+/* Verbatim structure of blog.js:renderPostFull() */
+function renderTelegramPostFull(post) {
+  const dateStr = formatDateUk(post.date);
+  const imgHtml = post.photo
+    ? `<div class="tg-post__img"><img src="${escapeHtml(post.photo)}" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`
+    : '';
+  return `
+  <article class="tg-post">
+    <div class="tg-post__header">
+      <img src="assets/images/logo.jpg" alt="Автономка" class="tg-post__avatar">
+      <div class="tg-post__meta">
+        <span class="tg-post__channel">Автономка</span>
+        ${dateStr ? `<span class="tg-post__date">${escapeHtml(dateStr)}</span>` : ''}
+      </div>
+    </div>
+    ${imgHtml}
+    ${post.text ? `<div class="tg-post__text">${escapeHtml(post.text)}</div>` : ''}
+    <div class="tg-post__footer">
+      <a href="${escapeHtml(post.url || 'https://telegram.me/avtonomka_od')}"
+         target="_blank" rel="noopener noreferrer"
+         class="tg-post__link">Переглянути в Telegram →</a>
+    </div>
+  </article>`;
+}
+
+/* Verbatim structure of articles.js:renderCard() */
+function renderArticleCard(article) {
+  const dateStr = formatDateUk(article.date);
+  const title   = article.title || '';
+  const summary = article.summary || '';
+  const imgHtml = article.photo
+    ? `<div class="article-card__img"><img src="${escapeHtml(article.photo)}" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`
+    : '<div class="article-card__img article-card__img--placeholder"></div>';
+  const metaParts = [];
+  if (dateStr) metaParts.push(escapeHtml(dateStr));
+  metaParts.push(`<span class="article-card__views" data-views-id="${escapeHtml(article.id)}">…</span>`);
+  return `
+  <article class="article-card" data-id="${escapeHtml(article.id)}" tabindex="0" role="button" aria-label="${escapeHtml(title)}">
+    ${imgHtml}
+    <div class="article-card__body">
+      <div class="article-card__date">${metaParts.join(' · ')}</div>
+      <h2 class="article-card__title">${escapeHtml(title)}</h2>
+      ${summary ? `<p class="article-card__summary">${escapeHtml(summary)}</p>` : ''}
+    </div>
+    <div class="article-card__footer">
+      <span class="article-card__link">Читати далі →</span>
+    </div>
+  </article>`;
+}
+
+/* Verbatim structure of index.html's inline "Останні 3 статті" script */
+function renderHomeArticleCard(article) {
+  const dateStr = formatDateUk(article.date);
+  const title   = article.title || '';
+  const summary = article.summary || '';
+  const imgHtml = article.photo
+    ? `<div class="article-card__img"><img src="${escapeHtml(article.photo)}" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`
+    : '<div class="article-card__img article-card__img--placeholder"></div>';
+  const meta = (dateStr ? escapeHtml(dateStr) + ' · ' : '') + `<span data-views-id="${escapeHtml(article.id)}">…</span>`;
+  return `<a href="articles.html#${escapeHtml(article.id)}" class="article-card" style="text-decoration:none">
+              ${imgHtml}
+              <div class="article-card__body">
+                <div class="article-card__date">${meta}</div>
+                <h3 class="article-card__title">${escapeHtml(title)}</h3>
+                ${summary ? `<p class="article-card__summary">${escapeHtml(summary)}</p>` : ''}
+              </div>
+              <div class="article-card__footer"><span class="article-card__link">Читати далі →</span></div>
+            </a>`;
+}
+
+/* Generic idempotent inject: replaces an existing SSR:<tag>:START/END block
+   in place, or (first run) the exact original wrapper markup given in
+   `firstRunFrom` (the whole `<div id="...">...loading-state...</div>`),
+   with `openTag + marker-wrapped html + closeTag` — i.e. the same div,
+   now holding the baked cards instead of the loading placeholder. */
+function injectMarked(filePath, tag, firstRunFrom, openTag, closeTag, html) {
+  const before = fs.readFileSync(filePath, 'utf8');
+  const start = `<!-- SSR:${tag}:START -->`;
+  const end   = `<!-- SSR:${tag}:END -->`;
+  const block = `${start}\n${html}\n${end}`;
+  const markerRe = new RegExp(start + '[\\s\\S]*?' + end);
+
+  let after;
+  if (markerRe.test(before)) {
+    after = before.replace(markerRe, block);
+  } else if (before.includes(firstRunFrom)) {
+    after = before.replace(firstRunFrom, `${openTag}${block}${closeTag}`);
+  } else {
+    console.warn(`generate_static_pages: could not find injection point for SSR:${tag} in ${filePath}`);
+    return false;
+  }
+
+  fs.writeFileSync(filePath, after, 'utf8');
+  return before !== after;
+}
+
+function generateTelegramAndArticles() {
+  const posts = loadJson(path.join('data', 'telegram_posts.json'));
+  const articles = [...loadJson(path.join('data', 'articles.json'))]
+    .sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  injectMarked(
+    path.join(ROOT, 'blog.html'),
+    'TG',
+    '<div id="blog-grid" class="blog-grid-full"></div>',
+    '<div id="blog-grid" class="blog-grid-full">', '</div>',
+    posts.map(renderTelegramPostFull).join('\n')
+  );
+
+  injectMarked(
+    path.join(ROOT, 'articles.html'),
+    'ARTICLES',
+    '<div id="articles-grid" class="articles-grid"></div>',
+    '<div id="articles-grid" class="articles-grid">', '</div>',
+    articles.map(renderArticleCard).join('\n')
+  );
+
+  const homeTgFrom = `<div id="home-tg-feed" class="tg-feed">
+              <div class="loading-state">
+                <div class="spinner"></div>
+                <span data-i18n="home.loading">Завантаження…</span>
+              </div>
+            </div>`;
+  injectMarked(
+    path.join(ROOT, 'index.html'),
+    'HOME-TG',
+    homeTgFrom,
+    '<div id="home-tg-feed" class="tg-feed">', '</div>',
+    posts.slice(0, 15).map(renderTelegramPostFull).join('\n')
+  );
+
+  const homeArticlesFrom = `<div id="home-articles-grid" class="articles-grid">
+          <div class="loading-state" style="grid-column:1/-1">
+            <div class="spinner"></div>
+            <span data-i18n="home.articles_loading">Завантаження статей…</span>
+          </div>
+        </div>`;
+  injectMarked(
+    path.join(ROOT, 'index.html'),
+    'HOME-ARTICLES',
+    homeArticlesFrom,
+    '<div id="home-articles-grid" class="articles-grid">', '</div>',
+    articles.slice(0, 3).map(renderHomeArticleCard).join('\n')
+  );
+
+  console.log(`generate_static_pages: prerendered ${posts.length} Telegram posts + ${articles.length} articles into blog.html/articles.html/index.html`);
+}
+
 /* ============================================================ */
 
 const products = loadProducts();
@@ -874,3 +1054,4 @@ const productLastmod = generateAllProductPages(products);
 const catalogLastmod = generateCatalogGrids(products);
 updateSitemap(products, catalogLastmod, productLastmod);
 updateHtaccess(products);
+generateTelegramAndArticles();
