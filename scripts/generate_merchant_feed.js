@@ -14,40 +14,11 @@ const SHOP_DESC   = 'Магазин обладнання для автономн
 
 const products = JSON.parse(fs.readFileSync(path.join(__dirname, '../products.json'), 'utf-8'));
 
-/* Віртуальні товари (public.virtual_products, розділ 9.4 ARCHITECTURE.md) -
-   тепер теж ідуть у Merchant Center фід, за явною вимогою власника
-   (ціни реальні, з прайсу постачальника - товар можна реально
-   підвезти під замовлення). anon-ключ + RLS = сюди підтягуються лише
-   active=true. ⚠ Значення мають збігатися з assets/js/catalog.js /
-   product.js / scripts/generate_static_pages.js. */
-const SUPABASE_URL = 'https://uvndubhmqzqqsrnrxgaj.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2bmR1YmhtcXpxcXNybnJ4Z2FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgzNDY4MDIsImV4cCI6MjEwMzkyMjgwMn0.AavrYyhDXBQkjKOMdQ9wAQX6B901dOfUpmtUDwO5Cv8';
-
-async function loadVirtualProducts() {
-  try {
-    const resp = await fetch(`${SUPABASE_URL}/rest/v1/virtual_products?select=*`, {
-      headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` },
-    });
-    if (!resp.ok) throw new Error('HTTP ' + resp.status);
-    const rows = await resp.json();
-    return (Array.isArray(rows) ? rows : []).map(r => ({
-      id: r.id,
-      title: r.title,
-      image_link: r.image,
-      additional_images: [],
-      price: r.price != null ? `${r.price} UAH` : '',
-      availability: 'in_stock',
-      product_type: r.product_type,
-      mpn: r.source_model,
-      condition: 'new',
-      description: r.description,
-      slug: r.slug,
-    }));
-  } catch (e) {
-    console.warn('generate_merchant_feed: could not load virtual_products from Supabase:', e.message);
-    return [];
-  }
-}
+/* Віртуальні товари (public.virtual_products, розділ 9.4 ARCHITECTURE.md)
+   у Merchant Center фід НЕ потрапляють: у них немає достовірної ціни
+   (не оновлюються з прайсу постачальника), а Merchant без ціни товар
+   відхиляє. Вони лишаються тільки як SEO-сторінки на сайті + в sitemap.xml
+   (див. scripts/generate_static_pages.js). */
 
 function escXml(str) {
   return String(str || '')
@@ -116,9 +87,7 @@ ${p.mpn ? `      <g:mpn>${escXml(p.mpn)}</g:mpn>\n` : ''}    </item>`;
 }
 
 (async () => {
-  const virtualProducts = await loadVirtualProducts();
-  const allProducts = [...products, ...virtualProducts];
-  const items = allProducts.map(buildItem).filter(Boolean).join('');
+  const items = products.map(buildItem).filter(Boolean).join('');
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">
@@ -133,5 +102,5 @@ ${items}
 
   const outPath = path.join(__dirname, '../feed.xml');
   fs.writeFileSync(outPath, xml, 'utf-8');
-  console.log(`feed.xml generated: ${products.length} products + ${virtualProducts.length} virtual → ${outPath}`);
+  console.log(`feed.xml generated: ${products.length} products → ${outPath}`);
 })();

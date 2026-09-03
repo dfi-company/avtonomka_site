@@ -300,10 +300,14 @@ async function loadArticles() {
 /* Віртуальні товари (public.virtual_products) - SEO-заглушки для моделей
    постачальника, яких нема в products.json (розділ 9.4 ARCHITECTURE.md).
    Мапляться в той самий "product"-формат, що й products.json, і йдуть в
-   generateAllProductPages/generateCatalogGrids/sitemap/.htaccess разом з
-   реальними товарами - НЕ в products.json, тому НЕ потрапляють у
-   catalog_export.csv чи feed.xml (Google Merchant), які читають лише
-   products.json напряму. Мережева помилка не зупиняє build. */
+   generateAllProductPages/sitemap/.htaccess разом з реальними товарами,
+   АЛЕ НЕ в generateCatalogGrids - у каталозі сайту (сітка + пошук) їх нема,
+   лишаються тільки окремі сторінки product/<slug>/<id>.html для індексації.
+   Позначені virtual:true - сторінка рендериться без ціни, зі статусом
+   "Під замовлення" (ціни віртуальних не оновлюються автоматично, тож
+   показувати конкретне число, яке потім розійдеться з реальним, не можна).
+   НЕ в products.json, тому НЕ потрапляють у catalog_export.csv чи feed.xml
+   (Google Merchant). Мережева помилка не зупиняє build. */
 async function loadVirtualProducts() {
   try {
     const resp = await fetch(`${SUPABASE_URL}/rest/v1/virtual_products?select=*`, {
@@ -316,13 +320,14 @@ async function loadVirtualProducts() {
       title: r.title,
       image_link: r.image,
       additional_images: [],
-      price: r.price != null ? `${r.price} UAH` : '',
-      availability: 'in_stock',
+      price: '',
+      availability: 'backorder',
       product_type: r.product_type,
       mpn: r.source_model,
       condition: 'new',
       description: r.description,
       slug: r.slug,
+      virtual: true,
     }));
   } catch (e) {
     console.warn('generate_static_pages: could not load virtual_products from Supabase:', e.message);
@@ -359,9 +364,13 @@ function buildJsonLd(p) {
     offers: {
       '@type': 'Offer',
       url: productUrl(p),
-      priceCurrency: priceCurrency(p.price),
+      priceCurrency: isNaN(num) ? undefined : priceCurrency(p.price),
       price: isNaN(num) ? undefined : num.toFixed(2),
-      availability: p.availability === 'in_stock' ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+      availability: p.availability === 'in_stock'
+        ? 'https://schema.org/InStock'
+        : p.availability === 'backorder'
+        ? 'https://schema.org/BackOrder'
+        : 'https://schema.org/OutOfStock',
       itemCondition: p.condition === 'new' ? 'https://schema.org/NewCondition' : 'https://schema.org/UsedCondition',
       hasMerchantReturnPolicy: {
         '@type': 'MerchantReturnPolicy',
@@ -422,10 +431,11 @@ function buildRelatedArticlesBlock(p, articlesBySlug) {
 
 function generateProductPage(p, template, articlesBySlug) {
   const title       = p.title || '';
-  const priceStr    = formatPrice(p.price || '');
-  const inStock     = p.availability === 'in_stock';
-  const badgeClass  = inStock ? 'badge-green' : 'badge-grey';
-  const badgeText   = inStock ? '✓ В наявності' : 'Немає в наявності';
+  const isVirtual   = !!p.virtual;
+  const priceStr    = isVirtual ? 'Ціну уточнюйте' : formatPrice(p.price || '');
+  const inStock     = !isVirtual && p.availability === 'in_stock';
+  const badgeClass  = isVirtual ? 'badge-grey' : (inStock ? 'badge-green' : 'badge-grey');
+  const badgeText   = isVirtual ? 'Під замовлення' : (inStock ? '✓ В наявності' : 'Немає в наявності');
   const image       = absoluteUrl(p.image_link);
   const metaDesc    = truncate(cleanDescription(p.description) || title, 160);
   const descText    = escapeHtml(cleanDescription(p.description) || '');
@@ -524,10 +534,19 @@ function generateProductPage(p, template, articlesBySlug) {
     '<div id="product-price" class="product-price"></div>',
     `<div id="product-price" class="product-price">${escapeHtml(priceStr)}</div>`
   );
-  html = html.replace(
-    '<button type="button" id="btn-add-cart" class="btn btn-cart" data-add-to-cart data-id="" data-title="" data-price="" data-sku="">',
-    `<button type="button" id="btn-add-cart" class="btn btn-cart" data-add-to-cart data-id="${escapeHtml(p.id)}" data-title="${escapeHtml(title)}" data-price="${isNaN(parseFloat(p.price)) ? '0' : parseFloat(p.price).toFixed(2)}" data-currency="${escapeHtml(priceCurrency(p.price))}" data-sku="${escapeHtml(p.mpn || '')}">`
-  );
+  if (isVirtual) {
+    /* Віртуальний товар: ціна не показується (може розійтися з реальною),
+       тож замість "у кошик" - дзвінок менеджеру для уточнення й замовлення. */
+    html = html.replace(
+      /<button type="button" id="btn-add-cart"[\s\S]*?<\/button>/,
+      '<a href="tel:+380987772020" class="btn btn-cart">☎ Замовити — уточнити ціну</a>'
+    );
+  } else {
+    html = html.replace(
+      '<button type="button" id="btn-add-cart" class="btn btn-cart" data-add-to-cart data-id="" data-title="" data-price="" data-sku="">',
+      `<button type="button" id="btn-add-cart" class="btn btn-cart" data-add-to-cart data-id="${escapeHtml(p.id)}" data-title="${escapeHtml(title)}" data-price="${isNaN(parseFloat(p.price)) ? '0' : parseFloat(p.price).toFixed(2)}" data-currency="${escapeHtml(priceCurrency(p.price))}" data-sku="${escapeHtml(p.mpn || '')}">`
+    );
+  }
   html = html.replace(
     '<span class="product-meta-row__value" id="product-mpn">-</span>',
     `<span class="product-meta-row__value" id="product-mpn">${escapeHtml(mpn)}</span>`
@@ -1095,7 +1114,8 @@ async function generateTelegramAndArticles() {
   const virtualProducts = await loadVirtualProducts();
   const allProducts = [...products, ...virtualProducts];
   const productLastmod = await generateAllProductPages(allProducts);
-  const catalogLastmod = generateCatalogGrids(allProducts);
+  // Віртуальні товари навмисно не передаємо в каталог - тільки реальні.
+  const catalogLastmod = generateCatalogGrids(products);
   updateSitemap(allProducts, catalogLastmod, productLastmod);
   updateHtaccess(allProducts);
   await generateTelegramAndArticles();
