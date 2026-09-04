@@ -37,7 +37,7 @@ function extractBrand(title) {
   return null;
 }
 
-/* Power rating in kW, parsed from the title - mirrors miniapp/index.html's
+/* Power rating in kW, parsed from the title - mirrors miniapp_v/index.html's
    extractKw() so the two stay consistent. (?!h) keeps "16kWh" (battery
    capacity) from being misread as power. */
 function extractKw(title) {

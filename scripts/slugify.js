@@ -7,7 +7,7 @@
  * pattern for. Nothing here should be called at request time; it's a
  * build-time helper only.
  *
- * Core-name extraction mirrors miniapp/index.html's stripTypePrefix() /
+ * Core-name extraction mirrors miniapp_v/index.html's stripTypePrefix() /
  * kitShortName() / kitPartShort() — same idea, same regexes, ported here so
  * slugs read as "brand + model (+ 2nd component for kits)" instead of the
  * full sentence-like product title (which repeats voltage/capacity/weight
@@ -32,7 +32,7 @@ const TYPE_PREFIXES = [
   /^Безперебійник(?:\s+для\s+\S+)?\s*/i,
 ];
 
-// Same as miniapp/index.html's KIT_UNIT_CUT_RE / WIFI_RE.
+// Same as miniapp_v/index.html's KIT_UNIT_CUT_RE / WIFI_RE.
 const UNIT_CUT_RE = /\d+(?:[.,]\d+)?\s*(?:кВт|kW|kw|Вт|фаза|V|В|Ah|Аh|ah)(?![A-Za-zА-Яа-яІіЇїЄєҐґ])/i;
 const WIFI_RE = /\bWi-?Fi\b/i;
 

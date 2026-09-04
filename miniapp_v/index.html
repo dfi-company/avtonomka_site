@@ -286,7 +286,7 @@ function splitPrice(raw){
   return {price:m[1].replace(/\s/g,"").replace(",","."), unit:(m[2]||"").trim()||"UAH"};
 }
 
-// ── IMAGE PATH: products.json paths are site-root-relative; miniapp/ is one level deep ──
+// ── IMAGE PATH: products.json paths are site-root-relative; miniapp_v/ is one level deep ──
 function resolveImg(img){
   if(!img) return "";
   if(/^https?:\/\//i.test(img)) return img;
@@ -349,7 +349,7 @@ function kitShortName(name){
 
 // ── NORMALIZE products.json entry ──
 // Комплекти в мініаппі показують окремий набір "темних" брендованих фото
-// (щоб не чіпати зелені фото на самому сайті) - див. miniapp/photos/manifest.json
+// (щоб не чіпати зелені фото на самому сайті) - див. miniapp_v/photos/manifest.json
 let KIT_DARK_PHOTOS={};
 function norm(p){
   const catLabel=CATEGORY_LABEL[p.product_type]||(p.product_type||"").split(">").pop().trim()||"Інші товари";
