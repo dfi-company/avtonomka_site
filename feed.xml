@@ -6,264 +6,6 @@
     <description>Магазин обладнання для автономного живлення</description>
 
     <item>
-      <g:id>145284</g:id>
-      <g:title>Комплект силових кабелів Dyness 4AWG 1000V VW1 2050мм</g:title>
-      <g:description>Комплект силових кабелів Dyness AWG4 для підключення акумуляторних батарей. Напруга 1000 В, клас горіння VW1. Довжина 2050 мм. Підходить для з&apos;єднання акумуляторів Dyness з інвертором при значній відстані між компонентами системи. кабель 4mm, кабель дайнес, кабель дайнес 4 mm, силовий кабель 4mm, силовий кабель дайнес, силовий кабель дайнес 4 mm, кабель для акумулятора, силовий кабель для акумулятора, екодрайв, ecodrive, кабель дайнес 4AWG, силовий кабель дайнес 4AWG, дайнес 4AWG кабель 4mm, кабель дайнес, кабель дайнес 4 mm, силовой кабель 4mm, силовой кабель дайнес, силовой кабель дайнес 4 mm, кабель для аккумулятора, силовой кабель для аккумулятора, экодрайв, ecodrive, кабель дайнес 4AWG, силовой кабель дайнес 4AWG, дайнес 4AWG</g:description>
-      <g:link>https://avtonomka.com.ua/product/dyness-4awg/145284.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/products/145284_1.jpg</g:image_link>
-      <g:price>1926.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Силові та сонячні кабелі</g:product_type>
-      <g:mpn>4AWG-2050</g:mpn>
-    </item>
-    <item>
-      <g:id>152675</g:id>
-      <g:title>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLB48314TG1-H 51.2V 314Ah</g:title>
-      <g:description>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLB48314TG1-H 51.2V 314Ah комплект автономного живлення селіситі, комплект автономного живлення маст, комплект селіситі, комплект маст, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive комплект автономного электропитания селисити, комплект автономного электропитания маст, комплект селисити, комплект маст, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive</g:description>
-      <g:link>https://avtonomka.com.ua/product/must-pv19-6048exp-felicity-flb48314tg1-h/152675.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/zaglushka.png</g:image_link>
-      <g:price>112525.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
-    </item>
-    <item>
-      <g:id>150590</g:id>
-      <g:title>Акумуляторна батарея Dyness BX51100 51.2v 100ah, 5.12kwh LiFePo4, Trade IN</g:title>
-      <g:description>Акумуляторна батарея Dyness BX51100 51.2 В, 100 Ah, 5.12 кВт·год, LiFePO4. Довговічна та безпечна хімія LiFePO4 з великим ресурсом циклів заряду-розряду — надійна основа для автономної системи живлення. Батарея Dyness чудово підійде для дому, а програма Trade IN дозволяє здати старий акумулятор і отримати вигідну знижку на новий. акумулятор 100ah, акумулятор дайнес, акумулятор дайнес 100 ah, батарея 100ah, батарея дайнес, батарея дайнес 100 ah, акумулятор для інвертора, батарея для інвертора, LiFePO4, екодрайв, ecodrive, акумулятор дайнес 51100, батарея дайнес 51100, дайнес 51100 аккумулятор 100ah, аккумулятор дайнес, аккумулятор дайнес 100 ah, батарея 100ah, батарея дайнес, батарея дайнес 100 ah, аккумулятор для инвертора, батарея для инвертора, LiFePO4, экодрайв, ecodrive, аккумулятор дайнес 51100, батарея дайнес 51100, дайнес 51100</g:description>
-      <g:link>https://avtonomka.com.ua/product/dyness-bx51100/150590.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/products/150590_1.jpg</g:image_link>
-      <g:price>34568.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Акумулятори для гібридних інверторів</g:product_type>
-      <g:mpn>BX51100</g:mpn>
-    </item>
-    <item>
-      <g:id>150649</g:id>
-      <g:title>Безперебійник для роутера TTN DC1036P 12000 mAh DC Mini UPS for Wifi Router</g:title>
-      <g:description>TTN DC1036P - компактний міні-ДБЖ для роутера та іншого мережевого обладнання. Вбудований акумулятор 12000 мА·год забезпечує роботу Wi-Fi роутера протягом кількох годин при відключенні електроенергії. Підтримує живлення постійним струмом (DC). Не потребує налаштувань - просто підключіть замість блока живлення роутера. безперебійник 12000mah, безперебійник ттн, безперебійник ттн 12000 mah, міні ДБЖ 12000mah, міні ДБЖ ттн, міні ДБЖ ттн 12000 mah, безперебійник для роутера, міні ДБЖ для роутера, екодрайв, ecodrive, безперебійник ттн DC1036P, міні ДБЖ ттн DC1036P, ттн DC1036P источник бесперебойного питания 12000mah, источник бесперебойного питания ттн, источник бесперебойного питания ттн 12000 mah, мини ИБП 12000mah, мини ИБП ттн, мини ИБП ттн 12000 mah, источник бесперебойного питания для роутера, мини ИБП для роутера, экодрайв, ecodrive, источник бесперебойного питания ттн DC1036P, мини ИБП ттн DC1036P, ттн DC1036P</g:description>
-      <g:link>https://avtonomka.com.ua/product/ttn-dc1036p-12000-mah-dc-mini-ups-for/150649.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/products/150649_1.jpg</g:image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/150649_2.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/150649_3.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/150649_4.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/150649_5.jpg</g:additional_image_link>
-      <g:price>1660.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Обладнання &gt; Джерела безперебійного живлення</g:product_type>
-      <g:mpn>DC1036P</g:mpn>
-    </item>
-    <item>
-      <g:id>150674</g:id>
-      <g:title>Акумулятор DAH Solar DHN-LVWES05-G1 100ah 51.2V, 480х500х155, 47 кг</g:title>
-      <g:description>DAH Solar DHN-LVWES05-G1 - акумуляторна батарея LiFePO4 ємністю 100 А·год і напругою 51,2 В (5,12 кВт·год). Призначена для автономних, резервних і сонячних систем живлення. Ресурс понад 6000 циклів. Максимальний струм заряду/розряду до 100 А. Вага 45–50 кг. акумулятор 100ah, акумулятор дан солар, акумулятор дан солар 100 ah, батарея 100ah, батарея дан солар, батарея дан солар 100 ah, акумулятор для інвертора, батарея для інвертора, LiFePO4, екодрайв, ecodrive, акумулятор дан солар DHN-LVWES05-G1, батарея дан солар DHN-LVWES05-G1, дан солар DHN-LVWES05-G1 аккумулятор 100ah, аккумулятор дан солар, аккумулятор дан солар 100 ah, батарея 100ah, батарея дан солар, батарея дан солар 100 ah, аккумулятор для инвертора, батарея для инвертора, LiFePO4, экодрайв, ecodrive, аккумулятор дан солар DHN-LVWES05-G1, батарея дан солар DHN-LVWES05-G1, дан солар DHN-LVWES05-G1</g:description>
-      <g:link>https://avtonomka.com.ua/product/dah-solar-dhn-lvwes05-g1/150674.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/products/150674_1.jpg</g:image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/150674_2.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/150674_3.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/150674_4.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/150674_5.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/150674_6.jpg</g:additional_image_link>
-      <g:price>38167.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Акумулятори для гібридних інверторів</g:product_type>
-      <g:mpn>DHN-LVWES05-G1</g:mpn>
-    </item>
-    <item>
-      <g:id>150676</g:id>
-      <g:title>Акумуляторна батарея DEYE SE-F5 Pro-C 51.2V 100 Аh, 404х547х141, 45 кг, LiFePO4 5.12kWh</g:title>
-      <g:description>DEYE SE-F5 Pro-C - сучасна акумуляторна батарея LiFePO4 ємністю 100 А·год і напругою 51,2 В (5,12 кВт·год). Забезпечує стабільну роботу гібридних і сонячних систем. Ресурс понад 6000 циклів. Порти зв&apos;язку CAN/RS485. Вага 45 кг. Підходить для приватних будинків, офісів і комерційних об&apos;єктів. акумулятор 100ah, акумулятор дея, акумулятор дея 100 ah, батарея 100ah, батарея дея, батарея дея 100 ah, акумулятор для інвертора, батарея для інвертора, LiFePO4, екодрайв, ecodrive, акумулятор дея SE-F5, батарея дея SE-F5, дея SE-F5 аккумулятор 100ah, аккумулятор дея, аккумулятор дея 100 ah, батарея 100ah, батарея дея, батарея дея 100 ah, аккумулятор для инвертора, батарея для инвертора, LiFePO4, экодрайв, ecodrive, аккумулятор дея SE-F5, батарея дея SE-F5, дея SE-F5</g:description>
-      <g:link>https://avtonomka.com.ua/product/deye-se-f5-pro-c/150676.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/products/150676_1.jpg</g:image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/150676_2.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/150676_3.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/150676_4.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/150676_5.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/150676_6.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/150676_7.jpg</g:additional_image_link>
-      <g:price>44915.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Акумулятори для гібридних інверторів</g:product_type>
-      <g:mpn>SE-F5 Pro-C</g:mpn>
-    </item>
-    <item>
-      <g:id>150825</g:id>
-      <g:title>Гібридний інвертор Must PV18-1012VPK 1 кВт 12 В, 297.5х468х125, 5 кг</g:title>
-      <g:description>Гібридний інвертор MUST PV18-1012VPK - 1000 Вт, 12 В, PWM-контролер заряду 50A. інвертор 1kvt, інвертор маст, інвертор маст 1 kvt, гібридний інвертор 1kvt, гібридний інвертор маст, гібридний інвертор маст 1 kvt, інвертор для сонячних панелей, гібридний інвертор для сонячних панелей, екодрайв, ecodrive, інвертор маст PV18-1012VPK, гібридний інвертор маст PV18-1012VPK, маст PV18-1012VPK инвертор 1kvt, инвертор маст, инвертор маст 1 kvt, гибридный инвертор 1kvt, гибридный инвертор маст, гибридный инвертор маст 1 kvt, инвертор для солнечных панелей, гибридный инвертор для солнечных панелей, экодрайв, ecodrive, инвертор маст PV18-1012VPK, гибридный инвертор маст PV18-1012VPK, маст PV18-1012VPK</g:description>
-      <g:link>https://avtonomka.com.ua/product/must-pv18-1012vpk/150825.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/products/150825_1.jpg</g:image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/150825_2.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/150825_3.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/150825_4.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/150825_5.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/150825_6.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/150825_7.jpg</g:additional_image_link>
-      <g:price>9745.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Гибридні інвертори</g:product_type>
-      <g:mpn>PV18-1012VPK</g:mpn>
-    </item>
-    <item>
-      <g:id>148245</g:id>
-      <g:title>Зарядна станція ECOFLOW DELTA 3 1024Wh 1800W (китайські розетки, з перехідниками)</g:title>
-      <g:description>EcoFlow DELTA 3 - портативна зарядна станція ємністю 1024 Вт·год і потужністю 1800 Вт. Оснащена довговічним акумулятором LiFePO4 з ресурсом до 4000 циклів. Підтримує швидку зарядку від мережі, а також підзарядку від сонячних панелей. Дозволяє одночасно підключати кілька пристроїв - від ноутбуків до побутової техніки. Версія з китайськими розетками, у комплекті 2 перехідники для стандартних євровилок. Вага близько 12,5 кг. зарядна станція 1024wh, зарядна станція екофлоу, зарядна станція екофлоу 1024 wh, портативна зарядна станція 1024wh, портативна зарядна станція екофлоу, портативна зарядна станція екофлоу 1024 wh, зарядна станція для дому, портативна зарядна станція для дому, екодрайв, ecodrive, зарядна станція екофлоу DELTA, портативна зарядна станція екофлоу DELTA, екофлоу DELTA зарядная станция 1024wh, зарядная станция экофлоу, зарядная станция экофлоу 1024 wh, портативная зарядная станция 1024wh, портативная зарядная станция экофлоу, портативная зарядная станция экофлоу 1024 wh, зарядная станция для дома, портативная зарядная станция для дома, экодрайв, ecodrive, зарядная станция экофлоу DELTA, портативная зарядная станция экофлоу DELTA, экофлоу DELTA</g:description>
-      <g:link>https://avtonomka.com.ua/product/ecoflow-delta-3-1024wh-1800w-kytaiski-rozetky-z-perekhidnykamy/148245.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/products/148245_1.jpg</g:image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/148245_2.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/148245_3.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/148245_4.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/148245_5.jpg</g:additional_image_link>
-      <g:price>33693.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Обладнання &gt; Джерела безперебійного живлення</g:product_type>
-      <g:mpn>EFDELTA3</g:mpn>
-    </item>
-    <item>
-      <g:id>148299</g:id>
-      <g:title>Зарядна станція EcoFlow Delta 2, 1800W, 1024Wh (EU)</g:title>
-      <g:description>EcoFlow DELTA 2 - портативна зарядна станція ємністю 1024 Вт·год і потужністю 1800 Вт з євророзетками. Акумулятор LiFePO4 розрахований на 3000 циклів. Заряджається від 0 до 80% за 50 хвилин. Підтримує сонячну зарядку до 500 Вт та підключення до 13 пристроїв одночасно. Функція EPS автоматично перемикає живлення при відключенні мережі. зарядна станція 1024wh, зарядна станція екофлоу, зарядна станція екофлоу 1024 wh, портативна зарядна станція 1024wh, портативна зарядна станція екофлоу, портативна зарядна станція екофлоу 1024 wh, зарядна станція для дому, портативна зарядна станція для дому, екодрайв, ecodrive, зарядна станція екофлоу Delta, портативна зарядна станція екофлоу Delta, екофлоу Delta зарядная станция 1024wh, зарядная станция экофлоу, зарядная станция экофлоу 1024 wh, портативная зарядная станция 1024wh, портативная зарядная станция экофлоу, портативная зарядная станция экофлоу 1024 wh, зарядная станция для дома, портативная зарядная станция для дома, экодрайв, ecodrive, зарядная станция экофлоу Delta, портативная зарядная станция экофлоу Delta, экофлоу Delta</g:description>
-      <g:link>https://avtonomka.com.ua/product/ecoflow-delta-2-1800w-1024wh-eu/148299.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/products/148299_1.jpg</g:image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/148299_2.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/148299_3.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/148299_4.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/148299_5.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/148299_6.jpg</g:additional_image_link>
-      <g:price>34368.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Обладнання &gt; Джерела безперебійного живлення</g:product_type>
-      <g:mpn>EF DELTA2 EU</g:mpn>
-    </item>
-    <item>
-      <g:id>148317</g:id>
-      <g:title>Гібридний інвертор MUST PV18-2012 ECO 2 кВт 12 В, 290х367х111, 6 кг</g:title>
-      <g:description>MUST PV18-2012 ECO - багатофункціональний гібридний інвертор потужністю 2 кВт для автономних та резервних систем живлення. Поєднує функції інвертора, MPPT сонячного зарядного пристрою та зарядного пристрою для акумуляторів. Може працювати без акумулятора. Має подвійний вихід для керування навантаженням. інвертор 2kvt, інвертор маст, інвертор маст 2 kvt, гібридний інвертор 2kvt, гібридний інвертор маст, гібридний інвертор маст 2 kvt, інвертор для сонячних панелей, гібридний інвертор для сонячних панелей, екодрайв, ecodrive, інвертор маст 2012, гібридний інвертор маст 2012, маст 2012 инвертор 2kvt, инвертор маст, инвертор маст 2 kvt, гибридный инвертор 2kvt, гибридный инвертор маст, гибридный инвертор маст 2 kvt, инвертор для солнечных панелей, гибридный инвертор для солнечных панелей, экодрайв, ecodrive, инвертор маст 2012, гибридный инвертор маст 2012, маст 2012</g:description>
-      <g:link>https://avtonomka.com.ua/product/must-pv18-2012-eco/148317.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/products/148317_1.jpg</g:image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/148317_2.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/148317_3.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/148317_4.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/148317_5.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/148317_6.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/148317_7.jpg</g:additional_image_link>
-      <g:price>12951.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Гибридні інвертори</g:product_type>
-      <g:mpn>PV18-2012ECO</g:mpn>
-    </item>
-    <item>
-      <g:id>152505</g:id>
-      <g:title>Комплект автономного енергоживлення: Must PV18-3224 VPM II 3.2 кВт + MUST LP15-24100 25.6V 100Ah LiFePO4</g:title>
-      <g:description>У комплект входять гібридний інвертор Must PV18-3224 VPM II потужністю 3.2 кВт, 24 В та акумулятор Must LP15-24100 25.6 В, 100 Ah, LiFePO4 — компоненти вже підібрані та сумісні між собою. Компактний комплект чудово підійде для дому чи дачі. комплект автономного живлення 3.2kvt, комплект автономного живлення маст, комплект автономного живлення маст 3.2 kvt, комплект 3.2kvt, комплект маст, комплект маст 3.2 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення маст 3224, комплект маст 3224, маст 3224 комплект автономного электропитания 3.2kvt, комплект автономного электропитания маст, комплект автономного электропитания маст 3.2 kvt, комплект 3.2kvt, комплект маст, комплект маст 3.2 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания маст 3224, комплект маст 3224, маст 3224</g:description>
-      <g:link>https://avtonomka.com.ua/product/must-pv18-3224-vpm-ii-must-lp15-24100/152505.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152505.jpg</g:image_link>
-      <g:price>36924.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
-    </item>
-    <item>
-      <g:id>152520</g:id>
-      <g:title>Акумуляторна батарея Felicity LPBA48100-OL 51.2V 100Ah LiFePO4, 665х440х175, 48.5 кг</g:title>
-      <g:description>Акумуляторна батарея Felicity LPBA48100-OL 51.2 В, 100 Ah, LiFePO4. Безпечна хімія LiFePO4 з великим ресурсом циклів заряду-розряду. Акумулятор Felicity чудово підійде для дому як надійний накопичувач енергії в парі з гібридним інвертором. акумулятор 100ah, акумулятор селіситі, акумулятор селіситі 100 ah, батарея 100ah, батарея селіситі, батарея селіситі 100 ah, акумулятор для інвертора, батарея для інвертора, LiFePO4, екодрайв, ecodrive, акумулятор селіситі LPBA48100-OL, батарея селіситі LPBA48100-OL, селіситі LPBA48100-OL аккумулятор 100ah, аккумулятор селисити, аккумулятор селисити 100 ah, батарея 100ah, батарея селисити, батарея селисити 100 ah, аккумулятор для инвертора, батарея для инвертора, LiFePO4, экодрайв, ecodrive, аккумулятор селисити LPBA48100-OL, батарея селисити LPBA48100-OL, селисити LPBA48100-OL</g:description>
-      <g:link>https://avtonomka.com.ua/product/felicity-lpba48100-ol/152520.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152520.jpg</g:image_link>
-      <g:additional_image_link>https://dfi2.com.ua/images/152520_2.jpg</g:additional_image_link>
-      <g:additional_image_link>https://dfi2.com.ua/images/152520_3.jpg</g:additional_image_link>
-      <g:additional_image_link>https://dfi2.com.ua/images/152520_4.jpg</g:additional_image_link>
-      <g:additional_image_link>https://dfi2.com.ua/images/152520_5.jpg</g:additional_image_link>
-      <g:additional_image_link>https://dfi2.com.ua/images/152520_7.jpg</g:additional_image_link>
-      <g:price>39004.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Акумулятори для гібридних інверторів</g:product_type>
-      <g:mpn>LPBA48100-OL</g:mpn>
-    </item>
-    <item>
-      <g:id>142723</g:id>
-      <g:title>Гібридний інвертор Must PV18-3224 VPM II 3.2 кВт 24 В, 254.5х367.4х103, 5.6 кг</g:title>
-      <g:description>Гібридний інвертор MUST PV18-3224 VPM II - 3200 ВА, 24 В, MPPT 60A. інвертор 3.2kvt, інвертор маст, інвертор маст 3.2 kvt, гібридний інвертор 3.2kvt, гібридний інвертор маст, гібридний інвертор маст 3.2 kvt, інвертор для сонячних панелей, гібридний інвертор для сонячних панелей, екодрайв, ecodrive, інвертор маст 3224, гібридний інвертор маст 3224, маст 3224 инвертор 3.2kvt, инвертор маст, инвертор маст 3.2 kvt, гибридный инвертор 3.2kvt, гибридный инвертор маст, гибридный инвертор маст 3.2 kvt, инвертор для солнечных панелей, гибридный инвертор для солнечных панелей, экодрайв, ecodrive, инвертор маст 3224, гибридный инвертор маст 3224, маст 3224</g:description>
-      <g:link>https://avtonomka.com.ua/product/must-pv18-3224-vpm-ii/142723.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/products/142723_1.jpg</g:image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/142723_2.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/142723_3.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/142723_4.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/142723_5.jpg</g:additional_image_link>
-      <g:price>14354.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Гибридні інвертори</g:product_type>
-      <g:mpn>PV18-3224VPM</g:mpn>
-    </item>
-    <item>
-      <g:id>142725</g:id>
-      <g:title>Гібридний інвертор Must PV19-6048EXP 6 кВт 48 В, 309х505х147, 14 кг</g:title>
-      <g:description>Гібридний інвертор Must PV19-6048EXP потужністю 6 кВт, 48 В. Поєднує функції інвертора, контролера заряду від сонячних панелей та зарядного пристрою для акумулятора. Гібридний інвертор Must чудово підійде для дому чи дачі, де потрібне надійне автономне живлення. інвертор 6kvt, інвертор маст, інвертор маст 6 kvt, гібридний інвертор 6kvt, гібридний інвертор маст, гібридний інвертор маст 6 kvt, інвертор для сонячних панелей, гібридний інвертор для сонячних панелей, екодрайв, ecodrive, інвертор маст PV19-6048EXP, гібридний інвертор маст PV19-6048EXP, маст PV19-6048EXP инвертор 6kvt, инвертор маст, инвертор маст 6 kvt, гибридный инвертор 6kvt, гибридный инвертор маст, гибридный инвертор маст 6 kvt, инвертор для солнечных панелей, гибридный инвертор для солнечных панелей, экодрайв, ecodrive, инвертор маст PV19-6048EXP, гибридный инвертор маст PV19-6048EXP, маст PV19-6048EXP</g:description>
-      <g:link>https://avtonomka.com.ua/product/must-pv19-6048exp/142725.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/products/142725_1.jpg</g:image_link>
-      <g:price>22470.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Гибридні інвертори</g:product_type>
-      <g:mpn>PV19-6048EXP</g:mpn>
-    </item>
-    <item>
-      <g:id>151057</g:id>
-      <g:title>Акумуляторна батарея Deye SE-F16-С 51.2V 314 Аh, 400х708х233, 123 кг, 16kWh LiFePO4</g:title>
-      <g:description>Deye SE-F16-С - потужна акумуляторна батарея LiFePO4 ємністю 314 А·год і напругою 51,2 В (16 кВт·год). Призначена для гібридних інверторів Deye та інших автономних і сонячних систем живлення приватних будинків, офісів і комерційних об&apos;єктів. Вбудована BMS забезпечує захист від перезаряду, глибокого розряду та перегріву, ресурс понад 6000 циклів. Розміри 400×708×233 мм, вага 123 кг. акумулятор 314ah, акумулятор дея, акумулятор дея 314 ah, батарея 314ah, батарея дея, батарея дея 314 ah, акумулятор для інвертора, батарея для інвертора, LiFePO4, екодрайв, ecodrive, акумулятор дея SE-F16-С, батарея дея SE-F16-С, дея SE-F16-С аккумулятор 314ah, аккумулятор дея, аккумулятор дея 314 ah, батарея 314ah, батарея дея, батарея дея 314 ah, аккумулятор для инвертора, батарея для инвертора, LiFePO4, экодрайв, ecodrive, аккумулятор дея SE-F16-С, батарея дея SE-F16-С, дея SE-F16-С</g:description>
-      <g:link>https://avtonomka.com.ua/product/deye-se-f16-s/151057.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/products/151057_1.jpg</g:image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/151057_2.jpg</g:additional_image_link>
-      <g:price>94404.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Акумулятори для гібридних інверторів</g:product_type>
-      <g:mpn>SE-F16-С</g:mpn>
-    </item>
-    <item>
-      <g:id>151288</g:id>
-      <g:title>Гібридний інвертор Deye SUN-16K-SG01LP1-EU-AM3-P WiFi 16 кВт 48 В, 1 фаза, 2 MPPT, LV, 464х763х282, 52 кг</g:title>
-      <g:description>Deye SUN-16K-SG01LP1-EU-AM3-P - потужний однофазний гібридний інвертор 16 кВт нового покоління. Підтримує низьковольтні акумулятори 48 В, має два MPPT-трекери та вбудований Wi-Fi модуль. Працює в резервному, автономному та мережевому режимах. Підходить для великих будинків, офісів і комерційних систем накопичення енергії. Розміри 464×763×282 мм, вага 52 кг. інвертор 16kvt, інвертор дея, інвертор дея 16 kvt, гібридний інвертор 16kvt, гібридний інвертор дея, гібридний інвертор дея 16 kvt, інвертор для сонячних панелей, гібридний інвертор для сонячних панелей, екодрайв, ecodrive, інвертор дея SUN-16K-SG01LP1-EU-AM3-P, гібридний інвертор дея SUN-16K-SG01LP1-EU-AM3-P, дея SUN-16K-SG01LP1-EU-AM3-P инвертор 16kvt, инвертор дея, инвертор дея 16 kvt, гибридный инвертор 16kvt, гибридный инвертор дея, гибридный инвертор дея 16 kvt, инвертор для солнечных панелей, гибридный инвертор для солнечных панелей, экодрайв, ecodrive, инвертор дея SUN-16K-SG01LP1-EU-AM3-P, гибридный инвертор дея SUN-16K-SG01LP1-EU-AM3-P, дея SUN-16K-SG01LP1-EU-AM3-P</g:description>
-      <g:link>https://avtonomka.com.ua/product/deye-sun-16k-sg01lp1-eu-am3-p/151288.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/products/151288_1.jpg</g:image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/151288_2.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/151288_3.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/151288_4.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/151288_5.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/151288_6.jpg</g:additional_image_link>
-      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/151288_7.jpg</g:additional_image_link>
-      <g:price>92155.00 UAH</g:price>
-      <g:availability>in stock</g:availability>
-      <g:condition>new</g:condition>
-      <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Гибридні інвертори</g:product_type>
-      <g:mpn>SUN-16K-SG01LP1-EU </g:mpn>
-    </item>
-    <item>
       <g:id>146741</g:id>
       <g:title>Сонячний кабель KBE Solar 6 мм, 500 м (бухта), чорний, Німеччина</g:title>
       <g:description>Сонячний кабель KBE Solar 6 мм² виробництва Німеччини. Спеціально розроблений для зовнішніх сонячних систем - стійкий до ультрафіолету, вологи та механічних пошкоджень. Бухта 500 м підходить для монтажу великих сонячних електростанцій. Відповідає стандартам безпеки для сонячних інсталяцій. кабель 6mm, кабель кбе, кабель кбе 6 mm, силовий кабель 6mm, силовий кабель кбе, силовий кабель кбе 6 mm, кабель для акумулятора, силовий кабель для акумулятора, екодрайв, ecodrive, кабель кбе Solar, силовий кабель кбе Solar, кбе Solar кабель 6mm, кабель кбе, кабель кбе 6 mm, силовой кабель 6mm, силовой кабель кбе, силовой кабель кбе 6 mm, кабель для аккумулятора, силовой кабель для аккумулятора, экодрайв, ecodrive, кабель кбе Solar, силовой кабель кбе Solar, кбе Solar</g:description>
@@ -398,6 +140,19 @@
       <g:product_type>Автономна енергетика &gt; Силові та сонячні кабелі</g:product_type>
     </item>
     <item>
+      <g:id>145284</g:id>
+      <g:title>Комплект силових кабелів Dyness 4AWG 1000V VW1 2050мм</g:title>
+      <g:description>Комплект силових кабелів Dyness AWG4 для підключення акумуляторних батарей. Напруга 1000 В, клас горіння VW1. Довжина 2050 мм. Підходить для з&apos;єднання акумуляторів Dyness з інвертором при значній відстані між компонентами системи. кабель 4mm, кабель дайнес, кабель дайнес 4 mm, силовий кабель 4mm, силовий кабель дайнес, силовий кабель дайнес 4 mm, кабель для акумулятора, силовий кабель для акумулятора, екодрайв, ecodrive, кабель дайнес 4AWG, силовий кабель дайнес 4AWG, дайнес 4AWG кабель 4mm, кабель дайнес, кабель дайнес 4 mm, силовой кабель 4mm, силовой кабель дайнес, силовой кабель дайнес 4 mm, кабель для аккумулятора, силовой кабель для аккумулятора, экодрайв, ecodrive, кабель дайнес 4AWG, силовой кабель дайнес 4AWG, дайнес 4AWG</g:description>
+      <g:link>https://avtonomka.com.ua/product/dyness-4awg/145284.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/products/145284_1.jpg</g:image_link>
+      <g:price>1926.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Автономна енергетика &gt; Силові та сонячні кабелі</g:product_type>
+      <g:mpn>4AWG-2050</g:mpn>
+    </item>
+    <item>
       <g:id>152253</g:id>
       <g:title>Сонячний кабель KBE Solar 6 мм, 500 м (бухта), червоний, Німеччина</g:title>
       <g:description>Сонячний кабель KBE Solar 6 мм² виробництва Німеччини. Спеціально розроблений для зовнішніх сонячних систем - стійкий до ультрафіолету, вологи та механічних пошкоджень. Бухта 500 м підходить для монтажу великих сонячних електростанцій. Відповідає стандартам безпеки для сонячних інсталяцій. кабель 6mm, кабель кбе, кабель кбе 6 mm, силовий кабель 6mm, силовий кабель кбе, силовий кабель кбе 6 mm, кабель для акумулятора, силовий кабель для акумулятора, екодрайв, ecodrive, кабель кбе Solar, силовий кабель кбе Solar, кбе Solar кабель 6mm, кабель кбе, кабель кбе 6 mm, силовой кабель 6mm, силовой кабель кбе, силовой кабель кбе 6 mm, кабель для аккумулятора, силовой кабель для аккумулятора, экодрайв, ecodrive, кабель кбе Solar, силовой кабель кбе Solar, кбе Solar</g:description>
@@ -512,16 +267,17 @@
       <g:mpn>FLA48171</g:mpn>
     </item>
     <item>
-      <g:id>152488</g:id>
-      <g:title>Комплект автономного енергоживлення: MUST PV18-3624PREM 3.6 кВт 24 В, Wi-Fi + MUST LP15-24100 25.6V 100Ah LiFePO4</g:title>
-      <g:description>Готовий комплект автономного живлення: гібридний інвертор MUST PV18-3624PREM 3,6 кВт та акумулятор LiFePO4 MUST LP15-24100 25,6 В 100 А·год. комплект автономного живлення 3.6kvt, комплект автономного живлення маст, комплект автономного живлення маст 3.6 kvt, комплект 3.6kvt, комплект маст, комплект маст 3.6 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення маст PV18-3624PREM, комплект маст PV18-3624PREM, маст PV18-3624PREM комплект автономного электропитания 3.6kvt, комплект автономного электропитания маст, комплект автономного электропитания маст 3.6 kvt, комплект 3.6kvt, комплект маст, комплект маст 3.6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания маст PV18-3624PREM, комплект маст PV18-3624PREM, маст PV18-3624PREM</g:description>
-      <g:link>https://avtonomka.com.ua/product/must-pv18-3624prem-must-lp15-24100/152488.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152488.jpg</g:image_link>
-      <g:price>39592.00 UAH</g:price>
+      <g:id>152175</g:id>
+      <g:title>Акумуляторна батарея Felicity FLA48230 51.2V 230Ah LiFePO4, 783x450x274, 97 кг</g:title>
+      <g:description>Felicity FLA48230 - акумуляторна батарея LiFePO4 ємністю 230 А·год (номінальна напруга 51,2 В, енергія 11,8 кВт·год). Робоча напруга 44,8–57,6 В, рекомендований струм заряду/розряду до 150 А, максимальний струм (15 с) - 200 А. Оснащена вбудованою інтелектуальною BMS з автоматичним вимикачем і запобіжником, глибина розряду ≥95%, ресурс понад 6000 циклів (за умов 25°C±2°C, 0.5C/0.5C, 90% DOD, 70% EOL). Гарантія 7 років. Підтримує масштабування до 15 одиниць паралельно (сумарно до 176,6 кВт·год). Комунікація RS485/CAN, LCD+LED дисплей, настінний або підлоговий монтаж, ступінь захисту IP21. Сертифікація UN38.3, CE-EMC, IEC 62619. Вага 92 кг, розміри 783×450×274 мм. акумулятор 230ah, акумулятор селіситі, акумулятор селіситі 230 ah, батарея 230ah, батарея селіситі, батарея селіситі 230 ah, акумулятор для інвертора, батарея для інвертора, LiFePO4, екодрайв, ecodrive, акумулятор селіситі 48230, батарея селіситі 48230, селіситі 48230 аккумулятор 230ah, аккумулятор селисити, аккумулятор селисити 230 ah, батарея 230ah, батарея селисити, батарея селисити 230 ah, аккумулятор для инвертора, батарея для инвертора, LiFePO4, экодрайв, ecodrive, аккумулятор селисити 48230, батарея селисити 48230, селисити 48230</g:description>
+      <g:link>https://avtonomka.com.ua/product/felicity-fla48230/152175.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152175.jpg</g:image_link>
+      <g:price>69925.00 UAH</g:price>
       <g:availability>in stock</g:availability>
       <g:condition>new</g:condition>
       <g:brand>Автономка</g:brand>
-      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
+      <g:product_type>Автономна енергетика &gt; Акумулятори для гібридних інверторів</g:product_type>
+      <g:mpn>FLA48230</g:mpn>
     </item>
     <item>
       <g:id>151617</g:id>
@@ -540,17 +296,243 @@
       <g:mpn>FLA48314-EU</g:mpn>
     </item>
     <item>
-      <g:id>152175</g:id>
-      <g:title>Акумуляторна батарея Felicity FLA48230 51.2V 230Ah LiFePO4, 783x450x274, 97 кг</g:title>
-      <g:description>Felicity FLA48230 - акумуляторна батарея LiFePO4 ємністю 230 А·год (номінальна напруга 51,2 В, енергія 11,8 кВт·год). Робоча напруга 44,8–57,6 В, рекомендований струм заряду/розряду до 150 А, максимальний струм (15 с) - 200 А. Оснащена вбудованою інтелектуальною BMS з автоматичним вимикачем і запобіжником, глибина розряду ≥95%, ресурс понад 6000 циклів (за умов 25°C±2°C, 0.5C/0.5C, 90% DOD, 70% EOL). Гарантія 7 років. Підтримує масштабування до 15 одиниць паралельно (сумарно до 176,6 кВт·год). Комунікація RS485/CAN, LCD+LED дисплей, настінний або підлоговий монтаж, ступінь захисту IP21. Сертифікація UN38.3, CE-EMC, IEC 62619. Вага 92 кг, розміри 783×450×274 мм. акумулятор 230ah, акумулятор селіситі, акумулятор селіситі 230 ah, батарея 230ah, батарея селіситі, батарея селіситі 230 ah, акумулятор для інвертора, батарея для інвертора, LiFePO4, екодрайв, ecodrive, акумулятор селіситі 48230, батарея селіситі 48230, селіситі 48230 аккумулятор 230ah, аккумулятор селисити, аккумулятор селисити 230 ah, батарея 230ah, батарея селисити, батарея селисити 230 ah, аккумулятор для инвертора, батарея для инвертора, LiFePO4, экодрайв, ecodrive, аккумулятор селисити 48230, батарея селисити 48230, селисити 48230</g:description>
-      <g:link>https://avtonomka.com.ua/product/felicity-fla48230/152175.html</g:link>
-      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152175.jpg</g:image_link>
-      <g:price>69925.00 UAH</g:price>
+      <g:id>152675</g:id>
+      <g:title>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLB48314TG1-H 51.2V 314Ah</g:title>
+      <g:description>Комплект автономного енергоживлення: MUST PV19-6048EXP 48V 6 kW + Felicity FLB48314TG1-H 51.2V 314Ah комплект автономного живлення селіситі, комплект автономного живлення маст, комплект селіситі, комплект маст, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive комплект автономного электропитания селисити, комплект автономного электропитания маст, комплект селисити, комплект маст, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive</g:description>
+      <g:link>https://avtonomka.com.ua/product/must-pv19-6048exp-felicity-flb48314tg1-h/152675.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/zaglushka.png</g:image_link>
+      <g:price>112525.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
+    </item>
+    <item>
+      <g:id>142723</g:id>
+      <g:title>Гібридний інвертор Must PV18-3224 VPM II 3.2 кВт 24 В, 254.5х367.4х103, 5.6 кг</g:title>
+      <g:description>Гібридний інвертор MUST PV18-3224 VPM II - 3200 ВА, 24 В, MPPT 60A. інвертор 3.2kvt, інвертор маст, інвертор маст 3.2 kvt, гібридний інвертор 3.2kvt, гібридний інвертор маст, гібридний інвертор маст 3.2 kvt, інвертор для сонячних панелей, гібридний інвертор для сонячних панелей, екодрайв, ecodrive, інвертор маст 3224, гібридний інвертор маст 3224, маст 3224 инвертор 3.2kvt, инвертор маст, инвертор маст 3.2 kvt, гибридный инвертор 3.2kvt, гибридный инвертор маст, гибридный инвертор маст 3.2 kvt, инвертор для солнечных панелей, гибридный инвертор для солнечных панелей, экодрайв, ecodrive, инвертор маст 3224, гибридный инвертор маст 3224, маст 3224</g:description>
+      <g:link>https://avtonomka.com.ua/product/must-pv18-3224-vpm-ii/142723.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/products/142723_1.jpg</g:image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/142723_2.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/142723_3.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/142723_4.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/142723_5.jpg</g:additional_image_link>
+      <g:price>14354.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Автономна енергетика &gt; Гибридні інвертори</g:product_type>
+      <g:mpn>PV18-3224VPM</g:mpn>
+    </item>
+    <item>
+      <g:id>142725</g:id>
+      <g:title>Гібридний інвертор Must PV19-6048EXP 6 кВт 48 В, 309х505х147, 14 кг</g:title>
+      <g:description>Гібридний інвертор Must PV19-6048EXP потужністю 6 кВт, 48 В. Поєднує функції інвертора, контролера заряду від сонячних панелей та зарядного пристрою для акумулятора. Гібридний інвертор Must чудово підійде для дому чи дачі, де потрібне надійне автономне живлення. інвертор 6kvt, інвертор маст, інвертор маст 6 kvt, гібридний інвертор 6kvt, гібридний інвертор маст, гібридний інвертор маст 6 kvt, інвертор для сонячних панелей, гібридний інвертор для сонячних панелей, екодрайв, ecodrive, інвертор маст PV19-6048EXP, гібридний інвертор маст PV19-6048EXP, маст PV19-6048EXP инвертор 6kvt, инвертор маст, инвертор маст 6 kvt, гибридный инвертор 6kvt, гибридный инвертор маст, гибридный инвертор маст 6 kvt, инвертор для солнечных панелей, гибридный инвертор для солнечных панелей, экодрайв, ecodrive, инвертор маст PV19-6048EXP, гибридный инвертор маст PV19-6048EXP, маст PV19-6048EXP</g:description>
+      <g:link>https://avtonomka.com.ua/product/must-pv19-6048exp/142725.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/products/142725_1.jpg</g:image_link>
+      <g:price>22470.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Автономна енергетика &gt; Гибридні інвертори</g:product_type>
+      <g:mpn>PV19-6048EXP</g:mpn>
+    </item>
+    <item>
+      <g:id>150590</g:id>
+      <g:title>Акумуляторна батарея Dyness BX51100 51.2v 100ah, 5.12kwh LiFePo4, Trade IN</g:title>
+      <g:description>Акумуляторна батарея Dyness BX51100 51.2 В, 100 Ah, 5.12 кВт·год, LiFePO4. Довговічна та безпечна хімія LiFePO4 з великим ресурсом циклів заряду-розряду — надійна основа для автономної системи живлення. Батарея Dyness чудово підійде для дому, а програма Trade IN дозволяє здати старий акумулятор і отримати вигідну знижку на новий. акумулятор 100ah, акумулятор дайнес, акумулятор дайнес 100 ah, батарея 100ah, батарея дайнес, батарея дайнес 100 ah, акумулятор для інвертора, батарея для інвертора, LiFePO4, екодрайв, ecodrive, акумулятор дайнес 51100, батарея дайнес 51100, дайнес 51100 аккумулятор 100ah, аккумулятор дайнес, аккумулятор дайнес 100 ah, батарея 100ah, батарея дайнес, батарея дайнес 100 ah, аккумулятор для инвертора, батарея для инвертора, LiFePO4, экодрайв, ecodrive, аккумулятор дайнес 51100, батарея дайнес 51100, дайнес 51100</g:description>
+      <g:link>https://avtonomka.com.ua/product/dyness-bx51100/150590.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/products/150590_1.jpg</g:image_link>
+      <g:price>34568.00 UAH</g:price>
       <g:availability>in stock</g:availability>
       <g:condition>new</g:condition>
       <g:brand>Автономка</g:brand>
       <g:product_type>Автономна енергетика &gt; Акумулятори для гібридних інверторів</g:product_type>
-      <g:mpn>FLA48230</g:mpn>
+      <g:mpn>BX51100</g:mpn>
+    </item>
+    <item>
+      <g:id>150649</g:id>
+      <g:title>Безперебійник для роутера TTN DC1036P 12000 mAh DC Mini UPS for Wifi Router</g:title>
+      <g:description>TTN DC1036P - компактний міні-ДБЖ для роутера та іншого мережевого обладнання. Вбудований акумулятор 12000 мА·год забезпечує роботу Wi-Fi роутера протягом кількох годин при відключенні електроенергії. Підтримує живлення постійним струмом (DC). Не потребує налаштувань - просто підключіть замість блока живлення роутера. безперебійник 12000mah, безперебійник ттн, безперебійник ттн 12000 mah, міні ДБЖ 12000mah, міні ДБЖ ттн, міні ДБЖ ттн 12000 mah, безперебійник для роутера, міні ДБЖ для роутера, екодрайв, ecodrive, безперебійник ттн DC1036P, міні ДБЖ ттн DC1036P, ттн DC1036P источник бесперебойного питания 12000mah, источник бесперебойного питания ттн, источник бесперебойного питания ттн 12000 mah, мини ИБП 12000mah, мини ИБП ттн, мини ИБП ттн 12000 mah, источник бесперебойного питания для роутера, мини ИБП для роутера, экодрайв, ecodrive, источник бесперебойного питания ттн DC1036P, мини ИБП ттн DC1036P, ттн DC1036P</g:description>
+      <g:link>https://avtonomka.com.ua/product/ttn-dc1036p-12000-mah-dc-mini-ups-for/150649.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/products/150649_1.jpg</g:image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/150649_2.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/150649_3.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/150649_4.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/150649_5.jpg</g:additional_image_link>
+      <g:price>1660.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Обладнання &gt; Джерела безперебійного живлення</g:product_type>
+      <g:mpn>DC1036P</g:mpn>
+    </item>
+    <item>
+      <g:id>150676</g:id>
+      <g:title>Акумуляторна батарея DEYE SE-F5 Pro-C 51.2V 100 Аh, 404х547х141, 45 кг, LiFePO4 5.12kWh</g:title>
+      <g:description>DEYE SE-F5 Pro-C - сучасна акумуляторна батарея LiFePO4 ємністю 100 А·год і напругою 51,2 В (5,12 кВт·год). Забезпечує стабільну роботу гібридних і сонячних систем. Ресурс понад 6000 циклів. Порти зв&apos;язку CAN/RS485. Вага 45 кг. Підходить для приватних будинків, офісів і комерційних об&apos;єктів. акумулятор 100ah, акумулятор дея, акумулятор дея 100 ah, батарея 100ah, батарея дея, батарея дея 100 ah, акумулятор для інвертора, батарея для інвертора, LiFePO4, екодрайв, ecodrive, акумулятор дея SE-F5, батарея дея SE-F5, дея SE-F5 аккумулятор 100ah, аккумулятор дея, аккумулятор дея 100 ah, батарея 100ah, батарея дея, батарея дея 100 ah, аккумулятор для инвертора, батарея для инвертора, LiFePO4, экодрайв, ecodrive, аккумулятор дея SE-F5, батарея дея SE-F5, дея SE-F5</g:description>
+      <g:link>https://avtonomka.com.ua/product/deye-se-f5-pro-c/150676.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/products/150676_1.jpg</g:image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/150676_2.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/150676_3.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/150676_4.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/150676_5.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/150676_6.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/150676_7.jpg</g:additional_image_link>
+      <g:price>44915.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Автономна енергетика &gt; Акумулятори для гібридних інверторів</g:product_type>
+      <g:mpn>SE-F5 Pro-C</g:mpn>
+    </item>
+    <item>
+      <g:id>150825</g:id>
+      <g:title>Гібридний інвертор Must PV18-1012VPK 1 кВт 12 В, 297.5х468х125, 5 кг</g:title>
+      <g:description>Гібридний інвертор MUST PV18-1012VPK - 1000 Вт, 12 В, PWM-контролер заряду 50A. інвертор 1kvt, інвертор маст, інвертор маст 1 kvt, гібридний інвертор 1kvt, гібридний інвертор маст, гібридний інвертор маст 1 kvt, інвертор для сонячних панелей, гібридний інвертор для сонячних панелей, екодрайв, ecodrive, інвертор маст PV18-1012VPK, гібридний інвертор маст PV18-1012VPK, маст PV18-1012VPK инвертор 1kvt, инвертор маст, инвертор маст 1 kvt, гибридный инвертор 1kvt, гибридный инвертор маст, гибридный инвертор маст 1 kvt, инвертор для солнечных панелей, гибридный инвертор для солнечных панелей, экодрайв, ecodrive, инвертор маст PV18-1012VPK, гибридный инвертор маст PV18-1012VPK, маст PV18-1012VPK</g:description>
+      <g:link>https://avtonomka.com.ua/product/must-pv18-1012vpk/150825.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/products/150825_1.jpg</g:image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/150825_2.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/150825_3.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/150825_4.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/150825_5.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/150825_6.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/150825_7.jpg</g:additional_image_link>
+      <g:price>9745.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Автономна енергетика &gt; Гибридні інвертори</g:product_type>
+      <g:mpn>PV18-1012VPK</g:mpn>
+    </item>
+    <item>
+      <g:id>148245</g:id>
+      <g:title>Зарядна станція ECOFLOW DELTA 3 1024Wh 1800W (китайські розетки, з перехідниками)</g:title>
+      <g:description>EcoFlow DELTA 3 - портативна зарядна станція ємністю 1024 Вт·год і потужністю 1800 Вт. Оснащена довговічним акумулятором LiFePO4 з ресурсом до 4000 циклів. Підтримує швидку зарядку від мережі, а також підзарядку від сонячних панелей. Дозволяє одночасно підключати кілька пристроїв - від ноутбуків до побутової техніки. Версія з китайськими розетками, у комплекті 2 перехідники для стандартних євровилок. Вага близько 12,5 кг. зарядна станція 1024wh, зарядна станція екофлоу, зарядна станція екофлоу 1024 wh, портативна зарядна станція 1024wh, портативна зарядна станція екофлоу, портативна зарядна станція екофлоу 1024 wh, зарядна станція для дому, портативна зарядна станція для дому, екодрайв, ecodrive, зарядна станція екофлоу DELTA, портативна зарядна станція екофлоу DELTA, екофлоу DELTA зарядная станция 1024wh, зарядная станция экофлоу, зарядная станция экофлоу 1024 wh, портативная зарядная станция 1024wh, портативная зарядная станция экофлоу, портативная зарядная станция экофлоу 1024 wh, зарядная станция для дома, портативная зарядная станция для дома, экодрайв, ecodrive, зарядная станция экофлоу DELTA, портативная зарядная станция экофлоу DELTA, экофлоу DELTA</g:description>
+      <g:link>https://avtonomka.com.ua/product/ecoflow-delta-3-1024wh-1800w-kytaiski-rozetky-z-perekhidnykamy/148245.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/products/148245_1.jpg</g:image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/148245_2.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/148245_3.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/148245_4.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/148245_5.jpg</g:additional_image_link>
+      <g:price>33693.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Обладнання &gt; Джерела безперебійного живлення</g:product_type>
+      <g:mpn>EFDELTA3</g:mpn>
+    </item>
+    <item>
+      <g:id>148299</g:id>
+      <g:title>Зарядна станція EcoFlow Delta 2, 1800W, 1024Wh (EU)</g:title>
+      <g:description>EcoFlow DELTA 2 - портативна зарядна станція ємністю 1024 Вт·год і потужністю 1800 Вт з євророзетками. Акумулятор LiFePO4 розрахований на 3000 циклів. Заряджається від 0 до 80% за 50 хвилин. Підтримує сонячну зарядку до 500 Вт та підключення до 13 пристроїв одночасно. Функція EPS автоматично перемикає живлення при відключенні мережі. зарядна станція 1024wh, зарядна станція екофлоу, зарядна станція екофлоу 1024 wh, портативна зарядна станція 1024wh, портативна зарядна станція екофлоу, портативна зарядна станція екофлоу 1024 wh, зарядна станція для дому, портативна зарядна станція для дому, екодрайв, ecodrive, зарядна станція екофлоу Delta, портативна зарядна станція екофлоу Delta, екофлоу Delta зарядная станция 1024wh, зарядная станция экофлоу, зарядная станция экофлоу 1024 wh, портативная зарядная станция 1024wh, портативная зарядная станция экофлоу, портативная зарядная станция экофлоу 1024 wh, зарядная станция для дома, портативная зарядная станция для дома, экодрайв, ecodrive, зарядная станция экофлоу Delta, портативная зарядная станция экофлоу Delta, экофлоу Delta</g:description>
+      <g:link>https://avtonomka.com.ua/product/ecoflow-delta-2-1800w-1024wh-eu/148299.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/products/148299_1.jpg</g:image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/148299_2.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/148299_3.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/148299_4.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/148299_5.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/148299_6.jpg</g:additional_image_link>
+      <g:price>34368.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Обладнання &gt; Джерела безперебійного живлення</g:product_type>
+      <g:mpn>EF DELTA2 EU</g:mpn>
+    </item>
+    <item>
+      <g:id>148317</g:id>
+      <g:title>Гібридний інвертор MUST PV18-2012 ECO 2 кВт 12 В, 290х367х111, 6 кг</g:title>
+      <g:description>MUST PV18-2012 ECO - багатофункціональний гібридний інвертор потужністю 2 кВт для автономних та резервних систем живлення. Поєднує функції інвертора, MPPT сонячного зарядного пристрою та зарядного пристрою для акумуляторів. Може працювати без акумулятора. Має подвійний вихід для керування навантаженням. інвертор 2kvt, інвертор маст, інвертор маст 2 kvt, гібридний інвертор 2kvt, гібридний інвертор маст, гібридний інвертор маст 2 kvt, інвертор для сонячних панелей, гібридний інвертор для сонячних панелей, екодрайв, ecodrive, інвертор маст 2012, гібридний інвертор маст 2012, маст 2012 инвертор 2kvt, инвертор маст, инвертор маст 2 kvt, гибридный инвертор 2kvt, гибридный инвертор маст, гибридный инвертор маст 2 kvt, инвертор для солнечных панелей, гибридный инвертор для солнечных панелей, экодрайв, ecodrive, инвертор маст 2012, гибридный инвертор маст 2012, маст 2012</g:description>
+      <g:link>https://avtonomka.com.ua/product/must-pv18-2012-eco/148317.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/products/148317_1.jpg</g:image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/148317_2.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/148317_3.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/148317_4.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/148317_5.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/148317_6.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/148317_7.jpg</g:additional_image_link>
+      <g:price>12951.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Автономна енергетика &gt; Гибридні інвертори</g:product_type>
+      <g:mpn>PV18-2012ECO</g:mpn>
+    </item>
+    <item>
+      <g:id>152488</g:id>
+      <g:title>Комплект автономного енергоживлення: MUST PV18-3624PREM 3.6 кВт 24 В, Wi-Fi + MUST LP15-24100 25.6V 100Ah LiFePO4</g:title>
+      <g:description>Готовий комплект автономного живлення: гібридний інвертор MUST PV18-3624PREM 3,6 кВт та акумулятор LiFePO4 MUST LP15-24100 25,6 В 100 А·год. комплект автономного живлення 3.6kvt, комплект автономного живлення маст, комплект автономного живлення маст 3.6 kvt, комплект 3.6kvt, комплект маст, комплект маст 3.6 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення маст PV18-3624PREM, комплект маст PV18-3624PREM, маст PV18-3624PREM комплект автономного электропитания 3.6kvt, комплект автономного электропитания маст, комплект автономного электропитания маст 3.6 kvt, комплект 3.6kvt, комплект маст, комплект маст 3.6 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания маст PV18-3624PREM, комплект маст PV18-3624PREM, маст PV18-3624PREM</g:description>
+      <g:link>https://avtonomka.com.ua/product/must-pv18-3624prem-must-lp15-24100/152488.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152488.jpg</g:image_link>
+      <g:price>39592.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
+    </item>
+    <item>
+      <g:id>152505</g:id>
+      <g:title>Комплект автономного енергоживлення: Must PV18-3224 VPM II 3.2 кВт + MUST LP15-24100 25.6V 100Ah LiFePO4</g:title>
+      <g:description>У комплект входять гібридний інвертор Must PV18-3224 VPM II потужністю 3.2 кВт, 24 В та акумулятор Must LP15-24100 25.6 В, 100 Ah, LiFePO4 — компоненти вже підібрані та сумісні між собою. Компактний комплект чудово підійде для дому чи дачі. комплект автономного живлення 3.2kvt, комплект автономного живлення маст, комплект автономного живлення маст 3.2 kvt, комплект 3.2kvt, комплект маст, комплект маст 3.2 kvt, комплект автономного живлення для будинку, комплект для будинку, LiFePO4, екодрайв, ecodrive, комплект автономного живлення маст 3224, комплект маст 3224, маст 3224 комплект автономного электропитания 3.2kvt, комплект автономного электропитания маст, комплект автономного электропитания маст 3.2 kvt, комплект 3.2kvt, комплект маст, комплект маст 3.2 kvt, комплект автономного электропитания для дома, комплект для дома, LiFePO4, экодрайв, ecodrive, комплект автономного электропитания маст 3224, комплект маст 3224, маст 3224</g:description>
+      <g:link>https://avtonomka.com.ua/product/must-pv18-3224-vpm-ii-must-lp15-24100/152505.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152505.jpg</g:image_link>
+      <g:price>36924.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Автономна енергетика &gt; Комплекти автономного енергоживлення</g:product_type>
+    </item>
+    <item>
+      <g:id>152520</g:id>
+      <g:title>Акумуляторна батарея Felicity LPBA48100-OL 51.2V 100Ah LiFePO4, 665х440х175, 48.5 кг</g:title>
+      <g:description>Акумуляторна батарея Felicity LPBA48100-OL 51.2 В, 100 Ah, LiFePO4. Безпечна хімія LiFePO4 з великим ресурсом циклів заряду-розряду. Акумулятор Felicity чудово підійде для дому як надійний накопичувач енергії в парі з гібридним інвертором. акумулятор 100ah, акумулятор селіситі, акумулятор селіситі 100 ah, батарея 100ah, батарея селіситі, батарея селіситі 100 ah, акумулятор для інвертора, батарея для інвертора, LiFePO4, екодрайв, ecodrive, акумулятор селіситі LPBA48100-OL, батарея селіситі LPBA48100-OL, селіситі LPBA48100-OL аккумулятор 100ah, аккумулятор селисити, аккумулятор селисити 100 ah, батарея 100ah, батарея селисити, батарея селисити 100 ah, аккумулятор для инвертора, батарея для инвертора, LiFePO4, экодрайв, ecodrive, аккумулятор селисити LPBA48100-OL, батарея селисити LPBA48100-OL, селисити LPBA48100-OL</g:description>
+      <g:link>https://avtonomka.com.ua/product/felicity-lpba48100-ol/152520.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/komp/152520.jpg</g:image_link>
+      <g:additional_image_link>https://dfi2.com.ua/images/152520_2.jpg</g:additional_image_link>
+      <g:additional_image_link>https://dfi2.com.ua/images/152520_3.jpg</g:additional_image_link>
+      <g:additional_image_link>https://dfi2.com.ua/images/152520_4.jpg</g:additional_image_link>
+      <g:additional_image_link>https://dfi2.com.ua/images/152520_5.jpg</g:additional_image_link>
+      <g:additional_image_link>https://dfi2.com.ua/images/152520_7.jpg</g:additional_image_link>
+      <g:price>39004.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Автономна енергетика &gt; Акумулятори для гібридних інверторів</g:product_type>
+      <g:mpn>LPBA48100-OL</g:mpn>
+    </item>
+    <item>
+      <g:id>151057</g:id>
+      <g:title>Акумуляторна батарея Deye SE-F16-С 51.2V 314 Аh, 400х708х233, 123 кг, 16kWh LiFePO4</g:title>
+      <g:description>Deye SE-F16-С - потужна акумуляторна батарея LiFePO4 ємністю 314 А·год і напругою 51,2 В (16 кВт·год). Призначена для гібридних інверторів Deye та інших автономних і сонячних систем живлення приватних будинків, офісів і комерційних об&apos;єктів. Вбудована BMS забезпечує захист від перезаряду, глибокого розряду та перегріву, ресурс понад 6000 циклів. Розміри 400×708×233 мм, вага 123 кг. акумулятор 314ah, акумулятор дея, акумулятор дея 314 ah, батарея 314ah, батарея дея, батарея дея 314 ah, акумулятор для інвертора, батарея для інвертора, LiFePO4, екодрайв, ecodrive, акумулятор дея SE-F16-С, батарея дея SE-F16-С, дея SE-F16-С аккумулятор 314ah, аккумулятор дея, аккумулятор дея 314 ah, батарея 314ah, батарея дея, батарея дея 314 ah, аккумулятор для инвертора, батарея для инвертора, LiFePO4, экодрайв, ecodrive, аккумулятор дея SE-F16-С, батарея дея SE-F16-С, дея SE-F16-С</g:description>
+      <g:link>https://avtonomka.com.ua/product/deye-se-f16-s/151057.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/products/151057_1.jpg</g:image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/151057_2.jpg</g:additional_image_link>
+      <g:price>94404.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Автономна енергетика &gt; Акумулятори для гібридних інверторів</g:product_type>
+      <g:mpn>SE-F16-С</g:mpn>
+    </item>
+    <item>
+      <g:id>151288</g:id>
+      <g:title>Гібридний інвертор Deye SUN-16K-SG01LP1-EU-AM3-P WiFi 16 кВт 48 В, 1 фаза, 2 MPPT, LV, 464х763х282, 52 кг</g:title>
+      <g:description>Deye SUN-16K-SG01LP1-EU-AM3-P - потужний однофазний гібридний інвертор 16 кВт нового покоління. Підтримує низьковольтні акумулятори 48 В, має два MPPT-трекери та вбудований Wi-Fi модуль. Працює в резервному, автономному та мережевому режимах. Підходить для великих будинків, офісів і комерційних систем накопичення енергії. Розміри 464×763×282 мм, вага 52 кг. інвертор 16kvt, інвертор дея, інвертор дея 16 kvt, гібридний інвертор 16kvt, гібридний інвертор дея, гібридний інвертор дея 16 kvt, інвертор для сонячних панелей, гібридний інвертор для сонячних панелей, екодрайв, ecodrive, інвертор дея SUN-16K-SG01LP1-EU-AM3-P, гібридний інвертор дея SUN-16K-SG01LP1-EU-AM3-P, дея SUN-16K-SG01LP1-EU-AM3-P инвертор 16kvt, инвертор дея, инвертор дея 16 kvt, гибридный инвертор 16kvt, гибридный инвертор дея, гибридный инвертор дея 16 kvt, инвертор для солнечных панелей, гибридный инвертор для солнечных панелей, экодрайв, ecodrive, инвертор дея SUN-16K-SG01LP1-EU-AM3-P, гибридный инвертор дея SUN-16K-SG01LP1-EU-AM3-P, дея SUN-16K-SG01LP1-EU-AM3-P</g:description>
+      <g:link>https://avtonomka.com.ua/product/deye-sun-16k-sg01lp1-eu-am3-p/151288.html</g:link>
+      <g:image_link>https://avtonomka.com.ua/assets/images/products/151288_1.jpg</g:image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/151288_2.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/151288_3.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/151288_4.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/151288_5.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/151288_6.jpg</g:additional_image_link>
+      <g:additional_image_link>https://avtonomka.com.ua/assets/images/products/151288_7.jpg</g:additional_image_link>
+      <g:price>92155.00 UAH</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Автономка</g:brand>
+      <g:product_type>Автономна енергетика &gt; Гибридні інвертори</g:product_type>
+      <g:mpn>SUN-16K-SG01LP1-EU </g:mpn>
     </item>
   </channel>
 </rss>
